@@ -1,0 +1,20 @@
+[
+  {
+    "usuario": "1900675289",
+    "clave": "mayonesa12345",
+    "persona": {
+      "identificacion": "1900675289",
+      "nombres": "Viviana",
+      "apellidos": "Calva"
+    }
+  },
+  {
+    "usuario": "1900675263",
+    "clave": "mayonesa12345",
+    "persona": {
+      "identificacion": "1900675263",
+      "nombres": "Mónica",
+      "apellidos": "Calva"
+    }
+  }
+]
