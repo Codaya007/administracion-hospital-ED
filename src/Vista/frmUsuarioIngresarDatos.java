@@ -88,6 +88,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel4.setText("Apellidos");
 
         txtNombrePaciente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -100,8 +101,10 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel3.setText("Nombres");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel2.setText("Cedula");
 
         txtApellidoPaciente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -114,6 +117,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel5.setText("Genero");
 
         cbxGeneroPaciente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maculino", "Femenino" }));
@@ -124,6 +128,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel6.setText("Edad");
 
         txtEdadPaciente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -175,9 +180,9 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNumeroCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -200,6 +205,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel8.setText("Molestias");
 
         txaMolestias.setColumns(20);
@@ -211,6 +217,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(txaMolestias);
 
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel9.setText("Numero celular");
 
         txtNumeroTelefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);

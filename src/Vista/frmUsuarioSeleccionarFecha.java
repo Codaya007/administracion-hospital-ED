@@ -88,6 +88,11 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
         cbxHorarioAtencion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "07:00 - 08:00", "08:00 - 09:00", "09:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00", "13:00 - 14:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00" }));
         cbxHorarioAtencion.setSelectedItem(null);
         cbxHorarioAtencion.setToolTipText("");
+        cbxHorarioAtencion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxHorarioAtencionActionPerformed(evt);
+            }
+        });
         cbxHorarioAtencion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 cbxHorarioAtencionKeyPressed(evt);
@@ -95,7 +100,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
         });
 
         jLabel2.setBackground(new java.awt.Color(255, 153, 153));
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 11)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 10)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 51, 51));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("*Ingresar en formato dd/mm/aaaa*");
@@ -119,7 +124,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Seleccionar fecha para la cita");
+        jLabel6.setText("SELECCIONAR FECHA");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -142,7 +147,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cbxHorarioAtencion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -186,7 +191,13 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
 
     private void btnAgendarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarCitaActionPerformed
         // TODO add your handling code here:
+       
         try {
+            if (txtFechaCita.getText().matches("^\\d{2}/\\d{2}/\\d{4}$")) {
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "La fecha tiene que contener 2 / en formato dia/mes/año", "FECHA SIN FORMATO0", JOptionPane.WARNING_MESSAGE);
+            }
             if (txtFechaCita.getText().isEmpty() || cbxHorarioAtencion.getSelectedItem() == null) {
                 JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos", "VALORES VACIOS", JOptionPane.WARNING_MESSAGE);
             } else {
@@ -207,7 +218,6 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                 if (resultado == true) {
                     frmPersonalCitasPorAtender abrir = new frmPersonalCitasPorAtender();
                     abrir.setVisible(false);
-                    
 
                     if (fechaSeleccionada.before(fechaHoy)) {
                         JOptionPane.showMessageDialog(null, "La fecha seleccionada ya ha pasado", "FECHA PASADO", JOptionPane.INFORMATION_MESSAGE);
@@ -218,7 +228,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                     } else if (fechaSeleccionada.after(fechaLimite)) {
                         JOptionPane.showMessageDialog(null, "La fecha seleccionada es muy lejana", "FECHA DEMASIADO LEJANA", JOptionPane.INFORMATION_MESSAGE);
                     } else {
-                        
+
                         String NumeroCedula = Vista.frmUsuarioIngresarDatos.txtNumeroCedula.getText();
                         String NombrePaciente = Vista.frmUsuarioIngresarDatos.txtNombrePaciente.getText();
                         String ApellidoPaciente = Vista.frmUsuarioIngresarDatos.txtApellidoPaciente.getText();
@@ -228,7 +238,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                         String MolestiaPaciente = Vista.frmUsuarioIngresarDatos.txaMolestias.getText();
                         String FechaAtencion = txtFechaCita.getText();
                         String HoraAtencion = cbxHorarioAtencion.getSelectedItem().toString();
-                        
+
                         Date miFecha = new SimpleDateFormat("dd/MM/yyyy").parse(txtFechaCita.getText());
                         calendario.setTime(miFecha);
                         int anio = calendario.get(Calendar.YEAR);
@@ -238,10 +248,10 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                         String Dia = String.valueOf(dia);
                         String Mes = String.valueOf(mes);
                         String Anio = String.valueOf(anio);
-                
+
                         Paciente claseauto = new Paciente(NumeroCedula, NombrePaciente, ApellidoPaciente, EdadPaciente, GeneroPaciente, TelefonoPaciente, MolestiaPaciente, FechaAtencion, HoraAtencion, Dia, Mes, Anio);
                         contenedor.add(claseauto);
-                                                
+
                         JOptionPane.showMessageDialog(null, "CITA AGENDADA CON EXITO");
                     }
                 } else {
@@ -249,6 +259,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                 }
             }
         } catch (ParseException ex) {
+            
         }
         Collections.sort(contenedor, (Paciente g, Paciente h) -> g.getHoraAtencion().compareTo(h.getHoraAtencion()));
     }//GEN-LAST:event_btnAgendarCitaActionPerformed
@@ -285,6 +296,10 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
             btnAgendarCita.requestFocus();
         }
     }//GEN-LAST:event_cbxHorarioAtencionKeyPressed
+
+    private void cbxHorarioAtencionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxHorarioAtencionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxHorarioAtencionActionPerformed
 
     /**
      * @param args the command line arguments

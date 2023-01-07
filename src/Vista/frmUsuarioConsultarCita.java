@@ -27,10 +27,11 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
             if (tabla.getValueAt(i, col).equals(dto)) {
                 Existe = true;
                 
+                String NombrePaciente = (String) frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 1);
                 String FechaCita = (String) frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 7);
                 String HoraCita =(String) frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 8);
                 String CedulaConsulta =(String) frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 0);
-                JOptionPane.showMessageDialog(null,"El usuario con numero de celuda "+CedulaConsulta +" cuenta con una cita para el dia "+FechaCita+" en el horario de "+HoraCita,"CUENTA CON CITA",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null,"El usuario "+NombrePaciente+" con numero de celuda "+CedulaConsulta +" cuenta con una cita para el dia "+FechaCita+" en el horario de "+HoraCita,"CUENTA CON CITA",JOptionPane.INFORMATION_MESSAGE);
             }
         }
         return Existe;
@@ -88,7 +89,7 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Consulta de citas");
+        jLabel1.setText("CONSULTA DE CITAS");
 
         btnRegresar.setText("REGRESAR");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
@@ -115,7 +116,7 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnVerificarCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
                             .addComponent(txtNumeroCedula, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
