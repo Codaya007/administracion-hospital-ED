@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -22,16 +23,20 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
     }
     
     public boolean ExisteEnTabla(JTable tabla, String dto, int col) {
+        ImageIcon CuentaCoCitaIcono = new ImageIcon("src/RecursosGraficosFondos/CuentaConCitaIcono.png");
+        
         boolean Existe = false;
+        
         for (int i = 0; i < tabla.getRowCount(); i++) {
             if (tabla.getValueAt(i, col).equals(dto)) {
                 Existe = true;
                 
-                String NombrePaciente = (String) frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 1);
-                String FechaCita = (String) frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 7);
-                String HoraCita =(String) frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 8);
-                String CedulaConsulta =(String) frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 0);
-                JOptionPane.showMessageDialog(null,"El usuario "+NombrePaciente+" con numero de celuda "+CedulaConsulta +" cuenta con una cita para el dia "+FechaCita+" en el horario de "+HoraCita,"CUENTA CON CITA",JOptionPane.INFORMATION_MESSAGE);
+                String NombrePaciente = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 1).toString();
+                String FechaCita = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 7).toString();
+                String HoraCita = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 8).toString();
+                String CedulaConsulta =frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 0).toString();               
+                
+                JOptionPane.showMessageDialog(null,"El usuario "+NombrePaciente+" con numero de celuda "+CedulaConsulta +" cuenta con una cita para el dia "+FechaCita+" en el horario de "+HoraCita,"CUENTA CON CITA",JOptionPane.INFORMATION_MESSAGE,CuentaCoCitaIcono);   
             }
         }
         return Existe;
@@ -55,9 +60,11 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CONSULTAR CITA");
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -75,7 +82,8 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
             }
         });
 
-        btnVerificarCita.setText("VERIFICAR CITA");
+        btnVerificarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/fechaValidaIcono.png"))); // NOI18N
+        btnVerificarCita.setText("        VERIFICAR CITA");
         btnVerificarCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVerificarCitaActionPerformed(evt);
@@ -91,7 +99,8 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CONSULTA DE CITAS");
 
-        btnRegresar.setText("REGRESAR");
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/regresarIcono.png"))); // NOI18N
+        btnRegresar.setText("   REGRESAR");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
@@ -100,6 +109,14 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/ConsultarCitaPacienteIcono.png"))); // NOI18N
+
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/salirIcono.png"))); // NOI18N
+        btnSalir.setText("   SALIR");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -119,7 +136,8 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
                             .addComponent(txtNumeroCedula, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnSalir)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnRegresar)))))
                 .addContainerGap())
         );
@@ -136,10 +154,12 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
                         .addComponent(txtNumeroCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
-                        .addGap(32, 32, 32)
-                        .addComponent(btnVerificarCita)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRegresar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnVerificarCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -167,22 +187,27 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
 
     private void btnVerificarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarCitaActionPerformed
         // TODO add your handling code here:
+        ImageIcon CedulaVaciaIcono = new ImageIcon("src/RecursosGraficosFondos/VacioIcono.png");
+        ImageIcon CedulaInvalidaIcono = new ImageIcon("src/RecursosGraficosFondos/CedulaInvalidaIcono.png");
+        ImageIcon SinRegistroIcono = new ImageIcon("src/RecursosGraficosFondos/SinRegistroIcono.png");
+        ImageIcon SinCitaIcono = new ImageIcon("src/RecursosGraficosFondos/SinCitaIcono.png");
+        
         String cedula = txtNumeroCedula.getText();
         frmPersonalCitasPorAtender abrir = new frmPersonalCitasPorAtender();
         abrir.setVisible(false);
         if(txtNumeroCedula.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Ingrese el numero de cedula","NUMERO DE CEDULA VACIO",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ingrese el numero de cedula","NUMERO DE CEDULA VACIO",JOptionPane.ERROR_MESSAGE,CedulaVaciaIcono);
         }
         else if(cedula.length() < 10) {
-            JOptionPane.showMessageDialog(null, "La cedula tiene menos de 10 digitos", "CEDULA MAL ESTABLECIDA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "La cedula tiene menos de 10 digitos", "CEDULA MAL ESTABLECIDA", JOptionPane.ERROR_MESSAGE,CedulaInvalidaIcono);
         }
         else if(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender.getRowCount() <= 0){
-            JOptionPane.showMessageDialog(null, "No hay registros de citas, primero tiene que agendar una cita","NO HAY REGISTROS",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No hay registros de citas, primero tiene que agendar una cita","NO HAY REGISTROS",JOptionPane.ERROR_MESSAGE,SinRegistroIcono);
         }
-        else if(ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 0)== true){
-            
-        }else{
-            JOptionPane.showMessageDialog(null, "No cuenta con una cita disponible","NO CUENTA CON CITA",JOptionPane.INFORMATION_MESSAGE);
+        else if(ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 0)== true){ 
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "No cuenta con una cita disponible","NO CUENTA CON CITA",JOptionPane.INFORMATION_MESSAGE,SinCitaIcono);
         }
         
 //        if(lblDisponibilidadCita.getText().isEmpty()){
@@ -208,6 +233,17 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
             btnVerificarCita.requestFocus();
         }
     }//GEN-LAST:event_txtNumeroCedulaKeyPressed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficosFondos/SalirIconoPane.png");
+        
+        int valor = JOptionPane.showConfirmDialog(null, "¿Esta seguro que quiere salir del sistema?\n Se perderan todos los avances", "CONFIRMACION DE SALIDA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, SalirConfirmar);
+        
+        if(valor == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -246,6 +282,7 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnVerificarCita;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

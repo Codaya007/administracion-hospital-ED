@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -56,10 +57,12 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
         btnRegresarInicio = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("INGRESAR DATOS DEL PACIENTE");
         setBackground(new java.awt.Color(204, 255, 255));
+        setUndecorated(true);
 
         jPanel4.setBackground(new java.awt.Color(204, 255, 255));
         jPanel4.setForeground(new java.awt.Color(204, 255, 255));
@@ -69,7 +72,8 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("INGRESAR DATOS DEL PACIENTE");
 
-        btnConfirmar.setText("CONFIRMAR");
+        btnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/IngresarIcono.png"))); // NOI18N
+        btnConfirmar.setText("  CONFIRMAR");
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmarActionPerformed(evt);
@@ -289,17 +293,27 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        btnRegresar.setText("REGRESAR");
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/regresarIcono.png"))); // NOI18N
+        btnRegresar.setText("  REGRESAR");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
             }
         });
 
+        btnRegresarInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/InicioIcono.png"))); // NOI18N
         btnRegresarInicio.setText("REGRESAR A INICIO");
         btnRegresarInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarInicioActionPerformed(evt);
+            }
+        });
+
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/salirIcono.png"))); // NOI18N
+        btnSalir.setText("SALIR");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
             }
         });
 
@@ -313,11 +327,14 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRegresar))
+                            .addComponent(btnSalir))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRegresarInicio))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(btnRegresarInicio)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRegresar)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -339,7 +356,8 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirmar)
                     .addComponent(btnRegresarInicio)
-                    .addComponent(btnRegresar))
+                    .addComponent(btnRegresar)
+                    .addComponent(btnSalir))
                 .addContainerGap())
         );
 
@@ -360,17 +378,42 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
         
+        ImageIcon CedulaVaciaIcono = new ImageIcon("src/RecursosGraficosFondos/VacioIcono.png");
+        ImageIcon NombresIcono = new ImageIcon("src/RecursosGraficosFondos/NombresIcono.png");
+        ImageIcon EdadIcono = new ImageIcon("src/RecursosGraficosFondos/EdadIcono.png");
+        ImageIcon GeneroIcono = new ImageIcon("src/RecursosGraficosFondos/GeneroIcono.png");
+        ImageIcon TelefonoIcono = new ImageIcon("src/RecursosGraficosFondos/TelefonoIcono.png");
+        ImageIcon MolestiaIcono = new ImageIcon("src/RecursosGraficosFondos/MolestiaIcono.png");
+        
         String cedula = txtNumeroCedula.getText();
         String telefono = txtNumeroTelefono.getText();
         
-        if(txaMolestias.getText().isEmpty() || txtNombrePaciente.getText().isEmpty() || txtApellidoPaciente.getText().isEmpty() || txtEdadPaciente.getText().isEmpty() || cbxGeneroPaciente.getSelectedItem() == null){
-            JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE);
-        }
-        else if(telefono.length()<10){
-            JOptionPane.showMessageDialog(null, "La numero de telefono tiene menos de 10 digitos","TELEFONO MAL ESTABLECIDO",JOptionPane.ERROR_MESSAGE);
+        if(txtNumeroCedula.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Por favor llene el campo de la cedula","INGRESE TODOS LOS DATOS",JOptionPane.ERROR_MESSAGE,CedulaVaciaIcono);
         }
         else if(cedula.length()<10){
-            JOptionPane.showMessageDialog(null, "La cedula tiene menos de 10 digitos","CEDULA MAL ESTABLECIDA",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "La cedula tiene menos de 10 digitos","CEDULA MAL ESTABLECIDA",JOptionPane.ERROR_MESSAGE,CedulaVaciaIcono);
+        }
+        else if(txtNombrePaciente.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Por favor llene el campo de paciente","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,NombresIcono);
+        }
+        else if(txtApellidoPaciente.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Por favor llene el campo de apellido","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,NombresIcono);
+        }
+        else if(txtEdadPaciente.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Por favor ingrese la edad","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,EdadIcono);
+        }
+        else if(cbxGeneroPaciente.getSelectedItem() == null){
+            JOptionPane.showMessageDialog(null, "Por favor seleccione el genero","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,GeneroIcono);
+        }
+        else if(txtNumeroTelefono.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Por favor ingrese el numero telefonico","INGRESE TODOS LOS DATOS",JOptionPane.ERROR_MESSAGE,TelefonoIcono);
+        }
+        else if(telefono.length()<10){
+            JOptionPane.showMessageDialog(null, "La numero de telefono tiene menos de 10 digitos","TELEFONO MAL ESTABLECIDO",JOptionPane.ERROR_MESSAGE,TelefonoIcono);
+        }
+        else if(txaMolestias.getText().isEmpty() ){
+            JOptionPane.showMessageDialog(null, "Por favor ingrese las molestias que presenta","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,MolestiaIcono);
         }
         else{
             frmUsuarioSeleccionarFecha abrir = new frmUsuarioSeleccionarFecha();
@@ -509,6 +552,17 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txaMolestiasKeyPressed
 
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficosFondos/SalirIconoPane.png");
+        
+        int valor = JOptionPane.showConfirmDialog(null, "¿Esta seguro que quiere salir del sistema?\n Se perderan todos los avances", "CONFIRMACION DE SALIDA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, SalirConfirmar);
+        
+        if(valor == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btnSalirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -555,6 +609,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnRegresarInicio;
+    private javax.swing.JButton btnSalir;
     public static javax.swing.JComboBox<String> cbxGeneroPaciente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
