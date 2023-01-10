@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
     int Xmouse,Ymouse;
+    
 
     /**
      * Creates new form frmAgendacionCita
@@ -372,7 +373,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(barrademovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(barrademovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -381,7 +382,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnConfirmar)
                             .addComponent(btnRegresarInicio)
@@ -389,10 +390,10 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
                             .addComponent(btnSalir)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57)))
-                .addGap(18, 18, 18))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -418,15 +419,20 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         ImageIcon GeneroIcono = new ImageIcon("src/RecursosGraficosFondos/GeneroIcono.png");
         ImageIcon TelefonoIcono = new ImageIcon("src/RecursosGraficosFondos/TelefonoIcono.png");
         ImageIcon MolestiaIcono = new ImageIcon("src/RecursosGraficosFondos/MolestiaIcono.png");
+        ImageIcon Edad = new ImageIcon("src/RecursosGraficosFondos/EdadMinimaMaximaIcono.png");
         
         String cedula = txtNumeroCedula.getText();
         String telefono = txtNumeroTelefono.getText();
         
+
         if(txtNumeroCedula.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Por favor llene el campo de la cedula","INGRESE TODOS LOS DATOS",JOptionPane.ERROR_MESSAGE,CedulaVaciaIcono);
         }
         else if(cedula.length()<10){
             JOptionPane.showMessageDialog(null, "La cedula tiene menos de 10 digitos","CEDULA MAL ESTABLECIDA",JOptionPane.ERROR_MESSAGE,CedulaVaciaIcono);
+        }
+        else if(!txtNumeroCedula.getText().matches("11\\d{8}")){
+            JOptionPane.showMessageDialog(null, "El numero de cedula tiene que iniciar con 11","CEDULA NO VALIDO",JOptionPane.ERROR_MESSAGE,CedulaVaciaIcono);
         }
         else if(txtNombrePaciente.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Por favor llene el campo de paciente","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,NombresIcono);
@@ -437,6 +443,12 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         else if(txtEdadPaciente.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Por favor ingrese la edad","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,EdadIcono);
         }
+        else if(Integer.parseInt(txtEdadPaciente.getText()) == 0){
+            JOptionPane.showMessageDialog(null, "La edad minima es de 1 año", "EDAD INVALIDA", JOptionPane.INFORMATION_MESSAGE, Edad);
+        }
+        else if(Integer.parseInt(txtEdadPaciente.getText()) >= 120){
+            JOptionPane.showMessageDialog(null, "La edad maxima es de 120 años", "EDAD INVALIDA", JOptionPane.INFORMATION_MESSAGE, Edad);
+        }
         else if(cbxGeneroPaciente.getSelectedItem() == null){
             JOptionPane.showMessageDialog(null, "Por favor seleccione el genero","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,GeneroIcono);
         }
@@ -445,6 +457,9 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         }
         else if(telefono.length()<10){
             JOptionPane.showMessageDialog(null, "La numero de telefono tiene menos de 10 digitos","TELEFONO MAL ESTABLECIDO",JOptionPane.ERROR_MESSAGE,TelefonoIcono);
+        }
+        else if(!txtNumeroTelefono.getText().matches("09\\d{8}")){
+            JOptionPane.showMessageDialog(null, "El numero de telefono tiene que iniciar con 09","TELEFONO NO VALIDO",JOptionPane.ERROR_MESSAGE,TelefonoIcono);
         }
         else if(txaMolestias.getText().isEmpty() ){
             JOptionPane.showMessageDialog(null, "Por favor ingrese las molestias que presenta","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,MolestiaIcono);

@@ -34,11 +34,12 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
                 Existe = true;
                 
                 String NombrePaciente = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 1).toString();
+                String ApellidoPaciente = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 2).toString();
                 String FechaCita = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 7).toString();
                 String HoraCita = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 8).toString();
                 String CedulaConsulta =frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 0).toString();               
                 
-                JOptionPane.showMessageDialog(null,"El usuario "+NombrePaciente+" con numero de celuda "+CedulaConsulta +" \ncuenta con una cita para el dia "+FechaCita+" en el horario de "+HoraCita,"CUENTA CON CITA",JOptionPane.INFORMATION_MESSAGE,CuentaCoCitaIcono);   
+                JOptionPane.showMessageDialog(null,"El usuario "+NombrePaciente+" "+ApellidoPaciente+"  con numero de celuda "+CedulaConsulta +" \ncuenta con una cita para el dia "+FechaCita+" en el horario de "+HoraCita,"CUENTA CON CITA",JOptionPane.INFORMATION_MESSAGE,CuentaCoCitaIcono);   
             }
         }
         return Existe;
@@ -75,9 +76,10 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Ingresar el numero de cedula");
 
-        txtNumeroCedula.setForeground(new java.awt.Color(204, 204, 204));
+        txtNumeroCedula.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtNumeroCedula.setForeground(java.awt.Color.gray);
         txtNumeroCedula.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtNumeroCedula.setText("1111111111");
+        txtNumeroCedula.setText("9999999999");
         txtNumeroCedula.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtNumeroCedulaMousePressed(evt);
@@ -169,7 +171,7 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(barraMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(barraMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -286,8 +288,11 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
 
     private void txtNumeroCedulaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNumeroCedulaMousePressed
         // TODO add your handling code here:
-        txtNumeroCedula.setText("");
-        txtNumeroCedula.setForeground(Color.BLACK);
+        if(txtNumeroCedula.getText().equals("9999999999")){
+            txtNumeroCedula.setText("");
+            txtNumeroCedula.setForeground(Color.BLACK);
+        }
+        
     }//GEN-LAST:event_txtNumeroCedulaMousePressed
 
     /**

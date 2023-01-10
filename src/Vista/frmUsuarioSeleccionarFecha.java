@@ -6,6 +6,7 @@ package Vista;
 
 import Modelo.Paciente;
 import static Utilidades.UtilidadesFechas.validarFecha;
+import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -78,7 +79,14 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel5.setText("Fecha de la cita");
 
+        txtFechaCita.setForeground(java.awt.Color.gray);
         txtFechaCita.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtFechaCita.setText("DIA/MES/AÑO");
+        txtFechaCita.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtFechaCitaMousePressed(evt);
+            }
+        });
         txtFechaCita.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtFechaCitaKeyPressed(evt);
@@ -181,10 +189,10 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(barramovimineto, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(barramovimineto, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5)
@@ -372,6 +380,14 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
         int y =evt.getYOnScreen();
         this.setLocation(x-Xmouse,y- Ymouse);
     }//GEN-LAST:event_barramoviminetoMouseDragged
+
+    private void txtFechaCitaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFechaCitaMousePressed
+        // TODO add your handling code here:
+        if(txtFechaCita.getText().equals("DIA/MES/AÑO")){
+            txtFechaCita.setText("");
+            txtFechaCita.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_txtFechaCitaMousePressed
 
     /**
      * @param args the command line arguments
