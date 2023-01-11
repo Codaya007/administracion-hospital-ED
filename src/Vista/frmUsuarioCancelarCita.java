@@ -276,8 +276,9 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         ImageIcon CedulaInvalidaIcono = new ImageIcon("src/RecursosGraficosFondos/CedulaInvalidaIcono.png");
-        ImageIcon NumeroMenor = new ImageIcon("src/RecursosGraficosFondos/NumeroIgual.png");
         ImageIcon SinRegistroIcono = new ImageIcon("src/RecursosGraficosFondos/SinRegistroIcono.png");
+        ImageIcon NumeroMenor = new ImageIcon("src/RecursosGraficosFondos/NumeroIgual.png");
+        ImageIcon CitaEliminada = new ImageIcon("src/RecursosGraficosFondos/CitaEliminada.png");
 
         
         String cedula = txtNumeroCedulaCancelar.getText();
@@ -288,7 +289,7 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
         } 
         else if (cedula.length() < 10) {
             JOptionPane.showMessageDialog(null, "La cedula tiene menos de 10 digitos", "CEDULA MAL ESTABLECIDA", JOptionPane.ERROR_MESSAGE, NumeroMenor);
-        } 
+        }
         else {
             Iterator<Paciente> iterator = EnviarContenido.iterator();
 
@@ -298,6 +299,8 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
                     iterator.remove();
                 }
             }
+            
+            JOptionPane.showMessageDialog(null, "La cita se ha eliminado", "CITA ELIMINADA", JOptionPane.INFORMATION_MESSAGE, CitaEliminada);
         }
 
     }//GEN-LAST:event_btnCancelarCitaActionPerformed
