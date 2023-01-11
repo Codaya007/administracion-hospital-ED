@@ -24,8 +24,8 @@ import javax.swing.JTable;
  */
 public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
     int Xmouse,Ymouse;
-        
-    public static LinkedList contenedor = new LinkedList();
+ 
+    public static LinkedList<Paciente> EnviarContenido = new LinkedList<>();
 
     /**
      * Creates new form frmAgendarCita
@@ -86,7 +86,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
 
         txtFechaCita.setForeground(java.awt.Color.gray);
         txtFechaCita.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtFechaCita.setText("DIA/MES/AÑO");
+        txtFechaCita.setText("DIA / MES / AÑO");
         txtFechaCita.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtFechaCitaMousePressed(evt);
@@ -218,7 +218,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                     .addComponent(btnRegresar)
                     .addComponent(btnAgendarCita)
                     .addComponent(btnSalir))
-                .addContainerGap())
+                .addGap(9, 9, 9))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -254,7 +254,6 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Por favor ingrese el horario", "CAMPO VACIOS", JOptionPane.WARNING_MESSAGE, HorarioVacio);
             } 
             else {
-                
                 if (txtFechaCita.getText().matches("^\\d{1,2}/\\d{1,2}/\\d{4}$")) {
                 } 
                 else {
@@ -314,7 +313,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                         String Anio = String.valueOf(anio);
 
                         Paciente paciente = new Paciente(NumeroCedula, NombrePaciente, ApellidoPaciente, EdadPaciente, GeneroPaciente, TelefonoPaciente, MolestiaPaciente, FechaAtencion, HoraAtencion, Dia, Mes, Anio);
-                        contenedor.add(paciente);
+                        EnviarContenido.add(paciente);
 
                         JOptionPane.showMessageDialog(null, "Cita agendada exitosamente", "AGENDADO", JOptionPane.INFORMATION_MESSAGE, Agendado);
                     }
@@ -326,7 +325,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
         } 
         catch (ParseException ex) {
         }
-        Collections.sort(contenedor, (Paciente g, Paciente h) -> g.getHoraAtencion().compareTo(h.getHoraAtencion()));
+        Collections.sort(EnviarContenido, (Paciente g, Paciente h) -> g.getHoraAtencion().compareTo(h.getHoraAtencion()));
     }//GEN-LAST:event_btnAgendarCitaActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -388,7 +387,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
 
     private void txtFechaCitaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFechaCitaMousePressed
         // TODO add your handling code here:
-        if(txtFechaCita.getText().equals("DIA/MES/AÑO")){
+        if(txtFechaCita.getText().equals("DIA / MES / AÑO")){
             txtFechaCita.setText("");
             txtFechaCita.setForeground(Color.BLACK);
         }
