@@ -21,6 +21,11 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
     public frmUsuarioIngresarDatos() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        btnRegresarInicio.setToolTipText("Regresa a la interfaz principal");
+        btnConfirmar.setToolTipText("Guarda la informacion y da paso para seleccionar la fecha");
+        btnRegresar.setToolTipText("Regresa a la interfaz anterior");
+        btnSalir.setToolTipText("Cierra todos las interfaces y procesos existentes");
     }
 
     /**
@@ -55,20 +60,19 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtNumeroTelefono = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
         btnRegresarInicio = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        jLabel13 = new javax.swing.JLabel();
         barrademovimiento = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("INGRESAR DATOS DEL PACIENTE");
         setBackground(new java.awt.Color(204, 255, 255));
         setUndecorated(true);
 
-        jPanel4.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel4.setBackground(new java.awt.Color(20, 66, 114));
         jPanel4.setForeground(new java.awt.Color(204, 255, 255));
 
         jLabel1.setBackground(new java.awt.Color(204, 255, 255));
@@ -84,7 +88,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(20, 66, 114));
 
         txtNumeroCedula.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtNumeroCedula.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -97,6 +101,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Apellidos");
 
         txtNombrePaciente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -110,9 +115,11 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Nombres");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Cedula");
 
         txtApellidoPaciente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -126,6 +133,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Genero");
 
         cbxGeneroPaciente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maculino", "Femenino" }));
@@ -137,6 +145,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Edad");
 
         txtEdadPaciente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -150,13 +159,13 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         });
 
         jLabel10.setBackground(new java.awt.Color(255, 51, 51));
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 2, 10)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 2, 11)); // NOI18N
+        jLabel10.setForeground(java.awt.Color.red);
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("*Ingresar solo numeros, maximo 3 numeros*");
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 2, 10)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 2, 11)); // NOI18N
+        jLabel11.setForeground(java.awt.Color.red);
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("*Ingresar solo numeros*");
 
@@ -211,9 +220,10 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(20, 66, 114));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Molestias");
 
         txaMolestias.setColumns(20);
@@ -226,6 +236,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txaMolestias);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Numero celular");
 
         txtNumeroTelefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -238,10 +249,16 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             }
         });
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 2, 10)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 2, 11)); // NOI18N
+        jLabel12.setForeground(java.awt.Color.red);
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("*Ingresar solo numeros*");
+
+        jLabel13.setBackground(new java.awt.Color(255, 0, 0));
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 2, 11)); // NOI18N
+        jLabel13.setForeground(java.awt.Color.red);
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("*Ingresar molestia detallada*");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -256,7 +273,9 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -272,28 +291,8 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        jPanel3.setBackground(new java.awt.Color(204, 255, 255));
-
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/IngresarDatosIcono.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -321,12 +320,6 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             }
         });
 
-        jLabel13.setBackground(new java.awt.Color(255, 0, 0));
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 2, 10)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("*Ingresar molestia detallada*");
-
         barrademovimiento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         barrademovimiento.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -339,6 +332,9 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/IngresarDatos.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -348,24 +344,22 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSalir))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(btnSalir)
+                                .addGap(185, 185, 185))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(btnRegresarInicio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnRegresar)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnConfirmar, javax.swing.GroupLayout.Alignment.TRAILING)))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnConfirmar, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addComponent(barrademovimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -373,26 +367,21 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(barrademovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(barrademovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnConfirmar)
-                            .addComponent(btnRegresarInicio)
-                            .addComponent(btnRegresar)
-                            .addComponent(btnSalir)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnConfirmar)
+                    .addComponent(btnRegresarInicio)
+                    .addComponent(btnRegresar)
+                    .addComponent(btnSalir))
                 .addGap(15, 15, 15))
         );
 
@@ -413,41 +402,45 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
         
-        ImageIcon CedulaVaciaIcono = new ImageIcon("src/RecursosGraficosFondos/VacioIcono.png");
+        ImageIcon CedulaVaciaIcono = new ImageIcon("src/RecursosGraficosFondos/CedulaVacioIcono.png");
         ImageIcon NombresIcono = new ImageIcon("src/RecursosGraficosFondos/NombresIcono.png");
-        ImageIcon EdadIcono = new ImageIcon("src/RecursosGraficosFondos/EdadIcono.png");
         ImageIcon GeneroIcono = new ImageIcon("src/RecursosGraficosFondos/GeneroIcono.png");
         ImageIcon TelefonoIcono = new ImageIcon("src/RecursosGraficosFondos/TelefonoIcono.png");
         ImageIcon MolestiaIcono = new ImageIcon("src/RecursosGraficosFondos/MolestiaIcono.png");
         ImageIcon Edad = new ImageIcon("src/RecursosGraficosFondos/EdadMinimaMaximaIcono.png");
+        ImageIcon CampoVacio = new ImageIcon("src/RecursosGraficosFondos/CampoVacioIcono.png");
+        ImageIcon ErrorCedula = new ImageIcon("src/RecursosGraficosFondos/ErrorCampoIcono.png");
+        ImageIcon ErrorTelefono = new ImageIcon("src/RecursosGraficosFondos/ErrorTelefono.png");
+        ImageIcon NumeroMenor = new ImageIcon("src/RecursosGraficosFondos/NumeroIgual.png");
+        ImageIcon EdadMaxima = new ImageIcon("src/RecursosGraficosFondos/EdadMaxima.png");
+        ImageIcon EdadMinima = new ImageIcon("src/RecursosGraficosFondos/EdadMinimaIcono.png");
         
         String cedula = txtNumeroCedula.getText();
         String telefono = txtNumeroTelefono.getText();
         
-
         if(txtNumeroCedula.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Por favor llene el campo de la cedula","INGRESE TODOS LOS DATOS",JOptionPane.ERROR_MESSAGE,CedulaVaciaIcono);
         }
         else if(cedula.length()<10){
-            JOptionPane.showMessageDialog(null, "La cedula tiene menos de 10 digitos","CEDULA MAL ESTABLECIDA",JOptionPane.ERROR_MESSAGE,CedulaVaciaIcono);
+            JOptionPane.showMessageDialog(null, "La cedula tiene menos de 10 digitos","CEDULA MAL ESTABLECIDA",JOptionPane.ERROR_MESSAGE,NumeroMenor);
         }
         else if(!txtNumeroCedula.getText().matches("11\\d{8}")){
-            JOptionPane.showMessageDialog(null, "El numero de cedula tiene que iniciar con 11","CEDULA NO VALIDO",JOptionPane.ERROR_MESSAGE,CedulaVaciaIcono);
+            JOptionPane.showMessageDialog(null, "El numero de cedula tiene que iniciar con 11","CEDULA NO VALIDO",JOptionPane.ERROR_MESSAGE,ErrorCedula);
         }
         else if(txtNombrePaciente.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Por favor llene el campo de paciente","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,NombresIcono);
+            JOptionPane.showMessageDialog(null, "Por favor llene el campo del nombre","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,NombresIcono);
         }
         else if(txtApellidoPaciente.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Por favor llene el campo de apellido","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,NombresIcono);
+            JOptionPane.showMessageDialog(null, "Por favor llene el campo de apellido ","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,CampoVacio);
         }
         else if(txtEdadPaciente.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Por favor ingrese la edad","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,EdadIcono);
+            JOptionPane.showMessageDialog(null, "Por favor ingrese la edad","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,Edad);
         }
         else if(Integer.parseInt(txtEdadPaciente.getText()) == 0){
-            JOptionPane.showMessageDialog(null, "La edad minima es de 1 año", "EDAD INVALIDA", JOptionPane.INFORMATION_MESSAGE, Edad);
+            JOptionPane.showMessageDialog(null, "La edad minima es de 1 año", "EDAD INVALIDA", JOptionPane.INFORMATION_MESSAGE, EdadMinima);
         }
         else if(Integer.parseInt(txtEdadPaciente.getText()) >= 120){
-            JOptionPane.showMessageDialog(null, "La edad maxima es de 120 años", "EDAD INVALIDA", JOptionPane.INFORMATION_MESSAGE, Edad);
+            JOptionPane.showMessageDialog(null, "La edad maxima es de 120 años", "EDAD INVALIDA", JOptionPane.INFORMATION_MESSAGE, EdadMaxima);
         }
         else if(cbxGeneroPaciente.getSelectedItem() == null){
             JOptionPane.showMessageDialog(null, "Por favor seleccione el genero","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,GeneroIcono);
@@ -456,10 +449,10 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Por favor ingrese el numero telefonico","INGRESE TODOS LOS DATOS",JOptionPane.ERROR_MESSAGE,TelefonoIcono);
         }
         else if(telefono.length()<10){
-            JOptionPane.showMessageDialog(null, "La numero de telefono tiene menos de 10 digitos","TELEFONO MAL ESTABLECIDO",JOptionPane.ERROR_MESSAGE,TelefonoIcono);
+            JOptionPane.showMessageDialog(null, "La numero de telefono tiene menos de 10 digitos","TELEFONO MAL ESTABLECIDO",JOptionPane.ERROR_MESSAGE,NumeroMenor);
         }
         else if(!txtNumeroTelefono.getText().matches("09\\d{8}")){
-            JOptionPane.showMessageDialog(null, "El numero de telefono tiene que iniciar con 09","TELEFONO NO VALIDO",JOptionPane.ERROR_MESSAGE,TelefonoIcono);
+            JOptionPane.showMessageDialog(null, "El numero de telefono tiene que iniciar con 09","TELEFONO NO VALIDO",JOptionPane.ERROR_MESSAGE,ErrorTelefono);
         }
         else if(txaMolestias.getText().isEmpty() ){
             JOptionPane.showMessageDialog(null, "Por favor ingrese las molestias que presenta","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,MolestiaIcono);
@@ -473,6 +466,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
     private void txtNumeroCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroCedulaKeyTyped
         // TODO add your handling code here:
         Character c = evt.getKeyChar();
+        
         if(!Character.isDigit(c)){
             evt.consume();
         }
@@ -690,7 +684,6 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTextArea txaMolestias;
