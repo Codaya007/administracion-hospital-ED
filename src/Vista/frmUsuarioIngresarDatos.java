@@ -376,13 +376,18 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnConfirmar)
-                    .addComponent(btnRegresarInicio)
-                    .addComponent(btnRegresar)
-                    .addComponent(btnSalir))
-                .addGap(15, 15, 15))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnRegresarInicio)
+                            .addComponent(btnRegresar)
+                            .addComponent(btnSalir))
+                        .addGap(15, 15, 15))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnConfirmar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -500,10 +505,22 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-        frmUsuarioSelecionarUso abrir = new frmUsuarioSelecionarUso();
-        abrir.setVisible(true);
-        this.setVisible(false);
-
+        ImageIcon Seguro = new ImageIcon("src/RecursosGraficosFondos/ConfirmarSeguro.png");
+        
+        if (!txtNumeroCedula.getText().isEmpty() || !txtNombrePaciente.getText().isEmpty() || !txtApellidoPaciente.getText().isEmpty() || !txtEdadPaciente.getText().isEmpty() || cbxGeneroPaciente.getSelectedItem() != null || !txtNumeroTelefono.getText().isEmpty() || !txaMolestias.getText().isEmpty()){
+            int result = JOptionPane.showConfirmDialog(null, "Estas seguro de salir? \nSe perderan todos los avances no guardados", "CONFIRMAR SALIDA", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE,Seguro);
+            
+            if (result == JOptionPane.YES_OPTION) {
+                frmUsuarioSelecionarUso abrir = new frmUsuarioSelecionarUso();
+                abrir.setVisible(true);
+                this.setVisible(false);
+            }
+            
+        } else {
+            frmUsuarioSelecionarUso abrir = new frmUsuarioSelecionarUso();
+            abrir.setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void txtNumeroCedulaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroCedulaKeyPressed
@@ -543,9 +560,24 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
 
     private void btnRegresarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarInicioActionPerformed
         // TODO add your handling code here:
-        frmPrincipal abrir = new frmPrincipal();
-        abrir.setVisible(true);
-        this.setVisible(false);
+        
+        ImageIcon Seguro = new ImageIcon("src/RecursosGraficosFondos/ConfirmarSeguro.png");
+        
+        if (!txtNumeroCedula.getText().isEmpty() || !txtNombrePaciente.getText().isEmpty() || !txtApellidoPaciente.getText().isEmpty() || !txtEdadPaciente.getText().isEmpty() || cbxGeneroPaciente.getSelectedItem() != null || !txtNumeroTelefono.getText().isEmpty() || !txaMolestias.getText().isEmpty()){
+            int result = JOptionPane.showConfirmDialog(null, "Estas seguro de salir? \nSe perderan todos los avances no guardados", "CONFIRMAR SALIDA", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE,Seguro);
+            
+            if (result == JOptionPane.YES_OPTION) {
+                frmPrincipal abrir = new frmPrincipal();
+                abrir.setVisible(true);
+                this.setVisible(false);
+            }
+            
+        } else {
+            frmPrincipal abrir = new frmPrincipal();
+            abrir.setVisible(true);
+            this.setVisible(false);
+        }
+        
     }//GEN-LAST:event_btnRegresarInicioActionPerformed
 
     private void txtNombrePacienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombrePacienteKeyTyped
