@@ -564,7 +564,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         ImageIcon Seguro = new ImageIcon("src/RecursosGraficosFondos/ConfirmarSeguro.png");
         
         if (!txtNumeroCedula.getText().isEmpty() || !txtNombrePaciente.getText().isEmpty() || !txtApellidoPaciente.getText().isEmpty() || !txtEdadPaciente.getText().isEmpty() || cbxGeneroPaciente.getSelectedItem() != null || !txtNumeroTelefono.getText().isEmpty() || !txaMolestias.getText().isEmpty()){
-            int result = JOptionPane.showConfirmDialog(null, "Estas seguro de salir? \nSe perderan todos los avances no guardados", "CONFIRMAR SALIDA", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE,Seguro);
+            int result = JOptionPane.showConfirmDialog(null, "Estas seguro de regresar? \nSe perderan todos los avances no guardados", "CONFIRMAR SALIDA", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE,Seguro);
             
             if (result == JOptionPane.YES_OPTION) {
                 frmPrincipal abrir = new frmPrincipal();
