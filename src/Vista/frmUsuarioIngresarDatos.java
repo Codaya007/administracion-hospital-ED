@@ -28,7 +28,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         btnBorrarCampos.setToolTipText("Se borran todos los campos para agregar una nueva cita");
         btnRegresar.setToolTipText("Regresa a la interfaz anterior");
         btnSalir.setToolTipText("Cierra todos las interfaces y procesos existentes");
-          
+        
     }
 
     /**
