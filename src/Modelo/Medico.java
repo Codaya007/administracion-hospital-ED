@@ -22,14 +22,14 @@ public class Medico extends Persona {
             throw new Error("El doctor ya cuenta con citas agendadas para esta fecha!");
         }
 
-        Integer indice = Utilidades.Utilidades.ultimoIndiceOcupado(citasAgendadas);
+        Integer indice = Controlador.Utilidades.ultimoIndiceOcupado(citasAgendadas);
 
         nuevaCita.setMedicoAsignado(this);
         this.citasAgendadas[indice] = nuevaCita;
     }
 
     public void eliminarCita(CitaMedica cita) {
-        Integer ultimoIndiceOcupado = Utilidades.Utilidades.ultimoIndiceOcupado(citasAgendadas);
+        Integer ultimoIndiceOcupado = Controlador.Utilidades.ultimoIndiceOcupado(citasAgendadas);
 
         for (int i = 0; i < ultimoIndiceOcupado; i++) {
             CitaMedica citaAgendada = citasAgendadas[i];
@@ -58,7 +58,7 @@ public class Medico extends Persona {
     }
 
     public boolean validarFechaDisponible(CitaMedica cita) {
-        Integer ultimoIndiceOcupado = Utilidades.Utilidades.ultimoIndiceOcupado(citasAgendadas);
+        Integer ultimoIndiceOcupado = Controlador.Utilidades.ultimoIndiceOcupado(citasAgendadas);
 
         if (cita == null) {
             throw new Error("Complete la fecha y hora de atención de la cita");

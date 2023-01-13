@@ -23,6 +23,11 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
     public frmUsuarioCancelarCita() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        btnRegresar.setToolTipText("Regresa a la interfaz anterior");
+        btnSalir.setToolTipText("Cierra todos las interfaces y procesos existentes");
+        btnBuscarCita.setToolTipText("Verifica que exista la cita");
+        btnCancelarCita.setToolTipText("Elimina la cita que esta registrada");
     }
     
     public boolean ExisteEnTabla(JTable tabla, String dto, int col) {
@@ -124,6 +129,7 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CANCELAR CITA");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Ingresar numero de cedula");
 
@@ -157,6 +163,7 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("DATOS DEL PACIENTE");
 
@@ -183,7 +190,7 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtNumeroCedulaCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                                .addComponent(txtNumeroCedulaCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnBuscarCita))
                             .addGroup(jPanel1Layout.createSequentialGroup()

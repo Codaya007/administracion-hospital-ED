@@ -43,7 +43,7 @@ public class Rol {
     }
 
     public void setNombre(String nombre) {
-        if(Utilidades.Utilidades.contains(ROLES_PERMITIDOS, nombre)){
+        if(Controlador.Utilidades.contains(ROLES_PERMITIDOS, nombre)){
             throw new Error("Los roles permitidos son: " + Arrays.toString(ROLES_PERMITIDOS));
         }
         

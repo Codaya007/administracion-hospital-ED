@@ -1,22 +1,41 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controlador;
 
-import com.google.gson.Gson;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import Modelo.Rol;
+import java.util.Date;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author vivic
+ * @author Victor
  */
-public class Utilidades {
+public class Utilidades extends Vista.frmUsuarioIngresarDatos {
 
-    private final Integer LIMITE_DATOS = 100;
+//    //obtener el valor de la clase enum GeneroComboBox
+//    public static JComboBox cargarComboGenero(JComboBox cbx){
+//        cbx.removeAllItems();
+//        for(GeneroComboBox tipo: GeneroComboBox.values()) {
+//            cbx.addItem(tipo);
+//        }
+//        return cbx;
+//    }
+//    
+//    public static GeneroComboBox getComboGenero(JComboBox  cbx){
+//        return (GeneroComboBox)cbx.getSelectedItem();
+//    }
+    public static String Cedula() {
+        String NumeroCedula = txtNumeroCedula.getText();
+        if (NumeroCedula.length() == 10) {
+
+        } else {
+            JOptionPane.showMessageDialog(null, "El numero de cedula esta mal establecido", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+        }
+        return NumeroCedula;
+    }
 
     public static <T> boolean contains(final T[] array, final T v) {
         for (final T e : array) {
@@ -27,7 +46,39 @@ public class Utilidades {
 
         return false;
     }
-    
+
+    public static void cargarCombosFecha(JComboBox dia, JComboBox mes, JComboBox anio) {
+        dia.removeAllItems();
+        mes.removeAllItems();
+        anio.removeAllItems();
+
+        // Lleno el combo de dias del 1 al 31
+        for (int i = 1; i <= 31; i++) {
+            dia.addItem(i);
+        }
+
+        // Lleno el combo de mes del 1 al 12
+        for (int i = 1; i <= 12; i++) {
+            mes.addItem(i);
+        }
+
+        // Lleno el combo de año desde los 100 años anteriores
+        Integer anio_actual = new Date().getYear() + 1900;
+        for (int i = anio_actual; i >= (anio_actual - 100); i--) {
+            anio.addItem(i);
+        }
+    }
+
+    public static JComboBox cargarComboRoles(JComboBox cbx, Rol roles[]) {
+        cbx.removeAllItems();
+
+        for (Rol rol : roles) {
+            cbx.addItem(rol.getNombre());
+        }
+
+        return cbx;
+    }
+
     public static int ultimoIndiceOcupado(Object array[]) {
         for (int i = 0; i < array.length; i++) {
             System.out.println("i -> " + i);
@@ -36,44 +87,6 @@ public class Utilidades {
             }
         }
 
-        return -1;
-    }
-
-    public static void guardar(Object expresiones[]) throws IOException {
-        Gson json = new Gson();
-        Integer ocupados = ultimoIndiceOcupado(expresiones);
-
-        Object[] expresionesCompletas = new Object[ocupados];
-        System.arraycopy(expresiones, 0, expresionesCompletas, 0, expresionesCompletas.length);
-
-        String jsons = json.toJson(expresionesCompletas);
-        FileWriter fw = new FileWriter("ObjectsArray" + ".json");
-        fw.write(jsons);
-        fw.flush();
-    }
-
-    public static int cargar(Object expresiones[]) {
-        int counter = 0;
-
-        try {
-            Gson json = new Gson();
-            FileReader fr = new FileReader("ObjectsArray" + ".json");
-            StringBuilder jsons = new StringBuilder();
-            int valor = fr.read();
-            while (valor != -1) {
-                jsons.append((char) valor);
-                valor = fr.read();
-            }
-            Object[] aux = json.fromJson(jsons.toString(), Object[].class);
-            for (int i = 0; i < aux.length; i++) {
-                expresiones[i] = aux[i];
-                counter += 1;
-            }
-
-        } catch (Exception e) {
-            System.out.println("No se encontraron objetos guardados en el json!");
-        } finally {
-            return counter;
-        }
+        return array.length;
     }
 }

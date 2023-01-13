@@ -5,7 +5,7 @@
 package Vista;
 
 import Modelo.Paciente;
-import static Utilidades.UtilidadesFechas.validarFecha;
+import static Controlador.UtilidadesFechas.validarFecha;
 import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -72,7 +72,6 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
-        btnRegresarInicio = new javax.swing.JButton();
         barramovimineto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -153,14 +152,6 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
             }
         });
 
-        btnRegresarInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/InicioIcono.png"))); // NOI18N
-        btnRegresarInicio.setText("INICIO");
-        btnRegresarInicio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarInicioActionPerformed(evt);
-            }
-        });
-
         barramovimineto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         barramovimineto.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -184,25 +175,22 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFechaCita, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbxHorarioAtencion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(9, 9, 9))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnSalir)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRegresarInicio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
-                        .addComponent(btnRegresar)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSalir))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAgendarCita)
-                        .addContainerGap())))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(btnRegresar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                                .addComponent(btnAgendarCita))
+                            .addComponent(txtFechaCita)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbxHorarioAtencion, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(15, 15, 15))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,8 +215,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalir)
                     .addComponent(btnAgendarCita)
-                    .addComponent(btnRegresar)
-                    .addComponent(btnRegresarInicio))
+                    .addComponent(btnRegresar))
                 .addContainerGap())
         );
 
@@ -256,7 +243,6 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
 
         ImageIcon MuyLejana = new ImageIcon("src/RecursosGraficosFondos/FechaLejana.png");
         ImageIcon Agendado = new ImageIcon("src/RecursosGraficosFondos/Agendada.png");
-        ImageIcon LimpiarDatos= new ImageIcon("src/RecursosGraficosFondos/LimpiarDatos.png");
 
         try {
             if (txtFechaCita.getText().isEmpty()) {
@@ -333,22 +319,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                         txtFechaCita.setForeground(Color.gray);
                         cbxHorarioAtencion.setSelectedItem(null);
                         
-                        
-                        int result = JOptionPane.showConfirmDialog(null, "Quiere limpiar todos los campos, \npara crear una nueva cita", "CONFIRMAR LIMPIEZA", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, LimpiarDatos);
-
-                        if (result == JOptionPane.YES_OPTION) {
-                            Vista.frmUsuarioIngresarDatos.txtNumeroCedula.setText("");
-                            Vista.frmUsuarioIngresarDatos.txtNombrePaciente.setText("");
-                            Vista.frmUsuarioIngresarDatos.txtApellidoPaciente.setText("");
-                            Vista.frmUsuarioIngresarDatos.txtEdadPaciente.setText("");
-                            Vista.frmUsuarioIngresarDatos.cbxGeneroPaciente.setSelectedItem(null);
-                            Vista.frmUsuarioIngresarDatos.txtNumeroTelefono.setText("");
-                            Vista.frmUsuarioIngresarDatos.txaMolestias.setText("");
-                        }else{
-                            
-                        }
-                        
-                        
+                        this.dispose();
                     }
                 } 
                 else {
@@ -359,6 +330,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
         catch (ParseException ex) {
         }
         Collections.sort(EnviarContenido, (Paciente g, Paciente h) -> g.getHoraAtencion().compareTo(h.getHoraAtencion()));
+        
     }//GEN-LAST:event_btnAgendarCitaActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -436,28 +408,6 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtFechaCitaMousePressed
 
-    private void btnRegresarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarInicioActionPerformed
-        // TODO add your handling code here:
-
-        ImageIcon Seguro = new ImageIcon("src/RecursosGraficosFondos/ConfirmarSeguro.png");
-
-        if (!txtFechaCita.getText().equalsIgnoreCase("DIA / MES / AÑO")  || cbxHorarioAtencion.getSelectedItem() != null){
-            int result = JOptionPane.showConfirmDialog(null, "Estas seguro de regresar? \nSe perderan todos los avances no guardados", "CONFIRMAR SALIDA", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE,Seguro);
-
-            if (result == JOptionPane.YES_OPTION) {
-                frmPrincipal abrir = new frmPrincipal();
-                abrir.setVisible(true);
-                this.setVisible(false);
-            }
-
-        } else {
-            frmPrincipal abrir = new frmPrincipal();
-            abrir.setVisible(true);
-            this.setVisible(false);
-        }
-
-    }//GEN-LAST:event_btnRegresarInicioActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -497,7 +447,6 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
     private javax.swing.JLabel barramovimineto;
     private javax.swing.JButton btnAgendarCita;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JButton btnRegresarInicio;
     private javax.swing.JButton btnSalir;
     public static javax.swing.JComboBox<String> cbxHorarioAtencion;
     private javax.swing.JLabel jLabel1;

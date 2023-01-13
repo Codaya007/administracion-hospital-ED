@@ -25,7 +25,7 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
     public frmAdminRegistrarPersonal() {
         initComponents();
         this.setLocationRelativeTo(null);
-        Utilidades.Utilidades.cargarCombosFecha(cbxDia, cbxMes, cbxAnio);
+        Controlador.Utilidades.cargarCombosFecha(cbxDia, cbxMes, cbxAnio);
     }
 
     /**
@@ -194,7 +194,6 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(204, 255, 255));
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/IngresarDatosIcono.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
