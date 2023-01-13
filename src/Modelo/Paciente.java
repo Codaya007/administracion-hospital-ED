@@ -27,14 +27,16 @@ public class Paciente {
     private String molestia;
     private String FechaIngreso;
     private String HoraAtencion;
+    
+    private boolean EstadoCita;
+    
     private String dia;
     private String mes;
     private String anio;
     
-    
     private Paciente unionPaciente[];
     
-    public Paciente(String identificacion, String nombres,String apellidos,String edad,String genero, String telefono,String molestia, String FechaIngreso, String HoraAtencion, String dia, String mes, String anio ) {
+    public Paciente(String identificacion, String nombres,String apellidos,String edad,String genero, String telefono,String molestia, String FechaIngreso, String HoraAtencion, String dia, String mes, String anio) {
         
         this.identificacion = identificacion;
         this.nombres = nombres;
@@ -45,30 +47,13 @@ public class Paciente {
         this.molestia = molestia;
         this.FechaIngreso = FechaIngreso;
         this.HoraAtencion = HoraAtencion;
+        
         this.dia = dia;
         this.mes = mes;
         this.anio = anio;
 
     }
     
-
-    
-//    private ArrayList <Paciente> pacienteU;
-//    
-//    public Paciente(String identificacionL, String nombresL, String apellidosL, String edadL, GeneroComboBox generoL, String telefonoL, String fechaIngresoL, String horaAtencionL, String molestiasL){
-//        this.identificacion = identificacionL;
-//        this.nombres = nombresL;
-//        this.apellidos = apellidosL;
-//        this.edad = edadL;
-//        this.genero = generoL;
-//        this.telefono = telefonoL;
-//        this.FechaIngreso = fechaIngresoL;
-//        this.HoraAtencion = horaAtencionL;
-//        this.molestia = molestiasL;
-//        
-//        this.pacienteU = new ArrayList(); 
-//    }
-
     public String getGenero() {
         return genero;
     }
@@ -76,8 +61,6 @@ public class Paciente {
     public void setGenero(String genero) {
         this.genero = genero;
     }
-    
-    
 
     public String getMolestia() {
         return this.molestia;
@@ -190,6 +173,13 @@ public class Paciente {
     public void setAnio(String anio) {
         this.anio = anio;
     }
+
+    public boolean isEstadoCita() {
+        return EstadoCita;
+    }
+
+    public void setEstadoCita(boolean EstadoCita) {
+        this.EstadoCita = EstadoCita;
+    }
     
- 
 }

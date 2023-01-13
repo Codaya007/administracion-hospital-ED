@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import java.awt.Color;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,6 +13,8 @@ import javax.swing.JOptionPane;
  * @author Victor
  */
 public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
+    int Xmouse,Ymouse;
+    
 
     /**
      * Creates new form frmAgendacionCita
@@ -18,6 +22,13 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
     public frmUsuarioIngresarDatos() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        btnRegresarInicio.setToolTipText("Regresa a la interfaz principal");
+        btnConfirmar.setToolTipText("Guarda la informacion y da paso para seleccionar la fecha");
+        btnBorrarCampos.setToolTipText("Se borran todos los campos para agregar una nueva cita");
+        btnRegresar.setToolTipText("Regresa a la interfaz anterior");
+        btnSalir.setToolTipText("Cierra todos las interfaces y procesos existentes");
+          
     }
 
     /**
@@ -43,25 +54,25 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         cbxGeneroPaciente = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         txtEdadPaciente = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txaMolestias = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
         txtNumeroTelefono = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
         btnRegresarInicio = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        barrademovimiento = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        btnBorrarCampos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("INGRESAR DATOS DEL PACIENTE");
         setBackground(new java.awt.Color(204, 255, 255));
+        setUndecorated(true);
 
-        jPanel4.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel4.setBackground(new java.awt.Color(20, 66, 114));
         jPanel4.setForeground(new java.awt.Color(204, 255, 255));
 
         jLabel1.setBackground(new java.awt.Color(204, 255, 255));
@@ -69,16 +80,27 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("INGRESAR DATOS DEL PACIENTE");
 
-        btnConfirmar.setText("CONFIRMAR");
+        btnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnIngresarIcono.png"))); // NOI18N
+        btnConfirmar.setText("  CONFIRMAR");
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmarActionPerformed(evt);
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(20, 66, 114));
 
+        txtNumeroCedula.setForeground(java.awt.Color.gray);
         txtNumeroCedula.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNumeroCedula.setText("Ingreso solo numeros");
+        txtNumeroCedula.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNumeroCedulaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNumeroCedulaFocusLost(evt);
+            }
+        });
         txtNumeroCedula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtNumeroCedulaKeyPressed(evt);
@@ -88,9 +110,21 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Apellidos");
 
+        txtNombrePaciente.setForeground(java.awt.Color.gray);
         txtNombrePaciente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNombrePaciente.setText("Ingresar solo letras");
+        txtNombrePaciente.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNombrePacienteFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombrePacienteFocusLost(evt);
+            }
+        });
         txtNombrePaciente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtNombrePacienteKeyPressed(evt);
@@ -100,11 +134,25 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Nombres");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Cedula");
 
+        txtApellidoPaciente.setForeground(java.awt.Color.gray);
         txtApellidoPaciente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtApellidoPaciente.setText("Ingresar solo letras");
+        txtApellidoPaciente.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtApellidoPacienteFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtApellidoPacienteFocusLost(evt);
+            }
+        });
         txtApellidoPaciente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtApellidoPacienteKeyPressed(evt);
@@ -114,6 +162,8 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Genero");
 
         cbxGeneroPaciente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maculino", "Femenino" }));
@@ -124,9 +174,21 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Edad");
 
+        txtEdadPaciente.setForeground(java.awt.Color.gray);
         txtEdadPaciente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtEdadPaciente.setText("Ingreso solo numeros, maximo hasta 140 años");
+        txtEdadPaciente.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtEdadPacienteFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtEdadPacienteFocusLost(evt);
+            }
+        });
         txtEdadPaciente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtEdadPacienteKeyPressed(evt);
@@ -136,17 +198,6 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setBackground(new java.awt.Color(255, 51, 51));
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 2, 10)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("*Ingresar solo numeros, maximo 3 numeros*");
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 2, 10)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("*Ingresar solo numeros*");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -154,19 +205,16 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtNumeroCedula)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtNombrePaciente)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtApellidoPaciente)
-                    .addComponent(txtNombrePaciente)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNumeroCedula)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbxGeneroPaciente, 0, 324, Short.MAX_VALUE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtEdadPaciente)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(txtEdadPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbxGeneroPaciente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,9 +223,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNumeroCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -189,21 +235,31 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtEdadPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbxGeneroPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(20, 66, 114));
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Molestias");
 
         txaMolestias.setColumns(20);
+        txaMolestias.setForeground(java.awt.Color.gray);
         txaMolestias.setRows(5);
+        txaMolestias.setText("Ingreso de molestias detalladas");
+        txaMolestias.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txaMolestiasFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txaMolestiasFocusLost(evt);
+            }
+        });
         txaMolestias.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txaMolestiasKeyPressed(evt);
@@ -211,9 +267,21 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(txaMolestias);
 
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Numero celular");
 
+        txtNumeroTelefono.setForeground(java.awt.Color.gray);
         txtNumeroTelefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNumeroTelefono.setText("Ingreso solo numeros");
+        txtNumeroTelefono.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNumeroTelefonoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNumeroTelefonoFocusLost(evt);
+            }
+        });
         txtNumeroTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtNumeroTelefonoKeyPressed(evt);
@@ -223,11 +291,6 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             }
         });
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 2, 10)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("*Ingresar solo numeros*");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -236,12 +299,11 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtNumeroTelefono)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -251,48 +313,57 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNumeroTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel12)
-                .addGap(8, 8, 8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(26, 26, 26))
         );
 
-        jPanel3.setBackground(new java.awt.Color(204, 255, 255));
-
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/IngresarDatosIcono.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addContainerGap())
-        );
-
-        btnRegresar.setText("REGRESAR");
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnRegresarIcono.png"))); // NOI18N
+        btnRegresar.setText("  REGRESAR");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
             }
         });
 
+        btnRegresarInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnInicioIcono.png"))); // NOI18N
         btnRegresarInicio.setText("REGRESAR A INICIO");
         btnRegresarInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarInicioActionPerformed(evt);
+            }
+        });
+
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnSalirIcono.png"))); // NOI18N
+        btnSalir.setText("SALIR");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+
+        barrademovimiento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        barrademovimiento.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                barrademovimientoMouseDragged(evt);
+            }
+        });
+        barrademovimiento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                barrademovimientoMousePressed(evt);
+            }
+        });
+
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/IngresarDatos.png"))); // NOI18N
+
+        btnBorrarCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnLimpiarIcono.png"))); // NOI18N
+        btnBorrarCampos.setText("Limpiar");
+        btnBorrarCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarCamposActionPerformed(evt);
             }
         });
 
@@ -305,35 +376,49 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRegresar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(btnSalir)
+                                .addGap(185, 185, 185))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRegresarInicio))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(btnRegresarInicio)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnRegresar)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnConfirmar, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(btnBorrarCampos)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnConfirmar))))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addComponent(barrademovimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(barrademovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 21, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnConfirmar)
                     .addComponent(btnRegresarInicio)
-                    .addComponent(btnRegresar))
-                .addContainerGap())
+                    .addComponent(btnRegresar)
+                    .addComponent(btnSalir)
+                    .addComponent(btnConfirmar)
+                    .addComponent(btnBorrarCampos))
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -353,17 +438,56 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
         
+        ImageIcon CedulaVaciaIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneCedulaVacioIcono.png");
+        ImageIcon NombresIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneNombresIcono.png");
+        ImageIcon GeneroIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneGeneroIcono.png");
+        ImageIcon TelefonoIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneTelefonoIcono.png");
+        ImageIcon MolestiaIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneMolestiaIcono.png");
+        ImageIcon Edad = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneEdadMinimaMaximaIcono.png");
+        ImageIcon CampoVacio = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneCampoVacioIcono.png");
+        ImageIcon ErrorCedula = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneErrorCampoIcono.png");
+        ImageIcon ErrorTelefono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneErrorTelefonoIcono.png");
+        ImageIcon NumeroMenor = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneNumeroIgualIcono.png");
+        ImageIcon EdadMaxima = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneEdadMaximaIcono.png");
+        
         String cedula = txtNumeroCedula.getText();
         String telefono = txtNumeroTelefono.getText();
         
-        if(txaMolestias.getText().isEmpty() || txtNombrePaciente.getText().isEmpty() || txtApellidoPaciente.getText().isEmpty() || txtEdadPaciente.getText().isEmpty() || cbxGeneroPaciente.getSelectedItem() == null){
-            JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE);
-        }
-        else if(telefono.length()<10){
-            JOptionPane.showMessageDialog(null, "La numero de telefono tiene menos de 10 digitos","TELEFONO MAL ESTABLECIDO",JOptionPane.ERROR_MESSAGE);
+        if(txtNumeroCedula.getText().isEmpty() || txtNumeroCedula.getText().equalsIgnoreCase("Ingreso solo numeros")){
+            JOptionPane.showMessageDialog(null, "Por favor llene el campo de la cedula","INGRESE TODOS LOS DATOS",JOptionPane.ERROR_MESSAGE,CedulaVaciaIcono);
         }
         else if(cedula.length()<10){
-            JOptionPane.showMessageDialog(null, "La cedula tiene menos de 10 digitos","CEDULA MAL ESTABLECIDA",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "La cedula tiene menos de 10 digitos","CEDULA MAL ESTABLECIDA",JOptionPane.ERROR_MESSAGE,NumeroMenor);
+        }
+        else if(!txtNumeroCedula.getText().matches("11\\d{8}")){
+            JOptionPane.showMessageDialog(null, "El numero de cedula tiene que iniciar con 11","CEDULA NO VALIDO",JOptionPane.ERROR_MESSAGE,ErrorCedula);
+        }
+        else if(txtNombrePaciente.getText().isEmpty() || txtNombrePaciente.getText().equalsIgnoreCase("Ingresar solo letras")){
+            JOptionPane.showMessageDialog(null, "Por favor llene el campo del nombre","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,NombresIcono);
+        }
+        else if(txtApellidoPaciente.getText().isEmpty() || txtApellidoPaciente.getText().equalsIgnoreCase("Ingresar solo letras")){
+            JOptionPane.showMessageDialog(null, "Por favor llene el campo de apellido ","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,CampoVacio);
+        }
+        else if(txtEdadPaciente.getText().isEmpty() || txtEdadPaciente.getText().equalsIgnoreCase("Ingreso solo numeros, maximo hasta 140 años")){
+            JOptionPane.showMessageDialog(null, "Por favor ingrese la edad","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,Edad);
+        }
+        else if(Integer.parseInt(txtEdadPaciente.getText()) > 140){
+            JOptionPane.showMessageDialog(null, "La edad maxima es de 140 años", "EDAD INVALIDA", JOptionPane.INFORMATION_MESSAGE, EdadMaxima);
+        }
+        else if(cbxGeneroPaciente.getSelectedItem() == null){
+            JOptionPane.showMessageDialog(null, "Por favor seleccione el genero","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,GeneroIcono);
+        }
+        else if(txtNumeroTelefono.getText().isEmpty() || txtNumeroTelefono.getText().equalsIgnoreCase("Ingreso solo numeros")){
+            JOptionPane.showMessageDialog(null, "Por favor ingrese el numero telefonico","INGRESE TODOS LOS DATOS",JOptionPane.ERROR_MESSAGE,TelefonoIcono);
+        }
+        else if(telefono.length()<10){
+            JOptionPane.showMessageDialog(null, "La numero de telefono tiene menos de 10 digitos","TELEFONO MAL ESTABLECIDO",JOptionPane.ERROR_MESSAGE,NumeroMenor);
+        }
+        else if(!txtNumeroTelefono.getText().matches("09\\d{8}")){
+            JOptionPane.showMessageDialog(null, "El numero de telefono tiene que iniciar con 09","TELEFONO NO VALIDO",JOptionPane.ERROR_MESSAGE,ErrorTelefono);
+        }
+        else if(txaMolestias.getText().isEmpty() || txaMolestias.getText().equalsIgnoreCase("Ingreso de molestias detalladas")){
+            JOptionPane.showMessageDialog(null, "Por favor ingrese las molestias que presenta","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,MolestiaIcono);
         }
         else{
             frmUsuarioSeleccionarFecha abrir = new frmUsuarioSeleccionarFecha();
@@ -374,6 +498,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
     private void txtNumeroCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroCedulaKeyTyped
         // TODO add your handling code here:
         Character c = evt.getKeyChar();
+        
         if(!Character.isDigit(c)){
             evt.consume();
         }
@@ -386,6 +511,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
     private void txtEdadPacienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadPacienteKeyTyped
         // TODO add your handling code here:
         Character c = evt.getKeyChar();
+        
         if(!Character.isDigit(c)){
             evt.consume();
         }
@@ -407,9 +533,29 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-        frmUsuarioSelecionarUso abrir = new frmUsuarioSelecionarUso();
-        abrir.setVisible(true);
-        this.setVisible(false);
+        ImageIcon Seguro = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneConfirmarSeguroIcono.png");
+        
+        if (!txtNumeroCedula.getText().isEmpty() & !txtNumeroCedula.getText().equalsIgnoreCase("Ingreso solo numeros")
+                || !txtNombrePaciente.getText().isEmpty() & !txtNombrePaciente.getText().equalsIgnoreCase("Ingresar solo letras")
+                || !txtApellidoPaciente.getText().isEmpty() & !txtApellidoPaciente.getText().equalsIgnoreCase("Ingresar solo letras")
+                || !txtEdadPaciente.getText().isEmpty() & !txtEdadPaciente.getText().equalsIgnoreCase("Ingreso solo numeros, maximo hasta 140 años")
+                || cbxGeneroPaciente.getSelectedItem() != null 
+                || !txtNumeroTelefono.getText().isEmpty() & !txtNumeroTelefono.getText().equalsIgnoreCase("Ingreso solo numeros")
+                || !txaMolestias.getText().isEmpty() & !txaMolestias.getText().equalsIgnoreCase("Ingreso de molestias detalladas")){
+            
+            int result = JOptionPane.showConfirmDialog(null, "Estas seguro de regresar? \nSe perderan todos los avances no guardados", "CONFIRMAR SALIDA", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE,Seguro);
+            
+            if (result == JOptionPane.YES_OPTION) {
+                frmUsuarioSelecionarUso abrir = new frmUsuarioSelecionarUso();
+                abrir.setVisible(true);
+                this.setVisible(false);
+            }
+            
+        } else {
+            frmUsuarioSelecionarUso abrir = new frmUsuarioSelecionarUso();
+            abrir.setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void txtNumeroCedulaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroCedulaKeyPressed
@@ -449,9 +595,33 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
 
     private void btnRegresarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarInicioActionPerformed
         // TODO add your handling code here:
-        frmPrincipal abrir = new frmPrincipal();
-        abrir.setVisible(true);
-        this.setVisible(false);
+        
+        
+        ImageIcon Seguro = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneConfirmarSeguroIcono.png");
+        
+        if (!txtNumeroCedula.getText().isEmpty() & !txtNumeroCedula.getText().equalsIgnoreCase("Ingreso solo numeros")
+                || !txtNombrePaciente.getText().isEmpty() & !txtNombrePaciente.getText().equalsIgnoreCase("Ingresar solo letras")
+                || !txtApellidoPaciente.getText().isEmpty() & !txtApellidoPaciente.getText().equalsIgnoreCase("Ingresar solo letras")
+                || !txtEdadPaciente.getText().isEmpty() & !txtEdadPaciente.getText().equalsIgnoreCase("Ingreso solo numeros, maximo hasta 140 años")
+                || cbxGeneroPaciente.getSelectedItem() != null 
+                || !txtNumeroTelefono.getText().isEmpty() & !txtNumeroTelefono.getText().equalsIgnoreCase("Ingreso solo numeros")
+                || !txaMolestias.getText().isEmpty() & !txaMolestias.getText().equalsIgnoreCase("Ingreso de molestias detalladas")){
+            
+            int result = JOptionPane.showConfirmDialog(null, "Estas seguro de salir? \nSe perderan todos los avances no guardados", "CONFIRMAR SALIDA", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE,Seguro);
+            
+            if (result == JOptionPane.YES_OPTION) {
+                frmPrincipal abrir = new frmPrincipal();
+                abrir.setVisible(true);
+                this.setVisible(false);
+            }
+            
+        } else {
+            frmPrincipal abrir = new frmPrincipal();
+            abrir.setVisible(true);
+            this.setVisible(false);
+        }
+        
+        
     }//GEN-LAST:event_btnRegresarInicioActionPerformed
 
     private void txtNombrePacienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombrePacienteKeyTyped
@@ -502,6 +672,145 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txaMolestiasKeyPressed
 
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSalirIcono.png");
+        
+        int valor = JOptionPane.showConfirmDialog(null, "¿Esta seguro que quiere salir del sistema?\n Se perderan todos los avances", "CONFIRMACION DE SALIDA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, SalirConfirmar);
+        
+        if(valor == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void barrademovimientoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barrademovimientoMousePressed
+        // TODO add your handling code here:
+        Xmouse = evt.getX();
+        Ymouse = evt.getY();
+    }//GEN-LAST:event_barrademovimientoMousePressed
+
+    private void barrademovimientoMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barrademovimientoMouseDragged
+        // TODO add your handling code here:
+        int x =evt.getXOnScreen();
+        int y =evt.getYOnScreen();
+        this.setLocation(x-Xmouse,y- Ymouse);
+    }//GEN-LAST:event_barrademovimientoMouseDragged
+
+    private void txtNumeroCedulaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroCedulaFocusGained
+        // TODO add your handling code here:
+        if (txtNumeroCedula.getText().equals("Ingreso solo numeros")) {
+            txtNumeroCedula.setText("");
+            txtNumeroCedula.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_txtNumeroCedulaFocusGained
+
+    private void txtNumeroCedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroCedulaFocusLost
+//         TODO add your handling code here:
+        if (txtNumeroCedula.getText().isEmpty()) {
+            txtNumeroCedula.setText("Ingreso solo numeros");
+            txtNumeroCedula.setForeground(Color.GRAY);
+        }
+    }//GEN-LAST:event_txtNumeroCedulaFocusLost
+
+    private void txtNombrePacienteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombrePacienteFocusGained
+        // TODO add your handling code here:
+        if (txtNombrePaciente.getText().equals("Ingresar solo letras")) {
+            txtNombrePaciente.setText("");
+            txtNombrePaciente.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_txtNombrePacienteFocusGained
+
+    private void txtNombrePacienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombrePacienteFocusLost
+        // TODO add your handling code here:
+        if (txtNombrePaciente.getText().isEmpty()) {
+            txtNombrePaciente.setText("Ingresar solo letras");
+            txtNombrePaciente.setForeground(Color.GRAY);
+        }
+    }//GEN-LAST:event_txtNombrePacienteFocusLost
+
+    private void txtApellidoPacienteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtApellidoPacienteFocusGained
+        // TODO add your handling code here:
+        if (txtApellidoPaciente.getText().equals("Ingresar solo letras")) {
+            txtApellidoPaciente.setText("");
+            txtApellidoPaciente.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_txtApellidoPacienteFocusGained
+
+    private void txtApellidoPacienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtApellidoPacienteFocusLost
+        // TODO add your handling code here:
+        if (txtApellidoPaciente.getText().isEmpty()) {
+            txtApellidoPaciente.setText("Ingresar solo letras");
+            txtApellidoPaciente.setForeground(Color.GRAY);
+        }
+    }//GEN-LAST:event_txtApellidoPacienteFocusLost
+
+    private void txtEdadPacienteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEdadPacienteFocusGained
+        // TODO add your handling code here:
+        if (txtEdadPaciente.getText().equals("Ingreso solo numeros, maximo hasta 140 años")) {
+            txtEdadPaciente.setText("");
+            txtEdadPaciente.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_txtEdadPacienteFocusGained
+
+    private void txtEdadPacienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEdadPacienteFocusLost
+        // TODO add your handling code here:
+        if (txtEdadPaciente.getText().isEmpty()) {
+            txtEdadPaciente.setText("Ingreso solo numeros, maximo hasta 140 años");
+            txtEdadPaciente.setForeground(Color.GRAY);
+        }
+    }//GEN-LAST:event_txtEdadPacienteFocusLost
+
+    private void txtNumeroTelefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroTelefonoFocusGained
+        // TODO add your handling code here:
+        if (txtNumeroTelefono.getText().equals("Ingreso solo numeros")) {
+            txtNumeroTelefono.setText("");
+            txtNumeroTelefono.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_txtNumeroTelefonoFocusGained
+
+    private void txtNumeroTelefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroTelefonoFocusLost
+        // TODO add your handling code here:
+        if (txtNumeroTelefono.getText().isEmpty()) {
+            txtNumeroTelefono.setText("Ingreso solo numeros");
+            txtNumeroTelefono.setForeground(Color.GRAY);
+        }
+    }//GEN-LAST:event_txtNumeroTelefonoFocusLost
+
+    private void txaMolestiasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txaMolestiasFocusGained
+        // TODO add your handling code here:
+        if (txaMolestias.getText().equals("Ingreso de molestias detalladas")) {
+            txaMolestias.setText("");
+            txaMolestias.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_txaMolestiasFocusGained
+
+    private void txaMolestiasFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txaMolestiasFocusLost
+        // TODO add your handling code here:
+        if (txaMolestias.getText().isEmpty()) {
+            txaMolestias.setText("Ingreso de molestias detalladas");
+            txaMolestias.setForeground(Color.GRAY);
+        }
+    }//GEN-LAST:event_txaMolestiasFocusLost
+
+    private void btnBorrarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarCamposActionPerformed
+        // TODO add your handling code here:
+        ImageIcon LimpiarDatos= new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneLimpiarDatosIcono.png");
+        
+        int result = JOptionPane.showConfirmDialog(null, "Quiere limpiar todos los campos, \npara crear una nueva cita", "CONFIRMAR LIMPIEZA", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, LimpiarDatos);
+
+        if (result == JOptionPane.YES_OPTION) {
+            Vista.frmUsuarioIngresarDatos.txtNumeroCedula.setText("");
+            Vista.frmUsuarioIngresarDatos.txtNombrePaciente.setText("");
+            Vista.frmUsuarioIngresarDatos.txtApellidoPaciente.setText("");
+            Vista.frmUsuarioIngresarDatos.txtEdadPaciente.setText("");
+            Vista.frmUsuarioIngresarDatos.cbxGeneroPaciente.setSelectedItem(null);
+            Vista.frmUsuarioIngresarDatos.txtNumeroTelefono.setText("");
+            Vista.frmUsuarioIngresarDatos.txaMolestias.setText("");
+        } else {
+
+        }
+    }//GEN-LAST:event_btnBorrarCamposActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -545,14 +854,14 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel barrademovimiento;
+    private javax.swing.JButton btnBorrarCampos;
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnRegresarInicio;
+    private javax.swing.JButton btnSalir;
     public static javax.swing.JComboBox<String> cbxGeneroPaciente;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -563,7 +872,6 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTextArea txaMolestias;

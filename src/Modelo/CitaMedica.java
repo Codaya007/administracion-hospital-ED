@@ -71,7 +71,7 @@ public class CitaMedica {
     }
 
     public void setStatus(String status) {
-        if (!Utilidades.Utilidades.contains(STATUSES_PERMITIDOS, status)) {
+        if (!Controlador.Utilidades.contains(STATUSES_PERMITIDOS, status)) {
             throw new Error("Los status permitidos para la cita son: " + Arrays.toString(STATUSES_PERMITIDOS));
         }
 

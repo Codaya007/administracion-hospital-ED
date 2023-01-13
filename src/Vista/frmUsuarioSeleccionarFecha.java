@@ -5,7 +5,8 @@
 package Vista;
 
 import Modelo.Paciente;
-import static Utilidades.UtilidadesFechas.validarFecha;
+import static Controlador.UtilidadesFechas.validarFecha;
+import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -13,6 +14,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -21,8 +23,9 @@ import javax.swing.JTable;
  * @author Victor
  */
 public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
-        
-    public static LinkedList contenedor = new LinkedList();
+    int Xmouse,Ymouse;
+ 
+    public static LinkedList<Paciente> EnviarContenido = new LinkedList<>();
 
     /**
      * Creates new form frmAgendarCita
@@ -30,11 +33,17 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
     public frmUsuarioSeleccionarFecha() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        btnAgendarCita.setToolTipText("Verifica la disponibilidad y guarda los datos");
+        btnRegresar.setToolTipText("Regresa a la interfaz anterior");
+        btnSalir.setToolTipText("Cierra todos las interfaces y procesos existentes");
 
     }
 
     public boolean ExisteEnTabla(JTable tabla, String cedula, int col) {
+        
         boolean Existe = false;
+        
         for (int i = 0; i < tabla.getRowCount(); i++) {
             if (tabla.getValueAt(i, col).equals(cedula)) {
                 Existe = true;
@@ -62,16 +71,27 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
         btnAgendarCita = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JButton();
+        barramovimineto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("INGRESAR LA FECHA PARA LA CITA");
+        setUndecorated(true);
 
-        jPanel3.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(20, 66, 114));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Fecha de la cita");
 
+        txtFechaCita.setForeground(java.awt.Color.gray);
         txtFechaCita.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtFechaCita.setText("DIA / MES / AÑO");
+        txtFechaCita.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtFechaCitaMousePressed(evt);
+            }
+        });
         txtFechaCita.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtFechaCitaKeyPressed(evt);
@@ -82,6 +102,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
         });
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Horarios de atencion");
 
         cbxHorarioAtencion.setMaximumRowCount(9);
@@ -95,11 +116,12 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
         });
 
         jLabel2.setBackground(new java.awt.Color(255, 153, 153));
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 11)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 10)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 51, 51));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("*Ingresar en formato dd/mm/aaaa*");
 
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnRegresarIcono.png"))); // NOI18N
         btnRegresar.setText("REGRESAR");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,7 +129,8 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
             }
         });
 
-        btnAgendarCita.setText("AGENDAR CITA");
+        btnAgendarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnFechaValidaIcono.png"))); // NOI18N
+        btnAgendarCita.setText("  AGENDAR");
         btnAgendarCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgendarCitaActionPerformed(evt);
@@ -115,58 +138,84 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
         });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/CalendarioIcono.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/calendarioIcono.png"))); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Seleccionar fecha para la cita");
+        jLabel6.setText("SELECCIONAR FECHA");
+
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnSalirIcono.png"))); // NOI18N
+        btnSalir.setText("SALIR");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+
+        barramovimineto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        barramovimineto.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                barramoviminetoMouseDragged(evt);
+            }
+        });
+        barramovimineto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                barramoviminetoMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(barramovimineto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnRegresar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAgendarCita))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtFechaCita, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbxHorarioAtencion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE))
-                .addContainerGap())
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSalir))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(btnRegresar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                                .addComponent(btnAgendarCita))
+                            .addComponent(txtFechaCita)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbxHorarioAtencion, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(15, 15, 15))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(barramovimineto, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 20, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtFechaCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFechaCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
                         .addComponent(jLabel2)
-                        .addGap(11, 11, 11)
+                        .addGap(24, 24, 24)
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbxHorarioAtencion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegresar)
-                    .addComponent(btnAgendarCita))
+                    .addComponent(btnSalir)
+                    .addComponent(btnAgendarCita)
+                    .addComponent(btnRegresar))
                 .addContainerGap())
         );
 
@@ -178,7 +227,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -186,10 +235,29 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
 
     private void btnAgendarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarCitaActionPerformed
         // TODO add your handling code here:
+        ImageIcon FechaVacia = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneFechaVaciaIcono.png");
+        ImageIcon HorarioVacio = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneHorarioVacioIcono.png");
+        ImageIcon YaCuenta = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneYaCuentaIcono.png");
+        ImageIcon FechaPasada = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneFechaPasadaIcono.png");
+        ImageIcon HorarioNoDisponible = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneHorarioLLenoIcono.png");
+
+        ImageIcon MuyLejana = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneFechaLejanaIcono.png");
+        ImageIcon Agendado = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneAgendadaIcono.png");
+
         try {
-            if (txtFechaCita.getText().isEmpty() || cbxHorarioAtencion.getSelectedItem() == null) {
-                JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos", "VALORES VACIOS", JOptionPane.WARNING_MESSAGE);
-            } else {
+            if (txtFechaCita.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Por favor ingrese la fecha", "CAMPO VACIOS", JOptionPane.WARNING_MESSAGE, FechaVacia);
+            } 
+            else if (cbxHorarioAtencion.getSelectedItem() == null) {
+                JOptionPane.showMessageDialog(null, "Por favor ingrese el horario", "CAMPO VACIOS", JOptionPane.WARNING_MESSAGE, HorarioVacio);
+            } 
+            else {
+                if (txtFechaCita.getText().matches("^\\d{1,2}/\\d{1,2}/\\d{4}$")) {
+                } 
+                else {
+                    JOptionPane.showMessageDialog(null, "La fecha tiene que contener 2 / en formato dia/mes/año", "FECHA SIN FORMATO0", JOptionPane.WARNING_MESSAGE, MuyLejana);
+                }
+                
                 String fecha1;
                 boolean resultado = true;
                 fecha1 = txtFechaCita.getText();
@@ -207,18 +275,21 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                 if (resultado == true) {
                     frmPersonalCitasPorAtender abrir = new frmPersonalCitasPorAtender();
                     abrir.setVisible(false);
-                    
 
                     if (fechaSeleccionada.before(fechaHoy)) {
-                        JOptionPane.showMessageDialog(null, "La fecha seleccionada ya ha pasado", "FECHA PASADO", JOptionPane.INFORMATION_MESSAGE);
-                    } else if (ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, fecha1, 7) == true & ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, CbxHoraAtencion, 8)) {
-                        JOptionPane.showMessageDialog(null, "La hora de atencion ya no esta disponible", "NO DISPONIBLE", JOptionPane.INFORMATION_MESSAGE);
-                    } else if (ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 0) == true) {
-                        JOptionPane.showMessageDialog(null, "El usuario con numero de cedula " + cedula + " ya tiene una cita agendada ", "YA CUENTA CON CITA", JOptionPane.INFORMATION_MESSAGE);
-                    } else if (fechaSeleccionada.after(fechaLimite)) {
-                        JOptionPane.showMessageDialog(null, "La fecha seleccionada es muy lejana", "FECHA DEMASIADO LEJANA", JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        
+                        JOptionPane.showMessageDialog(null, "La fecha seleccionada ya ha pasado", "FECHA PASADO", JOptionPane.INFORMATION_MESSAGE, FechaPasada);
+                    } 
+                    else if (ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, fecha1, 7) == true & ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, CbxHoraAtencion, 8)) {
+                        JOptionPane.showMessageDialog(null, "La hora de atencion ya no esta disponible", "NO DISPONIBLE", JOptionPane.INFORMATION_MESSAGE, HorarioNoDisponible);
+                    } 
+                    else if (ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 0) == true) {
+                        JOptionPane.showMessageDialog(null, "El usuario con numero de cedula " + cedula + " \nya tiene una cita agendada", "YA CUENTA CON CITA", JOptionPane.INFORMATION_MESSAGE, YaCuenta);
+                    } 
+                    else if (fechaSeleccionada.after(fechaLimite)) {
+                        JOptionPane.showMessageDialog(null, "La fecha seleccionada es muy lejana", "FECHA DEMASIADO LEJANA", JOptionPane.INFORMATION_MESSAGE, MuyLejana);
+                    } 
+                    else {
+
                         String NumeroCedula = Vista.frmUsuarioIngresarDatos.txtNumeroCedula.getText();
                         String NombrePaciente = Vista.frmUsuarioIngresarDatos.txtNombrePaciente.getText();
                         String ApellidoPaciente = Vista.frmUsuarioIngresarDatos.txtApellidoPaciente.getText();
@@ -228,7 +299,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                         String MolestiaPaciente = Vista.frmUsuarioIngresarDatos.txaMolestias.getText();
                         String FechaAtencion = txtFechaCita.getText();
                         String HoraAtencion = cbxHorarioAtencion.getSelectedItem().toString();
-                        
+
                         Date miFecha = new SimpleDateFormat("dd/MM/yyyy").parse(txtFechaCita.getText());
                         calendario.setTime(miFecha);
                         int anio = calendario.get(Calendar.YEAR);
@@ -238,24 +309,43 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                         String Dia = String.valueOf(dia);
                         String Mes = String.valueOf(mes);
                         String Anio = String.valueOf(anio);
-                
-                        Paciente claseauto = new Paciente(NumeroCedula, NombrePaciente, ApellidoPaciente, EdadPaciente, GeneroPaciente, TelefonoPaciente, MolestiaPaciente, FechaAtencion, HoraAtencion, Dia, Mes, Anio);
-                        contenedor.add(claseauto);
-                                                
-                        JOptionPane.showMessageDialog(null, "CITA AGENDADA CON EXITO");
+
+                        Paciente paciente = new Paciente(NumeroCedula, NombrePaciente, ApellidoPaciente, EdadPaciente, GeneroPaciente, TelefonoPaciente, MolestiaPaciente, FechaAtencion, HoraAtencion, Dia, Mes, Anio);
+                        EnviarContenido.add(paciente);
+
+                        JOptionPane.showMessageDialog(null, "Cita agendada exitosamente", "AGENDADO", JOptionPane.INFORMATION_MESSAGE, Agendado);
+                        
+                        txtFechaCita.setText("DIA / MES / AÑO");
+                        txtFechaCita.setForeground(Color.gray);
+                        cbxHorarioAtencion.setSelectedItem(null);
+                        
+                        this.dispose();
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, "El formato de la fecha esta mal, tiene que ser dia/mes/año, con limites de dias 30 o 31 y mes maximo 12 ,Por favor revisar", "FORMATO DE FECHA MAL ESTABLECIDO", JOptionPane.WARNING_MESSAGE);
+                } 
+                else {
+                    JOptionPane.showMessageDialog(null, "El formato de la fecha esta mal,tiene que tener limites de dias 30 o 31 y mes maximo 12 ,Por favor revisar", "FORMATO DE FECHA MAL ESTABLECIDO", JOptionPane.WARNING_MESSAGE, MuyLejana);
                 }
             }
-        } catch (ParseException ex) {
+        } 
+        catch (ParseException ex) {
         }
-        Collections.sort(contenedor, (Paciente g, Paciente h) -> g.getHoraAtencion().compareTo(h.getHoraAtencion()));
+        Collections.sort(EnviarContenido, (Paciente g, Paciente h) -> g.getHoraAtencion().compareTo(h.getHoraAtencion()));
+        
     }//GEN-LAST:event_btnAgendarCitaActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        ImageIcon Seguro = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneConfirmarSeguroIcono.png");
+        
+        if (!txtFechaCita.getText().equalsIgnoreCase("DIA / MES / AÑO")  || cbxHorarioAtencion.getSelectedItem() != null){
+            int result = JOptionPane.showConfirmDialog(null, "Estas seguro de salir? \nSe perderan todos los avances no guardados", "CONFIRMAR SALIDA", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE,Seguro);
+            
+            if (result == JOptionPane.YES_OPTION) {
+                this.dispose();
+            }
+        } else {
+            this.dispose();
+        }
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void txtFechaCitaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaCitaKeyTyped
@@ -285,6 +375,38 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
             btnAgendarCita.requestFocus();
         }
     }//GEN-LAST:event_cbxHorarioAtencionKeyPressed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSalirIcono.png");
+        
+        int valor = JOptionPane.showConfirmDialog(null, "¿Esta seguro que quiere salir del sistema?\n Se perderan todos los avances", "CONFIRMACION DE SALIDA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, SalirConfirmar);
+        
+        if(valor == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void barramoviminetoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barramoviminetoMousePressed
+        // TODO add your handling code here:
+        Xmouse = evt.getX();
+        Ymouse = evt.getY();
+    }//GEN-LAST:event_barramoviminetoMousePressed
+
+    private void barramoviminetoMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barramoviminetoMouseDragged
+        // TODO add your handling code here:
+        int x =evt.getXOnScreen();
+        int y =evt.getYOnScreen();
+        this.setLocation(x-Xmouse,y- Ymouse);
+    }//GEN-LAST:event_barramoviminetoMouseDragged
+
+    private void txtFechaCitaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFechaCitaMousePressed
+        // TODO add your handling code here:
+        if(txtFechaCita.getText().equals("DIA / MES / AÑO")){
+            txtFechaCita.setText("");
+            txtFechaCita.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_txtFechaCitaMousePressed
 
     /**
      * @param args the command line arguments
@@ -322,8 +444,10 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel barramovimineto;
     private javax.swing.JButton btnAgendarCita;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JButton btnSalir;
     public static javax.swing.JComboBox<String> cbxHorarioAtencion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

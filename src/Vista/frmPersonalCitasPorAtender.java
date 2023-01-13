@@ -6,11 +6,11 @@ package Vista;
 
 import Modelo.HistorialClinico;
 import Modelo.Paciente;
-import static Vista.frmUsuarioSeleccionarFecha.contenedor;
 import java.util.Collections;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import static Vista.frmUsuarioSeleccionarFecha.EnviarContenido;
 
 
 /**
@@ -21,8 +21,8 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     
     public static LinkedList contenedorAtendido=new LinkedList();
 
-    private DefaultTableModel modelo;
-    int contador = 0;
+    public static DefaultTableModel modelo;
+    int EnviarEnFila = 0;
 
     /**
      * Creates new form frmPersonalCitasPorAtender
@@ -43,22 +43,25 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     }
 
     public void CargarDatosCitasAtender() {
+        
         Paciente a;
-        Collections.sort(contenedor, (Paciente z, Paciente b) -> z.getDia().compareTo(b.getDia()));
-        Collections.sort(contenedor, (Paciente c, Paciente d) -> c.getMes().compareTo(d.getMes()));
-        Collections.sort(contenedor, (Paciente e, Paciente f) -> e.getAnio().compareTo(f.getAnio()));
-        for (int i = contenedor.size() - 1; i >= 0; i--) {
-            a = (Paciente) frmUsuarioSeleccionarFecha.contenedor.get(i);
-            modelo.insertRow(contador, new Object[]{});
-            modelo.setValueAt(a.getIdentificacion(), contador, 0);
-            modelo.setValueAt(a.getNombres(), contador, 1);
-            modelo.setValueAt(a.getApellidos(), contador, 2);
-            modelo.setValueAt(a.getEdad(), contador, 3);
-            modelo.setValueAt(a.getGenero(), contador, 4);
-            modelo.setValueAt(a.getTelefono(), contador, 5);
-            modelo.setValueAt(a.getMolestia(), contador, 6);
-            modelo.setValueAt(a.getFechaIngreso(), contador, 7);
-            modelo.setValueAt(a.getHoraAtencion(), contador, 8);
+        
+        Collections.sort(EnviarContenido, (Paciente z, Paciente b) -> z.getDia().compareTo(b.getDia()));
+        Collections.sort(EnviarContenido, (Paciente c, Paciente d) -> c.getMes().compareTo(d.getMes()));
+        Collections.sort(EnviarContenido, (Paciente e, Paciente f) -> e.getAnio().compareTo(f.getAnio()));
+        
+        for (int i = EnviarContenido.size() - 1; i >= 0; i--) {
+            a = (Paciente) frmUsuarioSeleccionarFecha.EnviarContenido.get(i);
+            modelo.insertRow(EnviarEnFila, new Object[]{});
+            modelo.setValueAt(a.getIdentificacion(), EnviarEnFila, 0);
+            modelo.setValueAt(a.getNombres(), EnviarEnFila, 1);
+            modelo.setValueAt(a.getApellidos(), EnviarEnFila, 2);
+            modelo.setValueAt(a.getEdad(), EnviarEnFila, 3);
+            modelo.setValueAt(a.getGenero(), EnviarEnFila, 4);
+            modelo.setValueAt(a.getTelefono(), EnviarEnFila, 5);
+            modelo.setValueAt(a.getMolestia(), EnviarEnFila, 6);
+            modelo.setValueAt(a.getFechaIngreso(), EnviarEnFila, 7);
+            modelo.setValueAt(a.getHoraAtencion(), EnviarEnFila, 8);
         }
     }
  
