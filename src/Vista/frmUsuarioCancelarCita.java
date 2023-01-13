@@ -31,7 +31,7 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
     }
     
     public boolean ExisteEnTabla(JTable tabla, String dto, int col) {
-        ImageIcon CuentaCoCitaIcono = new ImageIcon("src/RecursosGraficosFondos/CuentaConCitaIcono.png");
+        ImageIcon CuentaCoCitaIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneCuentaConCitaIcono.png");
         
         boolean Existe = false;
         
@@ -109,7 +109,7 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
             }
         });
 
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/salirIcono.png"))); // NOI18N
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnSalirIcono.png"))); // NOI18N
         btnSalir.setText("SALIR");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,7 +117,7 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
             }
         });
 
-        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/regresarIcono.png"))); // NOI18N
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnRegresarIcono.png"))); // NOI18N
         btnRegresar.setText("REGRESAR");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,7 +143,7 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
             }
         });
 
-        btnBuscarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/CitaConsultar.png"))); // NOI18N
+        btnBuscarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnCitaConsultarIcono.png"))); // NOI18N
         btnBuscarCita.setText("BUSCAR CITA");
         btnBuscarCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,7 +155,7 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
         lblCita.setRows(5);
         jScrollPane1.setViewportView(lblCita);
 
-        btnCancelarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/cancelarBoton.png"))); // NOI18N
+        btnCancelarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnCancelarIcono.png"))); // NOI18N
         btnCancelarCita.setText("CANCERLAR CITA");
         btnCancelarCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -256,7 +256,7 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
-        ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficosFondos/SalirIconoPane.png");
+        ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSalirIcono.png");
         
         int valor = JOptionPane.showConfirmDialog(null, "¿Esta seguro que quiere salir del sistema?\n Se perderan todos los avances", "CONFIRMACION DE SALIDA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, SalirConfirmar);
         
@@ -274,10 +274,10 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
 
     private void btnBuscarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCitaActionPerformed
         // TODO add your handling code here:
-        ImageIcon CedulaInvalidaIcono = new ImageIcon("src/RecursosGraficosFondos/CedulaInvalidaIcono.png");
-        ImageIcon SinRegistroIcono = new ImageIcon("src/RecursosGraficosFondos/SinRegistroIcono.png");
-        ImageIcon SinCitaIcono = new ImageIcon("src/RecursosGraficosFondos/SinCitaIcono.png");
-        ImageIcon NumeroMenor = new ImageIcon("src/RecursosGraficosFondos/NumeroIgual.png");
+        ImageIcon CedulaInvalidaIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneCedulaInvalidaIcono.png");
+        ImageIcon SinRegistroIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSinRegistroIcono.png");
+        ImageIcon SinCitaIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSinCitaIcono.png");
+        ImageIcon NumeroMenor = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneNumeroIgualIcono.png");
         
         String cedula = txtNumeroCedulaCancelar.getText();
         frmPersonalCitasPorAtender abrir = new frmPersonalCitasPorAtender();
@@ -319,12 +319,12 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
     private void btnCancelarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCitaActionPerformed
         // TODO add your handling code here:
 
-        ImageIcon CedulaInvalidaIcono = new ImageIcon("src/RecursosGraficosFondos/CedulaInvalidaIcono.png");
-        ImageIcon SinCita = new ImageIcon("src/RecursosGraficosFondos/SinCita.png");
-        ImageIcon NumeroMenor = new ImageIcon("src/RecursosGraficosFondos/NumeroIgual.png");
-        ImageIcon CitaEliminada = new ImageIcon("src/RecursosGraficosFondos/CitaEliminada.png");
-        ImageIcon CitaNoEliminada = new ImageIcon("src/RecursosGraficosFondos/CitaNoEliminada.png");
-        ImageIcon Confirmar = new ImageIcon("src/RecursosGraficosFondos/Confirmar.png");
+        ImageIcon CedulaInvalidaIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneCedulaInvalidaIcono.png");
+        ImageIcon SinCita = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSinCitaIcono.png");
+        ImageIcon NumeroMenor = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneNumeroIgualIcono.png");
+        ImageIcon CitaEliminada = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneCitaEliminadaIcono.png");
+        ImageIcon CitaNoEliminada = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneCitaNoEliminadaIcono.png");
+        ImageIcon Confirmar = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneConfirmarIcono.png");
 
         String cedula = txtNumeroCedulaCancelar.getText();
 //        EnviarContenido.removeIf(x -> x.getIdentificacion().equals(cedula));

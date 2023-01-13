@@ -28,7 +28,7 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
     }
     
     public boolean ExisteEnTabla(JTable tabla, String dto, int col) {
-        ImageIcon CuentaCoCitaIcono = new ImageIcon("src/RecursosGraficosFondos/CuentaConCitaIcono.png");
+        ImageIcon CuentaCoCitaIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneCuentaConCitaIcono.png");
         
         boolean Existe = false;
         
@@ -97,7 +97,7 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
             }
         });
 
-        btnVerificarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/CitaConsultar.png"))); // NOI18N
+        btnVerificarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnCitaConsultarIcono.png"))); // NOI18N
         btnVerificarCita.setText("VERIFICAR CITA");
         btnVerificarCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +114,7 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CONSULTA DE CITAS");
 
-        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/regresarIcono.png"))); // NOI18N
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnRegresarIcono.png"))); // NOI18N
         btnRegresar.setText("REGRESAR");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,7 +125,7 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/ConsultaPanel.png"))); // NOI18N
 
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/salirIcono.png"))); // NOI18N
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnSalirIcono.png"))); // NOI18N
         btnSalir.setText("   SALIR");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,10 +218,10 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
 
     private void btnVerificarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarCitaActionPerformed
         // TODO add your handling code here:
-        ImageIcon CedulaInvalidaIcono = new ImageIcon("src/RecursosGraficosFondos/CedulaInvalidaIcono.png");
-        ImageIcon SinRegistroIcono = new ImageIcon("src/RecursosGraficosFondos/SinRegistroIcono.png");
-        ImageIcon SinCitaIcono = new ImageIcon("src/RecursosGraficosFondos/SinCitaIcono.png");
-        ImageIcon NumeroMenor = new ImageIcon("src/RecursosGraficosFondos/NumeroIgual.png");
+        ImageIcon CedulaInvalidaIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneCedulaInvalidaIcono.png");
+        ImageIcon SinRegistroIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSinRegistroIcono.png");
+        ImageIcon SinCitaIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSinCitaIcono.png");
+        ImageIcon NumeroMenor = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneNumeroIgualIcono.png");
         
         String cedula = txtNumeroCedula.getText();
         frmPersonalCitasPorAtender abrir = new frmPersonalCitasPorAtender();
@@ -267,7 +267,7 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
-        ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficosFondos/SalirIconoPane.png");
+        ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSalirIcono.png");
         
         int valor = JOptionPane.showConfirmDialog(null, "¿Esta seguro que quiere salir del sistema?\n Se perderan todos los avances", "CONFIRMACION DE SALIDA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, SalirConfirmar);
         

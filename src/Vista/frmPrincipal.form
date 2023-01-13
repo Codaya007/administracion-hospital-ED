@@ -148,14 +148,14 @@
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/RecursosGraficosFondos/paciente.png"/>
+                  <Image iconType="3" name="/RecursosGraficos/Fondos/IconoPaciente.png"/>
                 </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnIngresarPaciente">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/RecursosGraficosFondos/IngresarSistemaIcono.png"/>
+                  <Image iconType="3" name="/RecursosGraficos/Botones/btnIngresarSistemaIcono.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="   INGRESAR"/>
               </Properties>
@@ -201,7 +201,7 @@
                       <Component id="jLabel5" min="-2" pref="140" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnIngresarPersonal" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="15" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -228,7 +228,7 @@
             <Component class="javax.swing.JButton" name="btnIngresarPersonal">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/RecursosGraficosFondos/IngresarSistemaIcono.png"/>
+                  <Image iconType="3" name="/RecursosGraficos/Botones/btnIngresarSistemaIcono.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="   INGRESAR"/>
               </Properties>

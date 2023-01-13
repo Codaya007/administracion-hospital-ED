@@ -66,9 +66,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         jLabel1.setText("PACIENTE");
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/paciente.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Fondos/IconoPaciente.png"))); // NOI18N
 
-        btnIngresarPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/IngresarSistemaIcono.png"))); // NOI18N
+        btnIngresarPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnIngresarSistemaIcono.png"))); // NOI18N
         btnIngresarPaciente.setText("   INGRESAR");
         btnIngresarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,7 +113,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/equipoMedico.png"))); // NOI18N
         jLabel5.setToolTipText("");
 
-        btnIngresarPersonal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/IngresarSistemaIcono.png"))); // NOI18N
+        btnIngresarPersonal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnIngresarSistemaIcono.png"))); // NOI18N
         btnIngresarPersonal.setText("   INGRESAR");
         btnIngresarPersonal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,7 +146,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnIngresarPersonal)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/salirIcono.png"))); // NOI18N
@@ -219,7 +219,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
-        ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficosFondos/SalirIconoPane.png");
+        ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSalirIcono.png");
         
         int valor = JOptionPane.showConfirmDialog(null, "¿Esta seguro que quiere salir del sistema?\n Se perderan todos los avances", "CONFIRMACION DE SALIDA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, SalirConfirmar);
         if(valor == JOptionPane.YES_OPTION){

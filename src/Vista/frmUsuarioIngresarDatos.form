@@ -133,7 +133,7 @@
         <Component class="javax.swing.JButton" name="btnConfirmar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/RecursosGraficosFondos/IngresarIcono.png"/>
+              <Image iconType="3" name="/RecursosGraficos/Botones/btnIngresarIcono.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="  CONFIRMAR"/>
           </Properties>
@@ -460,7 +460,7 @@
         <Component class="javax.swing.JButton" name="btnRegresar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/RecursosGraficosFondos/regresarIcono.png"/>
+              <Image iconType="3" name="/RecursosGraficos/Botones/btnRegresarIcono.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="  REGRESAR"/>
           </Properties>
@@ -471,7 +471,7 @@
         <Component class="javax.swing.JButton" name="btnRegresarInicio">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/RecursosGraficosFondos/InicioIcono.png"/>
+              <Image iconType="3" name="/RecursosGraficos/Botones/btnInicioIcono.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="REGRESAR A INICIO"/>
           </Properties>
@@ -482,7 +482,7 @@
         <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/RecursosGraficosFondos/salirIcono.png"/>
+              <Image iconType="3" name="/RecursosGraficos/Botones/btnSalirIcono.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="SALIR"/>
           </Properties>
@@ -510,7 +510,7 @@
         <Component class="javax.swing.JButton" name="btnBorrarCampos">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/RecursosGraficosFondos/BorrarCampos.png"/>
+              <Image iconType="3" name="/RecursosGraficos/Botones/btnLimpiarIcono.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Limpiar"/>
           </Properties>

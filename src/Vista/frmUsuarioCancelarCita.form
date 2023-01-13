@@ -125,7 +125,7 @@
         <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/RecursosGraficosFondos/salirIcono.png"/>
+              <Image iconType="3" name="/RecursosGraficos/Botones/btnSalirIcono.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="SALIR"/>
           </Properties>
@@ -136,7 +136,7 @@
         <Component class="javax.swing.JButton" name="btnRegresar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/RecursosGraficosFondos/regresarIcono.png"/>
+              <Image iconType="3" name="/RecursosGraficos/Botones/btnRegresarIcono.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="REGRESAR"/>
           </Properties>
@@ -176,7 +176,7 @@
         <Component class="javax.swing.JButton" name="btnBuscarCita">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/RecursosGraficosFondos/CitaConsultar.png"/>
+              <Image iconType="3" name="/RecursosGraficos/Botones/btnCitaConsultarIcono.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="BUSCAR CITA"/>
           </Properties>
@@ -202,7 +202,7 @@
         <Component class="javax.swing.JButton" name="btnCancelarCita">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/RecursosGraficosFondos/cancelarBoton.png"/>
+              <Image iconType="3" name="/RecursosGraficos/Botones/btnCancelarIcono.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="CANCERLAR CITA"/>
           </Properties>

@@ -121,7 +121,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("*Ingresar en formato dd/mm/aaaa*");
 
-        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/regresarIcono.png"))); // NOI18N
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnRegresarIcono.png"))); // NOI18N
         btnRegresar.setText("REGRESAR");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,7 +129,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
             }
         });
 
-        btnAgendarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/fechaValidaIcono.png"))); // NOI18N
+        btnAgendarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnFechaValidaIcono.png"))); // NOI18N
         btnAgendarCita.setText("  AGENDAR");
         btnAgendarCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,7 +144,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("SELECCIONAR FECHA");
 
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/salirIcono.png"))); // NOI18N
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnSalirIcono.png"))); // NOI18N
         btnSalir.setText("SALIR");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,14 +235,14 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
 
     private void btnAgendarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarCitaActionPerformed
         // TODO add your handling code here:
-        ImageIcon FechaVacia = new ImageIcon("src/RecursosGraficosFondos/FechaVacia.png");
-        ImageIcon HorarioVacio = new ImageIcon("src/RecursosGraficosFondos/HorarioVacio.png");
-        ImageIcon YaCuenta = new ImageIcon("src/RecursosGraficosFondos/YaCuenta.png");
-        ImageIcon FechaPasada = new ImageIcon("src/RecursosGraficosFondos/FechaPasada.png");
-        ImageIcon HorarioNoDisponible = new ImageIcon("src/RecursosGraficosFondos/HorarioLLeno.png");
+        ImageIcon FechaVacia = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneFechaVaciaIcono.png");
+        ImageIcon HorarioVacio = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneHorarioVacioIcono.png");
+        ImageIcon YaCuenta = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneYaCuentaIcono.png");
+        ImageIcon FechaPasada = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneFechaPasadaIcono.png");
+        ImageIcon HorarioNoDisponible = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneHorarioLLenoIcono.png");
 
-        ImageIcon MuyLejana = new ImageIcon("src/RecursosGraficosFondos/FechaLejana.png");
-        ImageIcon Agendado = new ImageIcon("src/RecursosGraficosFondos/Agendada.png");
+        ImageIcon MuyLejana = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneFechaLejanaIcono.png");
+        ImageIcon Agendado = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneAgendadaIcono.png");
 
         try {
             if (txtFechaCita.getText().isEmpty()) {
@@ -335,7 +335,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-        ImageIcon Seguro = new ImageIcon("src/RecursosGraficosFondos/ConfirmarSeguro.png");
+        ImageIcon Seguro = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneConfirmarSeguroIcono.png");
         
         if (!txtFechaCita.getText().equalsIgnoreCase("DIA / MES / AÑO")  || cbxHorarioAtencion.getSelectedItem() != null){
             int result = JOptionPane.showConfirmDialog(null, "Estas seguro de salir? \nSe perderan todos los avances no guardados", "CONFIRMAR SALIDA", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE,Seguro);
@@ -378,7 +378,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
-        ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficosFondos/SalirIconoPane.png");
+        ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSalirIcono.png");
         
         int valor = JOptionPane.showConfirmDialog(null, "¿Esta seguro que quiere salir del sistema?\n Se perderan todos los avances", "CONFIRMACION DE SALIDA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, SalirConfirmar);
         

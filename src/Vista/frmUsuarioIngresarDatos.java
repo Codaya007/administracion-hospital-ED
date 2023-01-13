@@ -80,7 +80,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("INGRESAR DATOS DEL PACIENTE");
 
-        btnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/IngresarIcono.png"))); // NOI18N
+        btnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnIngresarIcono.png"))); // NOI18N
         btnConfirmar.setText("  CONFIRMAR");
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -320,7 +320,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
                 .addGap(26, 26, 26))
         );
 
-        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/regresarIcono.png"))); // NOI18N
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnRegresarIcono.png"))); // NOI18N
         btnRegresar.setText("  REGRESAR");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -328,7 +328,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             }
         });
 
-        btnRegresarInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/InicioIcono.png"))); // NOI18N
+        btnRegresarInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnInicioIcono.png"))); // NOI18N
         btnRegresarInicio.setText("REGRESAR A INICIO");
         btnRegresarInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -336,7 +336,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             }
         });
 
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/salirIcono.png"))); // NOI18N
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnSalirIcono.png"))); // NOI18N
         btnSalir.setText("SALIR");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -359,7 +359,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/IngresarDatos.png"))); // NOI18N
 
-        btnBorrarCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/BorrarCampos.png"))); // NOI18N
+        btnBorrarCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnLimpiarIcono.png"))); // NOI18N
         btnBorrarCampos.setText("Limpiar");
         btnBorrarCampos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -438,18 +438,17 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
         
-        ImageIcon CedulaVaciaIcono = new ImageIcon("src/RecursosGraficosFondos/CedulaVacioIcono.png");
-        ImageIcon NombresIcono = new ImageIcon("src/RecursosGraficosFondos/NombresIcono.png");
-        ImageIcon GeneroIcono = new ImageIcon("src/RecursosGraficosFondos/GeneroIcono.png");
-        ImageIcon TelefonoIcono = new ImageIcon("src/RecursosGraficosFondos/TelefonoIcono.png");
-        ImageIcon MolestiaIcono = new ImageIcon("src/RecursosGraficosFondos/MolestiaIcono.png");
-        ImageIcon Edad = new ImageIcon("src/RecursosGraficosFondos/EdadMinimaMaximaIcono.png");
-        ImageIcon CampoVacio = new ImageIcon("src/RecursosGraficosFondos/CampoVacioIcono.png");
-        ImageIcon ErrorCedula = new ImageIcon("src/RecursosGraficosFondos/ErrorCampoIcono.png");
-        ImageIcon ErrorTelefono = new ImageIcon("src/RecursosGraficosFondos/ErrorTelefono.png");
-        ImageIcon NumeroMenor = new ImageIcon("src/RecursosGraficosFondos/NumeroIgual.png");
-        ImageIcon EdadMaxima = new ImageIcon("src/RecursosGraficosFondos/EdadMaxima.png");
-        ImageIcon EdadMinima = new ImageIcon("src/RecursosGraficosFondos/EdadMinimaIcono.png");
+        ImageIcon CedulaVaciaIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneCedulaVacioIcono.png");
+        ImageIcon NombresIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneNombresIcono.png");
+        ImageIcon GeneroIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneGeneroIcono.png");
+        ImageIcon TelefonoIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneTelefonoIcono.png");
+        ImageIcon MolestiaIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneMolestiaIcono.png");
+        ImageIcon Edad = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneEdadMinimaMaximaIcono.png");
+        ImageIcon CampoVacio = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneCampoVacioIcono.png");
+        ImageIcon ErrorCedula = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneErrorCampoIcono.png");
+        ImageIcon ErrorTelefono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneErrorTelefonoIcono.png");
+        ImageIcon NumeroMenor = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneNumeroIgualIcono.png");
+        ImageIcon EdadMaxima = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneEdadMaximaIcono.png");
         
         String cedula = txtNumeroCedula.getText();
         String telefono = txtNumeroTelefono.getText();
@@ -472,7 +471,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         else if(txtEdadPaciente.getText().isEmpty() || txtEdadPaciente.getText().equalsIgnoreCase("Ingreso solo numeros, maximo hasta 140 años")){
             JOptionPane.showMessageDialog(null, "Por favor ingrese la edad","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,Edad);
         }
-        else if(Integer.parseInt(txtEdadPaciente.getText()) >= 140){
+        else if(Integer.parseInt(txtEdadPaciente.getText()) > 140){
             JOptionPane.showMessageDialog(null, "La edad maxima es de 140 años", "EDAD INVALIDA", JOptionPane.INFORMATION_MESSAGE, EdadMaxima);
         }
         else if(cbxGeneroPaciente.getSelectedItem() == null){
@@ -534,7 +533,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-        ImageIcon Seguro = new ImageIcon("src/RecursosGraficosFondos/ConfirmarSeguro.png");
+        ImageIcon Seguro = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneConfirmarSeguroIcono.png");
         
         if (!txtNumeroCedula.getText().isEmpty() & !txtNumeroCedula.getText().equalsIgnoreCase("Ingreso solo numeros")
                 || !txtNombrePaciente.getText().isEmpty() & !txtNombrePaciente.getText().equalsIgnoreCase("Ingresar solo letras")
@@ -598,7 +597,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         
-        ImageIcon Seguro = new ImageIcon("src/RecursosGraficosFondos/ConfirmarSeguro.png");
+        ImageIcon Seguro = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneConfirmarSeguroIcono.png");
         
         if (!txtNumeroCedula.getText().isEmpty() & !txtNumeroCedula.getText().equalsIgnoreCase("Ingreso solo numeros")
                 || !txtNombrePaciente.getText().isEmpty() & !txtNombrePaciente.getText().equalsIgnoreCase("Ingresar solo letras")
@@ -675,7 +674,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
-        ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficosFondos/SalirIconoPane.png");
+        ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSalirIcono.png");
         
         int valor = JOptionPane.showConfirmDialog(null, "¿Esta seguro que quiere salir del sistema?\n Se perderan todos los avances", "CONFIRMACION DE SALIDA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, SalirConfirmar);
         
@@ -795,7 +794,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
 
     private void btnBorrarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarCamposActionPerformed
         // TODO add your handling code here:
-        ImageIcon LimpiarDatos= new ImageIcon("src/RecursosGraficosFondos/LimpiarDatos.png");
+        ImageIcon LimpiarDatos= new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneLimpiarDatosIcono.png");
         
         int result = JOptionPane.showConfirmDialog(null, "Quiere limpiar todos los campos, \npara crear una nueva cita", "CONFIRMAR LIMPIEZA", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, LimpiarDatos);
 

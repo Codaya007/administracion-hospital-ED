@@ -152,7 +152,7 @@
             <Component class="javax.swing.JButton" name="btnConsultarCita">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/RecursosGraficosFondos/ConsultarIcono.png"/>
+                  <Image iconType="3" name="/RecursosGraficos/Botones/btnConsultarIcono.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="   CONSULTAR CITA"/>
               </Properties>
@@ -218,7 +218,7 @@
             <Component class="javax.swing.JButton" name="btnCrearCita">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/RecursosGraficosFondos/CrearIcono.png"/>
+                  <Image iconType="3" name="/RecursosGraficos/Botones/btnCrearIcono.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="   CREAR CITA"/>
               </Properties>
@@ -242,7 +242,7 @@
         <Component class="javax.swing.JButton" name="btnRegresar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/RecursosGraficosFondos/regresarIcono.png"/>
+              <Image iconType="3" name="/RecursosGraficos/Botones/btnRegresarIcono.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="REGRESAR"/>
           </Properties>
@@ -253,7 +253,7 @@
         <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/RecursosGraficosFondos/salirIcono.png"/>
+              <Image iconType="3" name="/RecursosGraficos/Botones/btnSalirIcono.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="SALIR"/>
           </Properties>
@@ -321,7 +321,7 @@
             <Component class="javax.swing.JButton" name="btnCancelarCita">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/RecursosGraficosFondos/CancelarCitaIcono.png"/>
+                  <Image iconType="3" name="/RecursosGraficos/Botones/btnCancelarCitaIcono.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="CANCELAR CITA"/>
               </Properties>

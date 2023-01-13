@@ -71,7 +71,7 @@ public class frmUsuarioSelecionarUso extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("CONSULTAR CITA AGENDADA");
 
-        btnConsultarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/ConsultarIcono.png"))); // NOI18N
+        btnConsultarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnConsultarIcono.png"))); // NOI18N
         btnConsultarCita.setText("   CONSULTAR CITA");
         btnConsultarCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +114,7 @@ public class frmUsuarioSelecionarUso extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("CREAR CITA");
 
-        btnCrearCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/CrearIcono.png"))); // NOI18N
+        btnCrearCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnCrearIcono.png"))); // NOI18N
         btnCrearCita.setText("   CREAR CITA");
         btnCrearCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,7 +150,7 @@ public class frmUsuarioSelecionarUso extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/regresarIcono.png"))); // NOI18N
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnRegresarIcono.png"))); // NOI18N
         btnRegresar.setText("REGRESAR");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,7 +158,7 @@ public class frmUsuarioSelecionarUso extends javax.swing.JFrame {
             }
         });
 
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/salirIcono.png"))); // NOI18N
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnSalirIcono.png"))); // NOI18N
         btnSalir.setText("SALIR");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,7 +184,7 @@ public class frmUsuarioSelecionarUso extends javax.swing.JFrame {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("CANCELAR CITA");
 
-        btnCancelarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/CancelarCitaIcono.png"))); // NOI18N
+        btnCancelarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnCancelarCitaIcono.png"))); // NOI18N
         btnCancelarCita.setText("CANCELAR CITA");
         btnCancelarCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -300,7 +300,7 @@ public class frmUsuarioSelecionarUso extends javax.swing.JFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
-        ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficosFondos/SalirIconoPane.png");
+        ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficos/JoptionPane/SalirIconoPane.png");
         
         int valor = JOptionPane.showConfirmDialog(null, "¿Esta seguro que quiere salir del sistema?\n Se perderan todos los avances", "CONFIRMACION DE SALIDA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, SalirConfirmar);
         
