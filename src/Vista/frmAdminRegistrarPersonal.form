@@ -44,24 +44,25 @@
           <Color blue="72" green="42" red="14" type="rgb"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="cc" type="rgb"/>
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
       </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <Component id="jLabel8" alignment="0" max="32767" attributes="0"/>
+              <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnRegresar" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace type="separate" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                       <Component id="jLabel5" max="32767" attributes="0"/>
                                       <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
@@ -84,13 +85,12 @@
                                       <Component id="jLabel13" alignment="1" min="-2" pref="243" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="txtUsuario" alignment="0" min="-2" pref="243" max="-2" attributes="0"/>
-                                              <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="jLabel14" max="32767" attributes="0"/>
-                                                  <Component id="txtClave" pref="243" max="32767" attributes="0"/>
-                                                  <Component id="cbxEspecialiadad" max="32767" attributes="0"/>
-                                              </Group>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="txtUsuario" alignment="0" pref="243" max="32767" attributes="0"/>
+                                              <Component id="jLabel14" max="32767" attributes="0"/>
+                                              <Component id="txtClave" pref="243" max="32767" attributes="0"/>
+                                              <Component id="cbxEspecialiadad" max="32767" attributes="0"/>
+                                              <Component id="jLabel9" alignment="0" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -103,11 +103,13 @@
                               </Group>
                           </Group>
                       </Group>
-                      <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel1" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               </Group>
-              <Component id="jLabel8" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -128,6 +130,8 @@
                           <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txtClave" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="cbxEspecialiadad" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -176,6 +180,9 @@
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="36" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="INGRESAR DATOS"/>
@@ -456,6 +463,14 @@
             <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="jLabel8MouseDragged"/>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel8MousePressed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel9">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Especialidad"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

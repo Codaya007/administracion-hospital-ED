@@ -29,10 +29,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
+          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -54,24 +51,29 @@
                       <Component id="jLabel1" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel4" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                              <Component id="btnSalir" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="btnSalir" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jLabel4" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="btnRegresar" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="btnCancelarCita" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <Component id="jLabel3" alignment="1" max="32767" attributes="0"/>
                               <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="txtNumeroCedulaCancelar" pref="175" max="32767" attributes="0"/>
+                                  <Component id="txtNumeroCedulaCancelar" pref="208" max="32767" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="btnBuscarCita" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="btnRegresar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="btnCancelarCita" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -99,13 +101,13 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane1" pref="121" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jLabel4" max="32767" attributes="0"/>
+                      <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnSalir" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnRegresar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnCancelarCita" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnRegresar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               </Group>
@@ -149,6 +151,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="36" style="1"/>
             </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="CANCELAR CITA"/>
           </Properties>
@@ -166,9 +171,15 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtNumeroCedulaCancelar">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="80" green="80" id="gray" palette="1" red="80" type="palette"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="Ingreso solo numeros"/>
           </Properties>
           <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNumeroCedulaCancelarFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNumeroCedulaCancelarFocusLost"/>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNumeroCedulaCancelarKeyPressed"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNumeroCedulaCancelarKeyTyped"/>
           </Events>
@@ -191,7 +202,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextArea" name="lblCita">
+            <Component class="javax.swing.JTextArea" name="txaDatosPaciente">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
@@ -225,7 +236,7 @@
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/RecursosGraficosFondos/cancelarCitaAntes.png"/>
+              <Image iconType="3" name="/RecursosGraficos/Fondos/IconoCancelarCitaAntes.png"/>
             </Property>
           </Properties>
         </Component>

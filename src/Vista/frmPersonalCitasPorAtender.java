@@ -471,8 +471,8 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
             
             HistorialClinico claseauto = new HistorialClinico(NumeroCedula, NombrePaciente, ApellidoPaciente, EdadPaciente, GeneroPaciente, TelefonoPaciente, MolestiaPaciente, FechaAtencion, HoraAtencion, Medicamento, Dosis);
             contenedorAtendido.add(claseauto);
-            
             if (tblCitasSinAtender.getSelectedRow() != -1) {
+                EnviarContenido.remove(tblCitasSinAtender.getSelectedRow());
                 modelo.removeRow(tblCitasSinAtender.getSelectedRow());
                 JOptionPane.showMessageDialog(null, "PACIENTE ATENDIDO EXITOSAMENTE");
             } else {

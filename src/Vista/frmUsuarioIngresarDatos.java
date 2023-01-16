@@ -22,6 +22,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
     public frmUsuarioIngresarDatos() {
         initComponents();
         this.setLocationRelativeTo(null);
+        btnBorrarCampos.requestFocus();
         
         btnRegresarInicio.setToolTipText("Regresa a la interfaz principal");
         btnConfirmar.setToolTipText("Guarda la informacion y da paso para seleccionar la fecha");
@@ -77,6 +78,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(204, 255, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("INGRESAR DATOS DEL PACIENTE");
 
@@ -357,7 +359,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         });
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/IngresarDatos.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Fondos/IconoIngresarDatos.png"))); // NOI18N
 
         btnBorrarCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnLimpiarIcono.png"))); // NOI18N
         btnBorrarCampos.setText("Limpiar");
@@ -411,7 +413,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 21, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegresarInicio)
                     .addComponent(btnRegresar)
@@ -460,7 +462,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "La cedula tiene menos de 10 digitos","CEDULA MAL ESTABLECIDA",JOptionPane.ERROR_MESSAGE,NumeroMenor);
         }
         else if(!txtNumeroCedula.getText().matches("11\\d{8}")){
-            JOptionPane.showMessageDialog(null, "El numero de cedula tiene que iniciar con 11","CEDULA NO VALIDO",JOptionPane.ERROR_MESSAGE,ErrorCedula);
+            JOptionPane.showMessageDialog(null, "El numero de cedula tiene que tener este formato 11********","CEDULA NO VALIDO",JOptionPane.ERROR_MESSAGE,ErrorCedula);
         }
         else if(txtNombrePaciente.getText().isEmpty() || txtNombrePaciente.getText().equalsIgnoreCase("Ingresar solo letras")){
             JOptionPane.showMessageDialog(null, "Por favor llene el campo del nombre","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,NombresIcono);
@@ -481,10 +483,10 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Por favor ingrese el numero telefonico","INGRESE TODOS LOS DATOS",JOptionPane.ERROR_MESSAGE,TelefonoIcono);
         }
         else if(telefono.length()<10){
-            JOptionPane.showMessageDialog(null, "La numero de telefono tiene menos de 10 digitos","TELEFONO MAL ESTABLECIDO",JOptionPane.ERROR_MESSAGE,NumeroMenor);
+            JOptionPane.showMessageDialog(null, "La cedula tiene menos de 10 digitos","TELEFONO MAL ESTABLECIDO",JOptionPane.ERROR_MESSAGE,NumeroMenor);
         }
         else if(!txtNumeroTelefono.getText().matches("09\\d{8}")){
-            JOptionPane.showMessageDialog(null, "El numero de telefono tiene que iniciar con 09","TELEFONO NO VALIDO",JOptionPane.ERROR_MESSAGE,ErrorTelefono);
+            JOptionPane.showMessageDialog(null, "El numero de telefono tiene que tener este formato 09********","TELEFONO NO VALIDO",JOptionPane.ERROR_MESSAGE,ErrorTelefono);
         }
         else if(txaMolestias.getText().isEmpty() || txaMolestias.getText().equalsIgnoreCase("Ingreso de molestias detalladas")){
             JOptionPane.showMessageDialog(null, "Por favor ingrese las molestias que presenta","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,MolestiaIcono);

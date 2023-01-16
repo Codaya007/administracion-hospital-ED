@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import static Vista.frmUsuarioSeleccionarFecha.EnviarContenido;
+import java.awt.Color;
 
 /**
  *
@@ -23,6 +24,7 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
     public frmUsuarioCancelarCita() {
         initComponents();
         this.setLocationRelativeTo(null);
+        btnBuscarCita.requestFocus();
         
         btnRegresar.setToolTipText("Regresa a la interfaz anterior");
         btnSalir.setToolTipText("Cierra todos las interfaces y procesos existentes");
@@ -51,7 +53,7 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
                 
                 
                 JOptionPane.showMessageDialog(null,"El usuario "+NombrePaciente+" "+ApellidoPaciente+"  con numero de celuda "+CedulaConsulta +" \ncuenta con una cita para el dia "+FechaCita+" en el horario de "+HoraCita,"CUENTA CON CITA",JOptionPane.INFORMATION_MESSAGE,CuentaCoCitaIcono);
-                lblCita.setText("El usuario "+NombrePaciente+" "+ApellidoPaciente+"\nNumero de celuda "+CedulaConsulta +" \nEdad "+EdadConsultar +"\nGenero "+GeneroConsultar+"\nNumero de telefono "+TelefonoConsultar+"\nEnfermedad "+MolestiaConsultar+" \nCuenta con una cita para el dia "+FechaCita+" en el horario de "+HoraCita);
+                txaDatosPaciente.setText("Nombres: "+NombrePaciente+" "+ApellidoPaciente+"\nNumero de celuda: "+CedulaConsulta +" \nEdad: "+EdadConsultar +"\nGenero: "+GeneroConsultar+"\nNumero de telefono: "+TelefonoConsultar+"\nEnfermedad: "+MolestiaConsultar+" \nFecha de cita: "+FechaCita+"\nHorario: "+HoraCita);
             }
         }
         return Existe;
@@ -87,7 +89,7 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
         txtNumeroCedulaCancelar = new javax.swing.JTextField();
         btnBuscarCita = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        lblCita = new javax.swing.JTextArea();
+        txaDatosPaciente = new javax.swing.JTextArea();
         btnCancelarCita = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -126,6 +128,7 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CANCELAR CITA");
 
@@ -133,7 +136,17 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Ingresar numero de cedula");
 
+        txtNumeroCedulaCancelar.setForeground(java.awt.Color.gray);
         txtNumeroCedulaCancelar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNumeroCedulaCancelar.setText("Ingreso solo numeros");
+        txtNumeroCedulaCancelar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNumeroCedulaCancelarFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNumeroCedulaCancelarFocusLost(evt);
+            }
+        });
         txtNumeroCedulaCancelar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtNumeroCedulaCancelarKeyPressed(evt);
@@ -151,9 +164,9 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
             }
         });
 
-        lblCita.setColumns(20);
-        lblCita.setRows(5);
-        jScrollPane1.setViewportView(lblCita);
+        txaDatosPaciente.setColumns(20);
+        txaDatosPaciente.setRows(5);
+        jScrollPane1.setViewportView(txaDatosPaciente);
 
         btnCancelarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnCancelarIcono.png"))); // NOI18N
         btnCancelarCita.setText("CANCERLAR CITA");
@@ -168,7 +181,7 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
         jLabel3.setText("DATOS DEL PACIENTE");
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/cancelarCitaAntes.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Fondos/IconoCancelarCitaAntes.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -181,22 +194,25 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSalir))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnSalir)
+                                .addGap(78, 78, 78))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnRegresar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCancelarCita))
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtNumeroCedulaCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                                .addComponent(txtNumeroCedulaCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnBuscarCita))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnRegresar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnCancelarCita)))))
+                                .addComponent(btnBuscarCita)))))
                 .addGap(15, 15, 15))
         );
         jPanel1Layout.setVerticalGroup(
@@ -217,11 +233,11 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalir)
-                    .addComponent(btnRegresar)
-                    .addComponent(btnCancelarCita))
+                    .addComponent(btnCancelarCita)
+                    .addComponent(btnRegresar))
                 .addGap(15, 15, 15))
         );
 
@@ -233,9 +249,7 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -274,25 +288,31 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
 
     private void btnBuscarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCitaActionPerformed
         // TODO add your handling code here:
+        txaDatosPaciente.setText("");
         ImageIcon CedulaInvalidaIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneCedulaInvalidaIcono.png");
         ImageIcon SinRegistroIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSinRegistroIcono.png");
         ImageIcon SinCitaIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSinCitaIcono.png");
         ImageIcon NumeroMenor = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneNumeroIgualIcono.png");
+        ImageIcon ErrorCedula = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneErrorCampoIcono.png");
         
         String cedula = txtNumeroCedulaCancelar.getText();
         frmPersonalCitasPorAtender abrir = new frmPersonalCitasPorAtender();
         abrir.setVisible(false);
         
-        if(txtNumeroCedulaCancelar.getText().isEmpty()){
+        if(txtNumeroCedulaCancelar.getText().isEmpty() || txtNumeroCedulaCancelar.getText().equalsIgnoreCase("Ingreso solo numeros")){
             JOptionPane.showMessageDialog(null, "Ingrese el numero de cedula","NUMERO DE CEDULA VACIO",JOptionPane.ERROR_MESSAGE,CedulaInvalidaIcono);
         }
         else if(cedula.length() < 10) {
             JOptionPane.showMessageDialog(null, "La cedula tiene menos de 10 digitos", "CEDULA MAL ESTABLECIDA", JOptionPane.ERROR_MESSAGE,NumeroMenor);
         }
+        else if(!txtNumeroCedulaCancelar.getText().matches("11\\d{8}")){
+            JOptionPane.showMessageDialog(null, "El numero de cedula tiene que iniciar con 11","CEDULA NO VALIDO",JOptionPane.ERROR_MESSAGE,ErrorCedula);
+        }
         else if(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender.getRowCount() <= 0){
             JOptionPane.showMessageDialog(null, "No hay registros de citas, primero tiene que agendar una cita","NO HAY REGISTROS",JOptionPane.ERROR_MESSAGE,SinRegistroIcono);
         }
         else if(ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 0)== true){ 
+            
         }
         else{
             JOptionPane.showMessageDialog(null, "No cuenta con una cita disponible \n Registre una cita","NO CUENTA CON CITA",JOptionPane.INFORMATION_MESSAGE,SinCitaIcono);
@@ -325,24 +345,33 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
         ImageIcon CitaEliminada = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneCitaEliminadaIcono.png");
         ImageIcon CitaNoEliminada = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneCitaNoEliminadaIcono.png");
         ImageIcon Confirmar = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneConfirmarIcono.png");
+        ImageIcon SinRegistroIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSinRegistroIcono.png");
+        ImageIcon ErrorCedula = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneErrorCampoIcono.png");
 
         String cedula = txtNumeroCedulaCancelar.getText();
 //        EnviarContenido.removeIf(x -> x.getIdentificacion().equals(cedula));
 
-        if (cedula.isEmpty()) {
+        if (cedula.isEmpty()|| txtNumeroCedulaCancelar.getText().equalsIgnoreCase("Ingreso solo numeros")) {
             JOptionPane.showMessageDialog(null, "Ingrese el numero de cedula", "NUMERO DE CEDULA VACIO", JOptionPane.ERROR_MESSAGE, CedulaInvalidaIcono);
         } 
         else if (cedula.length() < 10) {
             JOptionPane.showMessageDialog(null, "La cedula tiene menos de 10 digitos", "CEDULA MAL ESTABLECIDA", JOptionPane.ERROR_MESSAGE, NumeroMenor);
+        }
+        else if(!txtNumeroCedulaCancelar.getText().matches("11\\d{8}")){
+            JOptionPane.showMessageDialog(null, "El numero de cedula tiene que iniciar con 11","CEDULA NO VALIDO",JOptionPane.ERROR_MESSAGE,ErrorCedula);
+        }
+        else if(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender.getRowCount() <= 0){
+            JOptionPane.showMessageDialog(null, "No hay registros de citas, primero tiene que agendar una cita","NO HAY REGISTROS",JOptionPane.ERROR_MESSAGE,SinRegistroIcono);
         }
         else {
             if(ExisteEnTabla2(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 0)==true){
                 int respuesta = JOptionPane.showConfirmDialog(null, "Estas seguro de eliminar la cita?", "CONFIRMAR", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE,Confirmar);
 
                 if (respuesta == JOptionPane.YES_OPTION) {
+                    
                     EnviarContenido.removeIf(p -> p.getIdentificacion().equals(cedula));
                     JOptionPane.showMessageDialog(null, "La cita se ha eliminado", "CITA ELIMINADA", JOptionPane.INFORMATION_MESSAGE, CitaEliminada);
-                    lblCita.setText("");
+                    txaDatosPaciente.setText("");
                 }else{
                     JOptionPane.showMessageDialog(null, "La cita no se ha eliminado", "CITA NO ELIMINADA", JOptionPane.INFORMATION_MESSAGE, CitaNoEliminada);
                 }
@@ -352,6 +381,22 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_btnCancelarCitaActionPerformed
+
+    private void txtNumeroCedulaCancelarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroCedulaCancelarFocusGained
+        // TODO add your handling code here:
+        if (txtNumeroCedulaCancelar.getText().equals("Ingreso solo numeros")) {
+            txtNumeroCedulaCancelar.setText("");
+            txtNumeroCedulaCancelar.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_txtNumeroCedulaCancelarFocusGained
+
+    private void txtNumeroCedulaCancelarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroCedulaCancelarFocusLost
+        // TODO add your handling code here:
+        if (txtNumeroCedulaCancelar.getText().isEmpty()) {
+            txtNumeroCedulaCancelar.setText("Ingreso solo numeros");
+            txtNumeroCedulaCancelar.setForeground(Color.GRAY);
+        }
+    }//GEN-LAST:event_txtNumeroCedulaCancelarFocusLost
 
     /**
      * @param args the command line arguments
@@ -399,8 +444,8 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea lblCita;
     private javax.swing.JLabel lblMovimiento;
+    private javax.swing.JTextArea txaDatosPaciente;
     private javax.swing.JTextField txtNumeroCedulaCancelar;
     // End of variables declaration//GEN-END:variables
 }
