@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -21,6 +22,7 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
     public frmUsuarioConsultarCita() {
         initComponents();
         this.setLocationRelativeTo(null);
+        btnRegresar.requestFocus();
         
         btnVerificarCita.setToolTipText("Verifica que exista la cita");
         btnRegresar.setToolTipText("Regresa a la interfaz anterior");
@@ -62,7 +64,6 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtNumeroCedula = new javax.swing.JTextField();
         btnVerificarCita = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -81,8 +82,17 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
         jLabel2.setText("Ingresar el numero de cedula");
 
         txtNumeroCedula.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtNumeroCedula.setForeground(new java.awt.Color(0, 0, 0));
+        txtNumeroCedula.setForeground(java.awt.Color.gray);
         txtNumeroCedula.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNumeroCedula.setText("Ingreso solo numeros");
+        txtNumeroCedula.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNumeroCedulaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNumeroCedulaFocusLost(evt);
+            }
+        });
         txtNumeroCedula.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtNumeroCedulaMousePressed(evt);
@@ -105,12 +115,8 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 11)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("*Ingresar solo numeros*");
-
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CONSULTA DE CITAS");
 
@@ -123,7 +129,7 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
         });
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficosFondos/ConsultaPanel.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Fondos/IconoConsultaPanel.png"))); // NOI18N
 
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnSalirIcono.png"))); // NOI18N
         btnSalir.setText("   SALIR");
@@ -162,7 +168,6 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnVerificarCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtNumeroCedula, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -177,22 +182,21 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
                 .addComponent(barraMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNumeroCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNumeroCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnVerificarCita, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSalir)
+                            .addComponent(btnRegresar))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -222,15 +226,19 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
         ImageIcon SinRegistroIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSinRegistroIcono.png");
         ImageIcon SinCitaIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSinCitaIcono.png");
         ImageIcon NumeroMenor = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneNumeroIgualIcono.png");
+        ImageIcon ErrorCedula = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneErrorCampoIcono.png");
         
         String cedula = txtNumeroCedula.getText();
         frmPersonalCitasPorAtender abrir = new frmPersonalCitasPorAtender();
         abrir.setVisible(false);
-        if(txtNumeroCedula.getText().isEmpty()){
+        if(txtNumeroCedula.getText().isEmpty() || txtNumeroCedula.getText().equalsIgnoreCase("Ingreso solo numeros")){
             JOptionPane.showMessageDialog(null, "Ingrese el numero de cedula","NUMERO DE CEDULA VACIO",JOptionPane.ERROR_MESSAGE,CedulaInvalidaIcono);
         }
         else if(cedula.length() < 10) {
             JOptionPane.showMessageDialog(null, "La cedula tiene menos de 10 digitos", "CEDULA MAL ESTABLECIDA", JOptionPane.ERROR_MESSAGE,NumeroMenor);
+        }
+        else if(!txtNumeroCedula.getText().matches("11\\d{8}")){
+            JOptionPane.showMessageDialog(null, "El numero de cedula tiene que iniciar con 11","CEDULA NO VALIDO",JOptionPane.ERROR_MESSAGE,ErrorCedula);
         }
         else if(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender.getRowCount() <= 0){
             JOptionPane.showMessageDialog(null, "No hay registros de citas, primero tiene que agendar una cita","NO HAY REGISTROS",JOptionPane.ERROR_MESSAGE,SinRegistroIcono);
@@ -298,6 +306,22 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtNumeroCedulaMousePressed
 
+    private void txtNumeroCedulaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroCedulaFocusGained
+        // TODO add your handling code here:
+        if (txtNumeroCedula.getText().equals("Ingreso solo numeros")) {
+            txtNumeroCedula.setText("");
+            txtNumeroCedula.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_txtNumeroCedulaFocusGained
+
+    private void txtNumeroCedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroCedulaFocusLost
+        // TODO add your handling code here:
+        if (txtNumeroCedula.getText().isEmpty()) {
+            txtNumeroCedula.setText("Ingreso solo numeros");
+            txtNumeroCedula.setForeground(Color.GRAY);
+        }
+    }//GEN-LAST:event_txtNumeroCedulaFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -341,7 +365,6 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtNumeroCedula;
     // End of variables declaration//GEN-END:variables
