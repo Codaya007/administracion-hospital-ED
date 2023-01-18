@@ -28,8 +28,10 @@ public class Paciente {
     private String FechaIngreso;
     private String HoraAtencion;
     
+    //estado de la cita
     private boolean EstadoCita;
     
+    //fecha de la cita
     private String dia;
     private String mes;
     private String anio;

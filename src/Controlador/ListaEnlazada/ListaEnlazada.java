@@ -22,30 +22,33 @@ public class ListaEnlazada<E> {
     private Integer size;
     private final Integer ascendente = 1;
     private final Integer descendente = 2;
-
+    
+    //se crear la lista
     public ListaEnlazada() {
         cabecera = null;
         size = 0;
     }
-    
-    public void imprimir() {
-        System.out.println("========================== LISTA RESTAURANTE ==========================");
-        NodoLista<E> aux = cabecera;
-        while (aux != null) {
-            System.out.print(aux.getDato().toString() + "\n");
-            aux = aux.getSiguiente();
-        }
-        System.out.println("========================================================================\n");
-    }
-
+    //se imprime
+//    public void imprimir() {
+//        System.out.println("========================== LISTA RESTAURANTE ==========================");
+//        NodoLista<E> aux = cabecera;
+//        while (aux != null) {
+//            System.out.print(aux.getDato().toString() + "\n");
+//            aux = aux.getSiguiente();
+//        }
+//        System.out.println("========================================================================\n");
+//    }
+    //se obtiene el nodo de la lista
     public NodoLista<E> getCabecera() {
         return cabecera;
     }
-
+    
+    //se obtiene al cabezera de la lista
     public void setCabecera(NodoLista<E> cabecera) {
         this.cabecera = cabecera;
     }
-
+    
+    //se obtiene el lugar de la lista
     public Integer getSize() {
         return size;
     }
@@ -53,17 +56,19 @@ public class ListaEnlazada<E> {
     public void setSize(Integer size) {
         this.size = size;
     }
-
+    //verifica que no este vacia
     public Boolean estaVacia() {
         return cabecera == null;
     }
     
+    //genera el numero aleatorio
     public float generarNumeroAleatorio() {
         float numAleatorio = 0;
         numAleatorio = (float) (Math.random() * 1000);
         return numAleatorio;
     }
-
+    
+    //llena la lista
     public void llenarLista(Integer tamanio) {
         Object aux;
         for (int i = 0; i < tamanio; i++) {
@@ -71,19 +76,22 @@ public class ListaEnlazada<E> {
             insertar((E) aux);
         }
     }
-
+    
+    //vacia la lista
     public void vaciar() {
         this.cabecera = null;
         this.size = 0;
     }
-
+    
+    //inserta un valor dentro de la lista
     public void insertar(E dato) {
         NodoLista<E> nodo = new NodoLista<>(dato, null);
 
         if (estaVacia()) {
             this.cabecera = nodo;
 
-        } else {
+        } 
+        else {
             NodoLista<E> aux = cabecera;
             while (aux.getSiguiente() != null) {
                 aux = aux.getSiguiente();
@@ -92,12 +100,14 @@ public class ListaEnlazada<E> {
         }
         size++;
     }
-
+    
+    //lo inserta en el primer lugar
     public void insertarCabecera(E dato) {
 
         if (estaVacia()) {
             insertar(dato);
-        } else {
+        } 
+        else {
             NodoLista<E> nodo = new NodoLista<>(dato, null);
             nodo.setSiguiente(cabecera);
             cabecera = nodo;
@@ -105,6 +115,7 @@ public class ListaEnlazada<E> {
         }
     }
     
+    //obtiene el valor 
     public E obtener(Integer pos) throws ListaVaciaExcepcion, PosicionNoEncontradaException {
 
         if (!estaVacia()) {
@@ -112,7 +123,8 @@ public class ListaEnlazada<E> {
             if (pos >= 0 && pos < size) {
                 if (pos == 0) {
                     dato = cabecera.getDato();
-                } else {
+                } 
+                else {
                     NodoLista<E> aux = cabecera;
 
                     for (int i = 0; i < pos; i++) {
@@ -121,16 +133,19 @@ public class ListaEnlazada<E> {
                     dato = aux.getDato();
                 }
 
-            } else {
+            } 
+            else {
                 throw new PosicionNoEncontradaException();
             }
             return dato;
-        } else {
+        } 
+        else {
             throw new ListaVaciaExcepcion();
         }
 
     }
-
+    
+    //elimina el valor
     public E eliminar(Integer pos) throws ListaVaciaExcepcion, PosicionNoEncontradaException {
         if (!estaVacia()) {
             E dato = null;
@@ -140,7 +155,8 @@ public class ListaEnlazada<E> {
                     cabecera = cabecera.getSiguiente();
                     size--;
 
-                } else {
+                } 
+                else {
                     NodoLista<E> aux = cabecera;
 
                     for (int i = 0; i < pos - 1; i++) {
@@ -153,16 +169,19 @@ public class ListaEnlazada<E> {
                     size--;
                 }
 
-            } else {
+            } 
+            else {
                 throw new PosicionNoEncontradaException();
             }
             return dato;
-        } else {
+        } 
+        else {
             throw new ListaVaciaExcepcion();
         }
 
     }
-
+    
+    //convierte en arreglo
     public E[] ComvertirEnArray() {
         E[] matriz = null;
         if (this.size > 0) {
@@ -175,7 +194,8 @@ public class ListaEnlazada<E> {
         }
         return matriz;
     }
-
+    
+    //convierte a lista
     public ListaEnlazada<E> toList(E[] matriz) {
         this.vaciar();
         for (int i = 0; i < matriz.length; i++) {
@@ -183,143 +203,8 @@ public class ListaEnlazada<E> {
         }
         return this;
     }
-
-    public ListaEnlazada<E> ordenarShell(String atributo, Integer tipoOrdenacion) {
-        E[] arreglo = ComvertirEnArray();
-        Class<E> clazz = null;
-
-        if (size > 0) {
-            Integer intervalo, i, j, k;
-            Integer n = arreglo.length;
-            intervalo = n / 2;
-            clazz = (Class<E>) cabecera.getDato().getClass();
-
-            while (intervalo > 0) {
-                for (i = intervalo; i < n; i++) {
-                    j = i - intervalo;
-                    while (j >= 0) {
-                        k = j + intervalo;
-                        j -= intervalo;
-                    }
-                }
-                intervalo = intervalo / 2;
-            }
-        }
-        if (arreglo != null) {
-            toList(arreglo);
-        }
-        return this;
-    }
-
-    public void cambioDatoShell(E[] arreglo, Integer j, Integer k, Integer tipoOrdenacion) {
-        Class clazz = arreglo[0].getClass();
-        Object aux;
-
-        if (UtilidadesGenerales.isString(clazz)) {
-            if (Objects.equals(tipoOrdenacion, descendente)) {
-                if (arreglo[j].toString().toLowerCase().compareTo(arreglo[k].toString().toLowerCase()) > 0) {
-                    j = -1;
-                } else {
-                    aux = (String) arreglo[j];
-                    arreglo[j] = arreglo[k];
-                    arreglo[k] = (E) aux;
-                }
-            } else {
-                if (arreglo[j].toString().toLowerCase().compareTo(arreglo[k].toString().toLowerCase()) < 0) {
-                    j = -1;
-                } else {
-                    aux = (String) arreglo[j];
-                    arreglo[j] = arreglo[k];
-                    arreglo[k] = (E) aux;
-                }
-            }
-        }
-    }
-
-    public void compararAtributoShell(E[] arreglo, Integer j, Integer k, Integer tipoOrdenacion, String atributo, Class clazz) throws Exception {
-        E auxJ = arreglo[j];
-        E auxK = arreglo[k];
-        Field field = UtilidadesGenerales.ObtencionDeAtributo(clazz, atributo);
-        if (field == null) {
-            throw new AtributoException();
-        } else {
-            field.setAccessible(true);
-            Object a = field.get(auxJ);
-            Object b = field.get(auxK);
-
-            cambioObjetoShell(arreglo, a, b, j, k, tipoOrdenacion, atributo);
-        }
-    }
     
-    public void insertarPosicion(E dato, Integer pos) throws PosicionNoEncontradaException {
-        if (estaVacia()) {
-            insertar(dato);
-        } else if (pos >= 0 && pos < size) {
-            if (pos == 0) {
-                insertarCabecera(dato);
-            } else {
-                NodoLista<E> nodo = new NodoLista(dato, null);
-                NodoLista<E> aux = cabecera;
-
-                for (int i = 0; i < (pos - 1); i++) {
-                    aux = aux.getSiguiente();
-                }
-                NodoLista<E> siguiente = aux.getSiguiente();
-                aux.setSiguiente(nodo);
-                nodo.setSiguiente(siguiente);
-                size++;
-            }
-
-        } else {
-            throw new PosicionNoEncontradaException();
-        }
-    }
-
-    public void modificarPosicion(E dato, Integer pos) throws PosicionNoEncontradaException {
-        if (estaVacia()) {
-            insertar(dato);
-        } else if (pos >= 0 && pos < size) {
-            if (pos == 0) {
-                cabecera.setDato(dato);
-            } else {
-
-                NodoLista<E> aux = cabecera;
-
-                for (int i = 0; i < pos; i++) {
-                    aux = aux.getSiguiente();
-                }
-                aux.setDato(dato);
-            }
-
-        } else {
-            throw new PosicionNoEncontradaException();
-        }
-    }
-
-    public void cambioObjetoShell(E[] arreglo, Object auxJ, Object auxK, Integer j, Integer k, Integer tipoOrdenacion, String atributo) {
-        Class clazz = auxJ.getClass();
-        Object aux;
-        if (UtilidadesGenerales.isString(clazz)) {
-            if (Objects.equals(tipoOrdenacion, descendente)) {
-                if (auxJ.toString().toLowerCase().compareTo(auxK.toString().toLowerCase()) > 0) {
-                    j = -1;
-                } else {
-                    aux = arreglo[j];
-                    arreglo[j] = arreglo[k];
-                    arreglo[k] = (E) aux;
-                }
-            } else {
-                if (auxJ.toString().toLowerCase().compareTo(auxK.toString().toLowerCase()) < 0) {
-                    j = -1;
-                } else {
-                    aux = arreglo[j];
-                    arreglo[j] = arreglo[k];
-                    arreglo[k] = (E) aux;
-                }
-            }
-        }
-    }
-
+    //aplica quick sort para la ordenacion de las cita
     public ListaEnlazada<E> QuickSort(String atributo, Integer tipoOrdenacion) {
         E[] arreglo = ComvertirEnArray();
         Class<E> clazz = null;
@@ -356,7 +241,8 @@ public class ListaEnlazada<E> {
                     while (arreglo[j].toString().toLowerCase().compareTo(pivote.toString().toLowerCase()) > 0) {
                         j--;
                     }
-                } else {
+                } 
+                else {
                     while (arreglo[i].toString().toLowerCase().compareTo(pivote.toString().toLowerCase()) > 0) {
                         i++;
                     }
@@ -365,7 +251,8 @@ public class ListaEnlazada<E> {
                     }
                 }
             }
-        } while (i <= j);
+        } 
+        while (i <= j);
 
         if (primero < j) {
             QuickRecursivo(arreglo, primero, j, tipoOrdenacion);
@@ -412,7 +299,8 @@ public class ListaEnlazada<E> {
         Field field = UtilidadesGenerales.ObtencionDeAtributo(clazz, atributo);
         if (field == null) {
             throw new AtributoException();
-        } else {
+        } 
+        else {
             field.setAccessible(true);
             a = field.get(arreglo[i]);
             b = field.get(arreglo[j]);
@@ -433,7 +321,8 @@ public class ListaEnlazada<E> {
         }
 
     }
-
+    
+    //inicia la busqueda secuencial
     public ListaEnlazada<E> busquedaSecuencial(String atributo, Object dato) throws Exception {
         Class<E> clazz = null;
         ListaEnlazada<E> resultado = new ListaEnlazada<>();
@@ -466,7 +355,8 @@ public class ListaEnlazada<E> {
         Field field = UtilidadesGenerales.ObtencionDeAtributo(clazz, atributo);
         if (field == null) {
             throw new AtributoException();
-        } else {
+        } 
+        else {
             field.setAccessible(true);
             a = field.get(valorCentral);
         }
@@ -474,10 +364,12 @@ public class ListaEnlazada<E> {
         if (UtilidadesGenerales.isString(a.getClass())) {
             if (dato.toString().toLowerCase().equals(a.toString().toLowerCase())) {
                 resultado.insertar(arreglo[central]);
-            } else if (dato.toString().toLowerCase().compareTo(a.toString().toLowerCase()) < 0) {
+            } 
+            else if (dato.toString().toLowerCase().compareTo(a.toString().toLowerCase()) < 0) {
                 alto = central;
                 bajo = 0;
-            } else {
+            } 
+            else {
                 alto = arreglo.length - 1;
                 bajo = central;
             }
@@ -501,7 +393,8 @@ public class ListaEnlazada<E> {
         Field field = UtilidadesGenerales.ObtencionDeAtributo(clazz, atributo);
         if (field == null) {
             throw new AtributoException();
-        } else {
+        } 
+        else {
             field.setAccessible(true);
             Object a = field.get(aux);
         }
