@@ -12,11 +12,13 @@ import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import jdk.nashorn.internal.ir.BreakNode;
 
 /**
  *
@@ -426,6 +428,7 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
         ImageIcon FechaPasada = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneFechaPasadaIcono.png");
         ImageIcon HorarioNoDisponible = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneHorarioLLenoIcono.png");
         ImageIcon MuyLejana = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneFechaLejanaIcono.png");
+        ImageIcon Cambiar = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneCambiarIcono.png");
 
 
         try {
@@ -490,8 +493,10 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
                                     if (objeto.getIdentificacion().equals(txtNumeroCedula.getText())) {
                                         objeto.setFechaIngreso(txtFechaCita.getText());
                                         objeto.setHoraAtencion(cbxHorarioA.getSelectedItem().toString());
-                                        JOptionPane.showMessageDialog(null, "La cita se ha cambiado para el dia " + txtFechaCita.getText() + "\n con el horario de " + cbxHorarioA.getSelectedItem().toString(), "CITA REAGENDADA", JOptionPane.INFORMATION_MESSAGE, CitaEliminada);
+                                        Collections.sort(EnviarContenido, (Paciente g, Paciente h) -> g.getHoraAtencion().compareTo(h.getHoraAtencion()));
+                                        JOptionPane.showMessageDialog(null, "La cita se ha cambiado para el dia " + txtFechaCita.getText() + "\n con el horario de " + cbxHorarioA.getSelectedItem().toString(), "CITA REAGENDADA", JOptionPane.INFORMATION_MESSAGE, Cambiar);
                                     }
+                                    break;
                                 }
                             }
                         }

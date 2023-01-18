@@ -31,7 +31,8 @@ public class VistaTabla extends AbstractTableModel{
     public int getRowCount() {
         return 1;
     }
-
+    
+    //creacion de la tabla para la presentacion de las citas
     @Override
     public String getColumnName(int i) {
         switch(i){
