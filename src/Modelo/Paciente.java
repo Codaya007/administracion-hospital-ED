@@ -18,6 +18,7 @@ public class Paciente {
     private Rol rol;
     
     //elementos pacientes
+    private String TipoIdentificacion;
     private String identificacion;
     private String nombres;
     private String apellidos;
@@ -38,8 +39,9 @@ public class Paciente {
     
     private Paciente unionPaciente[];
     
-    public Paciente(String identificacion, String nombres,String apellidos,String edad,String genero, String telefono,String molestia, String FechaIngreso, String HoraAtencion, String dia, String mes, String anio) {
+    public Paciente(String TipoIdentificacion,String identificacion, String nombres,String apellidos,String edad,String genero, String telefono,String molestia, String FechaIngreso, String HoraAtencion, String dia, String mes, String anio) {
         
+        this.TipoIdentificacion = TipoIdentificacion;
         this.identificacion = identificacion;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -55,7 +57,15 @@ public class Paciente {
         this.anio = anio;
 
     }
-    
+
+    public String getTipoIdentificacion() {
+        return TipoIdentificacion;
+    }
+
+    public void setTipoIdentificacion(String TipoIdentificacion) {
+        this.TipoIdentificacion = TipoIdentificacion;
+    }
+
     public String getGenero() {
         return genero;
     }

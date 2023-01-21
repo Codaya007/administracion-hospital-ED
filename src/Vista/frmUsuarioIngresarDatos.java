@@ -55,6 +55,8 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         cbxGeneroPaciente = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         txtEdadPaciente = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        cbxTipoIdentificacion = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -142,7 +144,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Cedula");
+        jLabel2.setText("Identificacion");
 
         txtApellidoPaciente.setForeground(java.awt.Color.gray);
         txtApellidoPaciente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -200,6 +202,12 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Tipo identificacion");
+
+        cbxTipoIdentificacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cedula", "Pasaporte" }));
+        cbxTipoIdentificacion.setSelectedItem(null);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -216,16 +224,22 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtEdadPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbxTipoIdentificacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbxGeneroPaciente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbxTipoIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNumeroCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -237,11 +251,11 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtEdadPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbxGeneroPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(20, 66, 114));
@@ -406,11 +420,17 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(27, 27, 27))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegresarInicio)
                     .addComponent(btnRegresar)
@@ -444,7 +464,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         ImageIcon MolestiaIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneMolestiaIcono.png");
         ImageIcon Edad = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneEdadMinimaMaximaIcono.png");
         ImageIcon CampoVacio = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneCampoVacioIcono.png");
-        ImageIcon ErrorCedula = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneErrorCampoIcono.png");
+        ImageIcon TipoId = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneIdentidicacionIcono.png");
         ImageIcon ErrorTelefono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneErrorTelefonoIcono.png");
         ImageIcon NumeroMenor = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneNumeroIgualIcono.png");
         ImageIcon EdadMaxima = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneEdadMaximaIcono.png");
@@ -452,15 +472,18 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         String cedula = txtNumeroCedula.getText();
         String telefono = txtNumeroTelefono.getText();
         
-        if(txtNumeroCedula.getText().isEmpty() || txtNumeroCedula.getText().equalsIgnoreCase("Ingreso solo numeros")){
+        if(cbxTipoIdentificacion.getSelectedItem() == null){
+            JOptionPane.showMessageDialog(null,"No se ha seleccionado el tipo de identificacion","TIPO IDENTIFICACION VACIO",JOptionPane.INFORMATION_MESSAGE,TipoId);
+        }
+        else if(txtNumeroCedula.getText().isEmpty() || txtNumeroCedula.getText().equalsIgnoreCase("Ingreso solo numeros")){
             JOptionPane.showMessageDialog(null, "Por favor llene el campo de la cedula","INGRESE TODOS LOS DATOS",JOptionPane.ERROR_MESSAGE,CedulaVaciaIcono);
         }
         else if(cedula.length()<10){
             JOptionPane.showMessageDialog(null, "La cedula tiene menos de 10 digitos","CEDULA MAL ESTABLECIDA",JOptionPane.ERROR_MESSAGE,NumeroMenor);
         }
-        else if(!txtNumeroCedula.getText().matches("11\\d{8}")){
-            JOptionPane.showMessageDialog(null, "El numero de cedula tiene que tener este formato 11********","CEDULA NO VALIDO",JOptionPane.ERROR_MESSAGE,ErrorCedula);
-        }
+//        else if(!txtNumeroCedula.getText().matches("11\\d{8}")){
+//            JOptionPane.showMessageDialog(null, "El numero de cedula tiene que tener este formato 11********","CEDULA NO VALIDO",JOptionPane.ERROR_MESSAGE,ErrorCedula);
+//        }
         else if(txtNombrePaciente.getText().isEmpty() || txtNombrePaciente.getText().equalsIgnoreCase("Ingresar solo letras")){
             JOptionPane.showMessageDialog(null, "Por favor llene el campo del nombre","INGRESE TODOS LOS DATOS",JOptionPane.WARNING_MESSAGE,NombresIcono);
         }
@@ -860,7 +883,9 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresarInicio;
     private javax.swing.JButton btnSalir;
     public static javax.swing.JComboBox<String> cbxGeneroPaciente;
+    public static javax.swing.JComboBox<String> cbxTipoIdentificacion;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

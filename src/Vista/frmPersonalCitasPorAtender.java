@@ -38,7 +38,7 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
 
     public void CargarInterfazCitasAtender() {
         String datos[][] = {};
-        String columna[] = {"Cedula", "Nombres", "Apellidos", "Edad", "Genero", "Telefono", "Molestia", "Fecha", "Hora Atencion"};
+        String columna[] = {"Tipo Identificacion","Cedula", "Nombres", "Apellidos", "Edad", "Genero", "Telefono", "Molestia", "Fecha", "Hora Atencion"};
         modelo = new DefaultTableModel(datos, columna);
         tblCitasSinAtender.setModel(modelo);
     }
@@ -54,15 +54,16 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
         for (int i = EnviarContenido.size() - 1; i >= 0; i--) {
             a = (Paciente) frmUsuarioSeleccionarFecha.EnviarContenido.get(i);
             modelo.insertRow(EnviarEnFila, new Object[]{});
-            modelo.setValueAt(a.getIdentificacion(), EnviarEnFila, 0);
-            modelo.setValueAt(a.getNombres(), EnviarEnFila, 1);
-            modelo.setValueAt(a.getApellidos(), EnviarEnFila, 2);
-            modelo.setValueAt(a.getEdad(), EnviarEnFila, 3);
-            modelo.setValueAt(a.getGenero(), EnviarEnFila, 4);
-            modelo.setValueAt(a.getTelefono(), EnviarEnFila, 5);
-            modelo.setValueAt(a.getMolestia(), EnviarEnFila, 6);
-            modelo.setValueAt(a.getFechaIngreso(), EnviarEnFila, 7);
-            modelo.setValueAt(a.getHoraAtencion(), EnviarEnFila, 8);
+            modelo.setValueAt(a.getTipoIdentificacion(), EnviarEnFila, 0);
+            modelo.setValueAt(a.getIdentificacion(), EnviarEnFila, 1);
+            modelo.setValueAt(a.getNombres(), EnviarEnFila, 2);
+            modelo.setValueAt(a.getApellidos(), EnviarEnFila, 3);
+            modelo.setValueAt(a.getEdad(), EnviarEnFila, 4);
+            modelo.setValueAt(a.getGenero(), EnviarEnFila, 5);
+            modelo.setValueAt(a.getTelefono(), EnviarEnFila, 6);
+            modelo.setValueAt(a.getMolestia(), EnviarEnFila, 7);
+            modelo.setValueAt(a.getFechaIngreso(), EnviarEnFila, 8);
+            modelo.setValueAt(a.getHoraAtencion(), EnviarEnFila, 9);
         }
     }
  
