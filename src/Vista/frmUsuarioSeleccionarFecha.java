@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Controlador.ListaEnlazada.ListaEnlazada;
 import Modelo.Paciente;
 import static Controlador.UtilidadesFechas.validarFecha;
 import java.awt.Color;
@@ -13,7 +14,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.LinkedList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -25,7 +25,7 @@ import javax.swing.JTable;
 public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
     int Xmouse,Ymouse;
  
-    public static LinkedList<Paciente> EnviarContenido = new LinkedList<>();
+    public static ListaEnlazada<Paciente> EnviarContenido = new ListaEnlazada<>();
 
     /**
      * Creates new form frmAgendarCita

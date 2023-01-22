@@ -4,10 +4,10 @@
  */
 package Vista;
 
+import Controlador.ListaEnlazada.ListaEnlazada;
 import Modelo.HistorialClinico;
 import Modelo.Paciente;
 import java.util.Collections;
-import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static Vista.frmUsuarioSeleccionarFecha.EnviarContenido;
@@ -20,7 +20,7 @@ import static Vista.frmUsuarioSeleccionarFecha.EnviarContenido;
 public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     int Xmouse,Ymouse;
     
-    public static LinkedList contenedorAtendido=new LinkedList();
+    public static ListaEnlazada contenedorAtendido=new ListaEnlazada();
 
     public static DefaultTableModel modelo;
     int EnviarEnFila = 0;

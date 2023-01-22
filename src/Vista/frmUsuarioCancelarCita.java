@@ -4,7 +4,6 @@
  */
 package Vista;
 
-import Modelo.Paciente;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -41,15 +40,15 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
             if (tabla.getValueAt(i, col).equals(dto)) {
                 Existe = true;
                 
-                String CedulaConsulta =frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 0).toString();    
-                String NombrePaciente = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 1).toString();
-                String ApellidoPaciente = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 2).toString();
-                String EdadConsultar =frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 3).toString();    
-                String GeneroConsultar =frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 4).toString();    
-                String TelefonoConsultar =frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 5).toString();    
-                String MolestiaConsultar =frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 6).toString();    
-                String FechaCita = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 7).toString();
-                String HoraCita = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 8).toString();
+                String CedulaConsulta =frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 1).toString();    
+                String NombrePaciente = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 2).toString();
+                String ApellidoPaciente = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 3).toString();
+                String EdadConsultar =frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 4).toString();    
+                String GeneroConsultar =frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 5).toString();    
+                String TelefonoConsultar =frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 6).toString();    
+                String MolestiaConsultar =frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 7).toString();    
+                String FechaCita = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 8).toString();
+                String HoraCita = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 9).toString();
                 
                 
                 JOptionPane.showMessageDialog(null,"El usuario "+NombrePaciente+" "+ApellidoPaciente+"  con numero de celuda "+CedulaConsulta +" \ncuenta con una cita para el dia "+FechaCita+" en el horario de "+HoraCita,"CUENTA CON CITA",JOptionPane.INFORMATION_MESSAGE,CuentaCoCitaIcono);
@@ -134,7 +133,7 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Ingresar numero de cedula");
+        jLabel2.setText("Ingresar numero de identificacion");
 
         txtNumeroCedulaCancelar.setForeground(java.awt.Color.gray);
         txtNumeroCedulaCancelar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -210,8 +209,8 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtNumeroCedulaCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtNumeroCedulaCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnBuscarCita)))))
                 .addGap(15, 15, 15))
         );
@@ -311,7 +310,7 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
         else if(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender.getRowCount() <= 0){
             JOptionPane.showMessageDialog(null, "No hay registros de citas, primero tiene que agendar una cita","NO HAY REGISTROS",JOptionPane.ERROR_MESSAGE,SinRegistroIcono);
         }
-        else if(ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 0)== true){ 
+        else if(ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 1)== true){ 
             
         }
         else{
@@ -364,7 +363,7 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No hay registros de citas, primero tiene que agendar una cita","NO HAY REGISTROS",JOptionPane.ERROR_MESSAGE,SinRegistroIcono);
         }
         else {
-            if(ExisteEnTabla2(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 0)==true){
+            if(ExisteEnTabla2(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 1)==true){
                 int respuesta = JOptionPane.showConfirmDialog(null, "Estas seguro de eliminar la cita?", "CONFIRMAR", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE,Confirmar);
 
                 if (respuesta == JOptionPane.YES_OPTION) {

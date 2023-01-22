@@ -41,15 +41,15 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
         for (int i = 0; i < tabla.getRowCount(); i++) {
             if (tabla.getValueAt(i, col).equals(dto)) {
                 Existe = true;  
-                String CedulaConsulta = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 0).toString();
-                String NombrePaciente = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 1).toString();
-                String ApellidoPaciente = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 2).toString();
-                String EdadConsultar = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 3).toString();
-                String GeneroConsultar = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 4).toString();
-                String TelefonoConsultar = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 5).toString();
-                String MolestiaConsultar = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 6).toString();
-                String FechaCita = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 7).toString();
-                String HoraCita = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 8).toString();
+                String CedulaConsulta = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 1).toString();
+                String NombrePaciente = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 2).toString();
+                String ApellidoPaciente = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 3).toString();
+                String EdadConsultar = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 4).toString();
+                String GeneroConsultar = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 5).toString();
+                String TelefonoConsultar = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 6).toString();
+                String MolestiaConsultar = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 7).toString();
+                String FechaCita = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 8).toString();
+                String HoraCita = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 9).toString();
                 
                 txaDatosPaciente.setText("Nombres: "+NombrePaciente+" "+ApellidoPaciente+"\nNumero de celuda: "+CedulaConsulta +" \nEdad: "+EdadConsultar +"\nGenero: "+GeneroConsultar+"\nNumero de telefono: "+TelefonoConsultar+"\nEnfermedad: "+MolestiaConsultar+" \nFecha de cita: "+FechaCita+"\nHorario: "+HoraCita);
 
@@ -124,7 +124,7 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Ingresar numero de cedula");
+        jLabel4.setText("Ingresar numero de identificacion");
 
         txtNumeroCedula.setForeground(java.awt.Color.gray);
         txtNumeroCedula.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -404,7 +404,7 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
         else if(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender.getRowCount() <= 0){
             JOptionPane.showMessageDialog(null, "No hay registros de citas, primero tiene que agendar una cita","NO HAY REGISTROS",JOptionPane.ERROR_MESSAGE,SinRegistroIcono);
         }
-        else if(ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 0)== true){ 
+        else if(ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 1)== true){ 
             
         }
         else{
@@ -451,7 +451,7 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
             } 
             
             else {
-                if (ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 0) == true) {
+                if (ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 1) == true) {
                     boolean resultado = true;
                     String FechaSeleccionada = txtFechaCita.getText();
                     resultado = validarFecha(FechaSeleccionada);
