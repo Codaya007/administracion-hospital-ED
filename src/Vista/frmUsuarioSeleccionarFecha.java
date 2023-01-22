@@ -288,10 +288,10 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                     else if (fechaSeleccionada.before(fechaHoy)) {
                         JOptionPane.showMessageDialog(null, "La fecha seleccionada ya ha pasado", "FECHA PASADO", JOptionPane.INFORMATION_MESSAGE, FechaPasada);
                     }
-                    else if (ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, fecha1, 7) == true & ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, CbxHoraAtencion, 8)) {
+                    else if (ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, fecha1, 8) == true & ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, CbxHoraAtencion, 9)) {
                         JOptionPane.showMessageDialog(null, "La hora de atencion ya no esta disponible", "NO DISPONIBLE", JOptionPane.INFORMATION_MESSAGE, HorarioNoDisponible);
                     } 
-                    else if (ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 0) == true) {
+                    else if (ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 1) == true) {
                         JOptionPane.showMessageDialog(null, "El usuario con numero de cedula " + cedula + " \nya tiene una cita agendada", "YA CUENTA CON CITA", JOptionPane.INFORMATION_MESSAGE, YaCuenta);
                     } 
                     else if (fechaSeleccionada.after(fechaLimite)) {
@@ -299,7 +299,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                     } 
                     else {
 
-                        String TipoId = Vista.frmUsuarioIngresarDatos.cbxGeneroPaciente.getSelectedItem().toString();
+                        String TipoId = Vista.frmUsuarioIngresarDatos.cbxTipoIdentificacion.getSelectedItem().toString();
                         String NumeroCedula = Vista.frmUsuarioIngresarDatos.txtNumeroCedula.getText();
                         String NombrePaciente = Vista.frmUsuarioIngresarDatos.txtNombrePaciente.getText();
                         String ApellidoPaciente = Vista.frmUsuarioIngresarDatos.txtApellidoPaciente.getText();
