@@ -30,7 +30,7 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
     public void CargarInterfazAtendidos() {
 
         String datos[][] = {};
-        String columna[] = {"Cedula", "Nombres", "Apellidos", "Edad", "Genero", "Telefono", "Molestia", "Fecha", "Hora Atencion", "Medicamento","Dosis"};
+        String columna[] = {"Tipo identificacion","Cedula", "Nombres", "Apellidos", "Edad", "Genero", "Telefono", "Molestia", "Fecha", "Hora Atencion", "Medicamento","Dosis"};
         modeloAtendido = new DefaultTableModel(datos, columna);
         tblRegistroPacientes.setModel(modeloAtendido);
     }
@@ -39,18 +39,20 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
         HistorialClinico a;
         for (int i = 0; i < frmPersonalCitasPorAtender.contenedorAtendido.size(); i++) {
             a = (HistorialClinico) frmPersonalCitasPorAtender.contenedorAtendido.get(i);
+            
             modeloAtendido.insertRow(contadorAtendido, new Object[]{});
-            modeloAtendido.setValueAt(a.getIdentificacionA(), contadorAtendido, 0);
-            modeloAtendido.setValueAt(a.getNombresA(), contadorAtendido, 1);
-            modeloAtendido.setValueAt(a.getApellidosA(), contadorAtendido, 2);
-            modeloAtendido.setValueAt(a.getEdadA(), contadorAtendido, 3);
-            modeloAtendido.setValueAt(a.getGeneroA(), contadorAtendido, 4);
-            modeloAtendido.setValueAt(a.getTelefonoA(), contadorAtendido, 5);
-            modeloAtendido.setValueAt(a.getMolestiaA(), contadorAtendido, 6);
-            modeloAtendido.setValueAt(a.getFechaIngresoA(), contadorAtendido, 7);
-            modeloAtendido.setValueAt(a.getHoraAtencionA(), contadorAtendido, 8);
-            modeloAtendido.setValueAt(a.getMedicamentoA(), contadorAtendido, 9);
-            modeloAtendido.setValueAt(a.getDosisA(), contadorAtendido, 10);
+            modeloAtendido.setValueAt(a.getTipoId(), contadorAtendido, 0);
+            modeloAtendido.setValueAt(a.getIdentificacionA(), contadorAtendido, 1);
+            modeloAtendido.setValueAt(a.getNombresA(), contadorAtendido, 2);
+            modeloAtendido.setValueAt(a.getApellidosA(), contadorAtendido, 3);
+            modeloAtendido.setValueAt(a.getEdadA(), contadorAtendido, 4);
+            modeloAtendido.setValueAt(a.getGeneroA(), contadorAtendido,5);
+            modeloAtendido.setValueAt(a.getTelefonoA(), contadorAtendido, 6);
+            modeloAtendido.setValueAt(a.getMolestiaA(), contadorAtendido, 7);
+            modeloAtendido.setValueAt(a.getFechaIngresoA(), contadorAtendido, 8);
+            modeloAtendido.setValueAt(a.getHoraAtencionA(), contadorAtendido, 9);
+            modeloAtendido.setValueAt(a.getMedicamentoA(), contadorAtendido, 10);
+            modeloAtendido.setValueAt(a.getDosisA(), contadorAtendido, 11);
         }
     }
 

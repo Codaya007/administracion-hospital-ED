@@ -9,6 +9,8 @@ package Modelo;
  * @author Victor
  */
 public class HistorialClinico {
+    
+    private String TipoId;
     private String identificacionAtendido;
     private String nombresAtendido;
     private String apellidosAtendido;
@@ -21,8 +23,9 @@ public class HistorialClinico {
     private String MedicamentoAtendido;
     private String DosisAtendido;
     
-    public HistorialClinico(String identificacionAtendido, String nombresAtendido,String apellidosAtendido,String edadA,String generoA, String telefonoA,String molestiaA, String FechaIngresoA, String HoraAtencionA, String MedicamentoA, String DosisA) {
+    public HistorialClinico(String TipoId, String identificacionAtendido, String nombresAtendido,String apellidosAtendido,String edadA,String generoA, String telefonoA,String molestiaA, String FechaIngresoA, String HoraAtencionA, String MedicamentoA, String DosisA) {
         
+        this.TipoId = TipoId;
         this.identificacionAtendido = identificacionAtendido;
         this.nombresAtendido = nombresAtendido;
         this.apellidosAtendido = apellidosAtendido;
@@ -35,6 +38,14 @@ public class HistorialClinico {
         this.MedicamentoAtendido = MedicamentoA;
         this.DosisAtendido = DosisA;
 
+    }
+
+    public String getTipoId() {
+        return TipoId;
+    }
+
+    public void setTipoId(String TipoId) {
+        this.TipoId = TipoId;
     }
 
     public String getIdentificacionA() {

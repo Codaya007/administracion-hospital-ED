@@ -4,10 +4,10 @@
  */
 package Vista;
 
+import Controlador.ListaEnlazada.ListaEnlazada;
 import Modelo.HistorialClinico;
 import Modelo.Paciente;
 import java.util.Collections;
-import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static Vista.frmUsuarioSeleccionarFecha.EnviarContenido;
@@ -20,7 +20,7 @@ import static Vista.frmUsuarioSeleccionarFecha.EnviarContenido;
 public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     int Xmouse,Ymouse;
     
-    public static LinkedList contenedorAtendido=new LinkedList();
+    public static ListaEnlazada contenedorAtendido=new ListaEnlazada();
 
     public static DefaultTableModel modelo;
     int EnviarEnFila = 0;
@@ -38,7 +38,7 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
 
     public void CargarInterfazCitasAtender() {
         String datos[][] = {};
-        String columna[] = {"Cedula", "Nombres", "Apellidos", "Edad", "Genero", "Telefono", "Molestia", "Fecha", "Hora Atencion"};
+        String columna[] = {"Tipo Identificacion","Cedula", "Nombres", "Apellidos", "Edad", "Genero", "Telefono", "Molestia", "Fecha", "Hora Atencion"};
         modelo = new DefaultTableModel(datos, columna);
         tblCitasSinAtender.setModel(modelo);
     }
@@ -54,15 +54,16 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
         for (int i = EnviarContenido.size() - 1; i >= 0; i--) {
             a = (Paciente) frmUsuarioSeleccionarFecha.EnviarContenido.get(i);
             modelo.insertRow(EnviarEnFila, new Object[]{});
-            modelo.setValueAt(a.getIdentificacion(), EnviarEnFila, 0);
-            modelo.setValueAt(a.getNombres(), EnviarEnFila, 1);
-            modelo.setValueAt(a.getApellidos(), EnviarEnFila, 2);
-            modelo.setValueAt(a.getEdad(), EnviarEnFila, 3);
-            modelo.setValueAt(a.getGenero(), EnviarEnFila, 4);
-            modelo.setValueAt(a.getTelefono(), EnviarEnFila, 5);
-            modelo.setValueAt(a.getMolestia(), EnviarEnFila, 6);
-            modelo.setValueAt(a.getFechaIngreso(), EnviarEnFila, 7);
-            modelo.setValueAt(a.getHoraAtencion(), EnviarEnFila, 8);
+            modelo.setValueAt(a.getTipoIdentificacion(), EnviarEnFila, 0);
+            modelo.setValueAt(a.getIdentificacion(), EnviarEnFila, 1);
+            modelo.setValueAt(a.getNombres(), EnviarEnFila, 2);
+            modelo.setValueAt(a.getApellidos(), EnviarEnFila, 3);
+            modelo.setValueAt(a.getEdad(), EnviarEnFila, 4);
+            modelo.setValueAt(a.getGenero(), EnviarEnFila, 5);
+            modelo.setValueAt(a.getTelefono(), EnviarEnFila, 6);
+            modelo.setValueAt(a.getMolestia(), EnviarEnFila, 7);
+            modelo.setValueAt(a.getFechaIngreso(), EnviarEnFila, 8);
+            modelo.setValueAt(a.getHoraAtencion(), EnviarEnFila, 9);
         }
     }
  
@@ -100,6 +101,8 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         txtHoraAtencion = new javax.swing.JTextField();
         txtNumeroTelefono = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        txtTipoId = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -215,6 +218,10 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
             }
         });
 
+        jLabel16.setText("Tipo identificacion");
+
+        txtTipoId.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -225,6 +232,8 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtTipoId, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtNumeroTelefono, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtHoraAtencion, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -263,6 +272,10 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTipoId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNumeroCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -285,7 +298,7 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
                 .addGap(12, 12, 12))
         );
 
@@ -457,6 +470,7 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
             frmPersonalHistorialPacientes abrir = new frmPersonalHistorialPacientes();
             abrir.setVisible(false);
 
+            String TipoId = txtTipoId.getText();
             String NumeroCedula = txtNumeroCedula.getText();
             String NombrePaciente = txtNombre.getText();
             String ApellidoPaciente = txtApellidoPaciente.getText();
@@ -469,7 +483,7 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
             String Medicamento = txtAsignarMedicamento.getText();
             String Dosis =txtDosis.getText();
             
-            HistorialClinico claseauto = new HistorialClinico(NumeroCedula, NombrePaciente, ApellidoPaciente, EdadPaciente, GeneroPaciente, TelefonoPaciente, MolestiaPaciente, FechaAtencion, HoraAtencion, Medicamento, Dosis);
+            HistorialClinico claseauto = new HistorialClinico(TipoId,NumeroCedula, NombrePaciente, ApellidoPaciente, EdadPaciente, GeneroPaciente, TelefonoPaciente, MolestiaPaciente, FechaAtencion, HoraAtencion, Medicamento, Dosis);
             contenedorAtendido.add(claseauto);
             if (tblCitasSinAtender.getSelectedRow() != -1) {
                 EnviarContenido.remove(tblCitasSinAtender.getSelectedRow());
@@ -485,15 +499,17 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     private void tblCitasSinAtenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCitasSinAtenderMouseClicked
         // TODO add your handling code here:
         int seleccionar = tblCitasSinAtender.rowAtPoint(evt.getPoint());
-        txtNumeroCedula.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 0)));
-        txtNombre.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 1)));
-        txtApellidoPaciente.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 2)));
-        txtEdad.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 3)));
-        txtGenero.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 4)));
-        txtNumeroTelefono.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 5)));
-        txaMolestias.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 6)));
-        txtFechaIngreso.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 7)));
-        txtHoraAtencion.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 8)));
+        
+        txtTipoId.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 0)));
+        txtNumeroCedula.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 1)));
+        txtNombre.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 2)));
+        txtApellidoPaciente.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 3)));
+        txtEdad.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 4)));
+        txtGenero.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 5)));
+        txtNumeroTelefono.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 6)));
+        txaMolestias.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 7)));
+        txtFechaIngreso.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 8)));
+        txtHoraAtencion.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 9)));
     }//GEN-LAST:event_tblCitasSinAtenderMouseClicked
 
     private void txtAsignarMedicamentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAsignarMedicamentoKeyPressed
@@ -568,6 +584,7 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -593,5 +610,6 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     public static javax.swing.JTextField txtNombre;
     public static javax.swing.JTextField txtNumeroCedula;
     public static javax.swing.JTextField txtNumeroTelefono;
+    public static javax.swing.JTextField txtTipoId;
     // End of variables declaration//GEN-END:variables
 }

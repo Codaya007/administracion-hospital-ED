@@ -17,14 +17,17 @@ import java.lang.reflect.Field;
  */
 public class UtilidadesGenerales {
     
+    //verifica si es cadena
     public static Boolean isString(Class clase){
         return clase.getSimpleName().equalsIgnoreCase("String");
     }
     
+    //verifica si es primitivo
     public static Boolean isPrimitive(Class clase){
         return clase.isPrimitive();
     }
     
+    //obtiene el atributo
     public static Field ObtencionDeAtributo(Class clase, String nombre){
         Field atributo = null;
         for(Field aux : clase.getDeclaredFields()){
@@ -37,7 +40,8 @@ public class UtilidadesGenerales {
     }
 
     private final Integer LIMITE_DATOS = 100;
-
+    
+    //contiene el valor
     public static <T> boolean contains(final T[] array, final T v) {
         for (final T e : array) {
             if (e == v || v != null && v.equals(e)) {
@@ -48,6 +52,7 @@ public class UtilidadesGenerales {
         return false;
     }
     
+    //verifica la ultima pocicion
     public static int ultimoIndiceOcupado(Object array[]) {
         for (int i = 0; i < array.length; i++) {
             System.out.println("i -> " + i);
@@ -58,7 +63,8 @@ public class UtilidadesGenerales {
 
         return -1;
     }
-
+    
+    //guarda 
     public static void guardar(Object expresiones[]) throws IOException {
         Gson json = new Gson();
         Integer ocupados = ultimoIndiceOcupado(expresiones);
@@ -71,7 +77,8 @@ public class UtilidadesGenerales {
         fw.write(jsons);
         fw.flush();
     }
-
+    
+    //cargar el objeto
     public static int cargar(Object expresiones[]) {
         int counter = 0;
 
