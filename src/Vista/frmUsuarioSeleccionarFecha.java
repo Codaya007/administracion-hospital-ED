@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Controlador.ListaEnlazada.ListaEnlazada;
 import Modelo.Paciente;
 import static Controlador.UtilidadesFechas.validarFecha;
 import java.awt.Color;
@@ -13,7 +14,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.LinkedList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -25,7 +25,7 @@ import javax.swing.JTable;
 public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
     int Xmouse,Ymouse;
  
-    public static LinkedList<Paciente> EnviarContenido = new LinkedList<>();
+    public static ListaEnlazada<Paciente> EnviarContenido = new ListaEnlazada<>();
 
     /**
      * Creates new form frmAgendarCita
@@ -288,10 +288,10 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                     else if (fechaSeleccionada.before(fechaHoy)) {
                         JOptionPane.showMessageDialog(null, "La fecha seleccionada ya ha pasado", "FECHA PASADO", JOptionPane.INFORMATION_MESSAGE, FechaPasada);
                     }
-                    else if (ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, fecha1, 7) == true & ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, CbxHoraAtencion, 8)) {
+                    else if (ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, fecha1, 8) == true & ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, CbxHoraAtencion, 9)) {
                         JOptionPane.showMessageDialog(null, "La hora de atencion ya no esta disponible", "NO DISPONIBLE", JOptionPane.INFORMATION_MESSAGE, HorarioNoDisponible);
                     } 
-                    else if (ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 0) == true) {
+                    else if (ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 1) == true) {
                         JOptionPane.showMessageDialog(null, "El usuario con numero de cedula " + cedula + " \nya tiene una cita agendada", "YA CUENTA CON CITA", JOptionPane.INFORMATION_MESSAGE, YaCuenta);
                     } 
                     else if (fechaSeleccionada.after(fechaLimite)) {
@@ -299,6 +299,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                     } 
                     else {
 
+                        String TipoId = Vista.frmUsuarioIngresarDatos.cbxTipoIdentificacion.getSelectedItem().toString();
                         String NumeroCedula = Vista.frmUsuarioIngresarDatos.txtNumeroCedula.getText();
                         String NombrePaciente = Vista.frmUsuarioIngresarDatos.txtNombrePaciente.getText();
                         String ApellidoPaciente = Vista.frmUsuarioIngresarDatos.txtApellidoPaciente.getText();
@@ -319,7 +320,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                         String Mes = String.valueOf(mes);
                         String Anio = String.valueOf(anio);
 
-                        Paciente paciente = new Paciente(NumeroCedula, NombrePaciente, ApellidoPaciente, EdadPaciente, GeneroPaciente, TelefonoPaciente, MolestiaPaciente, FechaAtencion, HoraAtencion, Dia, Mes, Anio);
+                        Paciente paciente = new Paciente(TipoId,NumeroCedula, NombrePaciente, ApellidoPaciente, EdadPaciente, GeneroPaciente, TelefonoPaciente, MolestiaPaciente, FechaAtencion, HoraAtencion, Dia, Mes, Anio);
                         EnviarContenido.add(paciente);
 
                         JOptionPane.showMessageDialog(null, "Cita agendada exitosamente", "AGENDADO", JOptionPane.INFORMATION_MESSAGE, Agendado);

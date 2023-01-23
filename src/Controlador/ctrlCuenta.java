@@ -23,7 +23,7 @@ public class ctrlCuenta {
     public ctrlCuenta() {
         cargar();
     }
-
+    //verifica si la cuenta existe
     public void registrarUsuario(Cuenta nuevaCuenta) throws IOException {
         if (!usuarioValido(nuevaCuenta.getUsuario())) {
             throw new Error("El usuario ya está en uso, intente con otro usuario");
@@ -37,7 +37,8 @@ public class ctrlCuenta {
         ocupados += 1;
         guardar();
     }
-
+    
+    //verifica la informacion que ingresa el usuario
     public boolean usuarioValido(String usuario) {
         for (int i = 0; i < ocupados; i++) {
             Cuenta cuenta = cuentas[i];
@@ -50,7 +51,8 @@ public class ctrlCuenta {
 
         return true;
     }
-
+    
+    //Ingresa al sistema
     public boolean login(String usuario, String clave) {
         cargar();
         for (int i = 0; i < ocupados; i++) {
@@ -62,7 +64,8 @@ public class ctrlCuenta {
 
         return false;
     }
-
+    
+    //guarda los datos que ingreso el usuario
     public void guardar() throws IOException {
         Gson json = new Gson();
 
@@ -74,7 +77,8 @@ public class ctrlCuenta {
         fw.write(jsons);
         fw.flush();
     }
-
+    
+    //carga el json con la inforamcion del login
     public void cargar() {
         int counter = 0;
 

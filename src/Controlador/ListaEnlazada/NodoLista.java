@@ -18,6 +18,7 @@ public class NodoLista<E> {
         this.siguiente = siguiente;
     }
     
+    //obtiene el dato
     public E getDato() {
         return dato;
     }
@@ -25,7 +26,8 @@ public class NodoLista<E> {
     public void setDato(E dato) {
         this.dato = dato;
     }
-
+    
+    //se dirigue hacia el siguiente
     public NodoLista<E> getSiguiente() {
         return siguiente;
     }
@@ -36,7 +38,8 @@ public class NodoLista<E> {
     
     public NodoLista() {
     }
-
+    
+    //convierte en cadena
     @Override
     public String toString() {
         return dato.toString();

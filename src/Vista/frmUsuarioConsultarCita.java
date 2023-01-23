@@ -38,11 +38,11 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
             if (tabla.getValueAt(i, col).equals(dto)) {
                 Existe = true;
                 
-                String NombrePaciente = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 1).toString();
-                String ApellidoPaciente = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 2).toString();
-                String FechaCita = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 7).toString();
-                String HoraCita = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 8).toString();
-                String CedulaConsulta =frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 0).toString();               
+                String NombrePaciente = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 2).toString();
+                String ApellidoPaciente = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 3).toString();
+                String FechaCita = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 8).toString();
+                String HoraCita = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 9).toString();
+                String CedulaConsulta =frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 1).toString();               
                 
                 JOptionPane.showMessageDialog(null,"El usuario "+NombrePaciente+" "+ApellidoPaciente+"  con numero de celuda "+CedulaConsulta +" \ncuenta con una cita para el dia "+FechaCita+" en el horario de "+HoraCita,"CUENTA CON CITA",JOptionPane.INFORMATION_MESSAGE,CuentaCoCitaIcono);   
             }
@@ -237,13 +237,13 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
         else if(cedula.length() < 10) {
             JOptionPane.showMessageDialog(null, "La cedula tiene menos de 10 digitos", "CEDULA MAL ESTABLECIDA", JOptionPane.ERROR_MESSAGE,NumeroMenor);
         }
-        else if(!txtNumeroCedula.getText().matches("11\\d{8}")){
-            JOptionPane.showMessageDialog(null, "El numero de cedula tiene que iniciar con 11","CEDULA NO VALIDO",JOptionPane.ERROR_MESSAGE,ErrorCedula);
-        }
+//        else if(!txtNumeroCedula.getText().matches("11\\d{8}")){
+//            JOptionPane.showMessageDialog(null, "El numero de cedula tiene que iniciar con 11","CEDULA NO VALIDO",JOptionPane.ERROR_MESSAGE,ErrorCedula);
+//        }
         else if(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender.getRowCount() <= 0){
             JOptionPane.showMessageDialog(null, "No hay registros de citas, primero tiene que agendar una cita","NO HAY REGISTROS",JOptionPane.ERROR_MESSAGE,SinRegistroIcono);
         }
-        else if(ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 0)== true){ 
+        else if(ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 1)== true){ 
         }
         else{
             JOptionPane.showMessageDialog(null, "No cuenta con una cita disponible \n Registre una cita","NO CUENTA CON CITA",JOptionPane.INFORMATION_MESSAGE,SinCitaIcono);
