@@ -4,8 +4,6 @@
  */
 package Modelo;
 
-import java.util.Date;
-
 /**
  *
  * @author Victor
@@ -14,8 +12,19 @@ public class Valoracion {
 
     private Float peso;
     private Float altura;
-    private Float presion;
-    private Date fechaCreacion;
+    private Float presionArterial;
+    private Float presionCardiaca;
+    private Float temperatura;
+    
+    public Valoracion(Float peso,Float altura,Float presionArterial,Float presionCardiaca,Float temperatura){
+        
+        this.peso = peso;
+        this.altura = altura;
+        this.presionArterial = presionArterial;
+        this.presionCardiaca = presionCardiaca;
+        this.temperatura = temperatura;
+        
+    }
 
     public Float getPeso() {
         return peso;
@@ -33,20 +42,28 @@ public class Valoracion {
         this.altura = altura;
     }
 
-    public Float getPresion() {
-        return presion;
+    public Float getPresionArterial() {
+        return presionArterial;
     }
 
-    public void setPresion(Float presion) {
-        this.presion = presion;
+    public void setPresionArterial(Float presionArterial) {
+        this.presionArterial = presionArterial;
     }
 
-    public Date getFechaCreacion() {
-        return fechaCreacion;
+    public Float getPresionCardiaca() {
+        return presionCardiaca;
     }
 
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
+    public void setPresionCardiaca(Float presionCardiaca) {
+        this.presionCardiaca = presionCardiaca;
+    }
+
+    public Float getTemperatura() {
+        return temperatura;
+    }
+
+    public void setTemperatura(Float temperatura) {
+        this.temperatura = temperatura;
     }
 
 }
