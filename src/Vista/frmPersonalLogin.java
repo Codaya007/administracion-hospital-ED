@@ -5,7 +5,7 @@
  */
 package Vista;
 
-import Controlador.ctrlCuenta;
+import Controlador.CtrlCuenta;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,10 +13,10 @@ import javax.swing.JOptionPane;
  * @author Victor
  */
 public class frmPersonalLogin extends javax.swing.JFrame {
-    
-    int Xmouse,Ymouse;
 
-    ctrlCuenta controlador = new ctrlCuenta();
+    int Xmouse, Ymouse;
+
+    CtrlCuenta controlador;
 
     /**
      * Creates new form Login
@@ -24,6 +24,7 @@ public class frmPersonalLogin extends javax.swing.JFrame {
     public frmPersonalLogin() {
         initComponents();
         this.setLocationRelativeTo(null);
+        controlador = (CtrlCuenta) Utilidades.Utilidades.cargarJson(CtrlCuenta.class, "ControladorCuenta");
     }
 
     /**
@@ -262,22 +263,22 @@ public class frmPersonalLogin extends javax.swing.JFrame {
 
     private void btnCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearUsuarioActionPerformed
         // TODO add your handling code here:
-        frmAdminRegistrarPersonal abrir = new frmAdminRegistrarPersonal();
-        abrir.setVisible(true);
+        this.setVisible(false);
+        new frmAdminRegistrarPersonal().setVisible(true);
     }//GEN-LAST:event_btnCrearUsuarioActionPerformed
 
     private void txtContraseñaIngresoUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraseñaIngresoUsuarioKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == evt.VK_ENTER){
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             btnIngresarLogin.requestFocus();
         }
     }//GEN-LAST:event_txtContraseñaIngresoUsuarioKeyPressed
 
     private void jLabel6MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseDragged
         // TODO add your handling code here:
-        int x =evt.getXOnScreen();
-        int y =evt.getYOnScreen();
-        this.setLocation(x-Xmouse,y- Ymouse);
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - Xmouse, y - Ymouse);
     }//GEN-LAST:event_jLabel6MouseDragged
 
     private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
