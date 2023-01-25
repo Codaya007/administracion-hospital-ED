@@ -4,7 +4,6 @@
  */
 package Controlador;
 
-import Controlador.ListaEnlazada.ListaEnlazada;
 import Modelo.Especialidad;
 import Utilidades.Utilidades;
 import java.io.IOException;
@@ -15,28 +14,29 @@ import java.io.IOException;
  */
 public class CtrlEspecialidades {
 
-    // private final Integer MAXIMO_CUENTAS = 25;
-    private ListaEnlazada<Especialidad> listaEspecialidades;
-    
-    public ListaEnlazada<Especialidad> getEspecialidades(){
+    private final Integer MAXIMO_ESPECIALIDADES = 25;
+//    private ListaEnlazada<Especialidad> listaEspecialidades;
+    private Especialidad listaEspecialidades[] = new Especialidad[MAXIMO_ESPECIALIDADES];
+
+    public Especialidad[] getEspecialidades() {
         return this.listaEspecialidades;
     }
 
     public CtrlEspecialidades() {
-        listaEspecialidades = new ListaEnlazada<>();
     }
 
     //verifica si la cuenta existe
     public void registrarEspecialidad(Especialidad nueva) throws Exception {
-        listaEspecialidades.add(nueva);
+        Integer index = Utilidades.ultimoElementoNoVacio(listaEspecialidades);
         
+        if(index == null) throw new Exception("Ya no se pueden agregar más especialidades");
+        
+        listaEspecialidades[index] = nueva;
         guardar();
     }
-    
-    //guarda los datos de las especialidades
-    public void guardar() throws IOException {
-        System.out.println("Guadando especialidades....");
 
+    //guarda los datos de las listaEspecialidades
+    public void guardar() throws IOException {
         Utilidades.guardarJson(this, "ControladorEspecialidades");
     }
 }

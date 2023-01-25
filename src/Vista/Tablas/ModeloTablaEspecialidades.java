@@ -4,13 +4,7 @@
  */
 package Vista.Tablas;
 
-import Controlador.ListaEnlazada.Excepciones.ListaVaciaExcepcion;
-import Controlador.ListaEnlazada.Excepciones.PosicionNoEncontradaException;
-import Controlador.ListaEnlazada.ListaEnlazada;
 import Modelo.Especialidad;
-import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -18,21 +12,24 @@ import javax.swing.table.AbstractTableModel;
  * @author Victor
  */
 public class ModeloTablaEspecialidades extends AbstractTableModel{
-    private Especialidad especialidades[];
+    private Especialidad especialidades[] =  new Especialidad[]{};
 
     public Especialidad[] getUniones() {
         return especialidades;
     }
 
-    public void setUniones(ListaEnlazada<Especialidad> especialidades) {
-        this.especialidades = new Especialidad[especialidades.size()];
+    public void setEspecialidades(Especialidad[] especialidades) {
+        if(especialidades.length == 0) this.especialidades = new Especialidad[]{};
+        else{
+        Especialidad result[] = new Especialidad[Utilidades.Utilidades.ultimoElementoNoVacio(especialidades)];
+        System.out.println("Longitud de especialidades: " + result.length);
         
-        for (int i = 0; i < especialidades.size(); i++) {
-            try {
-                this.especialidades[i] = especialidades.obtener(i);
-            } catch(Exception ex) {
-            System.out.println(ex);
-            }
+        for (int i = 0; i < result.length; i++) {
+            System.out.println("Elemento " + i + ": " + result[i]);
+            result[i] = especialidades[i];
+        }
+        
+        this.especialidades = result;
         }
     }
     
@@ -43,7 +40,6 @@ public class ModeloTablaEspecialidades extends AbstractTableModel{
 
     @Override
     public int getRowCount() {
-        System.out.println("Rows: " + (especialidades == null ? 0 : especialidades.length) );
         return especialidades == null ? 0 : especialidades.length;
     }
     
@@ -64,14 +60,13 @@ public class ModeloTablaEspecialidades extends AbstractTableModel{
         
         if(especialidades != null){
             esp = especialidades[i];
-            
         }
         
         System.out.println("Especialidad: " + esp);
         
         switch(i1) {
             case 0: 
-                return (esp != null) ? esp.getId(): i;    
+                return (esp != null) ? esp.getId(): i+1;    
             case 1: 
                 return (esp != null) ? esp.getNombre(): "INDEFINIDO";    
 

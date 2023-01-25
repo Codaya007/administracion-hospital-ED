@@ -36,6 +36,7 @@ public class FileJSON {
             if (file.exists()) {
                 file.delete();
             }
+            System.out.println("JSON: " + json);
             file.createNewFile();
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
             bufferedWriter.write(json);
