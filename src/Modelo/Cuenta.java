@@ -60,4 +60,9 @@ public class Cuenta {
 
         return usuario.equals(this.usuario) && Pbkdf2.authenticate(clave, this.clave, salt);
     }
+    
+    @Override
+    public String toString(){
+        return "Usuario: " + this.usuario;
+    }
 }

@@ -100,12 +100,16 @@ public class Persona {
         this.direccion = direccion;
     }
 
-    public String getFechaNacimiento() {
-        return fechaNacimiento.toString();
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
     public void setFechaNacimiento(Integer anio, Integer mes, Integer dia) {
         this.fechaNacimiento = new GregorianCalendar(anio, mes - 1, dia).getTime();
+    }
+    
+    public void setFechaNacimiento(Date date) {
+        this.fechaNacimiento = date;
     }
 
     public void setTelefono(String telefono) {

@@ -16,7 +16,7 @@ public class CtrlCuenta {
 
     private final Integer MAXIMO_CUENTAS = 100;
     private Cuenta cuentas[] = new Cuenta[MAXIMO_CUENTAS];
-    Integer ocupados = 0;
+    private Integer ocupados = 0;
     private byte[] salt;
 
     public CtrlCuenta() {
@@ -69,7 +69,7 @@ public class CtrlCuenta {
     //guarda los datos que ingreso el usuario
     public void guardar() throws IOException {
         System.out.println("Gurdando....");
-        
+
         Utilidades.guardarJson(this, "ControladorCuenta");
     }
 
@@ -79,5 +79,21 @@ public class CtrlCuenta {
 
     public void setSalt(byte[] salt) {
         this.salt = salt;
+    }
+
+    public Integer getOcupados() {
+        return ocupados;
+    }
+
+    public void setOcupados(Integer ocupados) {
+        this.ocupados = ocupados;
+    }
+
+    public Cuenta[] getCuentas() {
+        return cuentas;
+    }
+
+    public void setCuentas(Cuenta[] cuentas) {
+        this.cuentas = cuentas;
     }
 }

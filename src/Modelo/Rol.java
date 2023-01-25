@@ -19,7 +19,8 @@ public class Rol {
     private static final String[] ROLES_PERMITIDOS = new String[]{
         "Medico",
         "Enfermera",
-        "Paciente"
+        "Paciente", 
+        "SuperAdmin"
     };
 
     public Integer getId() {
@@ -43,11 +44,16 @@ public class Rol {
     }
 
     public void setNombre(String nombre) {
-        if(Controlador.Utilidades.contains(ROLES_PERMITIDOS, nombre)){
+        if(!Controlador.Utilidades.contains(ROLES_PERMITIDOS, nombre)){
             throw new Error("Los roles permitidos son: " + Arrays.toString(ROLES_PERMITIDOS));
         }
         
         this.nombre = nombre;
+    }
+    
+    @Override
+    public String toString(){
+        return nombre;
     }
 
 }

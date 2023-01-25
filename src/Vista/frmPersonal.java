@@ -4,40 +4,74 @@
  */
 package Vista;
 
+import Controlador.CtrlCuenta;
 import Controlador.CtrlEspecialidades;
+import Modelo.Cuenta;
+import Modelo.Enfermera;
 import Modelo.Especialidad;
+import Modelo.Medico;
+import Modelo.Persona;
 import Utilidades.Utilidades;
-import Vista.Tablas.ModeloTablaEspecialidades;
+import Vista.Tablas.ModeloTablaPersonal;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-public class frmEspecialidades extends javax.swing.JFrame {
+public class frmPersonal extends javax.swing.JFrame {
 
-    CtrlEspecialidades controlador;
-    ModeloTablaEspecialidades modeloTabla = new ModeloTablaEspecialidades();
-    Integer especialidadSeleccionada;
+    CtrlEspecialidades controladorEspecialidad;
+    CtrlCuenta controladorCuentas;
+    ModeloTablaPersonal modeloTabla = new ModeloTablaPersonal();
+    Integer personaSeleccionada;
 
     /**
      * Creates new form frmAgendacionCita
      */
-    public frmEspecialidades() {
+    public frmPersonal() {
         initComponents();
         this.setLocationRelativeTo(null);
-        //txtNumeroCedula.addKeyListener(this);
-        controlador = (CtrlEspecialidades) Utilidades.cargarJson(CtrlEspecialidades.class, "ControladorEspecialidades");
-        if (controlador == null) {
+
+        controladorEspecialidad = (CtrlEspecialidades) Utilidades.cargarJson(CtrlEspecialidades.class, "ControladorEspecialidades");
+        controladorCuentas = (CtrlCuenta) Utilidades.cargarJson(CtrlCuenta.class, "ControladorCuenta");
+
+        if (controladorEspecialidad == null) {
             try {
-                System.out.println("Creando nuevo controlador especialidad");
-                this.controlador = new CtrlEspecialidades();
-                this.controlador.guardar();
+                System.out.println("Creando nuevo controladorEspecialidad especialidad");
+                this.controladorEspecialidad = new CtrlEspecialidades();
+                this.controladorEspecialidad.guardar();
             } catch (Exception ex) {
                 System.out.println(ex);
             }
         }
+        cargarCombos();
         cargarTabla();
+    }
+
+    public Boolean validarPersonaSeleccionado() {
+        Integer selectedRow = tblPersonal.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Seleccione una persona de la tabla",
+                    "Seleccionar item",
+                    JOptionPane.WARNING_MESSAGE
+            );
+
+            return false;
+        }
+
+        personaSeleccionada = selectedRow;
+
+        return true;
+    }
+
+    private void cargarCombos() {
+        Utilidades.rellenarCombo(cbxPersona, controladorCuentas.getCuentas());
+        Utilidades.rellenarCombo(cbxEspecialidades, controladorEspecialidad.getEspecialidades());
+        Utilidades.rellenarCombo(cbxTipo, new String[]{"Medico", "Enfermera", "SuperAdmin"});
     }
 
     private void abrirAnterior() {
@@ -46,11 +80,11 @@ public class frmEspecialidades extends javax.swing.JFrame {
     }
 
     private void cargarTabla() {
-        System.out.println(Arrays.toString(this.controlador.getEspecialidades()));
-        if (controlador != null) {
-            modeloTabla.setEspecialidades(controlador.getEspecialidades());
-            tblEspecialidades.setModel(modeloTabla);
-            tblEspecialidades.updateUI();
+        System.out.println(Arrays.toString(this.controladorEspecialidad.getEspecialidades()));
+        if (controladorEspecialidad != null) {
+            modeloTabla.setCuentas(controladorCuentas.getCuentas());
+            tblPersonal.setModel(modeloTabla);
+            tblPersonal.updateUI();
             jScrollPane1.setVisible(true);
         } else {
             jScrollPane1.setVisible(false);
@@ -66,21 +100,24 @@ public class frmEspecialidades extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnCrear = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         btnRegresarInicio = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblEspecialidades = new javax.swing.JTable();
-        btnEliminar = new javax.swing.JButton();
+        tblPersonal = new javax.swing.JTable();
         btnEditar = new javax.swing.JButton();
-        txtDescripcion = new javax.swing.JTextField();
+        btnEliminar = new javax.swing.JButton();
+        cbxPersona = new javax.swing.JComboBox<>();
+        cbxEspecialidades = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        cbxTipo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("INGRESAR DATOS DEL PACIENTE");
@@ -94,10 +131,10 @@ public class frmEspecialidades extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Especialidades médicas");
+        jLabel1.setText("Personal hospital");
 
         btnCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnCrearIcono.png"))); // NOI18N
-        btnCrear.setText("GUARDAR");
+        btnCrear.setText("CREAR");
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearActionPerformed(evt);
@@ -121,20 +158,10 @@ public class frmEspecialidades extends javax.swing.JFrame {
         });
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Descripción");
-
-        txtNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtNombreKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNombreKeyTyped(evt);
-            }
-        });
+        jLabel4.setText("Especialidad");
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Nombres");
+        jLabel3.setText("Persona");
 
         jLabel8.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -149,7 +176,7 @@ public class frmEspecialidades extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(20, 66, 114));
 
-        tblEspecialidades.setModel(new javax.swing.table.DefaultTableModel(
+        tblPersonal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -160,21 +187,21 @@ public class frmEspecialidades extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tblEspecialidades);
-
-        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btn remove.png"))); // NOI18N
-        btnEliminar.setText("ELIMINAR");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
+        jScrollPane1.setViewportView(tblPersonal);
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnGuardarInformacionIcono.png"))); // NOI18N
         btnEditar.setText("EDITAR");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btn remove.png"))); // NOI18N
+        btnEliminar.setText("ELIMINAR");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
             }
         });
 
@@ -197,10 +224,19 @@ public class frmEspecialidades extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEliminar)
-                    .addComponent(btnEditar))
+                    .addComponent(btnEditar)
+                    .addComponent(btnEliminar))
                 .addGap(18, 18, 18))
         );
+
+        cbxPersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cbxEspecialidades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Tipo");
+
+        cbxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -210,46 +246,51 @@ public class frmEspecialidades extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                            .addComponent(btnRegresar))))
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnRegresar)
+                            .addComponent(cbxEspecialidades, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbxPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnRegresarInicio)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 19, Short.MAX_VALUE)))
-                .addGap(15, 15, 15))
+                        .addGap(97, 97, 97)
+                        .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnRegresarInicio)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 34, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(2, 2, 2)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbxEspecialidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
                         .addComponent(btnCrear))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
@@ -280,12 +321,6 @@ public class frmEspecialidades extends javax.swing.JFrame {
     private void jLabel8MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseDragged
     }//GEN-LAST:event_jLabel8MouseDragged
 
-    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-    }//GEN-LAST:event_txtNombreKeyTyped
-
-    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
-    }//GEN-LAST:event_txtNombreKeyPressed
-
     private void btnRegresarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarInicioActionPerformed
         abrirAnterior();
     }//GEN-LAST:event_btnRegresarInicioActionPerformed
@@ -297,39 +332,69 @@ public class frmEspecialidades extends javax.swing.JFrame {
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         try {
-            if (especialidadSeleccionada == null) {
-                String nombre = txtNombre.getText().trim();
-                String descripcion = txtDescripcion.getText().trim();
-
-                Especialidad nueva = new Especialidad();
-                nueva.setDescripcion(descripcion);
-                nueva.setNombre(nombre);
-
-                controlador.registrarEspecialidad(nueva);
-
-                cargarTabla();
+            Integer cuentaSeleccionada = cbxPersona.getSelectedIndex();
+            if (cuentaSeleccionada == -1) {
                 JOptionPane.showMessageDialog(
                         null,
-                        "Especialidad " + nombre + " creada exitosamente",
-                        "Éxito",
-                        JOptionPane.INFORMATION_MESSAGE
+                        "Seleccione una persona válida",
+                        "Complete la información",
+                        JOptionPane.ERROR_MESSAGE
                 );
-            } else {
-                Especialidad esp = controlador.getEspecialidades()[especialidadSeleccionada];
-                esp.setNombre(txtNombre.getText().trim());
-                esp.setDescripcion(txtDescripcion.getText().trim());
-
-                controlador.getEspecialidades()[especialidadSeleccionada] = esp;
-                controlador.guardar();
-                cargarTabla();
-                JOptionPane.showMessageDialog(
-                        null,
-                        "Especialidad actualizada exitosamente",
-                        "Éxito",
-                        JOptionPane.INFORMATION_MESSAGE
-                );
-                especialidadSeleccionada = null;
             }
+
+            Integer tipoSeleccionado = cbxTipo.getSelectedIndex();
+            Cuenta cuenta = controladorCuentas.getCuentas()[cuentaSeleccionada];
+            Persona persona = cuenta.getPersona();
+
+            if (tipoSeleccionado == -1) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Seleccione un tipo de personal",
+                        "Complete la información",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            } else if (tipoSeleccionado == 0) { // Es médico
+                Especialidad esp = controladorEspecialidad.getEspecialidades()[cbxEspecialidades.getSelectedIndex()];
+
+                Medico medico = new Medico();
+                // Añado el rol del médico y la especialidad
+                medico.setRol(Utilidades.getRoles()[Utilidades.INDEX_MEDICO_ROLE]);
+                medico.setEspecidalidad(esp);
+                // Copio la persona anterior en el medico que será ahora
+                medico.setNombres(persona.getNombres());
+                medico.setApellidos(persona.getApellidos());
+                medico.setDireccion(persona.getDireccion());
+                medico.setGenero(persona.getGenero());
+                medico.setFechaNacimiento(persona.getFechaNacimiento());
+                medico.setIdentificacion(persona.getIdentificacion());
+                medico.setTelefono(persona.getTelefono());
+                cuenta.setPersona(medico);
+            } else if (tipoSeleccionado == 1) { // Es enfermera
+                Enfermera enfermera = new Enfermera();
+                // Añado el rol de enfermera
+                enfermera.setRol(Utilidades.getRoles()[Utilidades.INDEX_ENFERMERA_ROLE]);
+                // Copio la persona anterior en la enfermera
+                enfermera.setNombres(persona.getNombres());
+                enfermera.setApellidos(persona.getApellidos());
+                enfermera.setDireccion(persona.getDireccion());
+                enfermera.setGenero(persona.getGenero());
+                enfermera.setFechaNacimiento(persona.getFechaNacimiento());
+                enfermera.setIdentificacion(persona.getIdentificacion());
+                enfermera.setTelefono(persona.getTelefono());
+                cuenta.setPersona(enfermera);
+            } else { // Es superusuario
+                persona.setRol(Utilidades.getRoles()[Utilidades.INDEX_SUPERADMIN_ROLE]);
+                cuenta.setPersona(persona);
+            }
+
+            controladorCuentas.guardar();
+            cargarTabla();
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Usuario añadido exitosamente",
+                    "Éxito",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(
@@ -341,48 +406,28 @@ public class frmEspecialidades extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCrearActionPerformed
 
-    public Boolean validarEspecialidadSeleccionada() {
-        Integer selectedRow = tblEspecialidades.getSelectedRow();
-
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Seleccione una especialidad de la tabla",
-                    "Seleccionar item",
-                    JOptionPane.WARNING_MESSAGE
-            );
-
-            return false;
-        }
-
-        especialidadSeleccionada = selectedRow;
-
-        return true;
-    }
-
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        if (validarEspecialidadSeleccionada()) {
+        if (validarPersonaSeleccionado()) {
             int confirmado = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar el personal?\n Esta acción no es reversible", "CONFIRMACION DE SALIDA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
             if (confirmado == JOptionPane.YES_OPTION) {
                 try {
-                    Utilidades.eliminarElemento(controlador.getEspecialidades(), especialidadSeleccionada);
-                    controlador.guardar();
+                    Utilidades.eliminarElemento(controladorCuentas.getCuentas(), personaSeleccionada);
+                    controladorCuentas.guardar();
                     cargarTabla();
-                    especialidadSeleccionada = null;
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    Logger.getLogger(frmPersonal.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        if (validarEspecialidadSeleccionada()) {
-            Especialidad toEdit = controlador.getEspecialidades()[especialidadSeleccionada];
+        if (validarPersonaSeleccionado()) {
+            Cuenta cuentaSeleccionada = controladorCuentas.getCuentas()[personaSeleccionada];
 
-            txtNombre.setText(toEdit.getNombre());
-            txtDescripcion.setText(toEdit.getDescripcion());
+            cbxPersona.setSelectedItem(cuentaSeleccionada);
+            cbxTipo.setSelectedItem(cuentaSeleccionada.getPersona().getRol());
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -403,14 +448,24 @@ public class frmEspecialidades extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmEspecialidades.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmPersonal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmEspecialidades.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmPersonal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmEspecialidades.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmPersonal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmEspecialidades.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmPersonal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -425,7 +480,7 @@ public class frmEspecialidades extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmEspecialidades().setVisible(true);
+                new frmPersonal().setVisible(true);
             }
         });
     }
@@ -436,15 +491,18 @@ public class frmEspecialidades extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnRegresarInicio;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cbxEspecialidades;
+    private javax.swing.JComboBox<String> cbxPersona;
+    private javax.swing.JComboBox<String> cbxTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblEspecialidades;
-    private javax.swing.JTextField txtDescripcion;
-    public javax.swing.JTextField txtNombre;
+    private javax.swing.JTable tblPersonal;
     // End of variables declaration//GEN-END:variables
 }

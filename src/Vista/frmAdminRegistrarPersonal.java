@@ -8,16 +8,16 @@ import Controlador.CtrlCuenta;
 import Modelo.Cuenta;
 import Modelo.Persona;
 import javax.swing.JOptionPane;
-
+import Utilidades.Utilidades;
 /**
  *
  * @author Victor Nivelo
  * @author Jaime Mendoza
  */
 public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
-    
+
     int Xmouse, Ymouse;
-    
+
     CtrlCuenta controlador;
 
     /**
@@ -27,8 +27,8 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         //txtNumeroCedula.addKeyListener(this);
-        controlador = (CtrlCuenta) Utilidades.Utilidades.cargarJson(CtrlCuenta.class, "ControladorCuenta");
-        
+        controlador = (CtrlCuenta) Utilidades.cargarJson(CtrlCuenta.class, "ControladorCuenta");
+
         Controlador.Utilidades.cargarCombosFecha(cbxDia, cbxMes, cbxAnio);
     }
 
@@ -52,7 +52,6 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
         txtUsuario = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         txtClave = new javax.swing.JTextField();
-        cbxEspecialiadad = new javax.swing.JComboBox<>();
         cbxGeneroPaciente = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         cbxAnio = new javax.swing.JComboBox<>();
@@ -66,7 +65,6 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
         txtNumeroCedula = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -155,9 +153,6 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
             }
         });
 
-        cbxEspecialiadad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enfermera", "Doctor" }));
-        cbxEspecialiadad.setSelectedItem(null);
-
         cbxGeneroPaciente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maculino", "Femenino" }));
         cbxGeneroPaciente.setSelectedItem(null);
         cbxGeneroPaciente.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -233,9 +228,6 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Especialidad");
-
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Fecha de nacimiento:");
 
@@ -260,9 +252,9 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
                                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                                        .addComponent(cbxAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(29, 29, 29)
-                                        .addComponent(cbxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cbxAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(38, 38, 38)
+                                        .addComponent(cbxMes, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(cbxDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(txtNumeroCedula, javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,9 +270,7 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
                                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                                             .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txtClave, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
-                                            .addComponent(cbxEspecialiadad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                            .addComponent(txtClave, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)))))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(btnRegresarInicio)
@@ -310,11 +300,7 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxEspecialiadad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(15, 15, 15))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -364,56 +350,52 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        // TODO add your handling code here:
-        if (cbxEspecialiadad.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(null, "Se necesita escoger una especialidad", "ESPECIALIDAD VACIA", JOptionPane.WARNING_MESSAGE);
-        } else {
+        try {
+            String cedula = txtNumeroCedula.getText();
+            String nombres = txtNombrePaciente.getText();
+            String apellidos = txtApellidoPaciente.getText();
+            String genero = cbxGeneroPaciente.getName();
+            String usuario = txtNumeroCedula.getText();
+            String clave = txtClave.getText();
+
             try {
-                String cedula = txtNumeroCedula.getText();
-                String nombres = txtNombrePaciente.getText();
-                String apellidos = txtApellidoPaciente.getText();
-                String genero = cbxGeneroPaciente.getName();
-                String usuario = txtNumeroCedula.getText();
-                String clave = txtClave.getText();
-                
-                try {
-                    Persona persona = new Persona();
-                    Cuenta cuenta = new Cuenta();
-                    cuenta.setPersona(persona);
-                    cuenta.setUsuario(usuario);
-                    cuenta.setClave(clave, controlador.getSalt());
-                    cuenta.getPersona().setNombres(nombres);
-                    cuenta.getPersona().setApellidos(apellidos);
-                    cuenta.getPersona().setGenero(genero);
-                    cuenta.getPersona().setIdentificacion(cedula);
-                    
-                    controlador.registrarUsuario(cuenta);
-                    
-                    JOptionPane.showMessageDialog(
-                            null,
-                            "Usuario " + usuario + " creado exitosamente",
-                            "Éxito",
-                            JOptionPane.INFORMATION_MESSAGE
-                    );
-                    this.setVisible(false);
-                    new frmPersonalLogin().setVisible(true);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(
-                            null,
-                            e.getMessage(),
-                            "Ha ocurrido un error",
-                            JOptionPane.ERROR_MESSAGE
-                    );
-                }
-            } catch (Error e) {
+                Persona persona = new Persona();
+                Cuenta cuenta = new Cuenta();
+                cuenta.setPersona(persona);
+                cuenta.setUsuario(usuario);
+                cuenta.setClave(clave, controlador.getSalt());
+                cuenta.getPersona().setNombres(nombres);
+                cuenta.getPersona().setApellidos(apellidos);
+                cuenta.getPersona().setGenero(genero);
+                cuenta.getPersona().setIdentificacion(cedula);
+                cuenta.getPersona().setRol(Utilidades.getRoles()[Utilidades.INDEX_PACIENTE_ROLE]);
+
+                controlador.registrarUsuario(cuenta);
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Usuario " + usuario + " creado exitosamente",
+                        "Éxito",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+                this.setVisible(false);
+                new frmPersonalLogin().setVisible(true);
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(
                         null,
                         e.getMessage(),
                         "Ha ocurrido un error",
                         JOptionPane.ERROR_MESSAGE
                 );
-                System.out.println("Error al crear usuario: " + e.getMessage());
             }
+        } catch (Error e) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    e.getMessage(),
+                    "Ha ocurrido un error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            System.out.println("Error al crear usuario: " + e.getMessage());
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
@@ -467,15 +449,15 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
     private void txtNombrePacienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombrePacienteKeyTyped
         // TODO add your handling code here:
         int key = evt.getKeyChar();
-        
+
         boolean mayusculas = key >= 65 && key <= 90;
         boolean minusculas = key >= 97 && key <= 122;
         boolean espacio = key == 32;
-        
+
         if (!(minusculas || mayusculas || espacio)) {
             evt.consume();
         }
-        
+
         if (txtNombrePaciente.getText().length() >= 30) {
             evt.consume();
         }
@@ -484,15 +466,15 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
     private void txtApellidoPacienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoPacienteKeyTyped
         // TODO add your handling code here:
         int key = evt.getKeyChar();
-        
+
         boolean mayusculas = key >= 65 && key <= 90;
         boolean minusculas = key >= 97 && key <= 122;
         boolean espacio = key == 32;
-        
+
         if (!(minusculas || mayusculas || espacio)) {
             evt.consume();
         }
-        
+
         if (txtApellidoPaciente.getText().length() >= 30) {
             evt.consume();
         }
@@ -580,7 +562,6 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresarInicio;
     public javax.swing.JComboBox<String> cbxAnio;
     public javax.swing.JComboBox<String> cbxDia;
-    private javax.swing.JComboBox<String> cbxEspecialiadad;
     public static javax.swing.JComboBox<String> cbxGeneroPaciente;
     public javax.swing.JComboBox<String> cbxMes;
     private javax.swing.JLabel jLabel1;
@@ -594,7 +575,6 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     public static javax.swing.JTextField txtApellidoPaciente;
