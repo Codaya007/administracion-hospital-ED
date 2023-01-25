@@ -1,7 +1,9 @@
 package Vista;
 
 import Controlador.ListaEnlazada.ListaEnlazada;
+import Modelo.Paciente;
 import Modelo.Valoracion;
+import static Vista.frmUsuarioSeleccionarFecha.EnviarContenido;
 import com.google.gson.Gson;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,6 +26,7 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
     public frmPersonalEnfermera() {
         initComponents();
         this.setLocationRelativeTo(null);
+        CargarDatosCitasAtender();
     }
 
     /**
@@ -52,6 +55,7 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
         txtPrecionCardiaca = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        cbxNumeroCedula = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -168,13 +172,17 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbxNumeroCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbxNumeroCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -213,7 +221,7 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
                     .addComponent(txtPeso)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -289,6 +297,23 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
         float presionC = Float.parseFloat(txtPrecionCardiaca.getText());
         float temperatura = Float.parseFloat(txtTemperatura.getText());
         
+        Paciente a = null;
+        Valoracion val = new Valoracion();
+        val.setAltura(Altura);
+        val.setPeso(Peso);
+        val.setPresionArterial(PrecionA);
+        val.setPresionCardiaca(presionC);
+        val.setTemperatura(temperatura);
+ 
+        //Asignar una valoracion a cada paciente
+        for (int i = EnviarContenido.size() - 1; i >= 0; i--) {
+            a = (Paciente) frmUsuarioSeleccionarFecha.EnviarContenido.get(i);
+            if (a.getIdentificacion() == cbxNumeroCedula.getSelectedItem()) {
+                 a.setValoracion(val);
+            }
+        }
+        
+        
         //Condiciones en caso de que los campos esten vacios
         if (txtPrecionArterial.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Los datos acerca de la precion arterial estan vacios", "DATOS VACIOS", JOptionPane.WARNING_MESSAGE);
@@ -325,6 +350,7 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, "Los datos del paciente se han guardado exitosamente", "DATOS GUARDADOS", JOptionPane.INFORMATION_MESSAGE);
             System.out.println("Datos correctamente guardados");
+            
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -489,10 +515,21 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void CargarDatosCitasAtender() {
+        Paciente a;
+
+        for (int i = EnviarContenido.size() - 1; i >= 0; i--) {
+            a = (Paciente) frmUsuarioSeleccionarFecha.EnviarContenido.get(i);
+              System.out.println(a);
+              cbxNumeroCedula.addItem(a.getIdentificacion());
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JComboBox<String> cbxNumeroCedula;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;

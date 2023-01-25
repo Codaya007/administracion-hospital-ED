@@ -111,7 +111,20 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
         txtDosis = new javax.swing.JTextField();
         btnAsignarMedicamento = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        txtPeso2 = new javax.swing.JTextField();
+        txtAltura2 = new javax.swing.JTextField();
+        txtPresionArterial2 = new javax.swing.JTextField();
+        txtPresionCardiaca2 = new javax.swing.JTextField();
+        txtTemperatura2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CITAS POR ATENDER");
@@ -342,6 +355,8 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("CANCELAR CITA");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -352,14 +367,15 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnAsignarMedicamento))
+                    .addComponent(btnRegresar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtAsignarMedicamento)
                             .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtDosis)))
-                    .addComponent(btnRegresar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtDosis)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -376,6 +392,8 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtDosis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAsignarMedicamento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRegresar)
@@ -393,6 +411,75 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
             }
         });
 
+        jPanel6.setBorder(new javax.swing.border.MatteBorder(null));
+
+        jLabel29.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel29.setText("VALORACION");
+
+        jLabel30.setText("Peso");
+
+        jLabel31.setText("Altura");
+
+        jLabel32.setText("Presion Arterial");
+
+        jLabel33.setText("Presion cardiaca");
+
+        jLabel34.setText("Temperatura");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtTemperatura2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPeso2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtAltura2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPresionArterial2)
+                    .addComponent(txtPresionCardiaca2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel33, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel30, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel31, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel32, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel34, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPeso2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtAltura2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPresionArterial2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPresionCardiaca2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTemperatura2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -403,7 +490,9 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -413,9 +502,12 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -463,7 +555,7 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     private void btnAsignarMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarMedicamentoActionPerformed
         // TODO add your handling code here:
         
-        
+
         if(txtAsignarMedicamento.getText().isEmpty() || txtDosis.getText().isEmpty()||txtNumeroCedula.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "No se ha asignado un medicamento","FALTA ASIGNAR MEDICAMENTO",JOptionPane.WARNING_MESSAGE);
         }else{
@@ -499,7 +591,7 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     private void tblCitasSinAtenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCitasSinAtenderMouseClicked
         // TODO add your handling code here:
         int seleccionar = tblCitasSinAtender.rowAtPoint(evt.getPoint());
-        
+        Paciente a;
         txtTipoId.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 0)));
         txtNumeroCedula.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 1)));
         txtNombre.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 2)));
@@ -510,6 +602,24 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
         txaMolestias.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 7)));
         txtFechaIngreso.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 8)));
         txtHoraAtencion.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 9)));
+        
+        //Muestran los datos de valoracion
+        for (int i = EnviarContenido.size() - 1; i >= 0; i--) {
+            a = (Paciente) frmUsuarioSeleccionarFecha.EnviarContenido.get(i);
+            if (a.getIdentificacion() == tblCitasSinAtender.getValueAt(seleccionar, 1)) {
+                if (a.getValoracion() != null) {
+                 txtAltura2.setText(String.valueOf(a.getValoracion().getAltura()));
+                 txtPeso2.setText(String.valueOf(a.getValoracion().getPeso()));
+                 txtPresionArterial2.setText(String.valueOf(a.getValoracion().getPresionArterial()));
+                 txtPresionCardiaca2.setText(String.valueOf(a.getValoracion().getPresionCardiaca()));
+                 txtTemperatura2.setText(String.valueOf(a.getValoracion().getTemperatura()));
+                }else{
+                  JOptionPane.showMessageDialog(null,"No se han rellenado los campos de valoracion");
+                }
+                 
+            }
+             
+        }
     }//GEN-LAST:event_tblCitasSinAtenderMouseClicked
 
     private void txtAsignarMedicamentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAsignarMedicamentoKeyPressed
@@ -577,6 +687,7 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAsignarMedicamento;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -585,8 +696,26 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -596,10 +725,16 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JTable tblCitasSinAtender;
     public static javax.swing.JTextArea txaMolestias;
+    private javax.swing.JTextField txtAltura;
+    private javax.swing.JTextField txtAltura1;
+    private javax.swing.JTextField txtAltura2;
     public static javax.swing.JTextField txtApellidoPaciente;
     public static javax.swing.JTextField txtAsignarMedicamento;
     public static javax.swing.JTextField txtDosis;
@@ -610,6 +745,18 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     public static javax.swing.JTextField txtNombre;
     public static javax.swing.JTextField txtNumeroCedula;
     public static javax.swing.JTextField txtNumeroTelefono;
+    private javax.swing.JTextField txtPeso;
+    private javax.swing.JTextField txtPeso1;
+    private javax.swing.JTextField txtPeso2;
+    private javax.swing.JTextField txtPresionArterial;
+    private javax.swing.JTextField txtPresionArterial1;
+    private javax.swing.JTextField txtPresionArterial2;
+    private javax.swing.JTextField txtPresionCardiaca;
+    private javax.swing.JTextField txtPresionCardiaca1;
+    private javax.swing.JTextField txtPresionCardiaca2;
+    private javax.swing.JTextField txtTemperatura;
+    private javax.swing.JTextField txtTemperatura1;
+    private javax.swing.JTextField txtTemperatura2;
     public static javax.swing.JTextField txtTipoId;
     // End of variables declaration//GEN-END:variables
 }
