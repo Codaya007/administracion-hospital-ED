@@ -6,9 +6,7 @@ package Controlador;
 
 import Modelo.Cuenta;
 import Utilidades.Utilidades;
-import Modelo.Pbkdf2;
 import java.io.IOException;
-import java.util.Arrays;
 
 /**
  *
