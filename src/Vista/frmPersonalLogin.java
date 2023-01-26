@@ -5,7 +5,7 @@
  */
 package Vista;
 
-import Controlador.ctrlCuenta;
+import Controlador.CtrlCuenta;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,10 +13,10 @@ import javax.swing.JOptionPane;
  * @author Victor
  */
 public class frmPersonalLogin extends javax.swing.JFrame {
-    
-    int Xmouse,Ymouse;
 
-    ctrlCuenta controlador = new ctrlCuenta();
+    int Xmouse, Ymouse;
+
+    CtrlCuenta controlador;
 
     /**
      * Creates new form Login
@@ -24,6 +24,7 @@ public class frmPersonalLogin extends javax.swing.JFrame {
     public frmPersonalLogin() {
         initComponents();
         this.setLocationRelativeTo(null);
+        controlador = (CtrlCuenta) Utilidades.Utilidades.cargarJson(CtrlCuenta.class, "ControladorCuenta");
     }
 
     /**
@@ -106,7 +107,7 @@ public class frmPersonalLogin extends javax.swing.JFrame {
         });
 
         btnCrearUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnAgregarUsuarioIcono.png"))); // NOI18N
-        btnCrearUsuario.setText("CREAR USUARIO");
+        btnCrearUsuario.setText("REGISTRAR");
         btnCrearUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearUsuarioActionPerformed(evt);
@@ -156,15 +157,20 @@ public class frmPersonalLogin extends javax.swing.JFrame {
                             .addComponent(btnRegresar))
                         .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnCrearUsuario)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnIngresarLogin))
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
                             .addComponent(txtNombreIngresoUsuario)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtContraseñaIngresoUsuario)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btnIngresarLogin)
+                                        .addGap(97, 97, 97))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btnCrearUsuario)
+                                        .addGap(13, 13, 13)))))))
                 .addGap(15, 15, 15))
             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -185,12 +191,13 @@ public class frmPersonalLogin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtContraseñaIngresoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtContraseñaIngresoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnIngresarLogin))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegresar)
-                    .addComponent(btnIngresarLogin)
                     .addComponent(btnCrearUsuario))
                 .addGap(12, 12, 12))
         );
@@ -262,22 +269,22 @@ public class frmPersonalLogin extends javax.swing.JFrame {
 
     private void btnCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearUsuarioActionPerformed
         // TODO add your handling code here:
-        frmAdminRegistrarPersonal abrir = new frmAdminRegistrarPersonal();
-        abrir.setVisible(true);
+        this.setVisible(false);
+        new frmAdminRegistrarPersonal().setVisible(true);
     }//GEN-LAST:event_btnCrearUsuarioActionPerformed
 
     private void txtContraseñaIngresoUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraseñaIngresoUsuarioKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == evt.VK_ENTER){
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             btnIngresarLogin.requestFocus();
         }
     }//GEN-LAST:event_txtContraseñaIngresoUsuarioKeyPressed
 
     private void jLabel6MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseDragged
         // TODO add your handling code here:
-        int x =evt.getXOnScreen();
-        int y =evt.getYOnScreen();
-        this.setLocation(x-Xmouse,y- Ymouse);
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - Xmouse, y - Ymouse);
     }//GEN-LAST:event_jLabel6MouseDragged
 
     private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed

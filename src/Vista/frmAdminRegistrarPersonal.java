@@ -4,11 +4,11 @@
  */
 package Vista;
 
-import Controlador.ctrlCuenta;
+import Controlador.CtrlCuenta;
 import Modelo.Cuenta;
 import Modelo.Persona;
-import java.io.IOException;
 import javax.swing.JOptionPane;
+import Utilidades.Utilidades;
 
 /**
  *
@@ -16,9 +16,10 @@ import javax.swing.JOptionPane;
  * @author Jaime Mendoza
  */
 public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
-    int Xmouse,Ymouse;
 
-    ctrlCuenta controlador = new ctrlCuenta();
+    int Xmouse, Ymouse;
+
+    CtrlCuenta controlador;
 
     /**
      * Creates new form frmAgendacionCita
@@ -26,6 +27,18 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
     public frmAdminRegistrarPersonal() {
         initComponents();
         this.setLocationRelativeTo(null);
+        //txtNumeroCedula.addKeyListener(this);
+        controlador = (CtrlCuenta) Utilidades.cargarJson(CtrlCuenta.class, "ControladorCuenta");
+
+        if (controlador == null) {
+            controlador = new CtrlCuenta();
+            try {
+                controlador.guardar();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         Controlador.Utilidades.cargarCombosFecha(cbxDia, cbxMes, cbxAnio);
     }
 
@@ -49,7 +62,6 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
         txtUsuario = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         txtClave = new javax.swing.JTextField();
-        cbxEspecialiadad = new javax.swing.JComboBox<>();
         cbxGeneroPaciente = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         cbxAnio = new javax.swing.JComboBox<>();
@@ -63,7 +75,7 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
         txtNumeroCedula = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("INGRESAR DATOS DEL PACIENTE");
@@ -127,13 +139,14 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Usuario:");
 
+        txtUsuario.setEditable(false);
         txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtUsuarioKeyTyped(evt);
-            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtUsuarioKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyTyped(evt);
             }
         });
 
@@ -149,9 +162,6 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
                 txtClaveKeyPressed(evt);
             }
         });
-
-        cbxEspecialiadad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enfermera", "Doctor" }));
-        cbxEspecialiadad.setSelectedItem(null);
 
         cbxGeneroPaciente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maculino", "Femenino" }));
         cbxGeneroPaciente.setSelectedItem(null);
@@ -200,6 +210,11 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
         jLabel3.setText("Nombres");
 
         txtNumeroCedula.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNumeroCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumeroCedulaActionPerformed(evt);
+            }
+        });
         txtNumeroCedula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtNumeroCedulaKeyPressed(evt);
@@ -223,8 +238,8 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Especialidad");
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Fecha de nacimiento:");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -247,16 +262,17 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
                                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                                        .addComponent(cbxAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(29, 29, 29)
-                                        .addComponent(cbxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cbxAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(38, 38, 38)
+                                        .addComponent(cbxMes, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(cbxDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(txtNumeroCedula, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtNombrePaciente, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtApellidoPaciente, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbxGeneroPaciente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cbxGeneroPaciente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -264,9 +280,7 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
                                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                                             .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txtClave, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
-                                            .addComponent(cbxEspecialiadad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                            .addComponent(txtClave, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)))))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(btnRegresarInicio)
@@ -284,21 +298,20 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxEspecialiadad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(15, 15, 15))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -311,18 +324,20 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtApellidoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbxAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbxMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbxDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxGeneroPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(15, 15, 15)
+                        .addComponent(cbxGeneroPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegresar)
                     .addComponent(btnConfirmar)
@@ -345,47 +360,54 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        // TODO add your handling code here:
-        if (cbxEspecialiadad.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(null, "Se nesecita escoger una especialidad", "ESPECIALIDAD VACIA", JOptionPane.WARNING_MESSAGE);
-        } else {
-            try {
-                String cedula = txtNumeroCedula.getText();
-                String nombres = txtNombrePaciente.getText();
-                String apellidos = txtApellidoPaciente.getText();
-                String genero = cbxGeneroPaciente.getName();
-                String usuario = txtUsuario.getText();
-                String clave = txtClave.getText();
+        try {
+            String cedula = txtNumeroCedula.getText();
+            String nombres = txtNombrePaciente.getText();
+            String apellidos = txtApellidoPaciente.getText();
+            String genero = cbxGeneroPaciente.getName();
+            String usuario = txtNumeroCedula.getText();
+            String clave = txtClave.getText();
 
+            try {
                 Persona persona = new Persona();
                 Cuenta cuenta = new Cuenta();
                 cuenta.setPersona(persona);
                 cuenta.setUsuario(usuario);
-                cuenta.setClave(clave);
+                cuenta.setClave(clave, controlador.getSalt());
                 cuenta.getPersona().setNombres(nombres);
                 cuenta.getPersona().setApellidos(apellidos);
                 cuenta.getPersona().setGenero(genero);
                 cuenta.getPersona().setIdentificacion(cedula);
+                cuenta.getPersona().setRol(Utilidades.getRoles()[Utilidades.INDEX_PACIENTE_ROLE]);
 
-                try {
-                    controlador.registrarUsuario(cuenta);
-                } catch (IOException e) {
-                    JOptionPane.showMessageDialog(
-                            null,
-                            e.getMessage(),
-                            "Ha ocurrido un error",
-                            JOptionPane.ERROR_MESSAGE
-                    );
-                }
-            } catch (Error e) {
+                controlador.registrarUsuario(cuenta);
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Usuario " + usuario + " creado exitosamente",
+                        "Éxito",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+                this.setVisible(false);
+                new frmPersonalLogin().setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null,
                         e.getMessage(),
                         "Ha ocurrido un error",
                         JOptionPane.ERROR_MESSAGE
                 );
-                System.out.println("Error al crear usuario: " + e.getMessage());
             }
+        } catch (Error e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(
+                    null,
+                    e.getMessage(),
+                    "Ha ocurrido un error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            System.out.println("Error al crear usuario: " + e.getMessage());
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
@@ -406,7 +428,8 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
 //        frmPersonalLogin abrir = new frmPersonalLogin();
 //        abrir.setVisible(true);
 //        this.setVisible(false);
-        this.dispose();
+        this.setVisible(false);
+        new frmPersonalLogin().setVisible(true);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void txtNumeroCedulaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroCedulaKeyPressed
@@ -414,6 +437,7 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txtNombrePaciente.requestFocus();
         }
+        txtUsuario.setText(txtNumeroCedula.getText());
     }//GEN-LAST:event_txtNumeroCedulaKeyPressed
 
     private void txtNombrePacienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombrePacienteKeyPressed
@@ -496,10 +520,14 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
 
     private void jLabel8MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseDragged
         // TODO add your handling code here:
-        int x =evt.getXOnScreen();
-        int y =evt.getYOnScreen();
-        this.setLocation(x-Xmouse,y- Ymouse);
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - Xmouse, y - Ymouse);
     }//GEN-LAST:event_jLabel8MouseDragged
+
+    private void txtNumeroCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumeroCedulaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -546,10 +574,10 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresarInicio;
     public javax.swing.JComboBox<String> cbxAnio;
     public javax.swing.JComboBox<String> cbxDia;
-    private javax.swing.JComboBox<String> cbxEspecialiadad;
     public static javax.swing.JComboBox<String> cbxGeneroPaciente;
     public javax.swing.JComboBox<String> cbxMes;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
@@ -559,7 +587,6 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     public static javax.swing.JTextField txtApellidoPaciente;
