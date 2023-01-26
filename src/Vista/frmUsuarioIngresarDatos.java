@@ -581,13 +581,13 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             int result = JOptionPane.showConfirmDialog(null, "Estas seguro de regresar? \nSe perderan todos los avances no guardados", "CONFIRMAR SALIDA", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE,Seguro);
             
             if (result == JOptionPane.YES_OPTION) {
-                frmUsuarioSelecionarUso abrir = new frmUsuarioSelecionarUso();
+                FrmMenuPaciente abrir = new FrmMenuPaciente();
                 abrir.setVisible(true);
                 this.setVisible(false);
             }
             
         } else {
-            frmUsuarioSelecionarUso abrir = new frmUsuarioSelecionarUso();
+            FrmMenuPaciente abrir = new FrmMenuPaciente();
             abrir.setVisible(true);
             this.setVisible(false);
         }

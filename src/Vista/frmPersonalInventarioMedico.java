@@ -398,13 +398,13 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
             int result = JOptionPane.showConfirmDialog(null, "Estas seguro de regresar? \nSe perderan todos los avances no guardados", "CONFIRMAR SALIDA", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {
 
-                frmMenuSuperAdmin abrir = new frmMenuSuperAdmin();
+                FrmMenuSuperAdmin abrir = new FrmMenuSuperAdmin();
                 abrir.setVisible(true);
                 this.setVisible(false);
             }
         } 
         else {
-            frmMenuSuperAdmin abrir = new frmMenuSuperAdmin();
+            FrmMenuSuperAdmin abrir = new FrmMenuSuperAdmin();
             abrir.setVisible(true);
             this.setVisible(false);
         }
