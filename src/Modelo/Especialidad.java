@@ -14,6 +14,20 @@ public class Especialidad {
     private Integer id;
     private String nombre;
     private String descripcion;
+    private static int contador = 0;
+
+    public Especialidad() {
+        contador += 1;
+        id = contador;
+    }
+
+    public static Integer getContador() {
+        return contador;
+    }
+
+    public static void setContador(Integer contador) {
+        Especialidad.contador = contador;
+    }
 
     public Integer getId() {
         return id;
@@ -35,4 +49,12 @@ public class Especialidad {
         return nombre;
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    @Override
+    public String toString(){
+        return "Especialidad " + this.nombre;
+    }
 }
