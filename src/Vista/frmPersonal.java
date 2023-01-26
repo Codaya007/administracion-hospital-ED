@@ -11,8 +11,12 @@ import Modelo.Enfermera;
 import Modelo.Especialidad;
 import Modelo.Medico;
 import Modelo.Persona;
+import Modelo.Roles;
+import Modelo.Rol;
 import Utilidades.Utilidades;
 import Vista.Tablas.ModeloTablaPersonal;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.logging.Level;
@@ -25,6 +29,7 @@ public class frmPersonal extends javax.swing.JFrame {
     CtrlCuenta controladorCuentas;
     ModeloTablaPersonal modeloTabla = new ModeloTablaPersonal();
     Integer personaSeleccionada;
+    Rol roles[] = Utilidades.getRoles();
 
     /**
      * Creates new form frmAgendacionCita
@@ -46,7 +51,31 @@ public class frmPersonal extends javax.swing.JFrame {
             }
         }
         cargarCombos();
+        limpiarCampos();
         cargarTabla();
+
+        cbxTipo.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent arg0) {
+                if (cbxTipo.getSelectedIndex() == Roles.Medico.getIndex()) {
+                    cbxEspecialidades.setVisible(true);
+                    lbEspecialidad.setVisible(true);
+                } else {
+                    cbxEspecialidades.setVisible(false);
+                    lbEspecialidad.setVisible(false);
+                }
+            }
+        });
+    }
+
+    public void limpiarCampos() {
+        cbxEspecialidades.setSelectedIndex(-1);
+        cbxPersona.setSelectedIndex(-1);
+        cbxTipo.setSelectedIndex(-1);
+        tblPersonal.clearSelection();
+
+        cbxEspecialidades.setVisible(false);
+        lbEspecialidad.setVisible(false);
     }
 
     public Boolean validarPersonaSeleccionado() {
@@ -71,7 +100,7 @@ public class frmPersonal extends javax.swing.JFrame {
     private void cargarCombos() {
         Utilidades.rellenarCombo(cbxPersona, controladorCuentas.getCuentas());
         Utilidades.rellenarCombo(cbxEspecialidades, controladorEspecialidad.getEspecialidades());
-        Utilidades.rellenarCombo(cbxTipo, new String[]{"Medico", "Enfermera", "SuperAdmin"});
+        Utilidades.rellenarCombo(cbxTipo, roles);
     }
 
     private void abrirAnterior() {
@@ -106,7 +135,7 @@ public class frmPersonal extends javax.swing.JFrame {
         btnCrear = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         btnRegresarInicio = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        lbEspecialidad = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -157,8 +186,8 @@ public class frmPersonal extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Especialidad");
+        lbEspecialidad.setForeground(new java.awt.Color(255, 255, 255));
+        lbEspecialidad.setText("Especialidad");
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Persona");
@@ -237,6 +266,11 @@ public class frmPersonal extends javax.swing.JFrame {
         jLabel5.setText("Tipo");
 
         cbxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxTipoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -246,25 +280,24 @@ public class frmPersonal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(btnRegresar)
-                            .addComponent(cbxEspecialidades, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbxPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(97, 97, 97)
                         .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRegresar)
+                            .addComponent(cbxPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+                            .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbEspecialidad, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+                            .addComponent(cbxEspecialidades, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnRegresarInicio)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 34, Short.MAX_VALUE))
+                .addGap(0, 15, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -282,15 +315,15 @@ public class frmPersonal extends javax.swing.JFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbxPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxEspecialidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbEspecialidad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbxEspecialidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
                         .addComponent(btnCrear))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
@@ -343,8 +376,6 @@ public class frmPersonal extends javax.swing.JFrame {
             }
 
             Integer tipoSeleccionado = cbxTipo.getSelectedIndex();
-            Cuenta cuenta = controladorCuentas.getCuentas()[cuentaSeleccionada];
-            Persona persona = cuenta.getPersona();
 
             if (tipoSeleccionado == -1) {
                 JOptionPane.showMessageDialog(
@@ -353,12 +384,24 @@ public class frmPersonal extends javax.swing.JFrame {
                         "Complete la información",
                         JOptionPane.ERROR_MESSAGE
                 );
-            } else if (tipoSeleccionado == 0) { // Es médico
+
+                return;
+            }
+
+            Cuenta cuenta = controladorCuentas.getCuentas()[cuentaSeleccionada];
+            Roles rolSeleccionado = Roles.getRolByIndex(tipoSeleccionado);
+
+            // Como es una cuenta válida, actualizo el rol
+            controladorCuentas.getCuentas()[cuentaSeleccionada].getPersona().setRol(roles[tipoSeleccionado]);
+            Persona persona = (Persona) cuenta.getPersona();
+
+            // Actualizo el rol
+            if (rolSeleccionado == Roles.Medico) { // Es médico
                 Especialidad esp = controladorEspecialidad.getEspecialidades()[cbxEspecialidades.getSelectedIndex()];
 
                 Medico medico = new Medico();
                 // Añado el rol del médico y la especialidad
-                medico.setRol(Utilidades.getRoles()[Utilidades.INDEX_MEDICO_ROLE]);
+                medico.setRol(roles[Roles.Medico.getIndex()]);
                 medico.setEspecidalidad(esp);
                 // Copio la persona anterior en el medico que será ahora
                 medico.setNombres(persona.getNombres());
@@ -369,10 +412,10 @@ public class frmPersonal extends javax.swing.JFrame {
                 medico.setIdentificacion(persona.getIdentificacion());
                 medico.setTelefono(persona.getTelefono());
                 cuenta.setPersona(medico);
-            } else if (tipoSeleccionado == 1) { // Es enfermera
+            } else if (rolSeleccionado == Roles.Enfermera) { // Es enfermera
                 Enfermera enfermera = new Enfermera();
                 // Añado el rol de enfermera
-                enfermera.setRol(Utilidades.getRoles()[Utilidades.INDEX_ENFERMERA_ROLE]);
+                enfermera.setRol(roles[Roles.Enfermera.getIndex()]);
                 // Copio la persona anterior en la enfermera
                 enfermera.setNombres(persona.getNombres());
                 enfermera.setApellidos(persona.getApellidos());
@@ -382,12 +425,14 @@ public class frmPersonal extends javax.swing.JFrame {
                 enfermera.setIdentificacion(persona.getIdentificacion());
                 enfermera.setTelefono(persona.getTelefono());
                 cuenta.setPersona(enfermera);
-            } else { // Es superusuario
-                persona.setRol(Utilidades.getRoles()[Utilidades.INDEX_SUPERADMIN_ROLE]);
+            } else if (rolSeleccionado == Roles.SuperAdmin) { // Es superusuario
+                persona.setRol(roles[Roles.SuperAdmin.getIndex()]);
                 cuenta.setPersona(persona);
             }
 
-            controladorCuentas.guardar();
+            controladorCuentas.actualizarRolCuenta(cuenta);
+            // controladorCuentas.guardar();
+            limpiarCampos();
             cargarTabla();
             JOptionPane.showMessageDialog(
                     null,
@@ -412,7 +457,8 @@ public class frmPersonal extends javax.swing.JFrame {
 
             if (confirmado == JOptionPane.YES_OPTION) {
                 try {
-                    Utilidades.eliminarElemento(controladorCuentas.getCuentas(), personaSeleccionada);
+                    controladorCuentas.eliminarCuenta(controladorCuentas.getCuentas()[personaSeleccionada].getPersona().getIdentificacion());
+                    // Utilidades.eliminarElemento(controladorCuentas.getCuentas(), personaSeleccionada);
                     controladorCuentas.guardar();
                     cargarTabla();
                 } catch (IOException ex) {
@@ -425,11 +471,21 @@ public class frmPersonal extends javax.swing.JFrame {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         if (validarPersonaSeleccionado()) {
             Cuenta cuentaSeleccionada = controladorCuentas.getCuentas()[personaSeleccionada];
+            Rol rol = cuentaSeleccionada.getPersona().getRol();
 
             cbxPersona.setSelectedItem(cuentaSeleccionada);
-            cbxTipo.setSelectedItem(cuentaSeleccionada.getPersona().getRol());
+            cbxTipo.setSelectedIndex(Roles.fromName(rol.getNombre()).getIndex());
+            
+            if (Roles.Medico.getNombre() == rol.getNombre()) {
+                Medico medico = (Medico) cuentaSeleccionada.getPersona();
+                cbxEspecialidades.setSelectedItem(medico.getEspecidalidad());
+            }
         }
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void cbxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxTipoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -497,12 +553,12 @@ public class frmPersonal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbEspecialidad;
     private javax.swing.JTable tblPersonal;
     // End of variables declaration//GEN-END:variables
 }

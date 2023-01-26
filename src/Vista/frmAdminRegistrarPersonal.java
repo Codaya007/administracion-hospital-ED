@@ -9,6 +9,7 @@ import Modelo.Cuenta;
 import Modelo.Persona;
 import javax.swing.JOptionPane;
 import Utilidades.Utilidades;
+
 /**
  *
  * @author Victor Nivelo
@@ -28,6 +29,15 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         //txtNumeroCedula.addKeyListener(this);
         controlador = (CtrlCuenta) Utilidades.cargarJson(CtrlCuenta.class, "ControladorCuenta");
+
+        if (controlador == null) {
+            controlador = new CtrlCuenta();
+            try {
+                controlador.guardar();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         Controlador.Utilidades.cargarCombosFecha(cbxDia, cbxMes, cbxAnio);
     }
@@ -381,6 +391,7 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
                 this.setVisible(false);
                 new frmPersonalLogin().setVisible(true);
             } catch (Exception e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null,
                         e.getMessage(),
@@ -389,6 +400,7 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
                 );
             }
         } catch (Error e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(
                     null,
                     e.getMessage(),

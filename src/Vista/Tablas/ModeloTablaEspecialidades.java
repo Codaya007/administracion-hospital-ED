@@ -22,10 +22,10 @@ public class ModeloTablaEspecialidades extends AbstractTableModel{
         if(especialidades.length == 0) this.especialidades = new Especialidad[]{};
         else{
         Especialidad result[] = new Especialidad[Utilidades.Utilidades.ultimoElementoNoVacio(especialidades)];
-        System.out.println("Longitud de especialidades: " + result.length);
+        //System.out.println("Longitud de especialidades: " + result.length);
         
         for (int i = 0; i < result.length; i++) {
-            System.out.println("Elemento " + i + ": " + result[i]);
+            //System.out.println("Elemento " + i + ": " + result[i]);
             result[i] = especialidades[i];
         }
         
@@ -62,7 +62,7 @@ public class ModeloTablaEspecialidades extends AbstractTableModel{
             esp = especialidades[i];
         }
         
-        System.out.println("Especialidad: " + esp);
+        //System.out.println("Especialidad: " + esp);
         
         switch(i1) {
             case 0: 

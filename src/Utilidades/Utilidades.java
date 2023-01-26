@@ -5,7 +5,10 @@
  */
 package Utilidades;
 
+import Modelo.Cuenta;
+import Modelo.Persona;
 import Modelo.Rol;
+import Modelo.Roles;
 import com.google.gson.Gson;
 import java.io.File;
 import java.io.FileWriter;
@@ -83,32 +86,22 @@ public class Utilidades {
     }
 
     public static Rol[] getRoles() {
-        Rol rolMedico = new Rol();
-        rolMedico.setNombre("Medico");
-        rolMedico.setDescripcion("Médicos de todas las especialidades del hospital");
+        Roles roles[] = Roles.values();
+        Rol rolArray[] = new Rol[roles.length];
 
-        Rol rolEnfermera = new Rol();
-        rolEnfermera.setNombre("Enfermera");
-        rolEnfermera.setDescripcion("Enfermeras del hospital");
+        for (int i = 0; i < roles.length; i++) {
+            // Creo el rol con los valores definidos en la enum de roles
+            Rol nuevoRol = new Rol();
+            nuevoRol.setId(roles[i].getIndex());
+            nuevoRol.setNombre(roles[i].getNombre());
+            nuevoRol.setDescripcion(roles[i].getDescripcion());
 
-        Rol rolPaciente = new Rol();
-        rolPaciente.setNombre("Paciente");
-        rolPaciente.setDescripcion("Pacientes del hospital");
-
-        Rol rolSuperAdmin = new Rol();
-        rolSuperAdmin.setNombre("SuperAdmin");
-        rolSuperAdmin.setDescripcion("Tiene mayores privilegios para la administración del hospital");
-
-        Rol roles[] = new Rol[4];
-
-        roles[INDEX_MEDICO_ROLE] = rolMedico;
-        roles[INDEX_ENFERMERA_ROLE] = rolEnfermera;
-        roles[INDEX_SUPERADMIN_ROLE] = rolSuperAdmin;
-        roles[INDEX_PACIENTE_ROLE] = rolPaciente;
+            // Almaceno el nuevo rol
+            rolArray[i] = nuevoRol;
+        }
 
         // guardarArray(roles, "roles");
-
-        return roles;
+        return rolArray;
     }
 
     public static void rellenarCombo(JComboBox cmb, Object array[]) {
@@ -121,6 +114,29 @@ public class Utilidades {
         for (int i = 0; i < size; i++) {
             cmb.addItem(array[i]);
         }
+    }
+
+    public static Integer buscarCuentaLinealPorCedula(Cuenta cuentas[], String cedula) {
+        Integer index = -1;
+
+        for (int i = 0; i < cuentas.length; i++) {
+            Cuenta item = cuentas[i];
+
+            if (item != null) {
+                Persona persona = item.getPersona();
+
+                if (persona == null) {
+                    continue;
+                }
+
+                if (persona.getIdentificacion().equals(cedula)) {
+                    index = i;
+                    break;
+                }
+            }
+        }
+
+        return index;
     }
 
     public static void eliminarElemento(Object array[], Integer index) {

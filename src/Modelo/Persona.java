@@ -58,9 +58,11 @@ public class Persona {
 
     public void setIdentificacion(String identificacion) {
         boolean cedulaValida = validarCedula(identificacion);
-        
-        if(!cedulaValida) throw new Error("Cédula no válida");
-        
+
+        if (!cedulaValida) {
+            throw new Error("Cédula no válida");
+        }
+
         this.identificacion = identificacion;
     }
 
@@ -81,6 +83,10 @@ public class Persona {
     }
 
     public Rol getRol() {
+        if (rol == null) {
+            this.rol = new Rol();
+        }
+        
         return this.rol;
     }
 
@@ -107,7 +113,7 @@ public class Persona {
     public void setFechaNacimiento(Integer anio, Integer mes, Integer dia) {
         this.fechaNacimiento = new GregorianCalendar(anio, mes - 1, dia).getTime();
     }
-    
+
     public void setFechaNacimiento(Date date) {
         this.fechaNacimiento = date;
     }
@@ -115,21 +121,25 @@ public class Persona {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    
-    public boolean validarCedula(String cedula){
+
+    public boolean validarCedula(String cedula) {
         // por ahora solo valida que sea una cadena de 10 dígitos
         return cedula.matches("\\d{10}");
     }
-    
-    public boolean esMedico(){
-        if(this.rol == null) return false;
-        
-        return "Medico".equals(this.rol.getNombre());
+
+    public boolean esMedico() {
+        if (this.rol == null) {
+            return false;
+        }
+
+        return Roles.Medico.toString().equals(this.rol.getNombre());
     }
-    
-    public boolean esEnfermera(){
-        if(this.rol == null) return false;
-        
-        return "Enfermera".equals(this.rol.getNombre());
+
+    public boolean esEnfermera() {
+        if (this.rol == null) {
+            return false;
+        }
+
+        return Roles.Enfermera.toString().equals(this.rol.getNombre());
     }
 }

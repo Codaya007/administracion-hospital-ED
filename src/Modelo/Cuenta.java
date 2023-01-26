@@ -17,6 +17,10 @@ public class Cuenta {
     private Persona persona;
 
     public Persona getPersona() {
+        if (persona == null) {
+            this.persona = new Persona();
+        }
+        
         return persona;
     }
 
@@ -49,7 +53,6 @@ public class Cuenta {
 
         //System.out.println("Contraseña guardada:" + Arrays.toString(claveHash));
         //System.out.println(clave);
-
         this.clave = claveHash;
     }
 
@@ -60,9 +63,9 @@ public class Cuenta {
 
         return usuario.equals(this.usuario) && Pbkdf2.authenticate(clave, this.clave, salt);
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return "Usuario: " + this.usuario;
     }
 }

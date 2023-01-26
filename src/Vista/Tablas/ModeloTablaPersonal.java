@@ -23,10 +23,10 @@ public class ModeloTablaPersonal extends AbstractTableModel{
         if(cuentas.length == 0) this.cuentas = new Cuenta[]{};
         else{
         Cuenta result[] = new Cuenta[Utilidades.Utilidades.ultimoElementoNoVacio(cuentas)];
-        System.out.println("Longitud de cuentas: " + result.length);
+        // System.out.println("Longitud de cuentas: " + result.length);
         
         for (int i = 0; i < result.length; i++) {
-            System.out.println("Elemento " + i + ": " + result[i]);
+            // System.out.println("Elemento " + i + ": " + result[i]);
             result[i] = cuentas[i];
         }
         
