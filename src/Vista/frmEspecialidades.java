@@ -8,10 +8,7 @@ import Controlador.CtrlEspecialidades;
 import Modelo.Especialidad;
 import Utilidades.Utilidades;
 import Vista.Tablas.ModeloTablaEspecialidades;
-import java.io.IOException;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class frmEspecialidades extends javax.swing.JFrame {
@@ -26,6 +23,7 @@ public class frmEspecialidades extends javax.swing.JFrame {
     public frmEspecialidades() {
         initComponents();
         this.setLocationRelativeTo(null);
+        txtDescripcion.setLineWrap(true);
         //txtNumeroCedula.addKeyListener(this);
         controlador = (CtrlEspecialidades) Utilidades.cargarJson(CtrlEspecialidades.class, "ControladorEspecialidades");
         if (controlador == null) {
@@ -38,6 +36,13 @@ public class frmEspecialidades extends javax.swing.JFrame {
             }
         }
         cargarTabla();
+        limpiarCampos();
+    }
+
+    private void limpiarCampos() {
+        txtNombre.setText("");
+        txtDescripcion.setText("");
+        tblEspecialidades.clearSelection();
     }
 
     private void abrirAnterior() {
@@ -80,7 +85,8 @@ public class frmEspecialidades extends javax.swing.JFrame {
         tblEspecialidades = new javax.swing.JTable();
         btnEliminar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
-        txtDescripcion = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtDescripcion = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("INGRESAR DATOS DEL PACIENTE");
@@ -202,6 +208,10 @@ public class frmEspecialidades extends javax.swing.JFrame {
                 .addGap(18, 18, 18))
         );
 
+        txtDescripcion.setColumns(20);
+        txtDescripcion.setRows(5);
+        jScrollPane2.setViewportView(txtDescripcion);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -215,14 +225,14 @@ public class frmEspecialidades extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                            .addComponent(btnRegresar))))
+                            .addComponent(btnRegresar)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -248,8 +258,8 @@ public class frmEspecialidades extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
                         .addComponent(btnCrear))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
@@ -308,6 +318,7 @@ public class frmEspecialidades extends javax.swing.JFrame {
                 controlador.registrarEspecialidad(nueva);
 
                 cargarTabla();
+                limpiarCampos();
                 JOptionPane.showMessageDialog(
                         null,
                         "Especialidad " + nombre + " creada exitosamente",
@@ -329,6 +340,7 @@ public class frmEspecialidades extends javax.swing.JFrame {
                         JOptionPane.INFORMATION_MESSAGE
                 );
                 especialidadSeleccionada = null;
+                limpiarCampos();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -443,8 +455,9 @@ public class frmEspecialidades extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblEspecialidades;
-    private javax.swing.JTextField txtDescripcion;
+    private javax.swing.JTextArea txtDescripcion;
     public javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
