@@ -10,7 +10,10 @@ import Modelo.Persona;
 import Modelo.Rol;
 import Modelo.Roles;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.reflect.TypeToken;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import javax.swing.JComboBox;
 
@@ -18,7 +21,7 @@ import javax.swing.JComboBox;
  *
  * @author vivic
  */
-public class Utilidades {
+public class Utilidades<T> {
 
     private static final String DIRDATA = "data";
     public static final Integer INDEX_SUPERADMIN_ROLE = 0;
@@ -47,6 +50,27 @@ public class Utilidades {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public static <T> T cargarArray(String nombreArchivo, Class<T> clazz) {
+        try {
+            System.out.println("Cargando " + nombreArchivo + "...");
+            Gson json = new Gson();
+            FileReader fr = new FileReader(nombreArchivo + ".json");
+            StringBuilder jsons = new StringBuilder();
+
+            int valor = fr.read();
+            while (valor != -1) {
+                jsons.append((char) valor);
+                valor = fr.read();
+            }
+
+            return json.fromJson(jsons.toString(), clazz);
+        } catch (Exception e) {
+            System.out.println("No se encontraron objetos guardados en el json!");
+        }
+
+        return null;
     }
 
 //    public Rol[] cargarRoles(String nombreArchivo, Class clazz) {

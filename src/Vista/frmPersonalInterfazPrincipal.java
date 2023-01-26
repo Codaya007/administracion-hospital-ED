@@ -314,7 +314,7 @@ public class frmPersonalInterfazPrincipal extends javax.swing.JFrame {
 
     private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
         // TODO add your handling code here:
-        frmPersonalInventarioMedico abrir = new frmPersonalInventarioMedico();
+        frmMedicinasDoctor abrir = new frmMedicinasDoctor();
         abrir.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnInventarioActionPerformed

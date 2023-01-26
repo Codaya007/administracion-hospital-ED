@@ -11,16 +11,16 @@ package Modelo;
 public class Medicina {
 
     private String id;
-    
+
     private String nombre;
     private String marca;
     private String stock;
-    
+
     private String fechaAgregado;
     private String fechaCaducidad;
-    
-    public Medicina(String nombre,String stock,String fechaAgregado, String fechaCaducidad){
-        
+
+    public Medicina(String nombre, String stock, String fechaAgregado, String fechaCaducidad) {
+
         this.nombre = nombre;
         this.stock = stock;
         this.fechaAgregado = fechaAgregado;
@@ -34,7 +34,7 @@ public class Medicina {
     public void setFechaAgregado(String fechaAgregado) {
         this.fechaAgregado = fechaAgregado;
     }
-    
+
     public String getId() {
         return id;
     }
@@ -85,5 +85,20 @@ public class Medicina {
 //
 //        return true;
 //    }
+    @Override
+    public String toString() {
+        return nombre + " (" + marca + ")";
+    }
 
+    public String obtenerDetalleMedicina() {
+        String result = "";
+
+        result += "Nombre: " + (nombre == null ? "No definido" : nombre) + "\n";
+        result += "Marca: " + (marca == null ? "No definido" : marca) + "\n";
+        result += "Stock: " + (stock == null ? "No definido" : stock) + "\n";
+        result += "Fecha de registro: " + (fechaAgregado == null ? "No definido" : fechaAgregado) + "\n";
+        result += "Fecha de caducidad: " + (fechaCaducidad == null ? "No definido" : fechaCaducidad) + "\n";
+
+        return result;
+    }
 }

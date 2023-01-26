@@ -165,6 +165,12 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Fondos/IconoSignosVitales.png"))); // NOI18N
 
+        cbxNumeroCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxNumeroCedulaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -473,6 +479,10 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
         int y =evt.getYOnScreen();
         this.setLocation(x-Xmouse,y- Ymouse);
     }//GEN-LAST:event_jLabel12MouseDragged
+
+    private void cbxNumeroCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxNumeroCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxNumeroCedulaActionPerformed
 
     /**
      * @param args the command line arguments
