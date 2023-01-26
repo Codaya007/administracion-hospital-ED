@@ -37,6 +37,7 @@ public class Utilidades extends Vista.frmUsuarioIngresarDatos {
         }
         return NumeroCedula;
     }
+
     //verificacion si existe en el arreglo
     public static <T> boolean contains(final T[] array, final T v) {
         for (final T e : array) {
@@ -47,7 +48,7 @@ public class Utilidades extends Vista.frmUsuarioIngresarDatos {
 
         return false;
     }
-    
+
     //cargar combos de fechas
     public static void cargarCombosFecha(JComboBox dia, JComboBox mes, JComboBox anio) {
         dia.removeAllItems();
@@ -70,7 +71,7 @@ public class Utilidades extends Vista.frmUsuarioIngresarDatos {
             anio.addItem(i);
         }
     }
-    
+
     //cargar combo de roles
     public static JComboBox cargarComboRoles(JComboBox cbx, Rol roles[]) {
         cbx.removeAllItems();
@@ -81,7 +82,7 @@ public class Utilidades extends Vista.frmUsuarioIngresarDatos {
 
         return cbx;
     }
-    
+
     //ocupado
     public static int ultimoIndiceOcupado(Object array[]) {
         for (int i = 0; i < array.length; i++) {
