@@ -8,6 +8,7 @@ import Controlador.ListaEnlazada.ListaEnlazada;
 import Modelo.Paciente;
 import static Controlador.UtilidadesFechas.validarFecha;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,7 +26,7 @@ import javax.swing.JTable;
 public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
     int Xmouse,Ymouse;
  
-    public static ListaEnlazada<Paciente> EnviarContenido = new ListaEnlazada<>();
+    public static ListaEnlazada<Paciente> ListaDePacientes = new ListaEnlazada<>();
 
     /**
      * Creates new form frmAgendarCita
@@ -321,7 +322,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                         String Anio = String.valueOf(anio);
 
                         Paciente paciente = new Paciente(TipoId,NumeroCedula, NombrePaciente, ApellidoPaciente, EdadPaciente, GeneroPaciente, TelefonoPaciente, MolestiaPaciente, FechaAtencion, HoraAtencion, Dia, Mes, Anio);
-                        EnviarContenido.add(paciente);
+                        ListaDePacientes.add(paciente);
 
                         JOptionPane.showMessageDialog(null, "Cita agendada exitosamente", "AGENDADO", JOptionPane.INFORMATION_MESSAGE, Agendado);
                         
@@ -341,7 +342,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
             
         }
         
-        Collections.sort(EnviarContenido, (Paciente g, Paciente h) -> g.getHoraAtencion().compareTo(h.getHoraAtencion()));
+        Collections.sort(ListaDePacientes, (Paciente g, Paciente h) -> g.getHoraAtencion().compareTo(h.getHoraAtencion()));
         
     }//GEN-LAST:event_btnAgendarCitaActionPerformed
 
@@ -349,7 +350,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
         // TODO add your handling code here:
         ImageIcon Seguro = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneConfirmarSeguroIcono.png");
         
-        if (!txtFechaCita.getText().equalsIgnoreCase("DIA / MES / AÑO")  || cbxHorarioAtencion.getSelectedItem() != null){
+        if (!txtFechaCita.getText().equalsIgnoreCase("dd/mm/aaaa")  || cbxHorarioAtencion.getSelectedItem() != null){
             int result = JOptionPane.showConfirmDialog(null, "Estas seguro de salir? \nSe perderan todos los avances no guardados", "CONFIRMAR SALIDA", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE,Seguro);
             
             if (result == JOptionPane.YES_OPTION) {
@@ -364,10 +365,13 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
         // TODO add your handling code here:
         int key = evt.getKeyChar();
         boolean slash = key == 47;
+        boolean delete = key == 8;
+        
         Character c = evt.getKeyChar();
 
-        if (!(Character.isDigit(c) || slash)) {
+        if (!(Character.isDigit(c) || slash || delete)) {
             evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo ingreso de numeros y slsh", "TEXTO NO VALIDO", JOptionPane.WARNING_MESSAGE);
         }
         if (txtFechaCita.getText().length() >= 10) {
             evt.consume();

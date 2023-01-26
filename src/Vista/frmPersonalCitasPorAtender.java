@@ -10,7 +10,7 @@ import Modelo.Paciente;
 import java.util.Collections;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import static Vista.frmUsuarioSeleccionarFecha.EnviarContenido;
+import static Vista.frmUsuarioSeleccionarFecha.ListaDePacientes;
 
 
 /**
@@ -47,12 +47,12 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
         
         Paciente a;
         
-        Collections.sort(EnviarContenido, (Paciente z, Paciente b) -> z.getDia().compareTo(b.getDia()));
-        Collections.sort(EnviarContenido, (Paciente c, Paciente d) -> c.getMes().compareTo(d.getMes()));
-        Collections.sort(EnviarContenido, (Paciente e, Paciente f) -> e.getAnio().compareTo(f.getAnio()));
+        Collections.sort(ListaDePacientes, (Paciente z, Paciente b) -> z.getDia().compareTo(b.getDia()));
+        Collections.sort(ListaDePacientes, (Paciente c, Paciente d) -> c.getMes().compareTo(d.getMes()));
+        Collections.sort(ListaDePacientes, (Paciente e, Paciente f) -> e.getAnio().compareTo(f.getAnio()));
         
-        for (int i = EnviarContenido.size() - 1; i >= 0; i--) {
-            a = (Paciente) frmUsuarioSeleccionarFecha.EnviarContenido.get(i);
+        for (int i = ListaDePacientes.size() - 1; i >= 0; i--) {
+            a = (Paciente) frmUsuarioSeleccionarFecha.ListaDePacientes.get(i);
             modelo.insertRow(EnviarEnFila, new Object[]{});
             modelo.setValueAt(a.getTipoIdentificacion(), EnviarEnFila, 0);
             modelo.setValueAt(a.getIdentificacion(), EnviarEnFila, 1);
@@ -486,7 +486,7 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
             HistorialClinico claseauto = new HistorialClinico(TipoId,NumeroCedula, NombrePaciente, ApellidoPaciente, EdadPaciente, GeneroPaciente, TelefonoPaciente, MolestiaPaciente, FechaAtencion, HoraAtencion, Medicamento, Dosis);
             contenedorAtendido.add(claseauto);
             if (tblCitasSinAtender.getSelectedRow() != -1) {
-                EnviarContenido.remove(tblCitasSinAtender.getSelectedRow());
+                ListaDePacientes.remove(tblCitasSinAtender.getSelectedRow());
                 modelo.removeRow(tblCitasSinAtender.getSelectedRow());
                 JOptionPane.showMessageDialog(null, "PACIENTE ATENDIDO EXITOSAMENTE");
             } else {

@@ -5,15 +5,13 @@ import java.util.Collection;
 import java.util.ConcurrentModificationException;
 import java.util.Deque;
 import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
-
 import Controlador.ListaEnlazada.Excepciones.AtributoException;
 import Controlador.ListaEnlazada.Excepciones.ListaVaciaExcepcion;
 import Controlador.ListaEnlazada.Excepciones.PosicionNoEncontradaException;
 import Controlador.UtilidadesGenerales;
+import java.util.ListIterator;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.Objects;
@@ -22,7 +20,7 @@ import java.util.Objects;
  *
  * @author Victor
  */
-public class ListaEnlazada<E> extends AbstractSequentialList<E> implements List<E>, Deque<E>, java.io.Serializable{
+public class ListaEnlazada<E> extends AbstractSequentialList<E> implements Deque<E>, java.io.Serializable{
     
     private NodoLista<E> cabecera;
     private Integer size;

@@ -7,8 +7,8 @@ package Vista;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import static Vista.frmUsuarioSeleccionarFecha.EnviarContenido;
 import java.awt.Color;
+import static Vista.frmUsuarioSeleccionarFecha.ListaDePacientes;
 
 /**
  *
@@ -163,6 +163,7 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
             }
         });
 
+        txaDatosPaciente.setEditable(false);
         txaDatosPaciente.setColumns(20);
         txaDatosPaciente.setRows(5);
         jScrollPane1.setViewportView(txaDatosPaciente);
@@ -320,10 +321,16 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
 
     private void txtNumeroCedulaCancelarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroCedulaCancelarKeyTyped
         // TODO add your handling code here:
+        int key = evt.getKeyChar();
+        boolean delete = key == 8;
+        
         Character c = evt.getKeyChar();
-        if(!Character.isDigit(c)){
+        
+        if(!(Character.isDigit(c) || delete)){
             evt.consume();
-        }if(txtNumeroCedulaCancelar.getText().length()>=10){
+            JOptionPane.showMessageDialog(null, "Solo ingreso de numeros", "TEXTO NO VALIDO", JOptionPane.WARNING_MESSAGE);
+        }
+        if(txtNumeroCedulaCancelar.getText().length()>=10){
             evt.consume();
         }
     }//GEN-LAST:event_txtNumeroCedulaCancelarKeyTyped
@@ -368,7 +375,7 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
 
                 if (respuesta == JOptionPane.YES_OPTION) {
                     
-                    EnviarContenido.removeIf(p -> p.getIdentificacion().equals(cedula));
+                    ListaDePacientes.removeIf(p -> p.getIdentificacion().equals(cedula));
                     JOptionPane.showMessageDialog(null, "La cita se ha eliminado", "CITA ELIMINADA", JOptionPane.INFORMATION_MESSAGE, CitaEliminada);
                     txaDatosPaciente.setText("");
                 }else{

@@ -258,10 +258,16 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
 
     private void txtNumeroCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroCedulaKeyTyped
         // TODO add your handling code here:
+        int key = evt.getKeyChar();
+        boolean delete = key == 8;
+        
         Character c = evt.getKeyChar();
-        if(!Character.isDigit(c)){
+        
+        if(!(Character.isDigit(c) || delete)){
             evt.consume();
-        }if(txtNumeroCedula.getText().length()>=10){
+            JOptionPane.showMessageDialog(null, "Solo ingreso de numeros", "TEXTO NO VALIDO", JOptionPane.WARNING_MESSAGE);
+        }
+        if(txtNumeroCedula.getText().length()>=10){
             evt.consume();
         }
     }//GEN-LAST:event_txtNumeroCedulaKeyTyped
