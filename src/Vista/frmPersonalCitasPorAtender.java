@@ -546,7 +546,7 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-        frmPersonalInterfazPrincipal abrir = new frmPersonalInterfazPrincipal();
+        FrmMenuDoctor abrir = new FrmMenuDoctor();
         abrir.setVisible(true);
         this.setVisible(false);
 //        dispose();

@@ -6,6 +6,9 @@
 package Vista;
 
 import Controlador.CtrlCuenta;
+import Modelo.Cuenta;
+import Modelo.Rol;
+import Modelo.Roles;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,9 +16,9 @@ import javax.swing.JOptionPane;
  * @author Victor
  */
 public class frmPersonalLogin extends javax.swing.JFrame {
-
+    
     int Xmouse, Ymouse;
-
+    
     CtrlCuenta controlador;
 
     /**
@@ -229,7 +232,7 @@ public class frmPersonalLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         String usuario = txtNombreIngresoUsuario.getText();
         String clave = txtContraseñaIngresoUsuario.getText();
-
+        
         if (usuario.isEmpty() || clave.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos", "CREDENCIALES VACIAS", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -237,8 +240,20 @@ public class frmPersonalLogin extends javax.swing.JFrame {
             try {
                 boolean loginExitoso = controlador.login(usuario, clave);
                 if (loginExitoso) {
-                    frmPersonarSeleccionarPersonal abrir = new frmPersonarSeleccionarPersonal();
-                    abrir.setVisible(true);
+                    // DEPENDE DEL ROL DEL USUARIO, SE SELECCIONA LA INTERFAZ A ABRIR
+                    Integer usuarioInIndex = Utilidades.Utilidades.buscarCuentaLinealPorCedula(controlador.getCuentas(), usuario);
+                    String rolUsuario = controlador.getCuentas()[usuarioInIndex].getPersona().getRol().getNombre();
+                    
+                    if (rolUsuario.equals(Roles.SuperAdmin.getNombre())) {
+                        new FrmMenuSuperAdmin().setVisible(true);
+                    } else if (rolUsuario.equals(Roles.Medico.getNombre())) {
+                        new FrmMenuDoctor().setVisible(true);
+                    } else if (rolUsuario.equals(Roles.Enfermera.getNombre())) {
+                        new frmPersonalEnfermera().setVisible(true);
+                    } else {
+                        new FrmMenuPaciente().setVisible(true);
+                    }
+                    
                     this.setVisible(false);
                 } else {
                     JOptionPane.showMessageDialog(

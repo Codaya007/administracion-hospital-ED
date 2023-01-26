@@ -229,7 +229,7 @@ public class frmMedicinasDoctor extends javax.swing.JFrame {
         // Boton para regresar a la ventana anterior 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.setVisible(false);
-        new frmPersonalInterfazPrincipal().setVisible(true);
+        new FrmMenuDoctor().setVisible(true);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed

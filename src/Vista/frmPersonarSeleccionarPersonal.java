@@ -206,7 +206,7 @@ public class frmPersonarSeleccionarPersonal extends javax.swing.JFrame {
 
     private void btnIngresarDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarDoctorActionPerformed
         // TODO add your handling code here:
-        frmPersonalInterfazPrincipal abrir = new frmPersonalInterfazPrincipal();
+        FrmMenuDoctor abrir = new FrmMenuDoctor();
         abrir.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnIngresarDoctorActionPerformed

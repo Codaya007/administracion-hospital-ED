@@ -370,7 +370,7 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        frmUsuarioSelecionarUso abrir = new frmUsuarioSelecionarUso();
+        FrmMenuPaciente abrir = new FrmMenuPaciente();
         abrir.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
