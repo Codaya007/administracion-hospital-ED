@@ -10,6 +10,7 @@ import java.util.AbstractSequentialList;
 import java.util.Collection;
 import java.util.ConcurrentModificationException;
 import java.util.Deque;
+import java.util.List;
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;

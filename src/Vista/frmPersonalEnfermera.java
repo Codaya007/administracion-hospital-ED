@@ -3,7 +3,7 @@ package Vista;
 import Controlador.ListaEnlazada.ListaEnlazada;
 import Modelo.Paciente;
 import Modelo.Valoracion;
-import static Vista.frmUsuarioSeleccionarFecha.EnviarContenido;
+import static Vista.frmUsuarioSeleccionarFecha.ListaDePacientes;
 import com.google.gson.Gson;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -306,8 +306,8 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
         val.setTemperatura(temperatura);
  
         //Asignar una valoracion a cada paciente
-        for (int i = EnviarContenido.size() - 1; i >= 0; i--) {
-            a = (Paciente) frmUsuarioSeleccionarFecha.EnviarContenido.get(i);
+        for (int i = ListaDePacientes.size() - 1; i >= 0; i--) {
+            a = (Paciente) frmUsuarioSeleccionarFecha.ListaDePacientes.get(i);
             if (a.getIdentificacion() == cbxNumeroCedula.getSelectedItem()) {
                  a.setValoracion(val);
             }
@@ -519,8 +519,8 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
     public void CargarDatosCitasAtender() {
         Paciente a;
 
-        for (int i = EnviarContenido.size() - 1; i >= 0; i--) {
-            a = (Paciente) frmUsuarioSeleccionarFecha.EnviarContenido.get(i);
+        for (int i = ListaDePacientes.size() - 1; i >= 0; i--) {
+            a = (Paciente) frmUsuarioSeleccionarFecha.ListaDePacientes.get(i);
               System.out.println(a);
               cbxNumeroCedula.addItem(a.getIdentificacion());
         }

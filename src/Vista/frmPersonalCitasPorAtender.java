@@ -604,8 +604,8 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
         txtHoraAtencion.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 9)));
         
         //Muestran los datos de valoracion
-        for (int i = EnviarContenido.size() - 1; i >= 0; i--) {
-            a = (Paciente) frmUsuarioSeleccionarFecha.EnviarContenido.get(i);
+        for (int i = ListaDePacientes.size() - 1; i >= 0; i--) {
+            a = (Paciente) frmUsuarioSeleccionarFecha.ListaDePacientes.get(i);
             if (a.getIdentificacion() == tblCitasSinAtender.getValueAt(seleccionar, 1)) {
                 if (a.getValoracion() != null) {
                  txtAltura2.setText(String.valueOf(a.getValoracion().getAltura()));
