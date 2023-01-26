@@ -320,7 +320,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                         String Mes = String.valueOf(mes);
                         String Anio = String.valueOf(anio);
 
-                        Paciente paciente = new Paciente(TipoId,NumeroCedula, NombrePaciente, ApellidoPaciente, EdadPaciente, GeneroPaciente, TelefonoPaciente, MolestiaPaciente, FechaAtencion, HoraAtencion, Dia, Mes, Anio);
+                        Paciente paciente = new Paciente(TipoId,NumeroCedula, NombrePaciente, ApellidoPaciente, EdadPaciente, GeneroPaciente, TelefonoPaciente, MolestiaPaciente, FechaAtencion, HoraAtencion, Dia, Mes, Anio, null);
                         EnviarContenido.add(paciente);
 
                         JOptionPane.showMessageDialog(null, "Cita agendada exitosamente", "AGENDADO", JOptionPane.INFORMATION_MESSAGE, Agendado);

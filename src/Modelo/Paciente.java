@@ -38,8 +38,8 @@ public class Paciente {
     private String anio;
     
     private Paciente unionPaciente[];
-    
-    public Paciente(String TipoIdentificacion,String identificacion, String nombres,String apellidos,String edad,String genero, String telefono,String molestia, String FechaIngreso, String HoraAtencion, String dia, String mes, String anio) {
+    private Valoracion valoracion;
+    public Paciente(String TipoIdentificacion,String identificacion, String nombres,String apellidos,String edad,String genero, String telefono,String molestia, String FechaIngreso, String HoraAtencion, String dia, String mes, String anio, Valoracion val) {
         
         this.TipoIdentificacion = TipoIdentificacion;
         this.identificacion = identificacion;
@@ -55,6 +55,7 @@ public class Paciente {
         this.dia = dia;
         this.mes = mes;
         this.anio = anio;
+        this.valoracion = val;
 
     }
 
@@ -192,6 +193,21 @@ public class Paciente {
 
     public void setEstadoCita(boolean EstadoCita) {
         this.EstadoCita = EstadoCita;
+    }
+
+    public Valoracion getValoracion() {
+        return valoracion;
+    }
+
+    public void setValoracion(Valoracion valoracion) {
+        this.valoracion = valoracion;
+    }
+    
+    
+    
+        @Override
+    public String toString() {
+        return "Paciente{" + "identificacion=" + identificacion + ", valoracion=" + valoracion + '}';
     }
     
 }

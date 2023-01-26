@@ -26,6 +26,7 @@ public class Valoracion {
         
     }
 
+
     public Float getPeso() {
         return peso;
     }
@@ -65,5 +66,16 @@ public class Valoracion {
     public void setTemperatura(Float temperatura) {
         this.temperatura = temperatura;
     }
+
+    public Valoracion() {
+    }
+
+    @Override
+    public String toString() {
+        return "Valoracion{" + "peso=" + peso + ", altura=" + altura + ", presionArterial=" + presionArterial + ", presionCardiaca=" + presionCardiaca + ", temperatura=" + temperatura + '}';
+    }
+    
+    
+    
 
 }
