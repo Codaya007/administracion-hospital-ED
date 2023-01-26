@@ -20,7 +20,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * @author Jaime Mendoza
+ * @author Victor
  */
 public class frmPersonalInventarioMedico extends javax.swing.JFrame {
 
@@ -28,27 +28,6 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
     int Xmouse, Ymouse;
 
     ListaEnlazada<Medicina> ListaMedicamentos = new ListaEnlazada<>();
-
-    public boolean ExisteEnTabla(JTable tabla, String dto, int col) {
-
-        boolean Existe = false;
-
-        String nuevoValor = txtCantidadMedicamento.getText();
-        String FechaActualizada = txtFechaCaducidad.getText();
-
-        for (int i = 0; i < tabla.getRowCount(); i++)
-        {
-
-            if (tabla.getValueAt(i, col).equals(dto))
-            {
-                tabla.setValueAt(nuevoValor, i, 1);
-                tabla.setValueAt(FechaActualizada, i, 3);
-
-                Existe = true;
-            }
-        }
-        return Existe;
-    }
 
     /**
      * Creates new form frmPersonalInventarioMedico
@@ -61,10 +40,54 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         tabla_modelo.addColumn("Cantidad");
         tabla_modelo.addColumn("Fecha agregado");
         tabla_modelo.addColumn("Fecha caducidad");
-        tabla_modelo.setColumnIdentifiers(new Object[]
-        {
-            "Nombre medicamento", "Cantidad", "Fecha agregado", "Fecha caducidad"
-        });
+        
+        tabla_modelo.setColumnIdentifiers(new Object[]{"Nombre medicamento", "Cantidad", "Fecha agregado", "Fecha caducidad"});
+        
+        CargarMedicamentos();
+    }
+    
+    
+    private void CargarMedicamentos() {
+        Gson gson = new Gson();
+
+        //Leer el archivo Json
+        FileReader reader;
+
+        try {
+            reader = new FileReader("ListaMedicamentos.json");
+            ListaEnlazada<Medicina> listaMedicamentosCargadas = gson.fromJson(reader, new TypeToken<ListaEnlazada<Medicina>>() {
+            }.getType());
+
+            for (Medicina medicamento : listaMedicamentosCargadas) {
+                if (!ExisteEnTabla(tblMedicamentos, medicamento.getNombre(), 0)) {
+                    tabla_modelo.addRow(new Object[]{medicamento.getNombre(), medicamento.getStock(), medicamento.getFechaAgregado(), medicamento.getFechaCaducidad()});
+                    tblMedicamentos.setModel(tabla_modelo);
+                } else {
+
+                }
+            }
+        } catch (FileNotFoundException e) {
+
+        }
+    }
+    
+    public boolean ExisteEnTabla(JTable tabla, String dto, int col) {
+
+        boolean Existe = false;
+
+        String nuevoValor = txtCantidadMedicamento.getText();
+        String FechaActualizada = txtFechaCaducidad.getText();
+
+        for (int i = 0; i < tabla.getRowCount(); i++) {
+
+            if (tabla.getValueAt(i, col).equals(dto)) {
+                tabla.setValueAt(nuevoValor, i, 1);
+                tabla.setValueAt(FechaActualizada, i, 3);
+
+                Existe = true;
+            }
+        }
+        return Existe;
     }
 
     //Metodo para eliminar todos los datos de la tabla
@@ -89,11 +112,10 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
     //Metodo para eliminar la fila de la tabla de inventario
     private void Eliminar() {
         int filaselecionada = tblMedicamentos.getSelectedRow();
-        if (filaselecionada >= 0)
-        {
+        if (filaselecionada >= 0) {
             tabla_modelo.removeRow(filaselecionada);
-        } else
-        {
+        } 
+        else {
             JOptionPane.showMessageDialog(null, "Seleccione el medicamento a eliminar", "Seleccione una fila", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -161,8 +183,8 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -283,46 +305,38 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(29, 29, 29)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtNombreMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(txtFechaCaducidad, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(btnEliminar))
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(txtCantidadMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(27, 27, 27)
-                                                .addComponent(btnAgregarMedicamento))))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(68, 68, 68))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnVaciar)
-                                .addGap(127, 127, 127)))
-                        .addGap(15, 15, 15))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtNombreMedicamento, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtCantidadMedicamento, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtFechaCaducidad))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnRegresar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnVaciar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAgregarMedicamento)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnGuardarMedicamentos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnVerificarMedicamento))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2))
+                .addGap(13, 13, 13))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,39 +345,34 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRegresar))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnGuardarMedicamentos)
+                            .addComponent(btnVerificarMedicamento)
+                            .addComponent(btnVaciar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRegresar)
+                            .addComponent(btnAgregarMedicamento)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btnGuardarMedicamentos)
-                                    .addComponent(btnVerificarMedicamento)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNombreMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtCantidadMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnAgregarMedicamento))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtFechaCaducidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(btnVaciar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 15, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNombreMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCantidadMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFechaCaducidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -385,18 +394,16 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // Condicion si alguno de los campos no esta vacio
         //Se mostrara la siguiente advertencia
-        if (!txtNombreMedicamento.getText().isEmpty() || !txtCantidadMedicamento.getText().isEmpty() || !txtFechaCaducidad.getText().isEmpty())
-        {
+        if (!txtNombreMedicamento.getText().isEmpty() || !txtCantidadMedicamento.getText().isEmpty() || !txtFechaCaducidad.getText().isEmpty()) {
             int result = JOptionPane.showConfirmDialog(null, "Estas seguro de regresar? \nSe perderan todos los avances no guardados", "CONFIRMAR SALIDA", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-            if (result == JOptionPane.YES_OPTION)
-            {
+            if (result == JOptionPane.YES_OPTION) {
 
                 frmPersonalInterfazPrincipal abrir = new frmPersonalInterfazPrincipal();
                 abrir.setVisible(true);
                 this.setVisible(false);
             }
-        } else
-        {
+        } 
+        else {
             frmPersonalInterfazPrincipal abrir = new frmPersonalInterfazPrincipal();
             abrir.setVisible(true);
             this.setVisible(false);
@@ -414,48 +421,44 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         String FechaCaducidad = txtFechaCaducidad.getText();
 
         //Condiciones si los datos estan vacios
-        if (txtNombreMedicamento.getText().isEmpty())
-        {
+        if (txtNombreMedicamento.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese un medicamento, el campo esta vacio", "MEDICAMENTO VACIO", JOptionPane.ERROR_MESSAGE);
-        } else if (txtCantidadMedicamento.getText().isEmpty())
-        {
+        } 
+        else if (txtCantidadMedicamento.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese la cantidad, el campo esta vacio", "CANTIDAD VACIO", JOptionPane.ERROR_MESSAGE);
-        } else if (txtFechaCaducidad.getText().isEmpty())
-        {
+        } 
+        else if (txtFechaCaducidad.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor ingrese la fecha", "NO EXISTE FECHA", JOptionPane.WARNING_MESSAGE);
-        } else if (ExisteEnTabla(tblMedicamentos, NombreMedicina, 0) == true)
-        {
+        } 
+        else if (ExisteEnTabla(tblMedicamentos, NombreMedicina, 0) == true) {
 
-        } else
-        {
+        } 
+        else {
 
             boolean resultado = true;
             String fecha1 = txtFechaCaducidad.getText();
             resultado = validarFecha(fecha1);
 
             //Validar el formato de fecha
-            if (txtFechaCaducidad.getText().matches("^\\d{1,2}/\\d{1,2}/\\d{4}$"))
-            {
+            if (txtFechaCaducidad.getText().matches("^\\d{1,2}/\\d{1,2}/\\d{4}$")) {
 
-            } else
-            {
+            } 
+            else {
                 JOptionPane.showMessageDialog(null, "La fecha tiene que contener 2 / en formato dia/mes/año", "FECHA SIN FORMATO0", JOptionPane.WARNING_MESSAGE);
             }
-            if (resultado == true)
-            {
+            if (resultado == true) {
 
                 ListaMedicamentos.add(new Medicina(NombreMedicina, CantidadMedicina, fechaActual, FechaCaducidad));
 
                 JOptionPane.showMessageDialog(null, "El medicamento se ha agregado", "MEDICAMENTO AGREGADO", JOptionPane.INFORMATION_MESSAGE);
 
-                tabla_modelo.addRow(new Object[]
-                {
+                tabla_modelo.addRow(new Object[]{
                     NombreMedicina, CantidadMedicina, fechaActual, FechaCaducidad
                 });
 
                 tblMedicamentos.setModel(tabla_modelo);
-            } else
-            {
+            } 
+            else {
                 JOptionPane.showMessageDialog(null, "El formato de la fecha esta mal,tiene que tener limites\n de dias 30 o 31 y mes maximo 12 ,Por favor revisar", "FORMATO DE FECHA MAL ESTABLECIDO", JOptionPane.WARNING_MESSAGE);
             }
         }
@@ -464,42 +467,33 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
 
     //Lee el archivo Json y trae los datos hacia la tabla
     private void btnVerificarMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarMedicamentoActionPerformed
-        if (tblMedicamentos.getRowCount() >= 0)
-        {
+        if (tblMedicamentos.getRowCount() >= 0) {
 
             Gson gson = new Gson();
 
             //Leer el archivo Json
             FileReader reader;
 
-            try
-            {
+            try {
                 reader = new FileReader("ListaMedicamentos.json");
                 ListaEnlazada<Medicina> listaMedicamentosCargadas = gson.fromJson(reader, new TypeToken<ListaEnlazada<Medicina>>() {
                 }.getType());
 
-                for (Medicina medicamento : listaMedicamentosCargadas)
-                {
-                    if (!ExisteEnTabla(tblMedicamentos, medicamento.getNombre(), 0))
-                    {
-                        tabla_modelo.addRow(new Object[]
-                        {
-                            medicamento.getNombre(), medicamento.getStock(), medicamento.getFechaAgregado(), medicamento.getFechaCaducidad()
-                        });
+                for (Medicina medicamento : listaMedicamentosCargadas) {
+                    if (!ExisteEnTabla(tblMedicamentos, medicamento.getNombre(), 0)) {
+                        tabla_modelo.addRow(new Object[]{medicamento.getNombre(), medicamento.getStock(), medicamento.getFechaAgregado(), medicamento.getFechaCaducidad()});
                         tblMedicamentos.setModel(tabla_modelo);
-                    } else
-                    {
+                    } 
+                    else {
 
                     }
                 }
-
-            } catch (FileNotFoundException e)
-            {
+            } 
+            catch (FileNotFoundException e) {
 
             }
-
-        } else
-        {
+        } 
+        else {
 
         }
     }//GEN-LAST:event_btnVerificarMedicamentoActionPerformed
@@ -526,13 +520,11 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         boolean minusculas = key >= 97 && key <= 122;
         boolean espacio = key == 32;
 
-        if (!(minusculas || mayusculas || espacio))
-        {
+        if (!(minusculas || mayusculas || espacio)) {
             evt.consume();
         }
 
-        if (txtNombreMedicamento.getText().length() >= 30)
-        {
+        if (txtNombreMedicamento.getText().length() >= 30) {
             evt.consume();
         }
     }//GEN-LAST:event_txtNombreMedicamentoKeyTyped
@@ -542,12 +534,10 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         //Limitaciones para evitar que el usuario ingrese letras ademas establecer la cantidad limite
         Character c = evt.getKeyChar();
 
-        if (!Character.isDigit(c))
-        {
+        if (!Character.isDigit(c)) {
             evt.consume();
         }
-        if (txtCantidadMedicamento.getText().length() >= 10000000)
-        {
+        if (txtCantidadMedicamento.getText().length() >= 10000000) {
             evt.consume();
         }
     }//GEN-LAST:event_txtCantidadMedicamentoKeyTyped
@@ -560,12 +550,10 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
 
         Character c = evt.getKeyChar();
 
-        if (!(Character.isDigit(c) || slash))
-        {
+        if (!(Character.isDigit(c) || slash)) {
             evt.consume();
         }
-        if (txtFechaCaducidad.getText().length() >= 10)
-        {
+        if (txtFechaCaducidad.getText().length() >= 10) {
             evt.consume();
         }
     }//GEN-LAST:event_txtFechaCaducidadKeyTyped
@@ -582,38 +570,34 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
 
         Gson gson = new Gson();
 
-        try
-        {
+        try {
             //Condiciones si los datos estan vacios
-            if (txtNombreMedicamento.getText().isEmpty())
-            {
+            if (txtNombreMedicamento.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Ingrese un medicamento, el campo esta vacio", "MEDICAMENTO VACIO", JOptionPane.ERROR_MESSAGE);
-            } else if (txtCantidadMedicamento.getText().isEmpty())
-            {
+            } 
+            else if (txtCantidadMedicamento.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Ingrese la cantidad, el campo esta vacio", "CANTIDAD VACIO", JOptionPane.ERROR_MESSAGE);
-            } else if (txtFechaCaducidad.getText().isEmpty())
-            {
+            } 
+            else if (txtFechaCaducidad.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Por favor ingrese la fecha", "NO EXISTE FECHA", JOptionPane.WARNING_MESSAGE);
-            } else
+            } 
             //Si la condicion no se cumple crear archivo Json 
-            {
+            else {
 
                 //Nombre archivo
                 File jsonFile = new File("ListaMedicamentos.json");
 
                 //Si el archivo ya exite entonces que se realize la condicion de lectura
-                if (jsonFile.exists())
-                {
+                if (jsonFile.exists()) {
                     FileReader reader = new FileReader("ListaMedicamentos.json");
                     Medicina[] dataArray = gson.fromJson(reader, Medicina[].class);
                     ListaMedicamentos = new ListaEnlazada<>();
 
-                    for (Medicina data : dataArray)
-                    {
+                    for (Medicina data : dataArray) {
                         ListaMedicamentos.add(data);
                     }
-                } else
-                {
+                } 
+                else {
                     ListaMedicamentos = new ListaEnlazada<>();
                 }
 
@@ -622,23 +606,20 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
                 boolean nombreExiste = false;
                 int indice = -1;
 
-                for (int i = 0; i < ListaMedicamentos.size(); i++)
-                {
-                    if (ListaMedicamentos.get(i).getNombre().equals(nuevoMedicamento.getNombre()))
-                    {
+                for (int i = 0; i < ListaMedicamentos.size(); i++) {
+                    if (ListaMedicamentos.get(i).getNombre().equals(nuevoMedicamento.getNombre())) {
                         nombreExiste = true;
                         indice = i;
                         break;
                     }
                 }
 
-                if (nombreExiste)
-                {
+                if (nombreExiste) {
                     ListaMedicamentos.get(indice).setStock(nuevoMedicamento.getStock());
                     ListaMedicamentos.get(indice).setFechaAgregado(nuevoMedicamento.getFechaAgregado());
                     ListaMedicamentos.get(indice).setFechaCaducidad(nuevoMedicamento.getFechaCaducidad());
-                } else
-                {
+                } 
+                else {
                     ListaMedicamentos.add(nuevoMedicamento);
                 }
 
@@ -651,8 +632,8 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
             }
 
             //Catch si es que ocurre algun error
-        } catch (IOException ex)
-        {
+        } 
+        catch (IOException ex) {
             Logger.getLogger(frmPersonalInventarioMedico.class.getName()).log(Level.SEVERE, null, ex);
         }
 
