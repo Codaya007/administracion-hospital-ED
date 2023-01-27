@@ -292,7 +292,7 @@ public class frmEspecialidades extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.setVisible(false);
-        new frmMenuSuperAdmin().setVisible(true);
+        new FrmMenuSuperAdmin().setVisible(true);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed

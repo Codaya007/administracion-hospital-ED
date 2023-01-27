@@ -7,6 +7,7 @@ package Vista;
 import Controlador.CtrlCuenta;
 import Modelo.Cuenta;
 import Modelo.Persona;
+import Modelo.Roles;
 import javax.swing.JOptionPane;
 import Utilidades.Utilidades;
 
@@ -378,7 +379,7 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
                 cuenta.getPersona().setApellidos(apellidos);
                 cuenta.getPersona().setGenero(genero);
                 cuenta.getPersona().setIdentificacion(cedula);
-                cuenta.getPersona().setRol(Utilidades.getRoles()[Utilidades.INDEX_PACIENTE_ROLE]);
+                cuenta.getPersona().setRol(Utilidades.getRoles()[Roles.Paciente.getIndex()]);
 
                 controlador.registrarUsuario(cuenta);
 

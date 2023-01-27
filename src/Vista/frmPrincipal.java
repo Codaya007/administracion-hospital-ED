@@ -245,7 +245,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void btnIngresarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarPacienteActionPerformed
         // TODO add your handling code here:
-        frmUsuarioSelecionarUso abrir = new frmUsuarioSelecionarUso();
+        FrmMenuPaciente abrir = new FrmMenuPaciente();
         abrir.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnIngresarPacienteActionPerformed

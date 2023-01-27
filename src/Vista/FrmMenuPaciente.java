@@ -11,13 +11,13 @@ import javax.swing.JOptionPane;
  *
  * @author Victor
  */
-public class frmUsuarioSelecionarUso extends javax.swing.JFrame {
+public class FrmMenuPaciente extends javax.swing.JFrame {
     int Xmouse,Ymouse;
 
     /**
      * Creates new form frmUsuarioSelecionarUso
      */
-    public frmUsuarioSelecionarUso() {
+    public FrmMenuPaciente() {
         initComponents();
         this.setLocationRelativeTo(null);
         
@@ -407,20 +407,21 @@ public class frmUsuarioSelecionarUso extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmUsuarioSelecionarUso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMenuPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmUsuarioSelecionarUso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMenuPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmUsuarioSelecionarUso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMenuPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmUsuarioSelecionarUso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMenuPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmUsuarioSelecionarUso().setVisible(true);
+                new FrmMenuPaciente().setVisible(true);
             }
         });
     }

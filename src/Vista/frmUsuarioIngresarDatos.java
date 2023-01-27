@@ -519,10 +519,14 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
 
     private void txtNumeroCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroCedulaKeyTyped
         // TODO add your handling code here:
+        int key = evt.getKeyChar();
+        boolean delete = key == 8;
+        
         Character c = evt.getKeyChar();
         
-        if(!Character.isDigit(c)){
+        if(!(Character.isDigit(c) || delete)){
             evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo ingreso de numeros", "TEXTO NO VALIDO", JOptionPane.WARNING_MESSAGE);
         }
         if(txtNumeroCedula.getText().length()>=10){
             evt.consume();
@@ -532,10 +536,14 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
 
     private void txtEdadPacienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadPacienteKeyTyped
         // TODO add your handling code here:
+        int key = evt.getKeyChar();
+        boolean delete = key == 8;
+        
         Character c = evt.getKeyChar();
         
-        if(!Character.isDigit(c)){
+        if(!(Character.isDigit(c) || delete)){
             evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo ingreso de numeros", "TEXTO NO VALIDO", JOptionPane.WARNING_MESSAGE);
         }
         if(txtEdadPaciente.getText().length()>=3){
             evt.consume();
@@ -544,9 +552,14 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
 
     private void txtNumeroTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroTelefonoKeyTyped
         // TODO add your handling code here:
+        int key = evt.getKeyChar();
+        boolean delete = key == 8;
+        
         Character c = evt.getKeyChar();
-        if(!Character.isDigit(c)){
+        
+        if(!(Character.isDigit(c) || delete)){
             evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo ingreso de numeros", "TEXTO NO VALIDO", JOptionPane.WARNING_MESSAGE);
         }
         if(txtNumeroTelefono.getText().length()>=10){
             evt.consume();
@@ -568,13 +581,13 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             int result = JOptionPane.showConfirmDialog(null, "Estas seguro de regresar? \nSe perderan todos los avances no guardados", "CONFIRMAR SALIDA", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE,Seguro);
             
             if (result == JOptionPane.YES_OPTION) {
-                frmUsuarioSelecionarUso abrir = new frmUsuarioSelecionarUso();
+                FrmMenuPaciente abrir = new FrmMenuPaciente();
                 abrir.setVisible(true);
                 this.setVisible(false);
             }
             
         } else {
-            frmUsuarioSelecionarUso abrir = new frmUsuarioSelecionarUso();
+            FrmMenuPaciente abrir = new FrmMenuPaciente();
             abrir.setVisible(true);
             this.setVisible(false);
         }
@@ -584,6 +597,7 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(evt.getKeyCode() == evt.VK_ENTER){
             txtNombrePaciente.requestFocus();
+            
         }
     }//GEN-LAST:event_txtNumeroCedulaKeyPressed
 
@@ -653,11 +667,12 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         boolean mayusculas = key >= 65 && key <= 90;
         boolean minusculas = key >= 97 && key <= 122;
         boolean espacio = key == 32;
+        boolean delete = key == 8;
 
-        if (!(minusculas || mayusculas || espacio)) {
+        if (!(minusculas || mayusculas || espacio ||delete)) {
             evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo ingreso de letras", "TEXTO NO VALIDO", JOptionPane.WARNING_MESSAGE);
         }
-
         if(txtNombrePaciente.getText().length()>=30){
             evt.consume();
         }
@@ -670,9 +685,11 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
         boolean mayusculas = key >= 65 && key <= 90;
         boolean minusculas = key >= 97 && key <= 122;
         boolean espacio = key == 32;
+        boolean delete = key == 8;
 
-        if (!(minusculas || mayusculas || espacio)) {
+        if (!(minusculas || mayusculas || espacio || delete)) {
             evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo ingreso de letras", "TEXTO NO VALIDO", JOptionPane.WARNING_MESSAGE);
         }
 
         if(txtApellidoPaciente.getText().length()>=30){

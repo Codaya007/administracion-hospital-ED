@@ -6,7 +6,6 @@ package Vista;
 
 import static Controlador.UtilidadesFechas.validarFecha;
 import Modelo.Paciente;
-import static Vista.frmUsuarioSeleccionarFecha.EnviarContenido;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -16,6 +15,7 @@ import java.util.GregorianCalendar;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import static Vista.frmUsuarioSeleccionarFecha.ListaDePacientes;
 
 /**
  *
@@ -241,6 +241,7 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
                 .addComponent(btnCambiarFecha))
         );
 
+        txaDatosPaciente.setEditable(false);
         txaDatosPaciente.setColumns(20);
         txaDatosPaciente.setRows(5);
         jScrollPane1.setViewportView(txaDatosPaciente);
@@ -337,10 +338,16 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
 
     private void txtNumeroCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroCedulaKeyTyped
         // TODO add your handling code here:
+        int key = evt.getKeyChar();
+        boolean delete = key == 8;
+        
         Character c = evt.getKeyChar();
-        if(!Character.isDigit(c)){
+        
+        if(!(Character.isDigit(c) || delete)){
             evt.consume();
-        }if(txtNumeroCedula.getText().length()>=10){
+            JOptionPane.showMessageDialog(null, "Solo ingreso de numeros", "TEXTO NO VALIDO", JOptionPane.WARNING_MESSAGE);
+        }
+        if(txtNumeroCedula.getText().length()>=10){
             evt.consume();
         }
     }//GEN-LAST:event_txtNumeroCedulaKeyTyped
@@ -363,7 +370,7 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        frmUsuarioSelecionarUso abrir = new frmUsuarioSelecionarUso();
+        FrmMenuPaciente abrir = new FrmMenuPaciente();
         abrir.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -464,7 +471,7 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
                     Date fechaSeleccionada = formatoDeFecha.parse(Fe);
                     Date fechaLimite = formatoDeFecha.parse("30/12/2040");
 
-                    boolean exist = EnviarContenido.stream().anyMatch(p -> p.getFechaIngreso().equals(Fe) && p.getHoraAtencion().equals(CbxHoraAtencion));
+                    boolean exist = ListaDePacientes.stream().anyMatch(p -> p.getFechaIngreso().equals(Fe) && p.getHoraAtencion().equals(CbxHoraAtencion));
 
                     if (txtFechaCita.getText().matches("^\\d{1,2}/\\d{1,2}/\\d{4}$")) {
                         
@@ -485,11 +492,11 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
                                 JOptionPane.showMessageDialog(null, "La hora de atencion ya no esta disponible", "NO DISPONIBLE", JOptionPane.INFORMATION_MESSAGE, HorarioNoDisponible);
                             } 
                             else {
-                                for (Paciente objeto : EnviarContenido) {
-                                    if (objeto.getIdentificacion().equals(txtNumeroCedula.getText())) {
-                                        objeto.setFechaIngreso(txtFechaCita.getText());
-                                        objeto.setHoraAtencion(cbxHorarioA.getSelectedItem().toString());
-                                        Collections.sort(EnviarContenido, (Paciente g, Paciente h) -> g.getHoraAtencion().compareTo(h.getHoraAtencion()));
+                                for (Paciente pacienteb : ListaDePacientes) {
+                                    if (pacienteb.getIdentificacion().equals(txtNumeroCedula.getText())) {
+                                        pacienteb.setFechaIngreso(txtFechaCita.getText());
+                                        pacienteb.setHoraAtencion(cbxHorarioA.getSelectedItem().toString());
+                                        Collections.sort(ListaDePacientes, (Paciente g, Paciente h) -> g.getHoraAtencion().compareTo(h.getHoraAtencion()));
                                         JOptionPane.showMessageDialog(null, "La cita se ha cambiado para el dia " + txtFechaCita.getText() + "\n con el horario de " + cbxHorarioA.getSelectedItem().toString(), "CITA REAGENDADA", JOptionPane.INFORMATION_MESSAGE, Cambiar);
                                     }
                                     break;
@@ -514,11 +521,15 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
     private void txtFechaCitaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaCitaKeyTyped
         // TODO add your handling code here:
         int key = evt.getKeyChar();
+        
         boolean slash = key == 47;
+        boolean delete = key == 8;
+        
         Character c = evt.getKeyChar();
 
-        if (!(Character.isDigit(c) || slash)) {
+        if (!(Character.isDigit(c) || slash || delete)) {
             evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo ingreso de numeros y slash", "TEXTO NO VALIDO", JOptionPane.WARNING_MESSAGE);
         }
         if (txtFechaCita.getText().length() >= 10) {
             evt.consume();
