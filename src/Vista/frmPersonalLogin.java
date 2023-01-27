@@ -6,8 +6,6 @@
 package Vista;
 
 import Controlador.CtrlCuenta;
-import Modelo.Cuenta;
-import Modelo.Rol;
 import Modelo.Roles;
 import javax.swing.JOptionPane;
 
@@ -166,14 +164,10 @@ public class frmPersonalLogin extends javax.swing.JFrame {
                             .addComponent(txtContraseñaIngresoUsuario)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(btnIngresarLogin)
-                                        .addGap(97, 97, 97))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(btnCrearUsuario)
-                                        .addGap(13, 13, 13)))))))
+                                .addGap(0, 179, Short.MAX_VALUE)
+                                .addComponent(btnCrearUsuario)
+                                .addGap(13, 13, 13))
+                            .addComponent(btnIngresarLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(15, 15, 15))
             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
