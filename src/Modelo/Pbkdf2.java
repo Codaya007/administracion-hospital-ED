@@ -18,6 +18,7 @@ import javax.crypto.spec.PBEKeySpec;
  * @author vivic
  */
 public class Pbkdf2 {
+//    SHA -> Secure Hash Algotithm
 
     public static boolean authenticate(String attemptedPassword, byte[] encryptedPassword, byte[] salt)
             throws NoSuchAlgorithmException, InvalidKeySpecException {
@@ -33,15 +34,16 @@ public class Pbkdf2 {
         return Arrays.equals(encryptedPassword, encryptedAttemptedPassword);
     }
 
+    //  SHA-1 producen una salida resumen de 160 bits (20 bytes) de un mensaje que puede tener un tamaño máximo de 264 bits
     public static byte[] getEncryptedPassword(String password, byte[] salt)
             throws NoSuchAlgorithmException, InvalidKeySpecException {
         // PBKDF2 with SHA-1 as the hashing algorithm. Note that the NIST
         // specifically names SHA-1 as an acceptable hashing algorithm for PBKDF2
         String algorithm = "PBKDF2WithHmacSHA1";
         // SHA-1 generates 160 bit hashes, so that's what makes sense here
-        int derivedKeyLength = 512;
+        int derivedKeyLength = 512; // Tamaño de bloque (bits)
 
-        int iterations = 4096;
+        int iterations = 4096; // 512 * 8 = 4096
 
         KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, derivedKeyLength);
 
@@ -52,10 +54,13 @@ public class Pbkdf2 {
 
     public static byte[] generateSalt() throws NoSuchAlgorithmException {
         // VERY important to use SecureRandom instead of just Random
+        // MEdiante el algoritmo SHA1PRNG generamos un string random
         SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
 
         // Generate a 8 byte (64 bit) salt as recommended by RSA PKCS5
+        // generamos un aray de bytes de longitud 8
         byte[] salt = new byte[8];
+        // usando el string random, generamos bytes randoms
         random.nextBytes(salt);
 
         return salt;

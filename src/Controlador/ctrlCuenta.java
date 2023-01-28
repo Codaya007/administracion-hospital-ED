@@ -87,7 +87,7 @@ public class CtrlCuenta {
 
     //guarda los datos que ingreso el usuario
     public void guardar() throws IOException {
-        System.out.println("Gurdando....");
+        System.out.println("Guardando ControladorCuenta....");
 
         Utilidades.guardarJson(this, "ControladorCuenta");
     }
@@ -125,49 +125,53 @@ public class CtrlCuenta {
         this.cuentas = cuentas;
     }
 
-    public void registrarMedico(Cuenta cuenta) throws Exception {
-        Integer lastEmptyIndexCuentas = Utilidades.ultimoElementoNoVacio(cuentas);
-        Integer lastEmptyIndex = Utilidades.ultimoElementoNoVacio(cuentasMedicos);
-
-        if (lastEmptyIndex == null) {
-            throw new Exception("Ya no se pueden registrar más médicos");
-        }
-
-        // Si es posible añadir más cuentas, primero elimino al médico de los arrays
-        eliminarCuenta(cuenta.getPersona().getIdentificacion());
-        // Y lo añado a la lista de cuentas y de médicos
-        cuentasMedicos[lastEmptyIndex] = cuenta;
-        cuentas[lastEmptyIndexCuentas] = cuenta;
-        this.guardar();
-    }
-
-    public void registrarEnfermera(Cuenta cuenta) throws Exception {
-        Integer lastEmptyIndexCuentas = Utilidades.ultimoElementoNoVacio(cuentas);
-        Integer lastEmptyIndex = Utilidades.ultimoElementoNoVacio(cuentasEnfermeros);
-
-        if (lastEmptyIndex == null) {
-            throw new Exception("Ya no se pueden registrar más enfermeros");
-        }
-
-        // Si es posible añadir más cuentas, primero elimino al enfermero de los arrays
-        eliminarCuenta(cuenta.getPersona().getIdentificacion());
-        // Y lo añado a la lista de cuentas y de médicos
-        cuentasEnfermeros[lastEmptyIndex] = cuenta;
-        cuentas[lastEmptyIndexCuentas] = cuenta;
-
-        this.guardar();
-    }
+//    public void registrarMedico(Cuenta cuenta) throws Exception {
+//        Integer lastEmptyIndexCuentas = Utilidades.ultimoElementoNoVacio(cuentas);
+//        Integer lastEmptyIndex = Utilidades.ultimoElementoNoVacio(cuentasMedicos);
+//
+//        if (lastEmptyIndex == null) {
+//            throw new Exception("Ya no se pueden registrar más médicos");
+//        }
+//
+//        // Si es posible añadir más cuentas, primero elimino al médico de los arrays
+//        eliminarCuenta(cuenta.getPersona().getIdentificacion());
+//        // Y lo añado a la lista de cuentas y de médicos
+//        cuentasMedicos[lastEmptyIndex] = cuenta;
+//        cuentas[lastEmptyIndexCuentas] = cuenta;
+//        this.guardar();
+//    }
+//
+//    public void registrarEnfermera(Cuenta cuenta) throws Exception {
+//        Integer lastEmptyIndexCuentas = Utilidades.ultimoElementoNoVacio(cuentas);
+//        Integer lastEmptyIndex = Utilidades.ultimoElementoNoVacio(cuentasEnfermeros);
+//
+//        if (lastEmptyIndex == null) {
+//            throw new Exception("Ya no se pueden registrar más enfermeros");
+//        }
+//
+//        // Si es posible añadir más cuentas, primero elimino al enfermero de los arrays
+//        eliminarCuenta(cuenta.getPersona().getIdentificacion());
+//        // Y lo añado a la lista de cuentas y de médicos
+//        cuentasEnfermeros[lastEmptyIndex] = cuenta;
+//        cuentas[lastEmptyIndexCuentas] = cuenta;
+//
+//        this.guardar();
+//    }
 
     public void actualizarRolCuenta(Cuenta cuenta) throws Exception {
+        // Si voy a actualizar el rol de una persona que está en la lista, primero confirmo que esté
         Integer findInIndex = Utilidades.buscarCuentaLinealPorCedula(cuentas, cuenta.getPersona().getIdentificacion());
 
         if (findInIndex == -1) {
             throw new Exception(cuenta.toString() + " no encontrado");
         }
 
+        // Obtengo el nuevo rol de la persona
         Rol nuevoRol = cuenta.getPersona().getRol();
 
+        // elimino la cuenta de todas las listasa
         eliminarCuenta(cuenta.getPersona().getIdentificacion());
+        // Depende del nuevo rol, vuelvo a agregar la persona en la lista del rol que corresponda
         if (nuevoRol.getNombre() == Roles.Medico.getNombre()) {
             Integer lastEmptyIndex = Utilidades.ultimoElementoNoVacio(cuentasMedicos);
 
@@ -182,6 +186,7 @@ public class CtrlCuenta {
             cuentasSuperAdmins[lastEmptyIndex] = cuenta;
         }
 
+        // Y la vuelvo a guardar en la lista general, de todos los roles.
         Integer lastIndexCuentas = Utilidades.ultimoElementoNoVacio(cuentas);
         if (lastIndexCuentas == null) {
             lastIndexCuentas = cuentas.length;
@@ -189,16 +194,20 @@ public class CtrlCuenta {
 
         cuentas[lastIndexCuentas] = cuenta;
         ocupados += 1;
+        // Actualizo el JSON
         this.guardar();
     }
 
     public void eliminarCuenta(String cedula) {
         try {
+            // Cuando envío a eliminar una cuenta, no sé qué indice ocupa, así que la busco por cédula, que es un atributo único
+            // en las cuentas. La elimino de toda las listas en las que esté la persona
             Integer indexCuentas = Utilidades.buscarCuentaLinealPorCedula(cuentas, cedula);
             Integer indexCuentasMedicos = Utilidades.buscarCuentaLinealPorCedula(cuentasMedicos, cedula);
             Integer indexCuentasEnfermeros = Utilidades.buscarCuentaLinealPorCedula(cuentasEnfermeros, cedula);
             Integer indexCuentasSuperAdmin = Utilidades.buscarCuentaLinealPorCedula(cuentasSuperAdmins, cedula);
 
+            // Si la cuenta ha sido hallada en alguna lista, las elimino de ahí
             if (indexCuentas != -1) {
                 Utilidades.eliminarElemento(cuentas, indexCuentas);
                 ocupados -= 1;

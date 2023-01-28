@@ -13,6 +13,7 @@ public class Cuenta {
 
     private Integer id;
     private String usuario;
+    // Array de bytes pq es una clave hasheada
     private byte[] clave;
     private Persona persona;
 
@@ -49,6 +50,7 @@ public class Cuenta {
     }
 
     public void setClave(String clave, byte[] salt) throws Exception {
+        // Al setear la clave, esta debe hashearse por motivos de seguridad
         byte[] claveHash = Pbkdf2.getEncryptedPassword(clave, salt);
 
         //System.out.println("Contraseña guardada:" + Arrays.toString(claveHash));
@@ -61,6 +63,7 @@ public class Cuenta {
             return false;
         }
 
+        // Como la clave está hasheada, usamos el método para comprobar las claves, para que coincida, se deben usar la misma sal
         return usuario.equals(this.usuario) && Pbkdf2.authenticate(clave, this.clave, salt);
     }
 
