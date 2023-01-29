@@ -328,7 +328,7 @@ public class FrmMenuDoctor extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-        frmPersonarSeleccionarPersonal abrir = new frmPersonarSeleccionarPersonal();
+        frmPersonalLogin abrir = new frmPersonalLogin();
         abrir.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnRegresarActionPerformed

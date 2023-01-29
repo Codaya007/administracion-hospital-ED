@@ -25,6 +25,7 @@ public class frmPersonalLogin extends javax.swing.JFrame {
     public frmPersonalLogin() {
         initComponents();
         this.setLocationRelativeTo(null);
+        // Cargamos el controlador guardado en el JSON
         controlador = (CtrlCuenta) Utilidades.Utilidades.cargarJson(CtrlCuenta.class, "ControladorCuenta");
     }
 
@@ -223,10 +224,11 @@ public class frmPersonalLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnIngresarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarLoginActionPerformed
-        // TODO add your handling code here:
+        // Extraemos el usuario y clave desde los inputs
         String usuario = txtNombreIngresoUsuario.getText();
         String clave = txtContraseñaIngresoUsuario.getText();
         
+        // Validamos que se hayan llenado los campos
         if (usuario.isEmpty() || clave.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos", "CREDENCIALES VACIAS", JOptionPane.ERROR_MESSAGE);
         } else {
