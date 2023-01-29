@@ -1,9 +1,1 @@
-[
-  {
-    "peso": 11.0,
-    "altura": 11.0,
-    "presionArterial": 11.0,
-    "presionCardiaca": 11.0,
-    "temperatura": 11.0
-  }
-]
+[{"peso":11.0,"altura":11.0,"presionArterial":111.0,"presionCardiaca":11.0,"temperatura":11.0}]
