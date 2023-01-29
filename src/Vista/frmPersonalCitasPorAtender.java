@@ -19,14 +19,14 @@ import java.io.FileReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  *
  * @author Victor
  */
 public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
-    int Xmouse,Ymouse;
-    
+
+    int Xmouse, Ymouse;
+
     public static ListaEnlazada contenedorAtendido = new ListaEnlazada();
 
     public static DefaultTableModel modelo;
@@ -36,17 +36,14 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
      * Creates new form frmPersonalCitasPorAtender
      */
     public frmPersonalCitasPorAtender() {
-//        frmPersonalInventarioMedico frm = new frmPersonalInventarioMedico();
-//        frm.CargarMedicamentos();
         initComponents();
         this.setLocationRelativeTo(null);
         CargarInterfazCitasAtender();
         CargarDatosCitasAtender();
         CargarMedicamentos();
-        //imprimirDatos();
-  
     }
     ListaEnlazada<Medicina> med = new ListaEnlazada<>();
+
     void CargarMedicamentos() {
         Gson gson = new Gson();
 
@@ -61,44 +58,30 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
             for (Medicina medicamento : listaMedicamentosCargadas) {
                 med.add(medicamento);
                 cbxMedicamentos.addItem(medicamento.getNombre());
-                
-                
-               
-
-//                if (!ExisteEnTabla(tblMedicamentos, medicamento.getNombre(), 0)) {
-//                    tabla_modelo.addRow(new Object[]{medicamento.getNombre(), medicamento.getStock(), medicamento.getFechaAgregado(), medicamento.getFechaCaducidad()});
-//                    tblMedicamentos.setModel(tabla_modelo);
-//                } else {
-//
-//                }
             }
-            
-            //System.out.println(med.get(1));
+
         } catch (FileNotFoundException e) {
 
         }
-                    
-
 
         //System.out.println(listaMedicamentosCargadas);
     }
 
-
     public void CargarInterfazCitasAtender() {
         String datos[][] = {};
-        String columna[] = {"Tipo Identificacion","Cedula", "Nombres", "Apellidos", "Edad", "Genero", "Telefono", "Molestia", "Fecha", "Hora Atencion"};
+        String columna[] = {"Tipo Identificacion", "Cedula", "Nombres", "Apellidos", "Edad", "Genero", "Telefono", "Molestia", "Fecha", "Hora Atencion"};
         modelo = new DefaultTableModel(datos, columna);
         tblCitasSinAtender.setModel(modelo);
     }
 
-    public void CargarDatosCitasAtender()  {
-        
+    public void CargarDatosCitasAtender() {
+
         Paciente a;
-        
+
         Collections.sort(ListaDePacientes, (Paciente z, Paciente b) -> z.getDia().compareTo(b.getDia()));
         Collections.sort(ListaDePacientes, (Paciente c, Paciente d) -> c.getMes().compareTo(d.getMes()));
         Collections.sort(ListaDePacientes, (Paciente e, Paciente f) -> e.getAnio().compareTo(f.getAnio()));
-        
+
         for (int i = ListaDePacientes.size() - 1; i >= 0; i--) {
             a = (Paciente) frmUsuarioSeleccionarFecha.ListaDePacientes.get(i);
             modelo.insertRow(EnviarEnFila, new Object[]{});
@@ -112,33 +95,9 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
             modelo.setValueAt(a.getMolestia(), EnviarEnFila, 7);
             modelo.setValueAt(a.getFechaIngreso(), EnviarEnFila, 8);
             modelo.setValueAt(a.getHoraAtencion(), EnviarEnFila, 9);
-//            try {
-//                System.out.println(ListaDePacientes.get(0));
-//                ListaDePacientes.busquedaBinaria("Nombres", "ddd");
-//            } catch (Exception ex) {
-//                Logger.getLogger(frmPersonalCitasPorAtender.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-
         }
-//             Medicina m;
-//             m = (Medicina) frmPersonalInventarioMedico.ListaMedicamentos.get(0);
-//             System.out.println(m);
     }
-    
-    public void imprimirDatos(){
-        try {
-                    System.out.println(contenedorAtendido.obtener(0));
 
-            //frmUsuarioSeleccionarFecha.ListaDePacientes.busquedaBinaria("", "");
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-    }
-    
-
- 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -182,7 +141,6 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
         txtNumero = new javax.swing.JTextField();
         btnAsignarMedicamento = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         cbxMedicamentos = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -421,8 +379,6 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("CANCELAR CITA");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -439,7 +395,6 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cbxMedicamentos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtNumero))))
                 .addContainerGap())
@@ -458,8 +413,6 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAsignarMedicamento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRegresar)
@@ -583,7 +536,7 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     private void txtEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadKeyTyped
         // TODO add your handling code here:
         Character c = evt.getKeyChar();
-        if(!Character.isDigit(c)){
+        if (!Character.isDigit(c)) {
             evt.consume();
         }
     }//GEN-LAST:event_txtEdadKeyTyped
@@ -591,10 +544,10 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     private void txtNumeroCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroCedulaKeyTyped
         // TODO add your handling code here:
         Character c = evt.getKeyChar();
-        if(!Character.isDigit(c)){
+        if (!Character.isDigit(c)) {
             evt.consume();
         }
-        if(txtNumeroCedula.getText().length()>=10){
+        if (txtNumeroCedula.getText().length() >= 10) {
             evt.consume();
         }
     }//GEN-LAST:event_txtNumeroCedulaKeyTyped
@@ -602,10 +555,10 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     private void txtNumeroTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroTelefonoKeyTyped
         // TODO add your handling code here:
         Character c = evt.getKeyChar();
-        if(!Character.isDigit(c)){
+        if (!Character.isDigit(c)) {
             evt.consume();
         }
-        if(txtNumeroTelefono.getText().length()>=10){
+        if (txtNumeroTelefono.getText().length() >= 10) {
             evt.consume();
         }
     }//GEN-LAST:event_txtNumeroTelefonoKeyTyped
@@ -620,11 +573,11 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
 
     private void btnAsignarMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarMedicamentoActionPerformed
         // TODO add your handling code here:
-        
 
-        if(txtNumero.getText().isEmpty() || txtNumero.getText().isEmpty()||txtNumeroCedula.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "No se ha asignado un medicamento","FALTA ASIGNAR MEDICAMENTO",JOptionPane.WARNING_MESSAGE);
-        }else{
+// se asigna un medicamento al paciente
+        if (txtNumero.getText().isEmpty() || txtNumero.getText().isEmpty() || txtNumeroCedula.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No se ha asignado un medicamento", "FALTA ASIGNAR MEDICAMENTO", JOptionPane.WARNING_MESSAGE);
+        } else {
             frmPersonalHistorialPacientes abrir = new frmPersonalHistorialPacientes();
             abrir.setVisible(false);
 
@@ -639,35 +592,30 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
             String FechaAtencion = txtFechaIngreso.getText();
             String HoraAtencion = txtHoraAtencion.getText();
             String Medicamento = txtNumero.getText();
-            String Dosis =txtNumero.getText();
-            
-            HistorialClinico claseauto = new HistorialClinico(TipoId,NumeroCedula, NombrePaciente, ApellidoPaciente, EdadPaciente, GeneroPaciente, TelefonoPaciente, MolestiaPaciente, FechaAtencion, HoraAtencion, Medicamento, Dosis);
+            String Dosis = txtNumero.getText();
+
+            HistorialClinico claseauto = new HistorialClinico(TipoId, NumeroCedula, NombrePaciente, ApellidoPaciente, EdadPaciente, GeneroPaciente, TelefonoPaciente, MolestiaPaciente, FechaAtencion, HoraAtencion, Medicamento, Dosis);
             contenedorAtendido.add(claseauto);
             if (tblCitasSinAtender.getSelectedRow() != -1) {
                 ListaDePacientes.remove(tblCitasSinAtender.getSelectedRow());
                 modelo.removeRow(tblCitasSinAtender.getSelectedRow());
                 String numero;
-                    numero = med.get(cbxMedicamentos.getSelectedIndex()).getStock();
-                    
-                    if (Integer.valueOf(txtNumero.getText()) > Integer.valueOf(numero)  ) {
-                                    JOptionPane.showMessageDialog(null, "No hay suficientes medicinas","Medicinas insuficientes",JOptionPane.WARNING_MESSAGE);
-                    }else if (Integer.valueOf(txtNumero.getText()) < Integer.valueOf(numero)) {
-                        Integer stock;
-                        stock = Integer.valueOf(numero) - Integer.valueOf(txtNumero.getText());
-                                           med.get(cbxMedicamentos.getSelectedIndex()).setStock(String.valueOf(stock));
+                numero = med.get(cbxMedicamentos.getSelectedIndex()).getStock();
 
-                                  JOptionPane.showMessageDialog(null, "PACIENTE ATENDIDO EXITOSAMENTE");
+                if (Integer.valueOf(txtNumero.getText()) > Integer.valueOf(numero)) {
+                    JOptionPane.showMessageDialog(null, "No hay suficientes medicinas", "Medicinas insuficientes", JOptionPane.WARNING_MESSAGE);
+                } else if (Integer.valueOf(txtNumero.getText()) < Integer.valueOf(numero)) {
+                    Integer stock;
+                    stock = Integer.valueOf(numero) - Integer.valueOf(txtNumero.getText());
+                    med.get(cbxMedicamentos.getSelectedIndex()).setStock(String.valueOf(stock));
 
+                    JOptionPane.showMessageDialog(null, "PACIENTE ATENDIDO EXITOSAMENTE");
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun paciente","PACIENTE NO SELECCIONADO",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun paciente", "PACIENTE NO SELECCIONADO", JOptionPane.INFORMATION_MESSAGE);
             }
         }
-        
-                    //System.out.println(med.get(1));
-                    
 
-        
     }//GEN-LAST:event_btnAsignarMedicamentoActionPerformed
 
     private void tblCitasSinAtenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCitasSinAtenderMouseClicked
@@ -684,29 +632,29 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
         txaMolestias.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 7)));
         txtFechaIngreso.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 8)));
         txtHoraAtencion.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 9)));
-        
+
         //Muestran los datos de valoracion
         for (int i = ListaDePacientes.size() - 1; i >= 0; i--) {
             a = (Paciente) frmUsuarioSeleccionarFecha.ListaDePacientes.get(i);
             if (a.getIdentificacion() == tblCitasSinAtender.getValueAt(seleccionar, 1)) {
                 if (a.getValoracion() != null) {
-                 txtAltura2.setText(String.valueOf(a.getValoracion().getAltura()));
-                 txtPeso2.setText(String.valueOf(a.getValoracion().getPeso()));
-                 txtPresionArterial2.setText(String.valueOf(a.getValoracion().getPresionArterial()));
-                 txtPresionCardiaca2.setText(String.valueOf(a.getValoracion().getPresionCardiaca()));
-                 txtTemperatura2.setText(String.valueOf(a.getValoracion().getTemperatura()));
-                }else{
-                  JOptionPane.showMessageDialog(null,"No se han rellenado los campos de valoracion");
+                    txtAltura2.setText(String.valueOf(a.getValoracion().getAltura()));
+                    txtPeso2.setText(String.valueOf(a.getValoracion().getPeso()));
+                    txtPresionArterial2.setText(String.valueOf(a.getValoracion().getPresionArterial()));
+                    txtPresionCardiaca2.setText(String.valueOf(a.getValoracion().getPresionCardiaca()));
+                    txtTemperatura2.setText(String.valueOf(a.getValoracion().getTemperatura()));
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se han rellenado los campos de valoracion");
                 }
-                 
+
             }
-             
+
         }
     }//GEN-LAST:event_tblCitasSinAtenderMouseClicked
 
     private void txtNumeroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == evt.VK_ENTER){
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             btnAsignarMedicamento.requestFocus();
         }
     }//GEN-LAST:event_txtNumeroKeyPressed
@@ -719,9 +667,9 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
 
     private void jLabel15MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseDragged
         // TODO add your handling code here:
-        int x =evt.getXOnScreen();
-        int y =evt.getYOnScreen();
-        this.setLocation(x-Xmouse,y- Ymouse);
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - Xmouse, y - Ymouse);
     }//GEN-LAST:event_jLabel15MouseDragged
 
     /**
@@ -763,7 +711,6 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     private javax.swing.JButton btnAsignarMedicamento;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cbxMedicamentos;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

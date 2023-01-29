@@ -409,7 +409,6 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
                               <Component id="jLabel14" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
                               <Component id="cbxMedicamentos" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtNumero" alignment="0" max="32767" attributes="0"/>
                           </Group>
@@ -433,8 +432,6 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtNumero" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnAsignarMedicamento" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnRegresar" min="-2" max="-2" attributes="0"/>
@@ -494,11 +491,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegresarActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="CANCELAR CITA"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cbxMedicamentos">
           <Properties>
