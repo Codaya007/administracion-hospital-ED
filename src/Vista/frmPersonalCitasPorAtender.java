@@ -6,11 +6,14 @@ package Vista;
 
 import Controlador.ListaEnlazada.ListaEnlazada;
 import Modelo.HistorialClinico;
+import Modelo.Medicina;
 import Modelo.Paciente;
 import java.util.Collections;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static Vista.frmUsuarioSeleccionarFecha.ListaDePacientes;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -29,10 +32,16 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
      * Creates new form frmPersonalCitasPorAtender
      */
     public frmPersonalCitasPorAtender() {
+        frmPersonalInventarioMedico frm = new frmPersonalInventarioMedico();
+        frm.CargarMedicamentos();
         initComponents();
         this.setLocationRelativeTo(null);
         CargarInterfazCitasAtender();
+
+        
         CargarDatosCitasAtender();
+        //imprimirDatos();
+  
     }
 
 
@@ -43,7 +52,7 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
         tblCitasSinAtender.setModel(modelo);
     }
 
-    public void CargarDatosCitasAtender() {
+    public void CargarDatosCitasAtender()  {
         
         Paciente a;
         
@@ -64,8 +73,32 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
             modelo.setValueAt(a.getMolestia(), EnviarEnFila, 7);
             modelo.setValueAt(a.getFechaIngreso(), EnviarEnFila, 8);
             modelo.setValueAt(a.getHoraAtencion(), EnviarEnFila, 9);
+//            try {
+//                System.out.println(ListaDePacientes.get(0));
+//                ListaDePacientes.busquedaBinaria("Nombres", "ddd");
+//            } catch (Exception ex) {
+//                Logger.getLogger(frmPersonalCitasPorAtender.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+
         }
+             Medicina m;
+             m = (Medicina) frmPersonalInventarioMedico.ListaMedicamentos.get(0);
+             System.out.println(m);
     }
+    
+    public void imprimirDatos(){
+        try {
+                    System.out.println(contenedorAtendido.obtener(0));
+
+            //frmUsuarioSeleccionarFecha.ListaDePacientes.busquedaBinaria("", "");
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+    
+
  
     /**
      * This method is called from within the constructor to initialize the form.
@@ -112,6 +145,7 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
         btnAsignarMedicamento = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        cbxMedicamentos = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
@@ -357,6 +391,8 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
 
         jButton1.setText("CANCELAR CITA");
 
+        cbxMedicamentos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -375,7 +411,8 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
                             .addComponent(txtAsignarMedicamento)
                             .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtDosis)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbxMedicamentos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -388,8 +425,10 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtAsignarMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbxMedicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
                 .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(txtDosis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
@@ -687,6 +726,7 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAsignarMedicamento;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JComboBox<String> cbxMedicamentos;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

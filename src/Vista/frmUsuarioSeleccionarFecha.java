@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Controlador.ListaEnlazada.Excepciones.ListaVaciaExcepcion;
+import Controlador.ListaEnlazada.Excepciones.PosicionNoEncontradaException;
 import static Controlador.UtilidadesFechas.validarFecha;
 
 import Controlador.ListaEnlazada.ListaEnlazada;
@@ -15,6 +17,8 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -631,6 +635,8 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
               (Paciente g, Paciente h)
               -> g.getHoraAtencion().compareTo(h.getHoraAtencion())
       );
+      
+        
   }//GEN-LAST:event_btnAgendarCitaActionPerformed
 
   private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
