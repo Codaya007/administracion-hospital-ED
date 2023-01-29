@@ -3,7 +3,6 @@ package Controlador.ListaEnlazada;
 import Controlador.ListaEnlazada.Excepciones.AtributoException;
 import Controlador.ListaEnlazada.Excepciones.ListaVaciaExcepcion;
 import Controlador.ListaEnlazada.Excepciones.PosicionNoEncontradaException;
-import Controlador.UtilidadesLista;
 import Controlador.UtilidadesGenerales;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
@@ -117,65 +116,6 @@ public class ListaEnlazada<E>
       size++;
     }
   }
-  
-  public Integer busquedaBinaria(String atributo, Object dato) throws Exception {
-        Integer posicion = 0;
-        E[] arreglo = toArray();
-        Boolean isObject = Utilidades.isObject(arreglo[0].getClass());
-        Object a;
-        Class<E> clazz = (Class<E>) cabecera.getDato().getClass();
-
-        Integer central, bajo, alto;
-        Object valorCentral;
-        bajo = 0;
-        alto = arreglo.length - 1;
-        while (bajo <= alto) {
-            central = (bajo + alto) / 2;
-            valorCentral = arreglo[central];
-            if (isObject) { //Objetos
-                
-                Field field = Utilidades.obtenerAtributo(clazz, atributo);
-                if (field == null) {
-                    throw new AtributoException();
-                } else {
-                    field.setAccessible(true);
-                    a = field.get(valorCentral);
-                }
-                if (Utilidades.isNumber(a.getClass())) { //Atributo con numeros
-                    if (((Number) dato).doubleValue() == ((Number) a).doubleValue()) {
-                        return central;
-                    } else if (((Number) dato).doubleValue() < ((Number) a).doubleValue()) {
-                        alto = central - 1;
-                    } else {
-                        bajo = central + 1;
-                    }
-                }
-                if (Utilidades.isString(a.getClass())) { //Atributo con cadenas
-
-                    if (dato.toString().toLowerCase().equals(a.toString().toLowerCase())) {
-                        return central;
-                    } else if (dato.toString().toLowerCase().compareTo(a.toString().toLowerCase()) < 0) {
-                        alto = central - 1;
-                    } else {
-                        bajo = central + 1;
-                    }
-                }
-
-            } else { //Datos primitivos
-                if (Utilidades.isNumber(arreglo[0].getClass())) { //Numeros
-                    if (((Number) dato).doubleValue() == ((Number) valorCentral).doubleValue()) {
-                        return central;
-                    } else if (((Number) dato).doubleValue() < ((Number) valorCentral).doubleValue()) {
-                        alto = central - 1;
-                    } else {
-                        bajo = central + 1;
-                    }
-                }
-
-            }
-        }
-        return -1;
-    }
 
   //obtiene el valor
   public E obtener(Integer pos)

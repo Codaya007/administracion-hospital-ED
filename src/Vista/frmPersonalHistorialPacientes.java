@@ -63,12 +63,12 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
         }
     }
     
-    public void BuscarPaciente() throws Exception{
-        System.out.println(contenedorAtendido.obtener(1)); 
-        Integer encontrado =null;
-                 encontrado = contenedorAtendido.busquedaBinaria("identificacionAtendido", "111111111");
-
-    }
+//    public void BuscarPaciente() throws Exception{
+//        System.out.println(contenedorAtendido.obtener(1)); 
+//        Integer encontrado =null;
+//                 encontrado = contenedorAtendido.busquedaBinaria("identificacionAtendido", "111111111");
+//
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -87,8 +87,6 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtIdentificacion = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PACIENTES ATENDIDOS");
@@ -168,21 +166,6 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
             }
         });
 
-        txtIdentificacion.setText("Identificacion");
-        txtIdentificacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdentificacionActionPerformed(evt);
-            }
-        });
-
-        btnBuscar.setText("BUSCAR");
-        btnBuscar.setActionCommand("");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -191,10 +174,7 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(237, 237, 237)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -211,11 +191,7 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnBuscar)))
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -241,13 +217,6 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        // TODO add your handling code here:
-        FrmMenuDoctor abrir = new FrmMenuDoctor();
-        abrir.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnRegresarActionPerformed
-
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         // TODO add your handling code here:
         Xmouse = evt.getX();
@@ -261,19 +230,12 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
         this.setLocation(x-Xmouse,y- Ymouse);
     }//GEN-LAST:event_jLabel3MouseDragged
 
-    private void txtIdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdentificacionActionPerformed
-        txtIdentificacion.setText("");
-    }//GEN-LAST:event_txtIdentificacionActionPerformed
-
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        System.out.println();
-        try {
-        
-            BuscarPaciente();
-        } catch (Exception ex) {
-            System.out.println("valio queso");
-        }
-    }//GEN-LAST:event_btnBuscarActionPerformed
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+        FrmMenuDoctor abrir = new FrmMenuDoctor();
+        abrir.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -315,7 +277,6 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -323,7 +284,6 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable tblRegistroPacientes;
-    private javax.swing.JTextField txtIdentificacion;
+    private javax.swing.JTable tblRegistroPacientes;
     // End of variables declaration//GEN-END:variables
 }
