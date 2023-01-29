@@ -242,12 +242,16 @@ public class frmPersonalLogin extends javax.swing.JFrame {
                     
                     if (rolUsuario.equals(Roles.SuperAdmin.getNombre())) {
                         new FrmMenuSuperAdmin().setVisible(true);
-                    } else if (rolUsuario.equals(Roles.Medico.getNombre())) {
+                    } 
+                    else if (rolUsuario.equals(Roles.Medico.getNombre())) {
                         new FrmMenuDoctor().setVisible(true);
-                    } else if (rolUsuario.equals(Roles.Enfermera.getNombre())) {
+                    } 
+                    if (rolUsuario.equals(Roles.Enfermera.getNombre())) {
                         new frmPersonalEnfermera().setVisible(true);
-                    } else {
-                        new FrmMenuPaciente().setVisible(true);
+                        
+                    } 
+                    else {
+                        new frmPrincipal().setVisible(true);
                     }
                     
                     this.setVisible(false);

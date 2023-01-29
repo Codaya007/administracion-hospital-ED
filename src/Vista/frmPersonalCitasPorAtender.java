@@ -411,7 +411,7 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
             }
         });
 
-        jPanel6.setBorder(new javax.swing.border.MatteBorder(null));
+        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel29.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -696,19 +696,7 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
@@ -725,15 +713,11 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JTable tblCitasSinAtender;
     public static javax.swing.JTextArea txaMolestias;
-    private javax.swing.JTextField txtAltura;
-    private javax.swing.JTextField txtAltura1;
     private javax.swing.JTextField txtAltura2;
     public static javax.swing.JTextField txtApellidoPaciente;
     public static javax.swing.JTextField txtAsignarMedicamento;
@@ -745,17 +729,9 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     public static javax.swing.JTextField txtNombre;
     public static javax.swing.JTextField txtNumeroCedula;
     public static javax.swing.JTextField txtNumeroTelefono;
-    private javax.swing.JTextField txtPeso;
-    private javax.swing.JTextField txtPeso1;
     private javax.swing.JTextField txtPeso2;
-    private javax.swing.JTextField txtPresionArterial;
-    private javax.swing.JTextField txtPresionArterial1;
     private javax.swing.JTextField txtPresionArterial2;
-    private javax.swing.JTextField txtPresionCardiaca;
-    private javax.swing.JTextField txtPresionCardiaca1;
     private javax.swing.JTextField txtPresionCardiaca2;
-    private javax.swing.JTextField txtTemperatura;
-    private javax.swing.JTextField txtTemperatura1;
     private javax.swing.JTextField txtTemperatura2;
     public static javax.swing.JTextField txtTipoId;
     // End of variables declaration//GEN-END:variables
