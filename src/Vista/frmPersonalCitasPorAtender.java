@@ -4,18 +4,24 @@
  */
 package Vista;
 
+import Controlador.ListaEnlazada.Excepciones.ListaVaciaExcepcion;
+import Controlador.ListaEnlazada.Excepciones.PosicionNoEncontradaException;
 import Controlador.ListaEnlazada.ListaEnlazada;
 import Modelo.HistorialClinico;
 import Modelo.Medicina;
 import Modelo.Paciente;
+import static Vista.frmPersonalInventarioMedico.ListaMedicamentos;
+import static Vista.frmUsuarioSeleccionarFecha.ListaDePacientes;
 import java.util.Collections;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import static Vista.frmUsuarioSeleccionarFecha.ListaDePacientes;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,7 +29,7 @@ import java.util.logging.Logger;
  *
  * @author Victor
  */
-public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
+public final class frmPersonalCitasPorAtender extends javax.swing.JFrame {
 
     int Xmouse, Ymouse;
 
@@ -43,6 +49,7 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
         CargarMedicamentos();
     }
     ListaEnlazada<Medicina> med = new ListaEnlazada<>();
+    ListaEnlazada<Paciente> pas = new ListaEnlazada<>();
 
     void CargarMedicamentos() {
         Gson gson = new Gson();
@@ -54,17 +61,18 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
             reader = new FileReader("ListaMedicamentos.json");
             ListaEnlazada<Medicina> listaMedicamentosCargadas = gson.fromJson(reader, new TypeToken<ListaEnlazada<Medicina>>() {
             }.getType());
-
             for (Medicina medicamento : listaMedicamentosCargadas) {
                 med.add(medicamento);
                 cbxMedicamentos.addItem(medicamento.getNombre());
             }
+            
+            System.out.println(med);
 
         } catch (FileNotFoundException e) {
 
         }
 
-        //System.out.println(listaMedicamentosCargadas);
+        
     }
 
     public void CargarInterfazCitasAtender() {
@@ -75,26 +83,43 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     }
 
     public void CargarDatosCitasAtender() {
-
         Paciente a;
+        Gson gson = new Gson();
 
-        Collections.sort(ListaDePacientes, (Paciente z, Paciente b) -> z.getDia().compareTo(b.getDia()));
-        Collections.sort(ListaDePacientes, (Paciente c, Paciente d) -> c.getMes().compareTo(d.getMes()));
-        Collections.sort(ListaDePacientes, (Paciente e, Paciente f) -> e.getAnio().compareTo(f.getAnio()));
+        //Leer el archivo Json
+        FileReader reader;
 
-        for (int i = ListaDePacientes.size() - 1; i >= 0; i--) {
-            a = (Paciente) frmUsuarioSeleccionarFecha.ListaDePacientes.get(i);
-            modelo.insertRow(EnviarEnFila, new Object[]{});
-            modelo.setValueAt(a.getTipoIdentificacion(), EnviarEnFila, 0);
-            modelo.setValueAt(a.getIdentificacion(), EnviarEnFila, 1);
-            modelo.setValueAt(a.getNombres(), EnviarEnFila, 2);
-            modelo.setValueAt(a.getApellidos(), EnviarEnFila, 3);
-            modelo.setValueAt(a.getEdad(), EnviarEnFila, 4);
-            modelo.setValueAt(a.getGenero(), EnviarEnFila, 5);
-            modelo.setValueAt(a.getTelefono(), EnviarEnFila, 6);
-            modelo.setValueAt(a.getMolestia(), EnviarEnFila, 7);
-            modelo.setValueAt(a.getFechaIngreso(), EnviarEnFila, 8);
-            modelo.setValueAt(a.getHoraAtencion(), EnviarEnFila, 9);
+        try {
+            reader = new FileReader("ListaPacientes.json");
+            ListaEnlazada<Paciente> listaPacientesCargada = gson.fromJson(reader, new TypeToken<ListaEnlazada<Paciente>>() {
+            }.getType());
+
+            for (Paciente paciente : listaPacientesCargada) {
+                pas.add(paciente);
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("valio queso");
+
+        }
+
+        Collections.sort(pas, (Paciente z, Paciente b) -> z.getDia().compareTo(b.getDia()));
+        Collections.sort(pas, (Paciente c, Paciente d) -> c.getMes().compareTo(d.getMes()));
+        Collections.sort(pas, (Paciente e, Paciente f) -> e.getAnio().compareTo(f.getAnio()));
+        for (int i = pas.size() - 1; i >= 0; i--) {
+             a = (Paciente) pas.get(i);
+                modelo.insertRow(EnviarEnFila, new Object[]{});
+                modelo.setValueAt(a.getTipoIdentificacion(), EnviarEnFila, 0);
+                modelo.setValueAt(a.getIdentificacion(), EnviarEnFila, 1);
+                modelo.setValueAt(a.getNombres(), EnviarEnFila, 2);
+                modelo.setValueAt(a.getApellidos(), EnviarEnFila, 3);
+                modelo.setValueAt(a.getEdad(), EnviarEnFila, 4);
+                modelo.setValueAt(a.getGenero(), EnviarEnFila, 5);
+                modelo.setValueAt(a.getTelefono(), EnviarEnFila, 6);
+                modelo.setValueAt(a.getMolestia(), EnviarEnFila, 7);
+                modelo.setValueAt(a.getFechaIngreso(), EnviarEnFila, 8);
+                modelo.setValueAt(a.getHoraAtencion(), EnviarEnFila, 9);
+
         }
     }
 
@@ -570,7 +595,7 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
         this.setVisible(false);
 //        dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
-
+Paciente paciente;
     private void btnAsignarMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarMedicamentoActionPerformed
         // TODO add your handling code here:
 
@@ -595,12 +620,18 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
             String Dosis = txtNumero.getText();
 
             HistorialClinico claseauto = new HistorialClinico(TipoId, NumeroCedula, NombrePaciente, ApellidoPaciente, EdadPaciente, GeneroPaciente, TelefonoPaciente, MolestiaPaciente, FechaAtencion, HoraAtencion, Medicamento, Dosis);
-            contenedorAtendido.add(claseauto);
-            if (tblCitasSinAtender.getSelectedRow() != -1) {
-                ListaDePacientes.remove(tblCitasSinAtender.getSelectedRow());
-                modelo.removeRow(tblCitasSinAtender.getSelectedRow());
+            
+            
+            System.out.println(tblCitasSinAtender.getSelectedRow());
+            if (tblCitasSinAtender.getSelectedRow()>= 0) {
+                
+                
+                
                 String numero;
                 numero = med.get(cbxMedicamentos.getSelectedIndex()).getStock();
+                
+                
+             
 
                 if (Integer.valueOf(txtNumero.getText()) > Integer.valueOf(numero)) {
                     JOptionPane.showMessageDialog(null, "No hay suficientes medicinas", "Medicinas insuficientes", JOptionPane.WARNING_MESSAGE);
@@ -608,13 +639,64 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
                     Integer stock;
                     stock = Integer.valueOf(numero) - Integer.valueOf(txtNumero.getText());
                     med.get(cbxMedicamentos.getSelectedIndex()).setStock(String.valueOf(stock));
+                    contenedorAtendido.add(claseauto);
+                    //                    System.out.println(tblCitasSinAtender.getSelectedRow());
+//                    System.out.println(pas);
+//                    System.out.println(pas.get(tblCitasSinAtender.getSelectedRow()));
 
+                    pas.remove(tblCitasSinAtender.getSelectedRow());
+                    System.out.println("eliminado");
                     JOptionPane.showMessageDialog(null, "PACIENTE ATENDIDO EXITOSAMENTE");
+                    modelo.removeRow(tblCitasSinAtender.getSelectedRow());
+                    //tblCitasSinAtender.remove(tblCitasSinAtender.getSelectedRow());
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun paciente", "PACIENTE NO SELECCIONADO", JOptionPane.INFORMATION_MESSAGE);
             }
         }
+        
+        
+        System.out.println();
+        Gson gson = new Gson();
+                      File jsonFile = new File("ListaPacientes.json");
+                      
+                      //Agregar datos al archivo Json
+                FileWriter writer = null;
+        try {
+            writer = new FileWriter("ListaPacientes.json");
+        } catch (IOException ex) {
+            Logger.getLogger(frmPersonalCitasPorAtender.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                //Agrega la listaMedicamento dentro del Json y lo escribe 
+                gson.toJson(pas, writer);
+        try {
+            //Cierro
+            writer.close();
+            
+ 
+        } catch (IOException ex) {
+            Logger.getLogger(frmPersonalCitasPorAtender.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+                      File jsonFile2 = new File("HistorialPacientes.json");
+                      
+                      //Agregar datos al archivo Json
+                
+        try {
+            writer = new FileWriter("HistorialPacientes.json");
+        } catch (IOException ex) {
+            Logger.getLogger(frmPersonalCitasPorAtender.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                //Agrega la listaMedicamento dentro del Json y lo escribe 
+                gson.toJson(contenedorAtendido, writer);
+        try {
+            //Cierro
+            writer.close();} catch (IOException ex) {
+            Logger.getLogger(frmPersonalCitasPorAtender.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //CargarDatosCitasAtender();
 
     }//GEN-LAST:event_btnAsignarMedicamentoActionPerformed
 

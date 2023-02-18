@@ -625,7 +625,7 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
 
                 //Agregar datos al archivo Json
                 FileWriter writer = new FileWriter("ListaMedicamentos.json");
-                //Agrega la listaMedicamento denttro del Json y lo escribe 
+                //Agrega la listaMedicamento dentro del Json y lo escribe 
                 gson.toJson(ListaMedicamentos, writer);
                 //Cierro
                 writer.close();

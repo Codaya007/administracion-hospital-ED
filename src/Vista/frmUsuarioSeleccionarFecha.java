@@ -9,8 +9,16 @@ import Controlador.ListaEnlazada.Excepciones.PosicionNoEncontradaException;
 import static Controlador.UtilidadesFechas.validarFecha;
 
 import Controlador.ListaEnlazada.ListaEnlazada;
+import Modelo.Medicina;
 import Modelo.Paciente;
+import static Vista.frmPersonalInventarioMedico.ListaMedicamentos;
+import com.google.gson.Gson;
 import java.awt.Color;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -32,6 +40,7 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
     int Xmouse, Ymouse;
 
     public static ListaEnlazada<Paciente> ListaDePacientes = new ListaEnlazada<>();
+    public static ListaEnlazada<Paciente> ListaDePacientes2 = new ListaEnlazada<>();
 
     /**
      * Creates new form frmAgendarCita
@@ -601,7 +610,46 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                               Anio,
                               null
                       );
+
                       ListaDePacientes.add(paciente);
+                      Gson gson = new Gson();
+                      File jsonFile = new File("ListaPacientes.json");
+
+                      if (jsonFile.exists()) {
+                          FileReader reader = new FileReader("ListaPacientes.json");
+                          Paciente[] dataArray = gson.fromJson(reader, Paciente[].class);
+                          ListaDePacientes = new ListaEnlazada<>();
+
+                          for (Paciente data : dataArray) {
+                              ListaDePacientes.add(data);
+                          }
+                      } else {
+                          ListaDePacientes = new ListaEnlazada<>();
+
+                      }
+                      boolean nombreExiste = false;
+                      int indice = -1;
+
+                      for (int i = 0; i < ListaDePacientes.size(); i++) {
+                          if (ListaDePacientes.get(i).getIdentificacion().equals(paciente.getIdentificacion())) {
+                              nombreExiste = true;
+                              indice = i;
+                              break;
+                          }
+                      }
+
+                      if (nombreExiste) {
+                          ListaDePacientes.get(indice).setNombres(paciente.getNombres());
+
+                      } else {
+                          ListaDePacientes.add(paciente);
+                      }
+
+                      FileWriter writer = new FileWriter("ListaPacientes.json");
+                      //Agrega la listaMedicamento dentro del Json y lo escribe 
+                      gson.toJson(ListaDePacientes, writer);
+                      //Cierro
+                      writer.close();
 
                       JOptionPane.showMessageDialog(
                               null,
@@ -628,6 +676,10 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
               }
           }
       } catch (ParseException ex) {
+      } catch (FileNotFoundException ex) {
+          Logger.getLogger(frmUsuarioSeleccionarFecha.class.getName()).log(Level.SEVERE, null, ex);
+      } catch (IOException ex) {
+          Logger.getLogger(frmUsuarioSeleccionarFecha.class.getName()).log(Level.SEVERE, null, ex);
       }
 
       Collections.sort(
@@ -635,8 +687,8 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
               (Paciente g, Paciente h)
               -> g.getHoraAtencion().compareTo(h.getHoraAtencion())
       );
-      
-        
+
+
   }//GEN-LAST:event_btnAgendarCitaActionPerformed
 
   private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed

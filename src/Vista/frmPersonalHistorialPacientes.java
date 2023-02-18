@@ -6,7 +6,12 @@ package Vista;
 
 import Controlador.ListaEnlazada.ListaEnlazada;
 import Modelo.HistorialClinico;
+import Modelo.Medicina;
 import static Vista.frmPersonalCitasPorAtender.contenedorAtendido;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -26,10 +31,14 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
      */
     public frmPersonalHistorialPacientes() {
         initComponents();
+        CargarHistorial();
         this.setLocationRelativeTo(null);
         CargarInterfazAtendidos();
         CargarDatosAtendidos();
+        
     }
+    
+    ListaEnlazada<HistorialClinico> clin = new ListaEnlazada<>();
     
     public void CargarInterfazAtendidos() {
 
@@ -38,13 +47,34 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
         modeloAtendido = new DefaultTableModel(datos, columna);
         tblRegistroPacientes.setModel(modeloAtendido);
     }
+    
+    void CargarHistorial() {
+        Gson gson = new Gson();
+
+        //Leer el archivo Json
+        FileReader reader;
+
+        try {
+            reader = new FileReader("HistorialPacientes.json");
+            ListaEnlazada<HistorialClinico> listaRegistroCargadas = gson.fromJson(reader, new TypeToken<ListaEnlazada<HistorialClinico>>() {
+            }.getType());
+
+            for (HistorialClinico historialClinico : listaRegistroCargadas) {
+                clin.add(historialClinico);
+            }
+        } catch (FileNotFoundException e) {
+
+        }
+    }
 
     public void CargarDatosAtendidos() {
         
+        
+        
         HistorialClinico a;
         
-        for (int i = 0; i < frmPersonalCitasPorAtender.contenedorAtendido.size(); i++) {
-            a = (HistorialClinico) frmPersonalCitasPorAtender.contenedorAtendido.get(i);
+        for (int i = 0; i < clin.size(); i++) {
+            a = (HistorialClinico) clin.get(i);
             modeloAtendido.insertRow(contadorAtendido, new Object[]{});
             modeloAtendido.setValueAt(a.getTipoId(), contadorAtendido, 0);
             modeloAtendido.setValueAt(a.getIdentificacionA(), contadorAtendido, 1);
