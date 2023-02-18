@@ -4,6 +4,9 @@ import Controlador.ListaEnlazada.ListaEnlazada;
 import static Controlador.UtilidadesFechas.validarFecha;
 import Modelo.Medicina;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,6 +31,8 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
     int Xmouse, Ymouse;
 
     ListaEnlazada<Medicina> ListaMedicamentos = new ListaEnlazada<>();
+    
+    
 
     /**
      * Creates new form frmPersonalInventarioMedico
@@ -114,6 +119,35 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         int filaselecionada = tblMedicamentos.getSelectedRow();
         if (filaselecionada >= 0) {
             tabla_modelo.removeRow(filaselecionada);
+            
+            Gson gson = new Gson();
+
+            //Leer el archivo Json
+            FileReader reader;
+            
+            try {
+                reader = new FileReader("ListaMedicamentos.json");
+                ListaEnlazada<Medicina> listaMedicamentosCargadas = gson.fromJson(reader, new TypeToken<ListaEnlazada<Medicina>>() {
+                }.getType());
+                
+                int posicionAEliminar = tblMedicamentos.getSelectedRowCount();
+                
+                
+                listaMedicamentosCargadas.remove(posicionAEliminar);
+                
+                FileWriter writer;
+                try {
+                    writer = new FileWriter("ListaMedicamentos.json");
+                    gson.toJson(listaMedicamentosCargadas, writer);
+                    writer.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(frmPersonalInventarioMedico.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            } 
+            catch (FileNotFoundException ex) {
+                Logger.getLogger(frmPersonalInventarioMedico.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } 
         else {
             JOptionPane.showMessageDialog(null, "Seleccione el medicamento a eliminar", "Seleccione una fila", JOptionPane.ERROR_MESSAGE);
@@ -326,9 +360,8 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
                         .addComponent(btnEliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnVaciar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAgregarMedicamento)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAgregarMedicamento)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -354,8 +387,8 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnGuardarMedicamentos)
                             .addComponent(btnVerificarMedicamento)
-                            .addComponent(btnVaciar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnVaciar)
+                            .addComponent(btnEliminar)
                             .addComponent(btnRegresar)
                             .addComponent(btnAgregarMedicamento)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -644,7 +677,9 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVaciarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+
         Eliminar();
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
