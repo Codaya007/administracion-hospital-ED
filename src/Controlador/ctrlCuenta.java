@@ -105,7 +105,9 @@ public class ctrlCuenta {
         
         return salt;
     }
-
+/**
+ * Getters y Setters de las cuentas
+ */
     public void setSalt(byte[] salt) {
         this.salt = salt;
     }
@@ -126,39 +128,12 @@ public class ctrlCuenta {
         this.cuentas = cuentas;
     }
 
-//    public void registrarMedico(Cuenta cuenta) throws Exception {
-//        Integer lastEmptyIndexCuentas = Utilidades.ultimoElementoNoVacio(cuentas);
-//        Integer lastEmptyIndex = Utilidades.ultimoElementoNoVacio(cuentasMedicos);
-//
-//        if (lastEmptyIndex == null) {
-//            throw new Exception("Ya no se pueden registrar más médicos");
-//        }
-//
-//        // Si es posible añadir más cuentas, primero elimino al médico de los arrays
-//        eliminarCuenta(cuenta.getPersona().getIdentificacion());
-//        // Y lo añado a la lista de cuentas y de médicos
-//        cuentasMedicos[lastEmptyIndex] = cuenta;
-//        cuentas[lastEmptyIndexCuentas] = cuenta;
-//        this.guardar();
-//    }
-//
-//    public void registrarEnfermera(Cuenta cuenta) throws Exception {
-//        Integer lastEmptyIndexCuentas = Utilidades.ultimoElementoNoVacio(cuentas);
-//        Integer lastEmptyIndex = Utilidades.ultimoElementoNoVacio(cuentasEnfermeros);
-//
-//        if (lastEmptyIndex == null) {
-//            throw new Exception("Ya no se pueden registrar más enfermeros");
-//        }
-//
-//        // Si es posible añadir más cuentas, primero elimino al enfermero de los arrays
-//        eliminarCuenta(cuenta.getPersona().getIdentificacion());
-//        // Y lo añado a la lista de cuentas y de médicos
-//        cuentasEnfermeros[lastEmptyIndex] = cuenta;
-//        cuentas[lastEmptyIndexCuentas] = cuenta;
-//
-//        this.guardar();
-//    }
 
+/**
+ * Metodo para actualizar el rol de cuenta
+ * @param cuenta a actualizar
+ * @throws Exception por si surge un error
+ */
     public void actualizarRolCuenta(Cuenta cuenta) throws Exception {
         // Si voy a actualizar el rol de una persona que está en la lista, primero confirmo que esté
         Integer findInIndex = Utilidades.buscarCuentaLinealPorCedula(cuentas, cuenta.getPersona().getIdentificacion());
@@ -198,6 +173,11 @@ public class ctrlCuenta {
         // Actualizo el JSON
         this.guardar();
     }
+    
+    /**
+     * Metodo para eliminar cuenta
+     * @param cedula a eliminar
+     */
 
     public void eliminarCuenta(String cedula) {
         try {
