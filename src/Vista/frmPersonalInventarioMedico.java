@@ -40,7 +40,7 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
     public frmPersonalInventarioMedico() {
         initComponents();
         this.setLocationRelativeTo(null);
-        //Nombre de las columnas
+        //Nombre de las columnas al cargar la interfaz
         tabla_modelo.addColumn("Nombre medicamento");
         tabla_modelo.addColumn("Cantidad");
         tabla_modelo.addColumn("Fecha agregado");
