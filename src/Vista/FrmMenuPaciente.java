@@ -68,7 +68,8 @@ public class FrmMenuPaciente extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("HOSPITAL \"ISIDRO\"");
+        jLabel1.setText("HOSPITAL \"ESTRUCTURA DE DATOS\"");
+        jLabel1.setToolTipText("");
 
         jPanel2.setBackground(new java.awt.Color(32, 82, 149));
 

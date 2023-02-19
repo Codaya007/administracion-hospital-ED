@@ -14,8 +14,9 @@ import java.io.IOException;
  */
 public class CtrlEspecialidades {
 
+    // Limito la creacion de especialidades
     private final Integer MAXIMO_ESPECIALIDADES = 25;
-//    private ListaEnlazada<Especialidad> listaEspecialidades;
+    // private ListaEnlazada<Especialidad> listaEspecialidades;
     private Especialidad listaEspecialidades[] = new Especialidad[MAXIMO_ESPECIALIDADES];
 
     public Especialidad[] getEspecialidades() {
@@ -25,13 +26,14 @@ public class CtrlEspecialidades {
     public CtrlEspecialidades() {
     }
 
-    //verifica si la cuenta existe
     public void registrarEspecialidad(Especialidad nueva) throws Exception {
+        // Determino si hay lugar para una nueva especialidad
         Integer index = Utilidades.ultimoElementoNoVacio(listaEspecialidades);
         
         if(index == null) throw new Exception("Ya no se pueden agregar más especialidades");
         
         listaEspecialidades[index] = nueva;
+        // Actualizo el JSON con la información
         guardar();
     }
 

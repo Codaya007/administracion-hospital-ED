@@ -139,7 +139,8 @@ public class Utilidades<T> {
             cmb.addItem(array[i]);
         }
     }
-
+    
+    //buscar cuenta por numero de cedula
     public static Integer buscarCuentaLinealPorCedula(Cuenta cuentas[], String cedula) {
         Integer index = -1;
 
@@ -162,7 +163,8 @@ public class Utilidades<T> {
 
         return index;
     }
-
+    
+    //comvierte la lista en arreglo y elimina en elemento que se selecciona
     public static void eliminarElemento(Object array[], Integer index) {
         for (int i = index; i < array.length - 1; i++) {
             array[i] = array[i + 1];

@@ -73,13 +73,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
                           <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel1" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jLabel1" alignment="1" pref="492" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                       <Component id="jLabel6" alignment="0" pref="475" max="32767" attributes="0"/>
@@ -92,24 +92,21 @@
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnRegresar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnEliminar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="btnVaciar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                          <Component id="btnRegresar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="btnAgregarMedicamento" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace pref="11" max="32767" attributes="0"/>
+                          <Component id="btnVaciar" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="btnGuardarMedicamentos" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="btnVerificarMedicamento" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jScrollPane2" max="32767" attributes="0"/>
@@ -125,22 +122,24 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jScrollPane2" min="-2" pref="242" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                                  <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
                                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnGuardarMedicamentos" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnVerificarMedicamento" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnVaciar" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                              <Component id="btnEliminar" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                              <Component id="btnVaciar" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnRegresar" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnAgregarMedicamento" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnSalir" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -157,6 +156,16 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txtFechaCaducidad" min="-2" max="-2" attributes="0"/>
                       </Group>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnGuardarMedicamentos" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnVerificarMedicamento" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnAgregarMedicamento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="btnEliminar" alignment="0" min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="btnRegresar" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="12" max="32767" attributes="0"/>
               </Group>
@@ -185,8 +194,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel4" min="-2" pref="195" max="-2" attributes="0"/>
-                      <EmptySpace pref="26" max="32767" attributes="0"/>
+                      <Component id="jLabel4" pref="230" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -320,20 +329,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Fecha caducidad"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnVaciar">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="0"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/RecursosGraficos/Botones/vaciar.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Vaciar Inventario"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVaciarActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtFechaCaducidad">
           <Properties>
