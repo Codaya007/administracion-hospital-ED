@@ -13,7 +13,7 @@ public class FrmMenuSuperAdmin extends javax.swing.JFrame {
     int Xmouse, Ymouse;
 
     /**
-     * Creates new form frmPersonarSeleccionarPersonal
+     * Creates new form FrmMenuSuperAdmin
      */
     public FrmMenuSuperAdmin() {
         initComponents();
@@ -323,8 +323,7 @@ public class FrmMenuSuperAdmin extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
