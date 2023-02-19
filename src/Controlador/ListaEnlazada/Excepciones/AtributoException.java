@@ -10,6 +10,8 @@ package Controlador.ListaEnlazada.Excepciones;
  */
 public class AtributoException extends Exception{
     
+    //excepcion de atributo vacio
+    
     public AtributoException(String msg){
         super(msg);
     }
