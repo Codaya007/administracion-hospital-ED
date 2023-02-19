@@ -26,7 +26,8 @@ public class Controlador extends frmUsuarioConsultarCita{
     }
     
     //verificar si un valor esta dentro de una tabla
-    public boolean ExisteEnTabla(JTable tblCitasSinAtender, String cedula, int col) {
+    @Override
+    public boolean ExisteEnLista(JTable tblCitasSinAtender, String cedula, int col) {
         boolean Existe = false;
         for (int i = 0; i < tblCitasSinAtender.getRowCount(); i++) {
             if (tblCitasSinAtender.getValueAt(0, col).equals(cedula)) {

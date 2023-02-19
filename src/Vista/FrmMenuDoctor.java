@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -83,6 +84,7 @@ public class FrmMenuDoctor extends javax.swing.JFrame {
         });
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("PANEL ADMINISTRATIVO DOCTOR");
 
@@ -100,6 +102,7 @@ public class FrmMenuDoctor extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("CITAS POR ATENDER");
 
@@ -141,6 +144,7 @@ public class FrmMenuDoctor extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("HISTORIAL PACIENTES");
 
@@ -171,6 +175,7 @@ public class FrmMenuDoctor extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(32, 82, 149));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("INVENTARIO MEDICO");
 
@@ -292,7 +297,10 @@ public class FrmMenuDoctor extends javax.swing.JFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
-        int valor = JOptionPane.showConfirmDialog(this,"¿Esta seguro que quiere salir del sistema?","CONFIRMACION DE SALIDA",JOptionPane.INFORMATION_MESSAGE);
+        ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSalirIcono.png");
+
+        int valor = JOptionPane.showConfirmDialog(null, "¿Esta seguro que quiere salir del sistema?\n Se perderan todos los avances", "CONFIRMACION DE SALIDA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, SalirConfirmar);
+
         if(valor == JOptionPane.YES_OPTION){
             System.exit(0);
         }

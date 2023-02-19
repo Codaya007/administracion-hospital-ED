@@ -469,7 +469,7 @@ public final class frmPersonalCitasPorAtender extends javax.swing.JFrame {
             }
         });
 
-        jPanel6.setBorder(new javax.swing.border.MatteBorder(null));
+        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel29.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

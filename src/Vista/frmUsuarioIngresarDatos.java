@@ -651,7 +651,8 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
                 this.setVisible(false);
             }
             
-        } else {
+        } 
+        else {
             frmPrincipal abrir = new frmPrincipal();
             abrir.setVisible(true);
             this.setVisible(false);
@@ -845,7 +846,8 @@ public class frmUsuarioIngresarDatos extends javax.swing.JFrame {
             Vista.frmUsuarioIngresarDatos.cbxGeneroPaciente.setSelectedItem(null);
             Vista.frmUsuarioIngresarDatos.txtNumeroTelefono.setText("");
             Vista.frmUsuarioIngresarDatos.txaMolestias.setText("");
-        } else {
+        } 
+        else {
 
         }
     }//GEN-LAST:event_btnBorrarCamposActionPerformed
