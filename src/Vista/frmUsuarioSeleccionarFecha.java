@@ -8,13 +8,17 @@ import static Controlador.UtilidadesFechas.validarFecha;
 
 import Controlador.ListaEnlazada.ListaEnlazada;
 import Modelo.Paciente;
+import Utilidades.PDFCrear;
 import java.awt.Color;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -407,6 +411,10 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
 
                         Paciente paciente = new Paciente(TipoId, NumeroCedula, NombrePaciente, ApellidoPaciente, EdadPaciente, GeneroPaciente, TelefonoPaciente, MolestiaPaciente, FechaAtencion, HoraAtencion, Dia, Mes, Anio, null);
                         ListaDePacientes.add(paciente);
+                        
+                        PDFCrear crear = new PDFCrear();
+
+                        crear.guardarDatos(paciente, ListaDePacientes);
 
                         JOptionPane.showMessageDialog(null, "Cita agendada exitosamente", "AGENDADO", JOptionPane.INFORMATION_MESSAGE, Agendado);
 
@@ -424,6 +432,9 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
         } 
         catch (ParseException ex) {
             
+        } 
+        catch (IOException ex) {
+            Logger.getLogger(frmUsuarioSeleccionarFecha.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         Collections.sort(ListaDePacientes, (Paciente g, Paciente h) -> g.getHoraAtencion().compareTo(h.getHoraAtencion()));
