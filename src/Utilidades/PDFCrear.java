@@ -26,9 +26,12 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+/**/
 public class PDFCrear {
-
+/**
+ * Metodo que sirve para crear un pdf de las citas por atender
+ * 
+ */
     public boolean crearPdfCitas() {
         boolean aviso = false;
         PDFCrear pdf = new PDFCrear();
@@ -88,7 +91,11 @@ public class PDFCrear {
         }
         return aviso;
     }
-
+/**
+ * Metodo para crear un reporte en pdf del historial de pacientes
+ * 
+ * @return retorna el aviso que me sirve para ver si el documento ha sido creado
+ */
     public boolean crearPdfHistorialPaciente() {
         boolean aviso = false;
         ListaEnlazada<HistorialClinico> pasA = new ListaEnlazada<>();
@@ -148,7 +155,10 @@ public class PDFCrear {
         }
         return aviso;
     }
-
+/**
+ * Permite guardar los datos de un json en una lista 
+ * @param pas permite ingresar una lista, la cual va a tener los datos del json
+ */
     public void CargarPacientesCitas(ListaEnlazada<Paciente> pas) {
 
         Gson gson = new Gson();
@@ -194,7 +204,12 @@ public class PDFCrear {
 
         }
     }
-
+/**
+ * 
+ * @param cedula parametro para buscar un paciente 
+ * @return avisa si el documento se crea
+ * @throws DocumentException Exepcion por si se genera un error al crear el documento
+ */
     public boolean ImprimirBuscado(String cedula) throws DocumentException {
         boolean aviso = false;
         PDFCrear pdf = new PDFCrear();
@@ -271,7 +286,13 @@ public class PDFCrear {
         }
         return aviso;
     }
-
+/**
+ * 
+ * @param paciente ingresa los datos del paciente a registrar
+ * @param pas lista con los datos a escribir 
+ * @throws FileNotFoundException para advertir de un archivo que no ha sido encontrado
+ * @throws IOException por si no puede escribir dentro del json
+ */
     public void guardarDatos(Paciente paciente, ListaEnlazada<Paciente> pas) throws FileNotFoundException, IOException {
         Gson gson = new Gson();
         File jsonFile = new File("ListaPacientes.json");
@@ -313,7 +334,14 @@ public class PDFCrear {
         writer.close();
 
     }
-
+/**
+ * Guarda los datos correspondiente a un paciente
+ * @param paciente nuevo a registra
+ * @param pas lista con los datos a escribir
+ * @param identificacion para buscar 
+ * @throws FileNotFoundException
+ * @throws IOException 
+ */
     public void guardarDatosPa(Paciente paciente, ListaEnlazada<Paciente> pas, String identificacion) throws FileNotFoundException, IOException {
         Gson gson = new Gson();
         File jsonFile = new File("ListaPacientes.json");
@@ -350,15 +378,6 @@ public class PDFCrear {
         } else {
             pas.add(paciente);
         }
-        
-//        for (int i = 0; i < pas.size(); i++) {
-//            if (pas.get(i).getIdentificacion().equals(identificacion)) {
-//                       pas.set(i);
-//                        break;
-//            }
-//        }
-
-        System.out.println("pasa");
         FileWriter writer = new FileWriter("ListaPacientes.json");
         //Agrega la listaMedicamento dentro del Json y lo escribe 
         gson.toJson(pas, writer);
