@@ -80,6 +80,9 @@ public class frmPersonalLogin extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtNombreIngresoUsuarioKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreIngresoUsuarioKeyTyped(evt);
+            }
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -289,6 +292,7 @@ public class frmPersonalLogin extends javax.swing.JFrame {
         if (evt.getKeyCode() == evt.VK_ENTER) {
             txtContraseñaIngresoUsuario.requestFocus();
         }
+        
     }//GEN-LAST:event_txtNombreIngresoUsuarioKeyPressed
 
     private void btnCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearUsuarioActionPerformed
@@ -327,6 +331,13 @@ public class frmPersonalLogin extends javax.swing.JFrame {
             System.exit(0);
         }
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void txtNombreIngresoUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreIngresoUsuarioKeyTyped
+        // TODO add your handling code here:
+        if(txtNombreIngresoUsuario.getText().length()>=10){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreIngresoUsuarioKeyTyped
 
     /**
      * @param args the command line arguments
