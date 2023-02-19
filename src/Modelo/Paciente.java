@@ -59,6 +59,8 @@ public class Paciente {
 
     }
 
+    
+
     public String getTipoIdentificacion() {
         return TipoIdentificacion;
     }

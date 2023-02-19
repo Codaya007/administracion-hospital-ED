@@ -40,7 +40,6 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
     int Xmouse, Ymouse;
 
     public static ListaEnlazada<Paciente> ListaDePacientes = new ListaEnlazada<>();
-    public static ListaEnlazada<Paciente> ListaDePacientes2 = new ListaEnlazada<>();
 
     /**
      * Creates new form frmAgendarCita

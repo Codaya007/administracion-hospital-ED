@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Utilidades.PDFCrear;
 import Controlador.ListaEnlazada.Excepciones.ListaVaciaExcepcion;
 import Controlador.ListaEnlazada.Excepciones.PosicionNoEncontradaException;
 import Controlador.ListaEnlazada.ListaEnlazada;
@@ -167,6 +168,7 @@ public final class frmPersonalCitasPorAtender extends javax.swing.JFrame {
         btnAsignarMedicamento = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         cbxMedicamentos = new javax.swing.JComboBox<>();
+        btnImprimirCitas = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
@@ -404,6 +406,14 @@ public final class frmPersonalCitasPorAtender extends javax.swing.JFrame {
             }
         });
 
+        btnImprimirCitas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnMostrarInventarioIcono.png"))); // NOI18N
+        btnImprimirCitas.setText("Imprimir Citas");
+        btnImprimirCitas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirCitasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -423,6 +433,7 @@ public final class frmPersonalCitasPorAtender extends javax.swing.JFrame {
                             .addComponent(cbxMedicamentos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtNumero))))
                 .addContainerGap())
+            .addComponent(btnImprimirCitas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -438,6 +449,8 @@ public final class frmPersonalCitasPorAtender extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnImprimirCitas, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAsignarMedicamento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRegresar)
@@ -640,15 +653,10 @@ Paciente paciente;
                     stock = Integer.valueOf(numero) - Integer.valueOf(txtNumero.getText());
                     med.get(cbxMedicamentos.getSelectedIndex()).setStock(String.valueOf(stock));
                     contenedorAtendido.add(claseauto);
-                    //                    System.out.println(tblCitasSinAtender.getSelectedRow());
-//                    System.out.println(pas);
-//                    System.out.println(pas.get(tblCitasSinAtender.getSelectedRow()));
-
                     pas.remove(tblCitasSinAtender.getSelectedRow());
                     System.out.println("eliminado");
                     JOptionPane.showMessageDialog(null, "PACIENTE ATENDIDO EXITOSAMENTE");
                     modelo.removeRow(tblCitasSinAtender.getSelectedRow());
-                    //tblCitasSinAtender.remove(tblCitasSinAtender.getSelectedRow());
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun paciente", "PACIENTE NO SELECCIONADO", JOptionPane.INFORMATION_MESSAGE);
@@ -696,7 +704,6 @@ Paciente paciente;
             Logger.getLogger(frmPersonalCitasPorAtender.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        //CargarDatosCitasAtender();
 
     }//GEN-LAST:event_btnAsignarMedicamentoActionPerformed
 
@@ -754,6 +761,11 @@ Paciente paciente;
         this.setLocation(x - Xmouse, y - Ymouse);
     }//GEN-LAST:event_jLabel15MouseDragged
 
+    private void btnImprimirCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirCitasActionPerformed
+        PDFCrear crea = new PDFCrear();
+        crea.crearPdfCitas();
+    }//GEN-LAST:event_btnImprimirCitasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -791,6 +803,7 @@ Paciente paciente;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAsignarMedicamento;
+    private javax.swing.JButton btnImprimirCitas;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cbxMedicamentos;
     private javax.swing.JLabel jLabel1;
