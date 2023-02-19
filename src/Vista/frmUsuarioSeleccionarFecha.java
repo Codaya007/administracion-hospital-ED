@@ -4,17 +4,30 @@
  */
 package Vista;
 
+import Controlador.ListaEnlazada.Excepciones.ListaVaciaExcepcion;
+import Controlador.ListaEnlazada.Excepciones.PosicionNoEncontradaException;
 import static Controlador.UtilidadesFechas.validarFecha;
 
 import Controlador.ListaEnlazada.ListaEnlazada;
+import Modelo.Medicina;
 import Modelo.Paciente;
+import Utilidades.PDFCrear;
+import static Vista.frmPersonalInventarioMedico.ListaMedicamentos;
+import com.google.gson.Gson;
 import java.awt.Color;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -597,7 +610,10 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                               Anio,
                               null
                       );
+
                       ListaDePacientes.add(paciente);
+                      PDFCrear crear = new PDFCrear();
+                      crear.guardarDatos(paciente, ListaDePacientes);
 
                       JOptionPane.showMessageDialog(
                               null,
@@ -624,6 +640,10 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
               }
           }
       } catch (ParseException ex) {
+      } catch (FileNotFoundException ex) {
+          Logger.getLogger(frmUsuarioSeleccionarFecha.class.getName()).log(Level.SEVERE, null, ex);
+      } catch (IOException ex) {
+          Logger.getLogger(frmUsuarioSeleccionarFecha.class.getName()).log(Level.SEVERE, null, ex);
       }
 
       Collections.sort(
@@ -631,6 +651,8 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
               (Paciente g, Paciente h)
               -> g.getHoraAtencion().compareTo(h.getHoraAtencion())
       );
+
+
   }//GEN-LAST:event_btnAgendarCitaActionPerformed
 
   private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed

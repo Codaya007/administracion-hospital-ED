@@ -3,6 +3,7 @@ package Vista;
 import Controlador.ListaEnlazada.ListaEnlazada;
 import Modelo.Paciente;
 import Modelo.Valoracion;
+import Utilidades.PDFCrear;
 import static Vista.frmUsuarioSeleccionarFecha.ListaDePacientes;
 import com.google.gson.Gson;
 import java.io.FileWriter;
@@ -16,17 +17,25 @@ import javax.swing.JOptionPane;
  * @author Jaime Mendoza
  */
 public class frmPersonalEnfermera extends javax.swing.JFrame {
-    int Xmouse,Ymouse;
-    
-    ListaEnlazada<Valoracion> ListaValoracion = new ListaEnlazada<>();
 
+    int Xmouse, Ymouse;
+
+    // ListaEnlazada<Valoracion> ListaValoracion = new ListaEnlazada<>();
     /**
      * Creates new form frmPersonalEnfermera
      */
     public frmPersonalEnfermera() {
         initComponents();
         this.setLocationRelativeTo(null);
+
+        cargarDatos();
         CargarDatosCitasAtender();
+    }
+    ListaEnlazada<Paciente> pas = new ListaEnlazada<>();
+
+    public void cargarDatos() {
+        PDFCrear crear = new PDFCrear();
+        crear.CargarPacientesCitas(pas);
     }
 
     /**
@@ -295,14 +304,14 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        
+
         // Traer los datos de los campos de texto
         float Peso = Float.parseFloat(txtPeso.getText());
         float Altura = Float.parseFloat(txtAltura.getText());
         float PrecionA = Float.parseFloat(txtPrecionArterial.getText());
         float presionC = Float.parseFloat(txtPrecionCardiaca.getText());
         float temperatura = Float.parseFloat(txtTemperatura.getText());
-        
+
         Paciente a = null;
         Valoracion val = new Valoracion();
         val.setAltura(Altura);
@@ -310,93 +319,80 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
         val.setPresionArterial(PrecionA);
         val.setPresionCardiaca(presionC);
         val.setTemperatura(temperatura);
- 
+
         //Asignar una valoracion a cada paciente
-        for (int i = ListaDePacientes.size() - 1; i >= 0; i--) {
-            a = (Paciente) frmUsuarioSeleccionarFecha.ListaDePacientes.get(i);
+        for (int i = pas.size() - 1; i >= 0; i--) {
+            a = (Paciente) pas.get(i);
             if (a.getIdentificacion() == cbxNumeroCedula.getSelectedItem()) {
-                 a.setValoracion(val);
+                a.setValoracion(val);
             }
         }
-        
-        
+
         //Condiciones en caso de que los campos esten vacios
-        if (txtPrecionArterial.getText().isEmpty()){
+        if (txtPrecionArterial.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los datos acerca de la precion arterial estan vacios", "DATOS VACIOS", JOptionPane.WARNING_MESSAGE);
-        } 
-        else if (txtAltura.getText().isEmpty()){
+        } else if (txtAltura.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los datos acerca de la altura estan vacios", "DATOS VACIOS", JOptionPane.WARNING_MESSAGE);
-        } 
-        else if (txtPeso.getText().isEmpty()){
+        } else if (txtPeso.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los datos acerca del peso estan vacios", "DATOS VACIOS", JOptionPane.WARNING_MESSAGE);
-        } 
-        else if (txtTemperatura.getText().isEmpty()){
+        } else if (txtTemperatura.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los datos acerca de la temperatura estan vacios", "DATOS VACIOS", JOptionPane.WARNING_MESSAGE);
-        } 
-        else if (txtPrecionCardiaca.getText().isEmpty()){
+        } else if (txtPrecionCardiaca.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los datos acerca de la precion cardiaca estan vacios", "DATOS VACIOS", JOptionPane.WARNING_MESSAGE);
-        } 
-        else{
-             //Escribir los datos en el archivo Json
-            ListaValoracion.add(new Valoracion(Peso, Altura, PrecionA, presionC, temperatura));
-            
+        } else {
+            //Escribir los datos en el archivo Json
+            //pas.setnew Valoracion(Peso, Altura, PrecionA, presionC, temperatura));
+
             Gson gson = new Gson();
-            
+
             FileWriter writer;
-            
+
             try {
-                writer = new FileWriter("ListaValoracion.json");
-                gson.toJson(ListaValoracion, writer);
+                writer = new FileWriter("ListaPacientes.json");
+                gson.toJson(pas, writer);
                 writer.close();
-            } 
-            catch (IOException ex) {
+            } catch (IOException ex) {
                 Logger.getLogger(frmPersonalEnfermera.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            
+
             JOptionPane.showMessageDialog(null, "Los datos del paciente se han guardado exitosamente", "DATOS GUARDADOS", JOptionPane.INFORMATION_MESSAGE);
             System.out.println("Datos correctamente guardados");
-            
+
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     //Seccion de Keys para los campos de texto cambiar con el enter
     private void txtPrecionArterialKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecionArterialKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == evt.VK_ENTER)
-        {
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             txtAltura.requestFocus();
         }
     }//GEN-LAST:event_txtPrecionArterialKeyPressed
 
     private void txtAlturaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAlturaKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == evt.VK_ENTER)
-        {
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             txtPeso.requestFocus();
         }
     }//GEN-LAST:event_txtAlturaKeyPressed
 
     private void txtPesoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesoKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == evt.VK_ENTER)
-        {
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             txtTemperatura.requestFocus();
         }
     }//GEN-LAST:event_txtPesoKeyPressed
 
     private void txtTemperaturaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTemperaturaKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == evt.VK_ENTER)
-        {
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             txtPrecionCardiaca.requestFocus();
         }
     }//GEN-LAST:event_txtTemperaturaKeyPressed
 
     private void txtPrecionCardiacaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecionCardiacaKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == evt.VK_ENTER)
-        {
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             btnGuardar.requestFocus();
         }
     }//GEN-LAST:event_txtPrecionCardiacaKeyPressed
@@ -405,12 +401,10 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
     private void txtPrecionArterialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecionArterialKeyTyped
         // TODO add your handling code here:
         Character c = evt.getKeyChar();
-        if (!Character.isDigit(c))
-        {
+        if (!Character.isDigit(c)) {
             evt.consume();
         }
-        if (txtPrecionArterial.getText().length() >= 9)
-        {
+        if (txtPrecionArterial.getText().length() >= 9) {
             evt.consume();
         }
     }//GEN-LAST:event_txtPrecionArterialKeyTyped
@@ -418,12 +412,10 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
     private void txtAlturaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAlturaKeyTyped
         // TODO add your handling code here:
         Character c = evt.getKeyChar();
-        if (!Character.isDigit(c))
-        {
+        if (!Character.isDigit(c)) {
             evt.consume();
         }
-        if (txtAltura.getText().length() >= 3)
-        {
+        if (txtAltura.getText().length() >= 3) {
             evt.consume();
         }
     }//GEN-LAST:event_txtAlturaKeyTyped
@@ -431,12 +423,10 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
     private void txtPesoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesoKeyTyped
         // TODO add your handling code here:
         Character c = evt.getKeyChar();
-        if (!Character.isDigit(c))
-        {
+        if (!Character.isDigit(c)) {
             evt.consume();
         }
-        if (txtPeso.getText().length() >= 3)
-        {
+        if (txtPeso.getText().length() >= 3) {
             evt.consume();
         }
     }//GEN-LAST:event_txtPesoKeyTyped
@@ -444,12 +434,10 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
     private void txtTemperaturaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTemperaturaKeyTyped
         // TODO add your handling code here:
         Character c = evt.getKeyChar();
-        if (!Character.isDigit(c))
-        {
+        if (!Character.isDigit(c)) {
             evt.consume();
         }
-        if (txtTemperatura.getText().length() >= 4)
-        {
+        if (txtTemperatura.getText().length() >= 4) {
             evt.consume();
         }
     }//GEN-LAST:event_txtTemperaturaKeyTyped
@@ -457,12 +445,10 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
     private void txtPrecionCardiacaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecionCardiacaKeyTyped
         // TODO add your handling code here:
         Character c = evt.getKeyChar();
-        if (!Character.isDigit(c))
-        {
+        if (!Character.isDigit(c)) {
             evt.consume();
         }
-        if (txtPrecionCardiaca.getText().length() >= 5)
-        {
+        if (txtPrecionCardiaca.getText().length() >= 5) {
             evt.consume();
         }
     }//GEN-LAST:event_txtPrecionCardiacaKeyTyped
@@ -475,9 +461,9 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
 
     private void jLabel12MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseDragged
         // TODO add your handling code here:
-        int x =evt.getXOnScreen();
-        int y =evt.getYOnScreen();
-        this.setLocation(x-Xmouse,y- Ymouse);
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - Xmouse, y - Ymouse);
     }//GEN-LAST:event_jLabel12MouseDragged
 
     private void cbxNumeroCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxNumeroCedulaActionPerformed
@@ -493,27 +479,20 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try
-        {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-            {
-                if ("Nimbus".equals(info.getName()))
-                {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex)
-        {
+        } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(frmPersonalEnfermera.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex)
-        {
+        } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(frmPersonalEnfermera.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex)
-        {
+        } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(frmPersonalEnfermera.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex)
-        {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(frmPersonalEnfermera.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -525,14 +504,23 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void CargarDatosCitasAtender() {
         Paciente a;
 
-        for (int i = ListaDePacientes.size() - 1; i >= 0; i--) {
-            a = (Paciente) frmUsuarioSeleccionarFecha.ListaDePacientes.get(i);
-              System.out.println(a);
-              cbxNumeroCedula.addItem(a.getIdentificacion());
+       // pas.get(0).getValoracion();
+        
+        System.out.println(pas.getSize());
+
+        for (int i = 0; i <= pas.getSize(); i++) {
+
+            if (pas.get(i).getValoracion() == null) {
+                a = (Paciente) pas.get(i);
+                //System.out.println(a);
+                cbxNumeroCedula.addItem(a.getIdentificacion());
+            } else {
+            }
+
         }
     }
 

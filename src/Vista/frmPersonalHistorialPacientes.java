@@ -4,7 +4,18 @@
  */
 package Vista;
 
+import Utilidades.PDFCrear;
+import Controlador.ListaEnlazada.ListaEnlazada;
 import Modelo.HistorialClinico;
+import Modelo.Medicina;
+import static Vista.frmPersonalCitasPorAtender.contenedorAtendido;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,10 +33,14 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
      */
     public frmPersonalHistorialPacientes() {
         initComponents();
+        CargarHistorial();
         this.setLocationRelativeTo(null);
         CargarInterfazAtendidos();
         CargarDatosAtendidos();
+        
     }
+    
+    ListaEnlazada<HistorialClinico> clin = new ListaEnlazada<>();
     
     public void CargarInterfazAtendidos() {
 
@@ -34,12 +49,34 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
         modeloAtendido = new DefaultTableModel(datos, columna);
         tblRegistroPacientes.setModel(modeloAtendido);
     }
+    
+    void CargarHistorial() {
+        Gson gson = new Gson();
+
+        //Leer el archivo Json
+        FileReader reader;
+
+        try {
+            reader = new FileReader("HistorialPacientes.json");
+            ListaEnlazada<HistorialClinico> listaRegistroCargadas = gson.fromJson(reader, new TypeToken<ListaEnlazada<HistorialClinico>>() {
+            }.getType());
+
+            for (HistorialClinico historialClinico : listaRegistroCargadas) {
+                clin.add(historialClinico);
+            }
+        } catch (FileNotFoundException e) {
+
+        }
+    }
 
     public void CargarDatosAtendidos() {
+        
+        
+        
         HistorialClinico a;
-        for (int i = 0; i < frmPersonalCitasPorAtender.contenedorAtendido.size(); i++) {
-            a = (HistorialClinico) frmPersonalCitasPorAtender.contenedorAtendido.get(i);
-            
+        
+        for (int i = 0; i < clin.size(); i++) {
+            a = (HistorialClinico) clin.get(i);
             modeloAtendido.insertRow(contadorAtendido, new Object[]{});
             modeloAtendido.setValueAt(a.getTipoId(), contadorAtendido, 0);
             modeloAtendido.setValueAt(a.getIdentificacionA(), contadorAtendido, 1);
@@ -53,8 +90,11 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
             modeloAtendido.setValueAt(a.getHoraAtencionA(), contadorAtendido, 9);
             modeloAtendido.setValueAt(a.getMedicamentoA(), contadorAtendido, 10);
             modeloAtendido.setValueAt(a.getDosisA(), contadorAtendido, 11);
+            
+
         }
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,6 +113,7 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        BtnImprimirHistorial = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PACIENTES ATENDIDOS");
@@ -152,6 +193,14 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
             }
         });
 
+        BtnImprimirHistorial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnMostrarInventarioIcono.png"))); // NOI18N
+        BtnImprimirHistorial.setText("Imprimir Historial");
+        BtnImprimirHistorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnImprimirHistorialActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -159,9 +208,13 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(237, 237, 237)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BtnImprimirHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnRegresar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -183,7 +236,9 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 9, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRegresar)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegresar)
+                    .addComponent(BtnImprimirHistorial))
                 .addContainerGap())
         );
 
@@ -201,13 +256,6 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        // TODO add your handling code here:
-        FrmMenuDoctor abrir = new FrmMenuDoctor();
-        abrir.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnRegresarActionPerformed
-
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         // TODO add your handling code here:
         Xmouse = evt.getX();
@@ -220,6 +268,25 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
         int y =evt.getYOnScreen();
         this.setLocation(x-Xmouse,y- Ymouse);
     }//GEN-LAST:event_jLabel3MouseDragged
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+        FrmMenuDoctor abrir = new FrmMenuDoctor();
+        abrir.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void BtnImprimirHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnImprimirHistorialActionPerformed
+        PDFCrear crea = new PDFCrear();
+        if (crea.crearPdfHistorialPaciente() == true) {
+         JOptionPane.showMessageDialog(null, " Su pdf ha sido creado","PDF CREADO EXITOSAMENTE",JOptionPane.INFORMATION_MESSAGE);
+
+            }else{
+              JOptionPane.showMessageDialog(null, " Su pdf no ha sido creado, cree una cita","ERROR",JOptionPane.INFORMATION_MESSAGE);
+
+            }
+        
+    }//GEN-LAST:event_BtnImprimirHistorialActionPerformed
 
     /**
      * @param args the command line arguments
@@ -251,12 +318,17 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmPersonalHistorialPacientes().setVisible(true);
+                try {
+                    new frmPersonalHistorialPacientes().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(frmPersonalHistorialPacientes.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnImprimirHistorial;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

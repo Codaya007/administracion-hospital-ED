@@ -4,7 +4,11 @@
  */
 package Vista;
 
+import Utilidades.PDFCrear;
+import com.lowagie.text.DocumentException;
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -69,6 +73,7 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
         barraMovimiento = new javax.swing.JLabel();
+        btnImprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CONSULTAR CITA");
@@ -151,6 +156,14 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
             }
         });
 
+        btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnMostrarInventarioIcono.png"))); // NOI18N
+        btnImprimir.setText("IMPRIMIR");
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -172,7 +185,9 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
                                     .addComponent(txtNumeroCedula, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(btnSalir)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(btnRegresar)))))
                         .addGap(12, 12, 12))))
         );
@@ -193,8 +208,8 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnSalir)
-                            .addComponent(btnRegresar))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(btnRegresar)
+                            .addComponent(btnImprimir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(12, 12, 12))
         );
@@ -237,9 +252,7 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
         else if(cedula.length() < 10) {
             JOptionPane.showMessageDialog(null, "La cedula tiene menos de 10 digitos", "CEDULA MAL ESTABLECIDA", JOptionPane.ERROR_MESSAGE,NumeroMenor);
         }
-//        else if(!txtNumeroCedula.getText().matches("11\\d{8}")){
-//            JOptionPane.showMessageDialog(null, "El numero de cedula tiene que iniciar con 11","CEDULA NO VALIDO",JOptionPane.ERROR_MESSAGE,ErrorCedula);
-//        }
+        
         else if(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender.getRowCount() <= 0){
             JOptionPane.showMessageDialog(null, "No hay registros de citas, primero tiene que agendar una cita","NO HAY REGISTROS",JOptionPane.ERROR_MESSAGE,SinRegistroIcono);
         }
@@ -249,11 +262,6 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No cuenta con una cita disponible \n Registre una cita","NO CUENTA CON CITA",JOptionPane.INFORMATION_MESSAGE,SinCitaIcono);
         }
         
-//        if(lblDisponibilidadCita.getText().isEmpty()){
-//            JOptionPane.showMessageDialog(null, "Por favor ingrese un numero de cedula","Error",JOptionPane.ERROR_MESSAGE);
-//        }else{
-//            JOptionPane.showMessageDialog(null, "La cita " + lblDisponibilidadCita.getText());
-//        }
     }//GEN-LAST:event_btnVerificarCitaActionPerformed
 
     private void txtNumeroCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroCedulaKeyTyped
@@ -328,6 +336,22 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtNumeroCedulaFocusLost
 
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+        PDFCrear crea = new PDFCrear();
+        try {
+            if (crea.ImprimirBuscado(txtNumeroCedula.getText()) == true) {
+              JOptionPane.showMessageDialog(null, " Su pdf ha sido creado","PDF CREADO EXITOSAMENTE",JOptionPane.INFORMATION_MESSAGE);
+
+            }else{
+              JOptionPane.showMessageDialog(null, " Su pdf no ha sido creado, cree una cita","ERROR",JOptionPane.INFORMATION_MESSAGE);
+
+            }
+            
+        } catch (DocumentException ex) {
+            Logger.getLogger(frmUsuarioConsultarCita.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnImprimirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -365,6 +389,7 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel barraMovimiento;
+    private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnVerificarCita;

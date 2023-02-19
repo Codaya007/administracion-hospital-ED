@@ -9,6 +9,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import java.awt.Color;
 import static Vista.frmUsuarioSeleccionarFecha.ListaDePacientes;
+import com.google.gson.Gson;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -385,6 +391,28 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No cuenta con cita", "CITA NO DISPONIBLE", JOptionPane.INFORMATION_MESSAGE, SinCita);
             }
             
+        }
+        
+        System.out.println(ListaDePacientes);
+        
+        Gson gson = new Gson();
+                      File jsonFile = new File("ListaPacientes.json");
+                      
+                      //Agregar datos al archivo Json
+                FileWriter writer = null;
+        try {
+            writer = new FileWriter("ListaPacientes.json");
+        } catch (IOException ex) {
+            Logger.getLogger(frmPersonalCitasPorAtender.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                //Agrega la listaMedicamento dentro del Json y lo escribe 
+                gson.toJson(ListaDePacientes, writer);
+        try {
+            //Cierro
+            writer.close();
+            
+             } catch (IOException ex) {
+            Logger.getLogger(frmPersonalCitasPorAtender.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnCancelarCitaActionPerformed
 

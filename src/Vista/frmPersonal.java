@@ -76,6 +76,7 @@ public class frmPersonal extends javax.swing.JFrame {
 
         cbxEspecialidades.setVisible(false);
         lbEspecialidad.setVisible(false);
+         
     }
 
     public Boolean validarPersonaSeleccionado() {

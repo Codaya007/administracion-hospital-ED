@@ -4,23 +4,37 @@
  */
 package Vista;
 
+import Utilidades.PDFCrear;
+import Controlador.ListaEnlazada.Excepciones.ListaVaciaExcepcion;
+import Controlador.ListaEnlazada.Excepciones.PosicionNoEncontradaException;
 import Controlador.ListaEnlazada.ListaEnlazada;
 import Modelo.HistorialClinico;
+import Modelo.Medicina;
 import Modelo.Paciente;
+import static Vista.frmPersonalInventarioMedico.ListaMedicamentos;
+import static Vista.frmUsuarioSeleccionarFecha.ListaDePacientes;
 import java.util.Collections;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import static Vista.frmUsuarioSeleccionarFecha.ListaDePacientes;
-
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Victor
  */
-public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
-    int Xmouse,Ymouse;
-    
-    public static ListaEnlazada contenedorAtendido=new ListaEnlazada();
+public final class frmPersonalCitasPorAtender extends javax.swing.JFrame {
+
+    int Xmouse, Ymouse;
+
+    public static ListaEnlazada contenedorAtendido = new ListaEnlazada();
 
     public static DefaultTableModel modelo;
     int EnviarEnFila = 0;
@@ -33,40 +47,81 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         CargarInterfazCitasAtender();
         CargarDatosCitasAtender();
+        CargarMedicamentos();
     }
+    ListaEnlazada<Medicina> med = new ListaEnlazada<>();
+    ListaEnlazada<Paciente> pas = new ListaEnlazada<>();
 
+    void CargarMedicamentos() {
+        Gson gson = new Gson();
+
+        //Leer el archivo Json
+        FileReader reader;
+
+        try {
+            reader = new FileReader("ListaMedicamentos.json");
+            ListaEnlazada<Medicina> listaMedicamentosCargadas = gson.fromJson(reader, new TypeToken<ListaEnlazada<Medicina>>() {
+            }.getType());
+            for (Medicina medicamento : listaMedicamentosCargadas) {
+                med.add(medicamento);
+                cbxMedicamentos.addItem(medicamento.getNombre());
+            }
+                        
+        } catch (FileNotFoundException e) {
+
+        }
+
+        
+    }
 
     public void CargarInterfazCitasAtender() {
         String datos[][] = {};
-        String columna[] = {"Tipo Identificacion","Cedula", "Nombres", "Apellidos", "Edad", "Genero", "Telefono", "Molestia", "Fecha", "Hora Atencion"};
+        String columna[] = {"Tipo Identificacion", "Cedula", "Nombres", "Apellidos", "Edad", "Genero", "Telefono", "Molestia", "Fecha", "Hora Atencion"};
         modelo = new DefaultTableModel(datos, columna);
         tblCitasSinAtender.setModel(modelo);
     }
 
     public void CargarDatosCitasAtender() {
-        
         Paciente a;
-        
-        Collections.sort(ListaDePacientes, (Paciente z, Paciente b) -> z.getDia().compareTo(b.getDia()));
-        Collections.sort(ListaDePacientes, (Paciente c, Paciente d) -> c.getMes().compareTo(d.getMes()));
-        Collections.sort(ListaDePacientes, (Paciente e, Paciente f) -> e.getAnio().compareTo(f.getAnio()));
-        
-        for (int i = ListaDePacientes.size() - 1; i >= 0; i--) {
-            a = (Paciente) frmUsuarioSeleccionarFecha.ListaDePacientes.get(i);
-            modelo.insertRow(EnviarEnFila, new Object[]{});
-            modelo.setValueAt(a.getTipoIdentificacion(), EnviarEnFila, 0);
-            modelo.setValueAt(a.getIdentificacion(), EnviarEnFila, 1);
-            modelo.setValueAt(a.getNombres(), EnviarEnFila, 2);
-            modelo.setValueAt(a.getApellidos(), EnviarEnFila, 3);
-            modelo.setValueAt(a.getEdad(), EnviarEnFila, 4);
-            modelo.setValueAt(a.getGenero(), EnviarEnFila, 5);
-            modelo.setValueAt(a.getTelefono(), EnviarEnFila, 6);
-            modelo.setValueAt(a.getMolestia(), EnviarEnFila, 7);
-            modelo.setValueAt(a.getFechaIngreso(), EnviarEnFila, 8);
-            modelo.setValueAt(a.getHoraAtencion(), EnviarEnFila, 9);
+        Gson gson = new Gson();
+
+        //Leer el archivo Json
+        FileReader reader;
+
+        try {
+            reader = new FileReader("ListaPacientes.json");
+            ListaEnlazada<Paciente> listaPacientesCargada = gson.fromJson(reader, new TypeToken<ListaEnlazada<Paciente>>() {
+            }.getType());
+
+            for (Paciente paciente : listaPacientesCargada) {
+                pas.add(paciente);
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+
+        }
+
+        Collections.sort(pas, (Paciente z, Paciente b) -> z.getDia().compareTo(b.getDia()));
+        Collections.sort(pas, (Paciente c, Paciente d) -> c.getMes().compareTo(d.getMes()));
+        Collections.sort(pas, (Paciente e, Paciente f) -> e.getAnio().compareTo(f.getAnio()));
+        for (int i = pas.size() - 1; i >= 0; i--) {
+             a = (Paciente) pas.get(i);
+                modelo.insertRow(EnviarEnFila, new Object[]{});
+                modelo.setValueAt(a.getTipoIdentificacion(), EnviarEnFila, 0);
+                modelo.setValueAt(a.getIdentificacion(), EnviarEnFila, 1);
+                modelo.setValueAt(a.getNombres(), EnviarEnFila, 2);
+                modelo.setValueAt(a.getApellidos(), EnviarEnFila, 3);
+                modelo.setValueAt(a.getEdad(), EnviarEnFila, 4);
+                modelo.setValueAt(a.getGenero(), EnviarEnFila, 5);
+                modelo.setValueAt(a.getTelefono(), EnviarEnFila, 6);
+                modelo.setValueAt(a.getMolestia(), EnviarEnFila, 7);
+                modelo.setValueAt(a.getFechaIngreso(), EnviarEnFila, 8);
+                modelo.setValueAt(a.getHoraAtencion(), EnviarEnFila, 9);
+
         }
     }
- 
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -106,12 +161,12 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        txtAsignarMedicamento = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        txtDosis = new javax.swing.JTextField();
+        txtNumero = new javax.swing.JTextField();
         btnAsignarMedicamento = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        cbxMedicamentos = new javax.swing.JComboBox<>();
+        btnImprimirCitas = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
@@ -147,6 +202,9 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
         tblCitasSinAtender.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblCitasSinAtenderMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblCitasSinAtenderMousePressed(evt);
             }
         });
         jScrollPane1.setViewportView(tblCitasSinAtender);
@@ -324,18 +382,12 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Asignar medicamentos");
 
-        txtAsignarMedicamento.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtAsignarMedicamentoKeyPressed(evt);
-            }
-        });
-
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("Dosis");
+        jLabel14.setText("Numero");
 
-        txtDosis.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtNumero.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtDosisKeyPressed(evt);
+                txtNumeroKeyPressed(evt);
             }
         });
 
@@ -355,7 +407,13 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("CANCELAR CITA");
+        btnImprimirCitas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnMostrarInventarioIcono.png"))); // NOI18N
+        btnImprimirCitas.setText("Imprimir Citas");
+        btnImprimirCitas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirCitasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -372,11 +430,11 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtAsignarMedicamento)
                             .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtDosis)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(cbxMedicamentos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNumero))))
                 .addContainerGap())
+            .addComponent(btnImprimirCitas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -386,14 +444,14 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtAsignarMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbxMedicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDosis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnImprimirCitas, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAsignarMedicamento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRegresar)
@@ -517,7 +575,7 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     private void txtEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadKeyTyped
         // TODO add your handling code here:
         Character c = evt.getKeyChar();
-        if(!Character.isDigit(c)){
+        if (!Character.isDigit(c)) {
             evt.consume();
         }
     }//GEN-LAST:event_txtEdadKeyTyped
@@ -525,10 +583,10 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     private void txtNumeroCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroCedulaKeyTyped
         // TODO add your handling code here:
         Character c = evt.getKeyChar();
-        if(!Character.isDigit(c)){
+        if (!Character.isDigit(c)) {
             evt.consume();
         }
-        if(txtNumeroCedula.getText().length()>=10){
+        if (txtNumeroCedula.getText().length() >= 10) {
             evt.consume();
         }
     }//GEN-LAST:event_txtNumeroCedulaKeyTyped
@@ -536,10 +594,10 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     private void txtNumeroTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroTelefonoKeyTyped
         // TODO add your handling code here:
         Character c = evt.getKeyChar();
-        if(!Character.isDigit(c)){
+        if (!Character.isDigit(c)) {
             evt.consume();
         }
-        if(txtNumeroTelefono.getText().length()>=10){
+        if (txtNumeroTelefono.getText().length() >= 10) {
             evt.consume();
         }
     }//GEN-LAST:event_txtNumeroTelefonoKeyTyped
@@ -551,14 +609,14 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
         this.setVisible(false);
 //        dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
-
+Paciente paciente;
     private void btnAsignarMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarMedicamentoActionPerformed
         // TODO add your handling code here:
-        
 
-        if(txtAsignarMedicamento.getText().isEmpty() || txtDosis.getText().isEmpty()||txtNumeroCedula.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "No se ha asignado un medicamento","FALTA ASIGNAR MEDICAMENTO",JOptionPane.WARNING_MESSAGE);
-        }else{
+// se asigna un medicamento al paciente
+        if (txtNumero.getText().isEmpty() || txtNumero.getText().isEmpty() || txtNumeroCedula.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No se ha asignado un medicamento", "FALTA ASIGNAR MEDICAMENTO", JOptionPane.WARNING_MESSAGE);
+        } else {
             frmPersonalHistorialPacientes abrir = new frmPersonalHistorialPacientes();
             abrir.setVisible(false);
 
@@ -572,20 +630,82 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
             String MolestiaPaciente = txaMolestias.getText();
             String FechaAtencion = txtFechaIngreso.getText();
             String HoraAtencion = txtHoraAtencion.getText();
-            String Medicamento = txtAsignarMedicamento.getText();
-            String Dosis =txtDosis.getText();
+            String Medicamento = txtNumero.getText();
+            String Dosis = txtNumero.getText();
+
+            HistorialClinico claseauto = new HistorialClinico(TipoId, NumeroCedula, NombrePaciente, ApellidoPaciente, EdadPaciente, GeneroPaciente, TelefonoPaciente, MolestiaPaciente, FechaAtencion, HoraAtencion, Medicamento, Dosis);
             
-            HistorialClinico claseauto = new HistorialClinico(TipoId,NumeroCedula, NombrePaciente, ApellidoPaciente, EdadPaciente, GeneroPaciente, TelefonoPaciente, MolestiaPaciente, FechaAtencion, HoraAtencion, Medicamento, Dosis);
-            contenedorAtendido.add(claseauto);
-            if (tblCitasSinAtender.getSelectedRow() != -1) {
-                ListaDePacientes.remove(tblCitasSinAtender.getSelectedRow());
-                modelo.removeRow(tblCitasSinAtender.getSelectedRow());
-                JOptionPane.showMessageDialog(null, "PACIENTE ATENDIDO EXITOSAMENTE");
+            
+            System.out.println(tblCitasSinAtender.getSelectedRow());
+            if (tblCitasSinAtender.getSelectedRow()>= 0) {
+                
+                
+                
+                String numero;
+                numero = med.get(cbxMedicamentos.getSelectedIndex()).getStock();
+                
+                
+             
+
+                if (Integer.valueOf(txtNumero.getText()) > Integer.valueOf(numero)) {
+                    JOptionPane.showMessageDialog(null, "No hay suficientes medicinas", "Medicinas insuficientes", JOptionPane.WARNING_MESSAGE);
+                } else if (Integer.valueOf(txtNumero.getText()) < Integer.valueOf(numero)) {
+                    Integer stock;
+                    stock = Integer.valueOf(numero) - Integer.valueOf(txtNumero.getText());
+                    med.get(cbxMedicamentos.getSelectedIndex()).setStock(String.valueOf(stock));
+                    contenedorAtendido.add(claseauto);
+                    pas.remove(tblCitasSinAtender.getSelectedRow());
+                    System.out.println("eliminado");
+                    JOptionPane.showMessageDialog(null, "PACIENTE ATENDIDO EXITOSAMENTE");
+                    modelo.removeRow(tblCitasSinAtender.getSelectedRow());
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun paciente","PACIENTE NO SELECCIONADO",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun paciente", "PACIENTE NO SELECCIONADO", JOptionPane.INFORMATION_MESSAGE);
             }
         }
         
+        
+        System.out.println();
+        Gson gson = new Gson();
+                      File jsonFile = new File("ListaPacientes.json");
+                      
+                      //Agregar datos al archivo Json
+                FileWriter writer = null;
+        try {
+            writer = new FileWriter("ListaPacientes.json");
+        } catch (IOException ex) {
+            Logger.getLogger(frmPersonalCitasPorAtender.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                //Agrega la listaMedicamento dentro del Json y lo escribe 
+                gson.toJson(pas, writer);
+        try {
+            //Cierro
+            writer.close();
+            
+ 
+        } catch (IOException ex) {
+            Logger.getLogger(frmPersonalCitasPorAtender.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+                      File jsonFile2 = new File("HistorialPacientes.json");
+                      
+                      //Agregar datos al archivo Json
+                
+        try {
+            writer = new FileWriter("HistorialPacientes.json");
+        } catch (IOException ex) {
+            Logger.getLogger(frmPersonalCitasPorAtender.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                //Agrega la listaMedicamento dentro del Json y lo escribe 
+                gson.toJson(contenedorAtendido, writer);
+        try {
+            //Cierro
+            writer.close();} catch (IOException ex) {
+            Logger.getLogger(frmPersonalCitasPorAtender.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
     }//GEN-LAST:event_btnAsignarMedicamentoActionPerformed
 
     private void tblCitasSinAtenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCitasSinAtenderMouseClicked
@@ -602,39 +722,35 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
         txaMolestias.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 7)));
         txtFechaIngreso.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 8)));
         txtHoraAtencion.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 9)));
-        
+
         //Muestran los datos de valoracion
-        for (int i = ListaDePacientes.size() - 1; i >= 0; i--) {
-            a = (Paciente) frmUsuarioSeleccionarFecha.ListaDePacientes.get(i);
+        System.out.println("holiide");
+        System.out.println(pas);
+        for (int i = pas.size() - 1; i >= 0; i--) {
+            System.out.println(pas.get(i).getValoracion());
+            a = (Paciente) pas.get(i);
             if (a.getIdentificacion() == tblCitasSinAtender.getValueAt(seleccionar, 1)) {
                 if (a.getValoracion() != null) {
-                 txtAltura2.setText(String.valueOf(a.getValoracion().getAltura()));
-                 txtPeso2.setText(String.valueOf(a.getValoracion().getPeso()));
-                 txtPresionArterial2.setText(String.valueOf(a.getValoracion().getPresionArterial()));
-                 txtPresionCardiaca2.setText(String.valueOf(a.getValoracion().getPresionCardiaca()));
-                 txtTemperatura2.setText(String.valueOf(a.getValoracion().getTemperatura()));
-                }else{
-                  JOptionPane.showMessageDialog(null,"No se han rellenado los campos de valoracion");
+                    txtAltura2.setText(String.valueOf(a.getValoracion().getAltura()));
+                    txtPeso2.setText(String.valueOf(a.getValoracion().getPeso()));
+                    txtPresionArterial2.setText(String.valueOf(a.getValoracion().getPresionArterial()));
+                    txtPresionCardiaca2.setText(String.valueOf(a.getValoracion().getPresionCardiaca()));
+                    txtTemperatura2.setText(String.valueOf(a.getValoracion().getTemperatura()));
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se han rellenado los campos de valoracion");
                 }
-                 
+
             }
-             
+
         }
     }//GEN-LAST:event_tblCitasSinAtenderMouseClicked
 
-    private void txtAsignarMedicamentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAsignarMedicamentoKeyPressed
+    private void txtNumeroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == evt.VK_ENTER){
-            txtDosis.requestFocus();
-        }
-    }//GEN-LAST:event_txtAsignarMedicamentoKeyPressed
-
-    private void txtDosisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDosisKeyPressed
-        // TODO add your handling code here:
-        if(evt.getKeyCode() == evt.VK_ENTER){
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             btnAsignarMedicamento.requestFocus();
         }
-    }//GEN-LAST:event_txtDosisKeyPressed
+    }//GEN-LAST:event_txtNumeroKeyPressed
 
     private void jLabel15MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MousePressed
         // TODO add your handling code here:
@@ -644,10 +760,27 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
 
     private void jLabel15MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseDragged
         // TODO add your handling code here:
-        int x =evt.getXOnScreen();
-        int y =evt.getYOnScreen();
-        this.setLocation(x-Xmouse,y- Ymouse);
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - Xmouse, y - Ymouse);
     }//GEN-LAST:event_jLabel15MouseDragged
+
+    private void btnImprimirCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirCitasActionPerformed
+        PDFCrear crea = new PDFCrear();
+        if (crea.crearPdfCitas() == true) {
+         JOptionPane.showMessageDialog(null, " Su pdf ha sido creado","PDF CREADO EXITOSAMENTE",JOptionPane.INFORMATION_MESSAGE);
+
+            }else{
+              JOptionPane.showMessageDialog(null, " Su pdf no ha sido creado, cree una cita","ERROR",JOptionPane.INFORMATION_MESSAGE);
+
+            }
+        
+    }//GEN-LAST:event_btnImprimirCitasActionPerformed
+
+    private void tblCitasSinAtenderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCitasSinAtenderMousePressed
+        System.out.println("holii");
+        
+    }//GEN-LAST:event_tblCitasSinAtenderMousePressed
 
     /**
      * @param args the command line arguments
@@ -686,8 +819,9 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAsignarMedicamento;
+    private javax.swing.JButton btnImprimirCitas;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> cbxMedicamentos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -696,19 +830,7 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
@@ -725,37 +847,24 @@ public class frmPersonalCitasPorAtender extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JTable tblCitasSinAtender;
     public static javax.swing.JTextArea txaMolestias;
-    private javax.swing.JTextField txtAltura;
-    private javax.swing.JTextField txtAltura1;
     private javax.swing.JTextField txtAltura2;
     public static javax.swing.JTextField txtApellidoPaciente;
-    public static javax.swing.JTextField txtAsignarMedicamento;
-    public static javax.swing.JTextField txtDosis;
     public static javax.swing.JTextField txtEdad;
     public static javax.swing.JTextField txtFechaIngreso;
     public static javax.swing.JTextField txtGenero;
     public static javax.swing.JTextField txtHoraAtencion;
     public static javax.swing.JTextField txtNombre;
+    public static javax.swing.JTextField txtNumero;
     public static javax.swing.JTextField txtNumeroCedula;
     public static javax.swing.JTextField txtNumeroTelefono;
-    private javax.swing.JTextField txtPeso;
-    private javax.swing.JTextField txtPeso1;
     private javax.swing.JTextField txtPeso2;
-    private javax.swing.JTextField txtPresionArterial;
-    private javax.swing.JTextField txtPresionArterial1;
     private javax.swing.JTextField txtPresionArterial2;
-    private javax.swing.JTextField txtPresionCardiaca;
-    private javax.swing.JTextField txtPresionCardiaca1;
     private javax.swing.JTextField txtPresionCardiaca2;
-    private javax.swing.JTextField txtTemperatura;
-    private javax.swing.JTextField txtTemperatura1;
     private javax.swing.JTextField txtTemperatura2;
     public static javax.swing.JTextField txtTipoId;
     // End of variables declaration//GEN-END:variables

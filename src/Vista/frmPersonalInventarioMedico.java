@@ -27,7 +27,7 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
     DefaultTableModel tabla_modelo = new DefaultTableModel();
     int Xmouse, Ymouse;
 
-    ListaEnlazada<Medicina> ListaMedicamentos = new ListaEnlazada<>();
+    static ListaEnlazada<Medicina> ListaMedicamentos = new ListaEnlazada<>();
 
     /**
      * Creates new form frmPersonalInventarioMedico
@@ -47,7 +47,7 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
     }
     
     
-    private void CargarMedicamentos() {
+    void CargarMedicamentos() {
         Gson gson = new Gson();
 
         //Leer el archivo Json
@@ -625,7 +625,7 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
 
                 //Agregar datos al archivo Json
                 FileWriter writer = new FileWriter("ListaMedicamentos.json");
-                //Agrega la listaMedicamento denttro del Json y lo escribe 
+                //Agrega la listaMedicamento dentro del Json y lo escribe 
                 gson.toJson(ListaMedicamentos, writer);
                 //Cierro
                 writer.close();
