@@ -11,14 +11,14 @@ import javax.swing.JOptionPane;
  *
  * @author Jaime Mendoza
  */
-public class FrmMenuSuperAdmin extends javax.swing.JFrame {
+public class frmMenuSuperAdmin extends javax.swing.JFrame {
 
     int Xmouse, Ymouse;
 
     /**
      * Creates new form FrmMenuSuperAdmin
      */
-    public FrmMenuSuperAdmin() {
+    public frmMenuSuperAdmin() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -341,14 +341,16 @@ public class FrmMenuSuperAdmin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmMenuSuperAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmMenuSuperAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmMenuSuperAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmMenuSuperAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmMenuSuperAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmMenuSuperAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmMenuSuperAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmMenuSuperAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -356,7 +358,7 @@ public class FrmMenuSuperAdmin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmMenuSuperAdmin().setVisible(true);
+                new frmMenuSuperAdmin().setVisible(true);
             }
         });
     }
@@ -366,7 +368,6 @@ public class FrmMenuSuperAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btnMedicamentos;
     private javax.swing.JButton btnPersonal;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnSalir1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
