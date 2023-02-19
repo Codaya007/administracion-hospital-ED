@@ -504,10 +504,10 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
 //                                        listaPacientes.get(i).setHoraAtencion(cbxHorarioA.getSelectedItem().toString());
 
                                         Collections.sort(listaPacientes, (Paciente g, Paciente h) -> g.getHoraAtencion().compareTo(h.getHoraAtencion()));
-DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 // Convertir el string a un objeto LocalDate utilizando el formateador
-LocalDate fecha = LocalDate.parse(txtFechaCita.getText(), formatter);
+                                        LocalDate fecha = LocalDate.parse(txtFechaCita.getText(), formatter);
 // Extraer el año, mes y día de la fecha
                                         int anio = fecha.getYear();
                                         int mes = fecha.getMonthValue();

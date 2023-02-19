@@ -203,6 +203,9 @@ public final class frmPersonalCitasPorAtender extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblCitasSinAtenderMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblCitasSinAtenderMousePressed(evt);
+            }
         });
         jScrollPane1.setViewportView(tblCitasSinAtender);
 
@@ -721,8 +724,11 @@ Paciente paciente;
         txtHoraAtencion.setText(String.valueOf(tblCitasSinAtender.getValueAt(seleccionar, 9)));
 
         //Muestran los datos de valoracion
-        for (int i = ListaDePacientes.size() - 1; i >= 0; i--) {
-            a = (Paciente) frmUsuarioSeleccionarFecha.ListaDePacientes.get(i);
+        System.out.println("holiide");
+        System.out.println(pas);
+        for (int i = pas.size() - 1; i >= 0; i--) {
+            System.out.println(pas.get(i).getValoracion());
+            a = (Paciente) pas.get(i);
             if (a.getIdentificacion() == tblCitasSinAtender.getValueAt(seleccionar, 1)) {
                 if (a.getValoracion() != null) {
                     txtAltura2.setText(String.valueOf(a.getValoracion().getAltura()));
@@ -770,6 +776,11 @@ Paciente paciente;
             }
         
     }//GEN-LAST:event_btnImprimirCitasActionPerformed
+
+    private void tblCitasSinAtenderMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCitasSinAtenderMousePressed
+        System.out.println("holii");
+        
+    }//GEN-LAST:event_tblCitasSinAtenderMousePressed
 
     /**
      * @param args the command line arguments

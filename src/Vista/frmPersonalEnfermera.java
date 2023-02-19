@@ -3,6 +3,7 @@ package Vista;
 import Controlador.ListaEnlazada.ListaEnlazada;
 import Modelo.Paciente;
 import Modelo.Valoracion;
+import Utilidades.PDFCrear;
 import static Vista.frmUsuarioSeleccionarFecha.ListaDePacientes;
 import com.google.gson.Gson;
 import java.io.FileWriter;
@@ -18,7 +19,7 @@ import javax.swing.JOptionPane;
 public class frmPersonalEnfermera extends javax.swing.JFrame {
     int Xmouse,Ymouse;
     
-    ListaEnlazada<Valoracion> ListaValoracion = new ListaEnlazada<>();
+   // ListaEnlazada<Valoracion> ListaValoracion = new ListaEnlazada<>();
 
     /**
      * Creates new form frmPersonalEnfermera
@@ -26,7 +27,14 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
     public frmPersonalEnfermera() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        cargarDatos();
         CargarDatosCitasAtender();
+    }
+    ListaEnlazada<Paciente> pas = new ListaEnlazada<>();
+    public void cargarDatos(){
+        PDFCrear crear = new PDFCrear();
+        crear.CargarPacientesCitas(pas);
     }
 
     /**
@@ -312,8 +320,8 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
         val.setTemperatura(temperatura);
  
         //Asignar una valoracion a cada paciente
-        for (int i = ListaDePacientes.size() - 1; i >= 0; i--) {
-            a = (Paciente) frmUsuarioSeleccionarFecha.ListaDePacientes.get(i);
+        for (int i = pas.size() - 1; i >= 0; i--) {
+            a = (Paciente) pas.get(i);
             if (a.getIdentificacion() == cbxNumeroCedula.getSelectedItem()) {
                  a.setValoracion(val);
             }
@@ -338,15 +346,15 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
         } 
         else{
              //Escribir los datos en el archivo Json
-            ListaValoracion.add(new Valoracion(Peso, Altura, PrecionA, presionC, temperatura));
+            //pas.setnew Valoracion(Peso, Altura, PrecionA, presionC, temperatura));
             
             Gson gson = new Gson();
             
             FileWriter writer;
             
             try {
-                writer = new FileWriter("ListaValoracion.json");
-                gson.toJson(ListaValoracion, writer);
+                writer = new FileWriter("ListaPacientes.json");
+                gson.toJson(pas, writer);
                 writer.close();
             } 
             catch (IOException ex) {
@@ -529,8 +537,8 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
     public void CargarDatosCitasAtender() {
         Paciente a;
 
-        for (int i = ListaDePacientes.size() - 1; i >= 0; i--) {
-            a = (Paciente) frmUsuarioSeleccionarFecha.ListaDePacientes.get(i);
+        for (int i = pas.size() - 1; i >= 0; i--) {
+            a = (Paciente) pas.get(i);
               System.out.println(a);
               cbxNumeroCedula.addItem(a.getIdentificacion());
         }
