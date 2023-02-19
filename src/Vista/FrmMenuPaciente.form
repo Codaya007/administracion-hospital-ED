@@ -106,7 +106,8 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="HOSPITAL &quot;ISIDRO&quot;"/>
+            <Property name="text" type="java.lang.String" value="HOSPITAL &quot;ESTRUCTURA DE DATOS&quot;"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel2">

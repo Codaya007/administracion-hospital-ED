@@ -29,7 +29,7 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
         btnSalir.setToolTipText("Cierra todos las interfaces y procesos existentes");
     }
     
-    public boolean ExisteEnTabla(JTable tabla, String dto, int col) {
+    public boolean ExisteEnLista(JTable tabla, String dto, int col) {
         ImageIcon CuentaCoCitaIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneCuentaConCitaIcono.png");
         
         boolean Existe = false;
@@ -243,7 +243,7 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
         else if(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender.getRowCount() <= 0){
             JOptionPane.showMessageDialog(null, "No hay registros de citas, primero tiene que agendar una cita","NO HAY REGISTROS",JOptionPane.ERROR_MESSAGE,SinRegistroIcono);
         }
-        else if(ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 1)== true){ 
+        else if(ExisteEnLista(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 1)== true){ 
         }
         else{
             JOptionPane.showMessageDialog(null, "No cuenta con una cita disponible \n Registre una cita","NO CUENTA CON CITA",JOptionPane.INFORMATION_MESSAGE,SinCitaIcono);

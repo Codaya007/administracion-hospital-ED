@@ -378,10 +378,12 @@ public class frmUsuarioCancelarCita extends javax.swing.JFrame {
                     ListaDePacientes.removeIf(p -> p.getIdentificacion().equals(cedula));
                     JOptionPane.showMessageDialog(null, "La cita se ha eliminado", "CITA ELIMINADA", JOptionPane.INFORMATION_MESSAGE, CitaEliminada);
                     txaDatosPaciente.setText("");
-                }else{
+                }
+                else{
                     JOptionPane.showMessageDialog(null, "La cita no se ha eliminado", "CITA NO ELIMINADA", JOptionPane.INFORMATION_MESSAGE, CitaNoEliminada);
                 }
-            }else{
+            }
+            else{
                 JOptionPane.showMessageDialog(null, "No cuenta con cita", "CITA NO DISPONIBLE", JOptionPane.INFORMATION_MESSAGE, SinCita);
             }
             
