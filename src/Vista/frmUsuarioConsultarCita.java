@@ -5,7 +5,10 @@
 package Vista;
 
 import Utilidades.PDFCrear;
+import com.lowagie.text.DocumentException;
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -249,9 +252,7 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
         else if(cedula.length() < 10) {
             JOptionPane.showMessageDialog(null, "La cedula tiene menos de 10 digitos", "CEDULA MAL ESTABLECIDA", JOptionPane.ERROR_MESSAGE,NumeroMenor);
         }
-//        else if(!txtNumeroCedula.getText().matches("11\\d{8}")){
-//            JOptionPane.showMessageDialog(null, "El numero de cedula tiene que iniciar con 11","CEDULA NO VALIDO",JOptionPane.ERROR_MESSAGE,ErrorCedula);
-//        }
+        
         else if(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender.getRowCount() <= 0){
             JOptionPane.showMessageDialog(null, "No hay registros de citas, primero tiene que agendar una cita","NO HAY REGISTROS",JOptionPane.ERROR_MESSAGE,SinRegistroIcono);
         }
@@ -337,7 +338,18 @@ public class frmUsuarioConsultarCita extends javax.swing.JFrame {
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
         PDFCrear crea = new PDFCrear();
-        crea.ImprimirBuscado(txtNumeroCedula.getText());
+        try {
+            if (crea.ImprimirBuscado(txtNumeroCedula.getText()) == true) {
+              JOptionPane.showMessageDialog(null, " Su pdf ha sido creado","PDF CREADO EXITOSAMENTE",JOptionPane.INFORMATION_MESSAGE);
+
+            }else{
+              JOptionPane.showMessageDialog(null, " Su pdf no ha sido creado, cree una cita","ERROR",JOptionPane.INFORMATION_MESSAGE);
+
+            }
+            
+        } catch (DocumentException ex) {
+            Logger.getLogger(frmUsuarioConsultarCita.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     /**

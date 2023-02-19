@@ -68,7 +68,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel4" max="32767" attributes="0"/>
                                       <Group type="102" attributes="0">
-                                          <Component id="txtNumeroCedula" min="-2" pref="265" max="-2" attributes="0"/>
+                                          <Component id="txtNumeroCedula1" min="-2" pref="265" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="btnConsultar" min="-2" pref="177" max="-2" attributes="0"/>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -109,7 +109,7 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtNumeroCedula" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtNumeroCedula1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnConsultar" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -161,7 +161,7 @@
             <Property name="text" type="java.lang.String" value="Ingresar numero de identificacion"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtNumeroCedula">
+        <Component class="javax.swing.JTextField" name="txtNumeroCedula1">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="80" green="80" id="gray" palette="1" red="80" type="palette"/>
@@ -170,9 +170,9 @@
             <Property name="text" type="java.lang.String" value="Ingreso solo numeros"/>
           </Properties>
           <Events>
-            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNumeroCedulaFocusGained"/>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNumeroCedulaFocusLost"/>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNumeroCedulaKeyTyped"/>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNumeroCedula1FocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNumeroCedula1FocusLost"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNumeroCedula1KeyTyped"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>

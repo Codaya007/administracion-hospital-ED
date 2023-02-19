@@ -11,6 +11,7 @@ import static Controlador.UtilidadesFechas.validarFecha;
 import Controlador.ListaEnlazada.ListaEnlazada;
 import Modelo.Medicina;
 import Modelo.Paciente;
+import Utilidades.PDFCrear;
 import static Vista.frmPersonalInventarioMedico.ListaMedicamentos;
 import com.google.gson.Gson;
 import java.awt.Color;
@@ -611,44 +612,8 @@ public class frmUsuarioSeleccionarFecha extends javax.swing.JFrame {
                       );
 
                       ListaDePacientes.add(paciente);
-                      Gson gson = new Gson();
-                      File jsonFile = new File("ListaPacientes.json");
-
-                      if (jsonFile.exists()) {
-                          FileReader reader = new FileReader("ListaPacientes.json");
-                          Paciente[] dataArray = gson.fromJson(reader, Paciente[].class);
-                          ListaDePacientes = new ListaEnlazada<>();
-
-                          for (Paciente data : dataArray) {
-                              ListaDePacientes.add(data);
-                          }
-                      } else {
-                          ListaDePacientes = new ListaEnlazada<>();
-
-                      }
-                      boolean nombreExiste = false;
-                      int indice = -1;
-
-                      for (int i = 0; i < ListaDePacientes.size(); i++) {
-                          if (ListaDePacientes.get(i).getIdentificacion().equals(paciente.getIdentificacion())) {
-                              nombreExiste = true;
-                              indice = i;
-                              break;
-                          }
-                      }
-
-                      if (nombreExiste) {
-                          ListaDePacientes.get(indice).setNombres(paciente.getNombres());
-
-                      } else {
-                          ListaDePacientes.add(paciente);
-                      }
-
-                      FileWriter writer = new FileWriter("ListaPacientes.json");
-                      //Agrega la listaMedicamento dentro del Json y lo escribe 
-                      gson.toJson(ListaDePacientes, writer);
-                      //Cierro
-                      writer.close();
+                      PDFCrear crear = new PDFCrear();
+                      crear.guardarDatos(paciente, ListaDePacientes);
 
                       JOptionPane.showMessageDialog(
                               null,

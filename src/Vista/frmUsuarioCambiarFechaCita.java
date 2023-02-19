@@ -4,8 +4,10 @@
  */
 package Vista;
 
+import Controlador.ListaEnlazada.ListaEnlazada;
 import static Controlador.UtilidadesFechas.validarFecha;
 import Modelo.Paciente;
+import Utilidades.PDFCrear;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -16,31 +18,43 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import static Vista.frmUsuarioSeleccionarFecha.ListaDePacientes;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
  * @author Victor
  */
 public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
-    int Xmouse,Ymouse;
+
+    int Xmouse, Ymouse;
 
     /**
      * Creates new form frmUsuarioCambiarFechaCita
      */
     public frmUsuarioCambiarFechaCita() {
         initComponents();
+        cargarDatos();
         this.setLocationRelativeTo(null);
         btnConsultar.requestFocus();
         btnConsultar.setToolTipText("Consulta si tiene una cita");
     }
-    
+    static ListaEnlazada<Paciente> listaPacientes = new ListaEnlazada<>();
+
+    public static void cargarDatos() {
+        PDFCrear cargar = new PDFCrear();
+        cargar.CargarPacientesCitas(listaPacientes);
+        System.out.println(listaPacientes);
+
+    }
+
     public boolean ExisteEnTabla(JTable tabla, String dto, int col) {
-        
+
         boolean Existe = false;
-        
+
         for (int i = 0; i < tabla.getRowCount(); i++) {
             if (tabla.getValueAt(i, col).equals(dto)) {
-                Existe = true;  
+                Existe = true;
                 String CedulaConsulta = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 1).toString();
                 String NombrePaciente = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 2).toString();
                 String ApellidoPaciente = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 3).toString();
@@ -50,21 +64,21 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
                 String MolestiaConsultar = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 7).toString();
                 String FechaCita = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 8).toString();
                 String HoraCita = frmPersonalCitasPorAtender.tblCitasSinAtender.getValueAt(i, 9).toString();
-                
-                txaDatosPaciente.setText("Nombres: "+NombrePaciente+" "+ApellidoPaciente+"\nNumero de celuda: "+CedulaConsulta +" \nEdad: "+EdadConsultar +"\nGenero: "+GeneroConsultar+"\nNumero de telefono: "+TelefonoConsultar+"\nEnfermedad: "+MolestiaConsultar+" \nFecha de cita: "+FechaCita+"\nHorario: "+HoraCita);
+
+                txaDatosPaciente.setText("Nombres: " + NombrePaciente + " " + ApellidoPaciente + "\nNumero de celuda: " + CedulaConsulta + " \nEdad: " + EdadConsultar + "\nGenero: " + GeneroConsultar + "\nNumero de telefono: " + TelefonoConsultar + "\nEnfermedad: " + MolestiaConsultar + " \nFecha de cita: " + FechaCita + "\nHorario: " + HoraCita);
 
             }
         }
         return Existe;
     }
-    
+
     public boolean ExisteEnTabla2(JTable tabla, String dto, int col) {
-        
+
         boolean Existe2 = false;
-        
+
         for (int i = 0; i < tabla.getRowCount(); i++) {
             if (tabla.getValueAt(i, col).equals(dto)) {
-                Existe2 = true;        
+                Existe2 = true;
             }
         }
         return Existe2;
@@ -84,7 +98,7 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtNumeroCedula = new javax.swing.JTextField();
+        txtNumeroCedula1 = new javax.swing.JTextField();
         btnConsultar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -126,20 +140,20 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Ingresar numero de identificacion");
 
-        txtNumeroCedula.setForeground(java.awt.Color.gray);
-        txtNumeroCedula.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtNumeroCedula.setText("Ingreso solo numeros");
-        txtNumeroCedula.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtNumeroCedula1.setForeground(java.awt.Color.gray);
+        txtNumeroCedula1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNumeroCedula1.setText("Ingreso solo numeros");
+        txtNumeroCedula1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                txtNumeroCedulaFocusGained(evt);
+                txtNumeroCedula1FocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txtNumeroCedulaFocusLost(evt);
+                txtNumeroCedula1FocusLost(evt);
             }
         });
-        txtNumeroCedula.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtNumeroCedula1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNumeroCedulaKeyTyped(evt);
+                txtNumeroCedula1KeyTyped(evt);
             }
         });
 
@@ -269,7 +283,7 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtNumeroCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtNumeroCedula1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -298,7 +312,7 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
                             .addComponent(btnSalir)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNumeroCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNumeroCedula1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnConsultar))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
@@ -331,42 +345,42 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         // TODO add your handling code here:
-        int x =evt.getXOnScreen();
-        int y =evt.getYOnScreen();
-        this.setLocation(x-Xmouse,y- Ymouse);
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - Xmouse, y - Ymouse);
     }//GEN-LAST:event_jLabel1MouseDragged
 
-    private void txtNumeroCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroCedulaKeyTyped
+    private void txtNumeroCedula1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroCedula1KeyTyped
         // TODO add your handling code here:
         int key = evt.getKeyChar();
         boolean delete = key == 8;
-        
+
         Character c = evt.getKeyChar();
-        
-        if(!(Character.isDigit(c) || delete)){
+
+        if (!(Character.isDigit(c) || delete)) {
             evt.consume();
             JOptionPane.showMessageDialog(null, "Solo ingreso de numeros", "TEXTO NO VALIDO", JOptionPane.WARNING_MESSAGE);
         }
-        if(txtNumeroCedula.getText().length()>=10){
+        if (txtNumeroCedula1.getText().length() >= 10) {
             evt.consume();
         }
-    }//GEN-LAST:event_txtNumeroCedulaKeyTyped
+    }//GEN-LAST:event_txtNumeroCedula1KeyTyped
 
-    private void txtNumeroCedulaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroCedulaFocusGained
+    private void txtNumeroCedula1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroCedula1FocusGained
         // TODO add your handling code here:
-        if (txtNumeroCedula.getText().equals("Ingreso solo numeros")) {
-            txtNumeroCedula.setText("");
-            txtNumeroCedula.setForeground(Color.BLACK);
+        if (txtNumeroCedula1.getText().equals("Ingreso solo numeros")) {
+            txtNumeroCedula1.setText("");
+            txtNumeroCedula1.setForeground(Color.BLACK);
         }
-    }//GEN-LAST:event_txtNumeroCedulaFocusGained
+    }//GEN-LAST:event_txtNumeroCedula1FocusGained
 
-    private void txtNumeroCedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroCedulaFocusLost
+    private void txtNumeroCedula1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroCedula1FocusLost
         // TODO add your handling code here:
-        if (txtNumeroCedula.getText().isEmpty()) {
-            txtNumeroCedula.setText("Ingreso solo numeros");
-            txtNumeroCedula.setForeground(Color.GRAY);
+        if (txtNumeroCedula1.getText().isEmpty()) {
+            txtNumeroCedula1.setText("Ingreso solo numeros");
+            txtNumeroCedula1.setForeground(Color.GRAY);
         }
-    }//GEN-LAST:event_txtNumeroCedulaFocusLost
+    }//GEN-LAST:event_txtNumeroCedula1FocusLost
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -378,9 +392,9 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
         ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSalirIcono.png");
-        
+
         int valor = JOptionPane.showConfirmDialog(null, "¿Esta seguro que quiere salir del sistema?\n Se perderan todos los avances", "CONFIRMACION DE SALIDA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, SalirConfirmar);
-        if(valor == JOptionPane.YES_OPTION){
+        if (valor == JOptionPane.YES_OPTION) {
             System.exit(0);
         }
     }//GEN-LAST:event_btnSalirActionPerformed
@@ -388,34 +402,30 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         // TODO add your handling code here:
         txaDatosPaciente.setText("");
-        
+
         ImageIcon CedulaInvalidaIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneCedulaInvalidaIcono.png");
         ImageIcon SinRegistroIcono = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSinRegistroIcono.png");
         ImageIcon SinCita = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSinCitaIcono.png");
         ImageIcon NumeroMenor = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneNumeroIgualIcono.png");
         ImageIcon ErrorCedula = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneErrorCampoIcono.png");
-        
-        String cedula = txtNumeroCedula.getText();
+
+        String cedula = txtNumeroCedula1.getText();
         frmPersonalCitasPorAtender abrir = new frmPersonalCitasPorAtender();
         abrir.setVisible(false);
-        
-        if(txtNumeroCedula.getText().isEmpty() || txtNumeroCedula.getText().equalsIgnoreCase("Ingreso solo numeros")){
-            JOptionPane.showMessageDialog(null, "Ingrese el numero de cedula","NUMERO DE CEDULA VACIO",JOptionPane.ERROR_MESSAGE,CedulaInvalidaIcono);
-        }
-        else if(cedula.length() < 10) {
-            JOptionPane.showMessageDialog(null, "La cedula tiene menos de 10 digitos", "CEDULA MAL ESTABLECIDA", JOptionPane.ERROR_MESSAGE,NumeroMenor);
-        }
-//        else if(!txtNumeroCedula.getText().matches("11\\d{8}")){
-//            JOptionPane.showMessageDialog(null, "El numero de cedula tiene que iniciar con 11","CEDULA NO VALIDO",JOptionPane.ERROR_MESSAGE,ErrorCedula);
-//        }
-        else if(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender.getRowCount() <= 0){
-            JOptionPane.showMessageDialog(null, "No hay registros de citas, primero tiene que agendar una cita","NO HAY REGISTROS",JOptionPane.ERROR_MESSAGE,SinRegistroIcono);
-        }
-        else if(ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 1)== true){ 
-            
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "No cuenta con una cita disponible \n Registre una cita","NO CUENTA CON CITA",JOptionPane.INFORMATION_MESSAGE,SinCita);
+
+        if (txtNumeroCedula1.getText().isEmpty() || txtNumeroCedula1.getText().equalsIgnoreCase("Ingreso solo numeros")) {
+            JOptionPane.showMessageDialog(null, "Ingrese el numero de cedula", "NUMERO DE CEDULA VACIO", JOptionPane.ERROR_MESSAGE, CedulaInvalidaIcono);
+        } else if (cedula.length() < 10) {
+            JOptionPane.showMessageDialog(null, "La cedula tiene menos de 10 digitos", "CEDULA MAL ESTABLECIDA", JOptionPane.ERROR_MESSAGE, NumeroMenor);
+        } //        else if(!txtNumeroCedula.getText().matches("11\\d{8}")){
+        //            JOptionPane.showMessageDialog(null, "El numero de cedula tiene que iniciar con 11","CEDULA NO VALIDO",JOptionPane.ERROR_MESSAGE,ErrorCedula);
+        //        }
+        else if (Vista.frmPersonalCitasPorAtender.tblCitasSinAtender.getRowCount() <= 0) {
+            JOptionPane.showMessageDialog(null, "No hay registros de citas, primero tiene que agendar una cita", "NO HAY REGISTROS", JOptionPane.ERROR_MESSAGE, SinRegistroIcono);
+        } else if (ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 1) == true) {
+
+        } else {
+            JOptionPane.showMessageDialog(null, "No cuenta con una cita disponible \n Registre una cita", "NO CUENTA CON CITA", JOptionPane.INFORMATION_MESSAGE, SinCita);
         }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
@@ -433,31 +443,25 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
         ImageIcon MuyLejana = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneFechaLejanaIcono.png");
         ImageIcon Cambiar = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneCambiarIcono.png");
 
-
         try {
-            String cedula = txtNumeroCedula.getText();
+            String cedula = txtNumeroCedula1.getText();
 //        EnviarContenido.removeIf(x -> x.getIdentificacion().equals(cedula));
 
-            if (cedula.isEmpty() || txtNumeroCedula.getText().equalsIgnoreCase("Ingreso solo numeros")) {
+            if (cedula.isEmpty() || txtNumeroCedula1.getText().equalsIgnoreCase("Ingreso solo numeros")) {
                 JOptionPane.showMessageDialog(null, "Ingrese el numero de cedula", "NUMERO DE CEDULA VACIO", JOptionPane.ERROR_MESSAGE, CedulaInvalidaIcono);
-            } 
-            else if (cedula.length() < 10) {
+            } else if (cedula.length() < 10) {
                 JOptionPane.showMessageDialog(null, "La cedula tiene menos de 10 digitos", "CEDULA MAL ESTABLECIDA", JOptionPane.ERROR_MESSAGE, NumeroMenor);
-            } 
-//            else if (!txtNumeroCedula.getText().matches("11\\d{8}")) {
-//                JOptionPane.showMessageDialog(null, "El numero de cedula tiene que iniciar con 11", "CEDULA NO VALIDO", JOptionPane.ERROR_MESSAGE, ErrorCedula);
-//            } 
+            } //            else if (!txtNumeroCedula.getText().matches("11\\d{8}")) {
+            //                JOptionPane.showMessageDialog(null, "El numero de cedula tiene que iniciar con 11", "CEDULA NO VALIDO", JOptionPane.ERROR_MESSAGE, ErrorCedula);
+            //            } 
             else if (txtFechaCita.getText().isEmpty() || txtFechaCita.getText().equalsIgnoreCase("dd/mm/aaaa")) {
                 JOptionPane.showMessageDialog(null, "Por favor ingrese la fecha", "CAMPO VACIOS", JOptionPane.WARNING_MESSAGE, FechaVacia);
-            } 
-            else if (cbxHorarioA.getSelectedItem() == null) {
+            } else if (cbxHorarioA.getSelectedItem() == null) {
                 JOptionPane.showMessageDialog(null, "Por favor ingrese el horario", "CAMPO VACIOS", JOptionPane.WARNING_MESSAGE, HorarioVacio);
-            } 
-            else if (Vista.frmPersonalCitasPorAtender.tblCitasSinAtender.getRowCount() <= 0) {
+            } else if (Vista.frmPersonalCitasPorAtender.tblCitasSinAtender.getRowCount() <= 0) {
                 JOptionPane.showMessageDialog(null, "No hay registros de citas, primero tiene que agendar una cita", "NO HAY REGISTROS", JOptionPane.ERROR_MESSAGE, SinRegistroIcono);
-            } 
-            
-            else {
+            } else {
+                System.out.println(listaPacientes);
                 if (ExisteEnTabla(Vista.frmPersonalCitasPorAtender.tblCitasSinAtender, cedula, 1) == true) {
                     boolean resultado = true;
                     String FechaSeleccionada = txtFechaCita.getText();
@@ -471,49 +475,83 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
                     Date fechaSeleccionada = formatoDeFecha.parse(Fe);
                     Date fechaLimite = formatoDeFecha.parse("30/12/2040");
 
-                    boolean exist = ListaDePacientes.stream().anyMatch(p -> p.getFechaIngreso().equals(Fe) && p.getHoraAtencion().equals(CbxHoraAtencion));
+                    boolean exist = listaPacientes.stream().anyMatch(p -> p.getFechaIngreso().equals(Fe) && p.getHoraAtencion().equals(CbxHoraAtencion));
 
                     if (txtFechaCita.getText().matches("^\\d{1,2}/\\d{1,2}/\\d{4}$")) {
-                        
-                    } 
-                    else {
+
+                    } else {
                         JOptionPane.showMessageDialog(null, "La fecha tiene que contener 2 / en formato dia/mes/año", "FECHA SIN FORMATO0", JOptionPane.WARNING_MESSAGE, MuyLejana);
                     }
                     if (resultado == true) {
 
                         if (fechaSeleccionada.before(fechaHoy)) {
                             JOptionPane.showMessageDialog(null, "La fecha seleccionada ya ha pasado", "FECHA PASADO", JOptionPane.INFORMATION_MESSAGE, FechaPasada);
-                        } 
-                        else if (fechaSeleccionada.after(fechaLimite)) {
+                        } else if (fechaSeleccionada.after(fechaLimite)) {
                             JOptionPane.showMessageDialog(null, "La fecha seleccionada es muy lejana", "FECHA DEMASIADO LEJANA", JOptionPane.INFORMATION_MESSAGE, MuyLejana);
-                        } 
-                        else {
+                        } else {
                             if (exist) {
                                 JOptionPane.showMessageDialog(null, "La hora de atencion ya no esta disponible", "NO DISPONIBLE", JOptionPane.INFORMATION_MESSAGE, HorarioNoDisponible);
-                            } 
-                            else {
-                                for (Paciente pacienteb : ListaDePacientes) {
-                                    if (pacienteb.getIdentificacion().equals(txtNumeroCedula.getText())) {
-                                        pacienteb.setFechaIngreso(txtFechaCita.getText());
-                                        pacienteb.setHoraAtencion(cbxHorarioA.getSelectedItem().toString());
-                                        Collections.sort(ListaDePacientes, (Paciente g, Paciente h) -> g.getHoraAtencion().compareTo(h.getHoraAtencion()));
+                            } else {
+                                System.out.println(listaPacientes.getSize());
+//                                System.out.println(listaPacientes.get(0).getIdentificacion());
+//                                System.out.println(listaPacientes.get(1).getIdentificacion());
+
+                                for (int i = 0; i <= listaPacientes.getSize(); i++) {
+                                    System.out.println(i);
+                                    if (listaPacientes.get(i).getIdentificacion().equals(txtNumeroCedula1.getText())) {
+                                        System.out.println("si");
+//                                        listaPacientes.get(i).setFechaIngreso(txtFechaCita.getText());
+//                                        listaPacientes.get(i).setHoraAtencion(cbxHorarioA.getSelectedItem().toString());
+
+                                        Collections.sort(listaPacientes, (Paciente g, Paciente h) -> g.getHoraAtencion().compareTo(h.getHoraAtencion()));
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+// Convertir el string a un objeto LocalDate utilizando el formateador
+LocalDate fecha = LocalDate.parse(txtFechaCita.getText(), formatter);
+// Extraer el año, mes y día de la fecha
+                                        int anio = fecha.getYear();
+                                        int mes = fecha.getMonthValue();
+                                        int dia = fecha.getDayOfMonth();
+
+                                        Paciente paciente = new Paciente(
+                                                listaPacientes.get(i).getTipoIdentificacion(),
+                                                listaPacientes.get(i).getIdentificacion(),
+                                                listaPacientes.get(i).getNombres(),
+                                                listaPacientes.get(i).getApellidos(),
+                                                listaPacientes.get(i).getEdad(),
+                                                listaPacientes.get(i).getGenero(),
+                                                listaPacientes.get(i).getTelefono(),
+                                                listaPacientes.get(i).getMolestia(),
+                                                txtFechaCita.getText(),
+                                                cbxHorarioA.getSelectedItem().toString(),
+                                                Integer.toString(dia),
+                                                Integer.toString(mes),
+                                                Integer.toString(anio),
+                                                listaPacientes.get(i).getValoracion()
+                                        );
+
+                                        PDFCrear crear = new PDFCrear();
+
+                                        //listaPacientes.set(i, paciente);
+                                        crear.guardarDatosPa(paciente, listaPacientes, txtNumeroCedula1.getText());
                                         JOptionPane.showMessageDialog(null, "La cita se ha cambiado para el dia " + txtFechaCita.getText() + "\n con el horario de " + cbxHorarioA.getSelectedItem().toString(), "CITA REAGENDADA", JOptionPane.INFORMATION_MESSAGE, Cambiar);
                                     }
-                                    break;
+
+                                }
+                                {
+
                                 }
                             }
                         }
-                    } 
-                    else {
+                    } else {
                         JOptionPane.showMessageDialog(null, "El formato de la fecha esta mal,tiene que tener limites\n de dias 30 o 31 y mes maximo 12 ,Por favor revisar", "FORMATO DE FECHA MAL ESTABLECIDO", JOptionPane.WARNING_MESSAGE, MuyLejana);
                     }
-                } 
-                else {
+                } else {
                     JOptionPane.showMessageDialog(null, "No cuenta con una cita disponible \n Registre una cita", "NO CUENTA CON CITA", JOptionPane.INFORMATION_MESSAGE, SinCita);
                 }
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
+            System.out.println(e);
 
         }
     }//GEN-LAST:event_btnCambiarFechaActionPerformed
@@ -521,10 +559,10 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
     private void txtFechaCitaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaCitaKeyTyped
         // TODO add your handling code here:
         int key = evt.getKeyChar();
-        
+
         boolean slash = key == 47;
         boolean delete = key == 8;
-        
+
         Character c = evt.getKeyChar();
 
         if (!(Character.isDigit(c) || slash || delete)) {
@@ -605,6 +643,6 @@ public class frmUsuarioCambiarFechaCita extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txaDatosPaciente;
     private javax.swing.JTextField txtFechaCita;
-    public static javax.swing.JTextField txtNumeroCedula;
+    public static javax.swing.JTextField txtNumeroCedula1;
     // End of variables declaration//GEN-END:variables
 }

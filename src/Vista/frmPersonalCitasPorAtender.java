@@ -66,9 +66,7 @@ public final class frmPersonalCitasPorAtender extends javax.swing.JFrame {
                 med.add(medicamento);
                 cbxMedicamentos.addItem(medicamento.getNombre());
             }
-            
-            System.out.println(med);
-
+                        
         } catch (FileNotFoundException e) {
 
         }
@@ -100,7 +98,7 @@ public final class frmPersonalCitasPorAtender extends javax.swing.JFrame {
             }
 
         } catch (FileNotFoundException e) {
-            System.out.println("valio queso");
+            System.out.println(e);
 
         }
 
@@ -763,7 +761,14 @@ Paciente paciente;
 
     private void btnImprimirCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirCitasActionPerformed
         PDFCrear crea = new PDFCrear();
-        crea.crearPdfCitas();
+        if (crea.crearPdfCitas() == true) {
+         JOptionPane.showMessageDialog(null, " Su pdf ha sido creado","PDF CREADO EXITOSAMENTE",JOptionPane.INFORMATION_MESSAGE);
+
+            }else{
+              JOptionPane.showMessageDialog(null, " Su pdf no ha sido creado, cree una cita","ERROR",JOptionPane.INFORMATION_MESSAGE);
+
+            }
+        
     }//GEN-LAST:event_btnImprimirCitasActionPerformed
 
     /**

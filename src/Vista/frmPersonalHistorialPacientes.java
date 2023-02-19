@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -277,7 +278,14 @@ public class frmPersonalHistorialPacientes extends javax.swing.JFrame {
 
     private void BtnImprimirHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnImprimirHistorialActionPerformed
         PDFCrear crea = new PDFCrear();
-        crea.crearPdfCitasAtendidas();
+        if (crea.crearPdfHistorialPaciente() == true) {
+         JOptionPane.showMessageDialog(null, " Su pdf ha sido creado","PDF CREADO EXITOSAMENTE",JOptionPane.INFORMATION_MESSAGE);
+
+            }else{
+              JOptionPane.showMessageDialog(null, " Su pdf no ha sido creado, cree una cita","ERROR",JOptionPane.INFORMATION_MESSAGE);
+
+            }
+        
     }//GEN-LAST:event_BtnImprimirHistorialActionPerformed
 
     /**
