@@ -5,14 +5,10 @@
 package Vista;
 
 import Utilidades.PDFCrear;
-import Controlador.ListaEnlazada.Excepciones.ListaVaciaExcepcion;
-import Controlador.ListaEnlazada.Excepciones.PosicionNoEncontradaException;
 import Controlador.ListaEnlazada.ListaEnlazada;
 import Modelo.HistorialClinico;
 import Modelo.Medicina;
 import Modelo.Paciente;
-import static Vista.frmPersonalInventarioMedico.ListaMedicamentos;
-import static Vista.frmUsuarioSeleccionarFecha.ListaDePacientes;
 import java.util.Collections;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
