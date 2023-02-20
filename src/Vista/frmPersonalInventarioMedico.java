@@ -44,44 +44,33 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         tabla_modelo.addColumn("Fecha agregado");
         tabla_modelo.addColumn("Fecha caducidad");
 
-        tabla_modelo.setColumnIdentifiers(new Object[]
-        {
-            "Nombre medicamento", "Cantidad", "Fecha agregado", "Fecha caducidad"
-        });
+        tabla_modelo.setColumnIdentifiers(new Object[]{"Nombre medicamento", "Cantidad", "Fecha agregado", "Fecha caducidad"});
 
         CargarMedicamentos();
     }
 
     private void CargarMedicamentos() {
-
-
+        
         Gson gson = new Gson();
 
         //Leer el archivo Json
         FileReader reader;
 
-        try
-        {
+        try {
             reader = new FileReader("ListaMedicamentos.json");
-            ListaEnlazada<Medicina> listaMedicamentosCargadas = gson.fromJson(reader, new TypeToken<ListaEnlazada<Medicina>>() {
-            }.getType());
+            ListaEnlazada<Medicina> listaMedicamentosCargadas = gson.fromJson(reader, new TypeToken<ListaEnlazada<Medicina>>() {}.getType());
 
-            for (Medicina medicamento : listaMedicamentosCargadas)
-            {
-                if (!ExisteEnTabla(tblMedicamentos, medicamento.getNombre(), 0))
-                {
-                    tabla_modelo.addRow(new Object[]
-                    {
-                        medicamento.getNombre(), medicamento.getStock(), medicamento.getFechaAgregado(), medicamento.getFechaCaducidad()
-                    });
+            for (Medicina medicamento : listaMedicamentosCargadas) {
+                if (!ExisteEnTabla(tblMedicamentos, medicamento.getNombre(), 0)) {
+                    tabla_modelo.addRow(new Object[]{medicamento.getNombre(), medicamento.getStock(), medicamento.getFechaAgregado(), medicamento.getFechaCaducidad()});
                     tblMedicamentos.setModel(tabla_modelo);
-                } else
-                {
+                } 
+                else {
 
                 }
             }
-        } catch (FileNotFoundException e)
-        {
+        } 
+        catch (FileNotFoundException e) {
 
         }
     }
@@ -93,11 +82,9 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         String nuevoValor = txtCantidadMedicamento.getText();
         String FechaActualizada = txtFechaCaducidad.getText();
 
-        for (int i = 0; i < tabla.getRowCount(); i++)
-        {
+        for (int i = 0; i < tabla.getRowCount(); i++) {
 
-            if (tabla.getValueAt(i, col).toString().toLowerCase().equals(dto.toLowerCase()))
-            {
+            if (tabla.getValueAt(i, col).toString().toLowerCase().equals(dto.toLowerCase())) {
                 tabla.setValueAt(nuevoValor, i, 1);
                 tabla.setValueAt(FechaActualizada, i, 3);
 
@@ -106,23 +93,20 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         }
         return Existe;
     }
-
+    
     public boolean BuscarMedicamento(JTable tabla, String dto, int col) {
 
         boolean Existe = false;
 
-        for (int i = 0; i < tabla.getRowCount(); i++)
-        {
+        for (int i = 0; i < tabla.getRowCount(); i++) {
 
-            if (tabla.getValueAt(i, col).toString().toLowerCase().equals(dto.toLowerCase()))
-            {
-
+            if (tabla.getValueAt(i, col).toString().toLowerCase().equals(dto.toLowerCase())) {
+                
                 Existe = true;
             }
         }
         return Existe;
     }
-
 
     //Metodo para eliminar todos los datos de la tabla
     private void VaciarI() {
@@ -146,38 +130,33 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
 //Metodo para eliminar la fila de la tabla de inventario
     private void Eliminar() throws IOException {
         int filaselecionada = tblMedicamentos.getSelectedRow();
-        if (filaselecionada >= 0)
-        {
+        if (filaselecionada >= 0) {
             tabla_modelo.removeRow(filaselecionada);
             Gson gson = new Gson();
 
             //Leer el archivo Json
             FileReader reader;
 
-            try
-            {
+            try {
                 reader = new FileReader("ListaMedicamentos.json");
-                ListaEnlazada<Medicina> listaMedicamentosCargadas = gson.fromJson(reader, new TypeToken<ListaEnlazada<Medicina>>() {
-                }.getType());
+                ListaEnlazada<Medicina> listaMedicamentosCargadas = gson.fromJson(reader, new TypeToken<ListaEnlazada<Medicina>>() {}.getType());
 
                 listaMedicamentosCargadas.remove(filaselecionada);
 
-                try
-                {
+                try {
                     FileWriter writer = new FileWriter("ListaMedicamentos.json");
                     gson.toJson(listaMedicamentosCargadas, writer);
                     writer.close();
-                } catch (Exception e)
-                {
-
-
+                } 
+                catch (Exception e) {
+                    
                 }
-            } catch (FileNotFoundException ex)
-            {
+            } 
+            catch (FileNotFoundException ex) {
                 Logger.getLogger(frmPersonalInventarioMedico.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else
-        {
+        } 
+        else {
             JOptionPane.showMessageDialog(null, "Seleccione el medicamento a eliminar", "Seleccione una fila", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -317,7 +296,6 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
             }
         });
 
-
         txtCantidadMedicamento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCantidadMedicamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -340,7 +318,6 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
                 txtFechaCaducidadKeyTyped(evt);
             }
         });
-
 
         btnGuardarMedicamentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnGuardarInformacionIcono.png"))); // NOI18N
         btnGuardarMedicamentos.setText("GUARDAR");
@@ -367,20 +344,16 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
             }
         });
 
-
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Buscar medicamento");
 
         txtBuscarMedicamento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
         txtBuscarMedicamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarMedicamentoActionPerformed(evt);
             }
         });
-
 
         btnBuscarMedicamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnCitaConsultarIcono.png"))); // NOI18N
         btnBuscarMedicamento.setText("BUSCAR");
@@ -493,19 +466,16 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // Condicion si alguno de los campos no esta vacio
         //Se mostrara la siguiente advertencia
-
-        if (!txtNombreMedicamento.getText().isEmpty() || !txtCantidadMedicamento.getText().isEmpty() || !txtFechaCaducidad.getText().isEmpty())
-        {
+        if (!txtNombreMedicamento.getText().isEmpty() || !txtCantidadMedicamento.getText().isEmpty() || !txtFechaCaducidad.getText().isEmpty()) {
             int result = JOptionPane.showConfirmDialog(null, "Estas seguro de regresar? \nSe perderan todos los avances no guardados", "CONFIRMAR SALIDA", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-            if (result == JOptionPane.YES_OPTION)
-            {
+            if (result == JOptionPane.YES_OPTION) {
 
                 FrmMenuSuperAdmin abrir = new FrmMenuSuperAdmin();
                 abrir.setVisible(true);
                 this.setVisible(false);
             }
-        } else
-        {
+        } 
+        else {
             FrmMenuSuperAdmin abrir = new FrmMenuSuperAdmin();
             abrir.setVisible(true);
             this.setVisible(false);
@@ -523,66 +493,57 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         String FechaCaducidad = txtFechaCaducidad.getText();
 
         //Condiciones si los datos estan vacios
-        if (txtNombreMedicamento.getText().isEmpty())
-        {
+        if (txtNombreMedicamento.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese un medicamento, el campo esta vacio", "MEDICAMENTO VACIO", JOptionPane.ERROR_MESSAGE);
-        } else if (txtCantidadMedicamento.getText().isEmpty())
-        {
+        } 
+        else if (txtCantidadMedicamento.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese la cantidad, el campo esta vacio", "CANTIDAD VACIO", JOptionPane.ERROR_MESSAGE);
-        } else if (txtFechaCaducidad.getText().isEmpty())
-        {
+        } 
+        else if (txtFechaCaducidad.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor ingrese la fecha", "NO EXISTE FECHA", JOptionPane.WARNING_MESSAGE);
-        } else if (ExisteEnTabla(tblMedicamentos, NombreMedicina, 0) == true)
-        {
+        } 
+        else if (ExisteEnTabla(tblMedicamentos, NombreMedicina, 0) == true) {
 
-        } else
-        {
+        } 
+        else {
 
             boolean resultado = true;
             String fecha1 = txtFechaCaducidad.getText();
             resultado = validarFecha(fecha1);
 
             //Validar el formato de fecha
-            if (txtFechaCaducidad.getText().matches("^\\d{1,2}/\\d{1,2}/\\d{4}$"))
-            {
+            if (txtFechaCaducidad.getText().matches("^\\d{1,2}/\\d{1,2}/\\d{4}$")) {
 
-            } else
-            {
+            } 
+            else {
                 JOptionPane.showMessageDialog(null, "La fecha tiene que contener 2 / en formato dia/mes/año", "FECHA SIN FORMATO0", JOptionPane.WARNING_MESSAGE);
             }
-            if (resultado == true)
-            {
+            if (resultado == true) {
 
                 ListaMedicamentos.add(new Medicina(NombreMedicina, CantidadMedicina, fechaActual, FechaCaducidad));
 
                 JOptionPane.showMessageDialog(null, "El medicamento se ha agregado", "MEDICAMENTO AGREGADO", JOptionPane.INFORMATION_MESSAGE);
 
-                tabla_modelo.addRow(new Object[]
-                {
-                    NombreMedicina, CantidadMedicina, fechaActual, FechaCaducidad
-                });
+                tabla_modelo.addRow(new Object[]{NombreMedicina, CantidadMedicina, fechaActual, FechaCaducidad});
 
                 tblMedicamentos.setModel(tabla_modelo);
-
+                
                 File jsonFile = new File("ListaMedicamentos.json");
-
-                try
-                {
+                
+                try {
                     Gson gson = new Gson();
 
                     //Si el archivo ya exite entonces que se realize la condicion de lectura
-                    if (jsonFile.exists())
-                    {
+                    if (jsonFile.exists()) {
                         FileReader reader = new FileReader("ListaMedicamentos.json");
                         Medicina[] dataArray = gson.fromJson(reader, Medicina[].class);
                         ListaMedicamentos = new ListaEnlazada<>();
 
-                        for (Medicina data : dataArray)
-                        {
+                        for (Medicina data : dataArray) {
                             ListaMedicamentos.add(data);
                         }
-                    } else
-                    {
+                    } 
+                    else {
                         ListaMedicamentos = new ListaEnlazada<>();
                     }
 
@@ -591,23 +552,20 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
                     boolean nombreExiste = false;
                     int indice = -1;
 
-                    for (int i = 0; i < ListaMedicamentos.size(); i++)
-                    {
-                        if (ListaMedicamentos.get(i).getNombre().equals(nuevoMedicamento.getNombre()))
-                        {
+                    for (int i = 0; i < ListaMedicamentos.size(); i++) {
+                        if (ListaMedicamentos.get(i).getNombre().equals(nuevoMedicamento.getNombre())) {
                             nombreExiste = true;
                             indice = i;
                             break;
                         }
                     }
 
-                    if (nombreExiste)
-                    {
+                    if (nombreExiste) {
                         ListaMedicamentos.get(indice).setStock(nuevoMedicamento.getStock());
                         ListaMedicamentos.get(indice).setFechaAgregado(nuevoMedicamento.getFechaAgregado());
                         ListaMedicamentos.get(indice).setFechaCaducidad(nuevoMedicamento.getFechaCaducidad());
-                    } else
-                    {
+                    } 
+                    else {
                         ListaMedicamentos.add(nuevoMedicamento);
                     }
 
@@ -617,12 +575,12 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
                     gson.toJson(ListaMedicamentos, writer);
                     //Cierro
                     writer.close();
-                } catch (Exception e)
-                {
-
+                } 
+                catch (Exception e) {
+                    
                 }
-            } else
-            {
+            }
+            else {
                 JOptionPane.showMessageDialog(null, "El formato de la fecha esta mal,tiene que tener limites\n de dias 30 o 31 y mes maximo 12 ,Por favor revisar", "FORMATO DE FECHA MAL ESTABLECIDO", JOptionPane.WARNING_MESSAGE);
             }
         }
@@ -641,29 +599,21 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         //Leer el archivo Json
         FileReader reader;
 
-        try
-        {
+        try {
             reader = new FileReader("ListaMedicamentos.json");
             ListaEnlazada<Medicina> listaMedicamentosCargadas = gson.fromJson(reader, new TypeToken<ListaEnlazada<Medicina>>() {
             }.getType());
 
-            for (Medicina medicamento : listaMedicamentosCargadas)
-            {
-                if (!BuscarMedicamento(tblMedicamentos, medicamento.getNombre(), 0))
-                {
-                    tabla_modelo.addRow(new Object[]
-                    {
-                        medicamento.getNombre(), medicamento.getStock(), medicamento.getFechaAgregado(), medicamento.getFechaCaducidad()
-                    });
+            for (Medicina medicamento : listaMedicamentosCargadas) {
+                if (!BuscarMedicamento(tblMedicamentos, medicamento.getNombre(), 0)) {
+                    tabla_modelo.addRow(new Object[]{medicamento.getNombre(), medicamento.getStock(), medicamento.getFechaAgregado(), medicamento.getFechaCaducidad()});
                     tblMedicamentos.setModel(tabla_modelo);
 
-                } else
-                {
+                } else {
 
                 }
             }
-        } catch (FileNotFoundException e)
-        {
+        } catch (FileNotFoundException e) {
 
         }
 //        } 
@@ -694,16 +644,11 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         boolean minusculas = key >= 97 && key <= 122;
         boolean espacio = key == 32;
 
-        if (!(minusculas || mayusculas || espacio))
-        {
+        if (!(minusculas || mayusculas || espacio)) {
             evt.consume();
-
         }
-    }//GEN-LAST:event_btnVerificarMedicamentoActionPerformed
 
-
-        if (txtNombreMedicamento.getText().length() >= 30)
-        {
+        if (txtNombreMedicamento.getText().length() >= 30) {
             evt.consume();
         }
     }//GEN-LAST:event_txtNombreMedicamentoKeyTyped
@@ -713,19 +658,15 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         //Limitaciones para evitar que el usuario ingrese letras ademas establecer la cantidad limite
         Character c = evt.getKeyChar();
 
-        if (!Character.isDigit(c))
-
-        {
+        if (!Character.isDigit(c)) {
             evt.consume();
         }
-        if (txtCantidadMedicamento.getText().length() >= 10000000)
-        {
+        if (txtCantidadMedicamento.getText().length() >= 10000000) {
             evt.consume();
         }
     }//GEN-LAST:event_txtCantidadMedicamentoKeyTyped
 
     private void txtFechaCaducidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaCaducidadKeyTyped
-
 
         //Limitaciones para evitar que el usuario ingrese letras
         int key = evt.getKeyChar();
@@ -733,12 +674,10 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
 
         Character c = evt.getKeyChar();
 
-        if (!(Character.isDigit(c) || slash))
-        {
+        if (!(Character.isDigit(c) || slash)) {
             evt.consume();
         }
-        if (txtFechaCaducidad.getText().length() >= 10)
-        {
+        if (txtFechaCaducidad.getText().length() >= 10) {
             evt.consume();
         }
     }//GEN-LAST:event_txtFechaCaducidadKeyTyped
@@ -752,65 +691,59 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         String NombreMedicina = txtNombreMedicamento.getText();
         String CantidadMedicina = txtCantidadMedicamento.getText();
         String FechaCaducidad = txtFechaCaducidad.getText();
-
-        try
-        {
+        
+        
+        
+        try {
             Gson gson = new Gson();
             //Condiciones si los datos estan vacios
-            if (txtNombreMedicamento.getText().isEmpty())
-            {
+            if (txtNombreMedicamento.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Ingrese un medicamento, el campo esta vacio", "MEDICAMENTO VACIO", JOptionPane.ERROR_MESSAGE);
-            } else if (txtCantidadMedicamento.getText().isEmpty())
-            {
+            } 
+            else if (txtCantidadMedicamento.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Ingrese la cantidad, el campo esta vacio", "CANTIDAD VACIO", JOptionPane.ERROR_MESSAGE);
-            } else if (txtFechaCaducidad.getText().isEmpty())
-            {
+            } 
+            else if (txtFechaCaducidad.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Por favor ingrese la fecha", "NO EXISTE FECHA", JOptionPane.WARNING_MESSAGE);
             } //Si la condicion no se cumple crear archivo Json 
-            else
-            {
+            else {
 
                 //Nombre archivo
                 File jsonFile = new File("ListaMedicamentos.json");
 
                 //Si el archivo ya exite entonces que se realize la condicion de lectura
-                if (jsonFile.exists())
-                {
+                if (jsonFile.exists()) {
                     FileReader reader = new FileReader("ListaMedicamentos.json");
                     Medicina[] dataArray = gson.fromJson(reader, Medicina[].class);
                     ListaMedicamentos = new ListaEnlazada<>();
-
-                    for (Medicina data : dataArray)
-                    {
+                    
+                    for (Medicina data : dataArray) {
                         ListaMedicamentos.add(data);
                     }
-                } else
-                {
+                } 
+                else {
                     ListaMedicamentos = new ListaEnlazada<>();
                 }
-
+                
                 Medicina nuevoMedicamento = new Medicina(NombreMedicina, CantidadMedicina, fechaActual, FechaCaducidad);
-
+                
                 boolean nombreExiste = false;
                 int indice = -1;
-
-                for (int i = 0; i < ListaMedicamentos.size(); i++)
-                {
-                    if (ListaMedicamentos.get(i).getNombre().equals(nuevoMedicamento.getNombre()))
-                    {
+                
+                for (int i = 0; i < ListaMedicamentos.size(); i++) {
+                    if (ListaMedicamentos.get(i).getNombre().equals(nuevoMedicamento.getNombre())) {
                         nombreExiste = true;
                         indice = i;
                         break;
                     }
                 }
-
-                if (nombreExiste)
-                {
+                
+                if (nombreExiste) {
                     ListaMedicamentos.get(indice).setStock(nuevoMedicamento.getStock());
                     ListaMedicamentos.get(indice).setFechaAgregado(nuevoMedicamento.getFechaAgregado());
                     ListaMedicamentos.get(indice).setFechaCaducidad(nuevoMedicamento.getFechaCaducidad());
-                } else
-                {
+                } 
+                else {
                     ListaMedicamentos.add(nuevoMedicamento);
                 }
 
@@ -822,23 +755,19 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
                 writer.close();
             }
 
-
             //Catch si es que ocurre algun error
-        } catch (IOException ex)
-        {
+        } 
+        catch (IOException ex) {
             Logger.getLogger(frmPersonalInventarioMedico.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnGuardarMedicamentosActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-
-        try
-        {
+        try {
             Eliminar();
-        } catch (IOException ex)
-        {
-
+        } 
+        catch (IOException ex) {
             Logger.getLogger(frmPersonalInventarioMedico.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -847,12 +776,9 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         // TODO add your handling code here:
         ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSalirIcono.png");
 
+        int valor = JOptionPane.showConfirmDialog(null,"¿Esta seguro que quiere salir del sistema?\n","CONFIRMACION DE SALIDA",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE,SalirConfirmar);
 
-        int valor = JOptionPane.showConfirmDialog(null, "¿Esta seguro que quiere salir del sistema?\n", "CONFIRMACION DE SALIDA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, SalirConfirmar);
-
-        if (valor == JOptionPane.YES_OPTION)
-        {
-
+        if (valor == JOptionPane.YES_OPTION) {
             System.exit(0);
         }
     }//GEN-LAST:event_btnSalirActionPerformed
@@ -863,28 +789,18 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
 
     private void btnBuscarMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMedicamentoActionPerformed
         // TODO add your handling code here:
-
-        // Se crea un objeto ImageIcon para el ícono del diálogo de advertencia.
         ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficos/JoptionPane/warning.png");
-
-        // Se obtiene el texto que se ingresó en el campo de búsqueda.
         String JaimeGay = txtBuscarMedicamento.getText();
-
-        // Se crea un objeto TableRowSorter y se establece en la tabla.
+        
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(tabla_modelo);
         tblMedicamentos.setRowSorter(sorter);
-
-        // Se establece un filtro de fila en el TableRowSorter.
-        // El filtro usa una expresión regular para buscar filas que contengan la cadena de búsqueda ignorando mayúsculas y minúsculas.
         sorter.setRowFilter(RowFilter.regexFilter("(?i)" + JaimeGay));
-
-        // Se llama a un método para comprobar si el medicamento buscado existe en la tabla.
-        if (BuscarMedicamento(tblMedicamentos, JaimeGay, 0) == true)
-        {
-            // El medicamento existe.
-        } else
-        {
-            // El medicamento no existe, se muestra un diálogo de advertencia con un mensaje y un ícono de advertencia.
+            
+        if(BuscarMedicamento(tblMedicamentos, JaimeGay, 0)== true){
+            
+            
+        }
+        else{
             JOptionPane.showMessageDialog(null, "El medicamento no existe", "NO ENCONTRADO", JOptionPane.INFORMATION_MESSAGE, SalirConfirmar);
         }
     }//GEN-LAST:event_btnBuscarMedicamentoActionPerformed
@@ -892,7 +808,6 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
     private void txtBuscarMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarMedicamentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarMedicamentoActionPerformed
-
 
     /**
      * @param args the command line arguments
