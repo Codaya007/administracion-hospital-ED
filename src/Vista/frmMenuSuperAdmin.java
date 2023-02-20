@@ -11,14 +11,14 @@ import javax.swing.JOptionPane;
  *
  * @author Jaime Mendoza
  */
-public class frmMenuSuperAdmin extends javax.swing.JFrame {
+public class FrmMenuSuperAdmin extends javax.swing.JFrame {
 
     int Xmouse, Ymouse;
 
     /**
      * Creates new form FrmMenuSuperAdmin
      */
-    public frmMenuSuperAdmin() {
+    public FrmMenuSuperAdmin() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -341,14 +341,18 @@ public class frmMenuSuperAdmin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmMenuSuperAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMenuSuperAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmMenuSuperAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMenuSuperAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmMenuSuperAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMenuSuperAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmMenuSuperAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMenuSuperAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -358,7 +362,7 @@ public class frmMenuSuperAdmin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmMenuSuperAdmin().setVisible(true);
+                new FrmMenuSuperAdmin().setVisible(true);
             }
         });
     }

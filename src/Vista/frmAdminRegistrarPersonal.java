@@ -4,7 +4,7 @@
  */
 package Vista;
 
-import Controlador.ctrlCuenta;
+import Controlador.CtrlCuenta;
 import Modelo.Cuenta;
 import Modelo.Persona;
 import Modelo.Roles;
@@ -21,7 +21,7 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
 
     int Xmouse, Ymouse;
 
-    ctrlCuenta controlador;
+    CtrlCuenta controlador;
 
     /**
      * Creates new form frmAgendacionCita
@@ -30,10 +30,10 @@ public class frmAdminRegistrarPersonal extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         //txtNumeroCedula.addKeyListener(this);
-        controlador = (ctrlCuenta) Utilidades.cargarJson(ctrlCuenta.class, "ControladorCuenta");
+        controlador = (CtrlCuenta) Utilidades.cargarJson(CtrlCuenta.class, "ControladorCuenta");
 
         if (controlador == null) {
-            controlador = new ctrlCuenta();
+            controlador = new CtrlCuenta();
             try {
                 controlador.guardar();
             } catch (Exception e) {

@@ -4,7 +4,7 @@
  */
 package Vista;
 
-import Controlador.ctrlCuenta;
+import Controlador.CtrlCuenta;
 import Controlador.CtrlEspecialidades;
 import Modelo.Cuenta;
 import Modelo.Enfermera;
@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
 public class frmPersonal extends javax.swing.JFrame {
 
     CtrlEspecialidades controladorEspecialidad;
-    ctrlCuenta controladorCuentas;
+    CtrlCuenta controladorCuentas;
     ModeloTablaPersonal modeloTabla = new ModeloTablaPersonal();
     Integer personaSeleccionada;
     Rol roles[] = Utilidades.getRoles();
@@ -40,7 +40,7 @@ public class frmPersonal extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 
         controladorEspecialidad = (CtrlEspecialidades) Utilidades.cargarJson(CtrlEspecialidades.class, "ControladorEspecialidades");
-        controladorCuentas = (ctrlCuenta) Utilidades.cargarJson(ctrlCuenta.class, "ControladorCuenta");
+        controladorCuentas = (CtrlCuenta) Utilidades.cargarJson(CtrlCuenta.class, "ControladorCuenta");
 
         if (controladorEspecialidad == null) {
             try {
@@ -372,7 +372,7 @@ public class frmPersonal extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.setVisible(false);
-        new frmMenuSuperAdmin().setVisible(true);
+        new FrmMenuSuperAdmin().setVisible(true);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
