@@ -7,7 +7,6 @@ package Vista;
 import Utilidades.PDFCrear;
 import com.lowagie.text.DocumentException;
 import java.awt.Color;
-import java.lang.System.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
