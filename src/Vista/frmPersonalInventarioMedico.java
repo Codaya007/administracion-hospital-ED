@@ -17,7 +17,10 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  * @author Victor
@@ -47,8 +50,6 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
     }
 
     private void CargarMedicamentos() {
-
-        
 
         Gson gson = new Gson();
 
@@ -89,6 +90,20 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
                 tabla.setValueAt(nuevoValor, i, 1);
                 tabla.setValueAt(FechaActualizada, i, 3);
 
+                Existe = true;
+            }
+        }
+        return Existe;
+    }
+    
+    public boolean BuscarMedicamento(JTable tabla, String dto, int col) {
+
+        boolean Existe = false;
+
+        for (int i = 0; i < tabla.getRowCount(); i++) {
+
+            if (tabla.getValueAt(i, col).toString().toLowerCase().equals(dto.toLowerCase())) {
+                
                 Existe = true;
             }
         }
@@ -349,13 +364,17 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
             }
         });
 
-
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Buscar medicamento");
 
         txtBuscarMedicamento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtBuscarMedicamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarMedicamentoActionPerformed(evt);
+            }
+        });
 
         txtBuscarMedicamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -478,7 +497,7 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
             int result = JOptionPane.showConfirmDialog(null, "Estas seguro de regresar? \nSe perderan todos los avances no guardados", "CONFIRMAR SALIDA", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {
 
-                frmMenuSuperAdmin abrir = new frmMenuSuperAdmin();
+                FrmMenuSuperAdmin abrir = new FrmMenuSuperAdmin();
                 abrir.setVisible(true);
                 this.setVisible(false);
             }
@@ -537,7 +556,6 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
                 tabla_modelo.addRow(new Object[]{NombreMedicina, CantidadMedicina, fechaActual, FechaCaducidad});
 
                 tblMedicamentos.setModel(tabla_modelo);
-
                 
                 File jsonFile = new File("ListaMedicamentos.json");
                 
@@ -591,7 +609,6 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
                     
                 }
             }
-
             else {
                 JOptionPane.showMessageDialog(null, "El formato de la fecha esta mal,tiene que tener limites\n de dias 30 o 31 y mes maximo 12 ,Por favor revisar", "FORMATO DE FECHA MAL ESTABLECIDO", JOptionPane.WARNING_MESSAGE);
             }
@@ -601,10 +618,15 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
 
     //Lee el archivo Json y trae los datos hacia la tabla
     private void btnVerificarMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarMedicamentoActionPerformed
-        if (tblMedicamentos.getRowCount() >= 0)
-        {
+//        if (tblMedicamentos.getRowCount() >= 0) {
 
-            Gson gson = new Gson();
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(tabla_modelo);
+        tblMedicamentos.setRowSorter(sorter);
+        sorter.setRowFilter(null);
+        Gson gson = new Gson();
+
+        //Leer el archivo Json
+        FileReader reader;
 
 
         try {
@@ -617,20 +639,20 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
                     tabla_modelo.addRow(new Object[]{medicamento.getNombre(), medicamento.getStock(), medicamento.getFechaAgregado(), medicamento.getFechaCaducidad()});
                     tblMedicamentos.setModel(tabla_modelo);
 
+
                 } else {
 
-
-                    }
                 }
-            } catch (FileNotFoundException e)
-            {
-
             }
 
         } catch (FileNotFoundException e) {
 
 
         }
+//        } 
+//        else {
+//
+//        }
     }//GEN-LAST:event_btnVerificarMedicamentoActionPerformed
 
     private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
@@ -705,6 +727,8 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         String CantidadMedicina = txtCantidadMedicamento.getText();
         String FechaCaducidad = txtFechaCaducidad.getText();
         
+        
+
         
         try {
             Gson gson = new Gson();
@@ -802,7 +826,6 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
 
     private void btnBuscarMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMedicamentoActionPerformed
         // TODO add your handling code here:
-
         ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficos/JoptionPane/warning.png");
         String JaimeGay = txtBuscarMedicamento.getText();
         
@@ -822,7 +845,6 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
     private void txtBuscarMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarMedicamentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarMedicamentoActionPerformed
-
 
     /**
      * @param args the command line arguments
