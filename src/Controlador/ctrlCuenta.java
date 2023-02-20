@@ -16,7 +16,7 @@ import java.io.IOException;
  *
  * @author vivi
  */
-public class CtrlCuenta {
+public class ctrlCuenta {
 
     private final Integer MAXIMO_CUENTAS = 100;
     private Cuenta cuentas[] = new Cuenta[MAXIMO_CUENTAS];
@@ -26,7 +26,7 @@ public class CtrlCuenta {
     private Integer ocupados = 0;
     private byte[] salt;
 
-    public CtrlCuenta() {
+    public ctrlCuenta() {
     }
 
     //verifica si la cuenta existe
