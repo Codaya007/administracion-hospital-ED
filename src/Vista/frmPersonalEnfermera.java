@@ -307,40 +307,45 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         // Traer los datos de los campos de texto
-        float Peso = Float.parseFloat(txtPeso.getText());
-        float Altura = Float.parseFloat(txtAltura.getText());
-        float PrecionA = Float.parseFloat(txtPrecionArterial.getText());
-        float presionC = Float.parseFloat(txtPrecionCardiaca.getText());
-        float temperatura = Float.parseFloat(txtTemperatura.getText());
-
-        Paciente a = null;
-        Valoracion val = new Valoracion();
-        val.setAltura(Altura);
-        val.setPeso(Peso);
-        val.setPresionArterial(PrecionA);
-        val.setPresionCardiaca(presionC);
-        val.setTemperatura(temperatura);
-
-        //Asignar una valoracion a cada paciente
-        for (int i = pas.size() - 1; i >= 0; i--) {
-            a = (Paciente) pas.get(i);
-            if (a.getIdentificacion() == cbxNumeroCedula.getSelectedItem()) {
-                a.setValoracion(val);
-            }
-        }
-
         //Condiciones en caso de que los campos esten vacios
         if (txtPrecionArterial.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los datos acerca de la precion arterial estan vacios", "DATOS VACIOS", JOptionPane.WARNING_MESSAGE);
-        } else if (txtAltura.getText().isEmpty()) {
+        } 
+        else if (txtAltura.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los datos acerca de la altura estan vacios", "DATOS VACIOS", JOptionPane.WARNING_MESSAGE);
-        } else if (txtPeso.getText().isEmpty()) {
+        } 
+        else if (txtPeso.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los datos acerca del peso estan vacios", "DATOS VACIOS", JOptionPane.WARNING_MESSAGE);
-        } else if (txtTemperatura.getText().isEmpty()) {
+        } 
+        else if (txtTemperatura.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los datos acerca de la temperatura estan vacios", "DATOS VACIOS", JOptionPane.WARNING_MESSAGE);
-        } else if (txtPrecionCardiaca.getText().isEmpty()) {
+        } 
+        else if (txtPrecionCardiaca.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los datos acerca de la precion cardiaca estan vacios", "DATOS VACIOS", JOptionPane.WARNING_MESSAGE);
-        } else {
+        } 
+        else {
+
+            float Peso = Float.parseFloat(txtPeso.getText());
+            float Altura = Float.parseFloat(txtAltura.getText());
+            float PrecionA = Float.parseFloat(txtPrecionArterial.getText());
+            float presionC = Float.parseFloat(txtPrecionCardiaca.getText());
+            float temperatura = Float.parseFloat(txtTemperatura.getText());
+
+            Paciente a = null;
+            Valoracion val = new Valoracion();
+            val.setAltura(Altura);
+            val.setPeso(Peso);
+            val.setPresionArterial(PrecionA);
+            val.setPresionCardiaca(presionC);
+            val.setTemperatura(temperatura);
+
+            //Asignar una valoracion a cada paciente
+            for (int i = pas.size() - 1; i >= 0; i--) {
+                a = (Paciente) pas.get(i);
+                if (a.getIdentificacion() == cbxNumeroCedula.getSelectedItem()) {
+                    a.setValoracion(val);
+                }
+            }
             //Escribir los datos en el archivo Json
             //pas.setnew Valoracion(Peso, Altura, PrecionA, presionC, temperatura));
 
@@ -352,7 +357,8 @@ public class frmPersonalEnfermera extends javax.swing.JFrame {
                 writer = new FileWriter("ListaPacientes.json");
                 gson.toJson(pas, writer);
                 writer.close();
-            } catch (IOException ex) {
+            } 
+            catch (IOException ex) {
                 Logger.getLogger(frmPersonalEnfermera.class.getName()).log(Level.SEVERE, null, ex);
             }
 
