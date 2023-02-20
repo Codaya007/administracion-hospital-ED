@@ -5,7 +5,7 @@
  */
 package Vista;
 
-import Controlador.ctrlCuenta;
+import Controlador.CtrlCuenta;
 import Modelo.Roles;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -18,7 +18,7 @@ public class frmPersonalLogin extends javax.swing.JFrame {
     
     int Xmouse, Ymouse;
     
-    ctrlCuenta controlador;
+    CtrlCuenta controlador;
 
     /**
      * Creates new form Login
@@ -27,7 +27,7 @@ public class frmPersonalLogin extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         // Cargamos el controlador guardado en el JSON
-        controlador = (ctrlCuenta) Utilidades.Utilidades.cargarJson(ctrlCuenta.class, "ControladorCuenta");
+        controlador = (CtrlCuenta) Utilidades.Utilidades.cargarJson(CtrlCuenta.class, "ControladorCuenta");
     }
 
     /**
@@ -257,7 +257,7 @@ public class frmPersonalLogin extends javax.swing.JFrame {
                     String rolUsuario = controlador.getCuentas()[usuarioInIndex].getPersona().getRol().getNombre();
                     
                     if (rolUsuario.equals(Roles.SuperAdmin.getNombre())) {
-                        new frmMenuSuperAdmin().setVisible(true);
+                        new FrmMenuSuperAdmin().setVisible(true);
                     } else if (rolUsuario.equals(Roles.Medico.getNombre())) {
                         new FrmMenuDoctor().setVisible(true);
                     } else if (rolUsuario.equals(Roles.Enfermera.getNombre())) {
