@@ -50,7 +50,7 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
     }
 
     private void CargarMedicamentos() {
-
+        
         Gson gson = new Gson();
 
         //Leer el archivo Json
@@ -84,9 +84,7 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
 
         for (int i = 0; i < tabla.getRowCount(); i++) {
 
-
             if (tabla.getValueAt(i, col).toString().toLowerCase().equals(dto.toLowerCase())) {
-
                 tabla.setValueAt(nuevoValor, i, 1);
                 tabla.setValueAt(FechaActualizada, i, 3);
 
@@ -109,7 +107,6 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         }
         return Existe;
     }
-
 
     //Metodo para eliminar todos los datos de la tabla
     private void VaciarI() {
@@ -150,11 +147,9 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
                     FileWriter writer = new FileWriter("ListaMedicamentos.json");
                     gson.toJson(listaMedicamentosCargadas, writer);
                     writer.close();
-
                 } 
                 catch (Exception e) {
                     
-
                 }
             } 
             catch (FileNotFoundException ex) {
@@ -350,17 +345,10 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         });
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Buscar medicamento");
 
         txtBuscarMedicamento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtBuscarMedicamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarMedicamentoActionPerformed(evt);
-            }
-        });
-
         txtBuscarMedicamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarMedicamentoActionPerformed(evt);
@@ -482,15 +470,13 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
             int result = JOptionPane.showConfirmDialog(null, "Estas seguro de regresar? \nSe perderan todos los avances no guardados", "CONFIRMAR SALIDA", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
             if (result == JOptionPane.YES_OPTION) {
 
-                FrmMenuSuperAdmin abrir = new FrmMenuSuperAdmin();
+                frmMenuSuperAdmin abrir = new frmMenuSuperAdmin();
                 abrir.setVisible(true);
                 this.setVisible(false);
             }
         } 
         else {
-
-            FrmMenuSuperAdmin abrir = new FrmMenuSuperAdmin();
-
+            frmMenuSuperAdmin abrir = new frmMenuSuperAdmin();
             abrir.setVisible(true);
             this.setVisible(false);
         }
@@ -613,7 +599,6 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         //Leer el archivo Json
         FileReader reader;
 
-
         try {
             reader = new FileReader("ListaMedicamentos.json");
             ListaEnlazada<Medicina> listaMedicamentosCargadas = gson.fromJson(reader, new TypeToken<ListaEnlazada<Medicina>>() {
@@ -624,14 +609,11 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
                     tabla_modelo.addRow(new Object[]{medicamento.getNombre(), medicamento.getStock(), medicamento.getFechaAgregado(), medicamento.getFechaCaducidad()});
                     tblMedicamentos.setModel(tabla_modelo);
 
-
                 } else {
 
                 }
             }
-
         } catch (FileNotFoundException e) {
-
 
         }
 //        } 
@@ -676,9 +658,7 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         //Limitaciones para evitar que el usuario ingrese letras ademas establecer la cantidad limite
         Character c = evt.getKeyChar();
 
-
         if (!Character.isDigit(c)) {
-
             evt.consume();
         }
         if (txtCantidadMedicamento.getText().length() >= 10000000) {
@@ -713,11 +693,9 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         String FechaCaducidad = txtFechaCaducidad.getText();
         
         
-
         
         try {
             Gson gson = new Gson();
-
             //Condiciones si los datos estan vacios
             if (txtNombreMedicamento.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Ingrese un medicamento, el campo esta vacio", "MEDICAMENTO VACIO", JOptionPane.ERROR_MESSAGE);
