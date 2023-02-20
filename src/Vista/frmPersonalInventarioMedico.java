@@ -110,21 +110,6 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         return Existe;
     }
 
-    
-    public boolean BuscarMedicamento(JTable tabla, String dto, int col) {
-
-        boolean Existe = false;
-
-        for (int i = 0; i < tabla.getRowCount(); i++) {
-
-            if (tabla.getValueAt(i, col).toString().toLowerCase().equals(dto.toLowerCase())) {
-                
-                Existe = true;
-            }
-        }
-        return Existe;
-    }
-
 
     //Metodo para eliminar todos los datos de la tabla
     private void VaciarI() {
