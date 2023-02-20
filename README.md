@@ -9,9 +9,5 @@ Jaime Mendoza.
 Victor Nivelo.
 Jhonel Pesantes.
 ```
-##### En base al TDA desarrollado en la materia de estructura de datos
+###### En base al TDA desarrollado en la materia de estructura de datos
 ![This is an image](https://github.com/VictorNivelo/Administracion-Hospital/blob/Main/TDA_Estructura_Datos_PF.jpeg)
-
-<p> La documentación del proyecto se encuentra en el siguiente link:
- <a href="https://documentacion-ed.vercel.app"> Documentación <a/> 
-</p>
