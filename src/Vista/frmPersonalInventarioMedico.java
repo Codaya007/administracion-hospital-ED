@@ -54,6 +54,7 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
 
     private void CargarMedicamentos() {
 
+
         Gson gson = new Gson();
 
         //Leer el archivo Json
@@ -122,6 +123,7 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         return Existe;
     }
 
+
     //Metodo para eliminar todos los datos de la tabla
     private void VaciarI() {
         int cantidadfilas = tblMedicamentos.getRowCount();
@@ -167,6 +169,7 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
                     writer.close();
                 } catch (Exception e)
                 {
+
 
                 }
             } catch (FileNotFoundException ex)
@@ -314,6 +317,7 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
             }
         });
 
+
         txtCantidadMedicamento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCantidadMedicamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -336,6 +340,7 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
                 txtFechaCaducidadKeyTyped(evt);
             }
         });
+
 
         btnGuardarMedicamentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnGuardarInformacionIcono.png"))); // NOI18N
         btnGuardarMedicamentos.setText("GUARDAR");
@@ -362,16 +367,20 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
             }
         });
 
+
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Buscar medicamento");
 
         txtBuscarMedicamento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         txtBuscarMedicamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarMedicamentoActionPerformed(evt);
             }
         });
+
 
         btnBuscarMedicamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RecursosGraficos/Botones/btnCitaConsultarIcono.png"))); // NOI18N
         btnBuscarMedicamento.setText("BUSCAR");
@@ -484,6 +493,7 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // Condicion si alguno de los campos no esta vacio
         //Se mostrara la siguiente advertencia
+
         if (!txtNombreMedicamento.getText().isEmpty() || !txtCantidadMedicamento.getText().isEmpty() || !txtFechaCaducidad.getText().isEmpty())
         {
             int result = JOptionPane.showConfirmDialog(null, "Estas seguro de regresar? \nSe perderan todos los avances no guardados", "CONFIRMAR SALIDA", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -687,7 +697,10 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         if (!(minusculas || mayusculas || espacio))
         {
             evt.consume();
+
         }
+    }//GEN-LAST:event_btnVerificarMedicamentoActionPerformed
+
 
         if (txtNombreMedicamento.getText().length() >= 30)
         {
@@ -701,6 +714,7 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         Character c = evt.getKeyChar();
 
         if (!Character.isDigit(c))
+
         {
             evt.consume();
         }
@@ -711,6 +725,7 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCantidadMedicamentoKeyTyped
 
     private void txtFechaCaducidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaCaducidadKeyTyped
+
 
         //Limitaciones para evitar que el usuario ingrese letras
         int key = evt.getKeyChar();
@@ -807,6 +822,7 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
                 writer.close();
             }
 
+
             //Catch si es que ocurre algun error
         } catch (IOException ex)
         {
@@ -816,11 +832,13 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarMedicamentosActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+
         try
         {
             Eliminar();
         } catch (IOException ex)
         {
+
             Logger.getLogger(frmPersonalInventarioMedico.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -829,10 +847,12 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
         // TODO add your handling code here:
         ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficos/JoptionPane/JoptionPaneSalirIcono.png");
 
+
         int valor = JOptionPane.showConfirmDialog(null, "¿Esta seguro que quiere salir del sistema?\n", "CONFIRMACION DE SALIDA", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, SalirConfirmar);
 
         if (valor == JOptionPane.YES_OPTION)
         {
+
             System.exit(0);
         }
     }//GEN-LAST:event_btnSalirActionPerformed
@@ -843,6 +863,7 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
 
     private void btnBuscarMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMedicamentoActionPerformed
         // TODO add your handling code here:
+
         // Se crea un objeto ImageIcon para el ícono del diálogo de advertencia.
         ImageIcon SalirConfirmar = new ImageIcon("src/RecursosGraficos/JoptionPane/warning.png");
 
@@ -871,6 +892,7 @@ public class frmPersonalInventarioMedico extends javax.swing.JFrame {
     private void txtBuscarMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarMedicamentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarMedicamentoActionPerformed
+
 
     /**
      * @param args the command line arguments
